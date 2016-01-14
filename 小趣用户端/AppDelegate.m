@@ -9,8 +9,8 @@
 #import "AppDelegate.h"
 #import "PeiZhenViewController.h"
 #import "YuYueViewController.h"
-#import "MyViewController.h"
 #import "SignInViewController.h"
+#import "MyTableViewController.h"
 #import "BPush.h"
 // rgb颜色转换（16进制->10进制）
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -54,7 +54,7 @@
     yuyueVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_health_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UINavigationController *yuyueNavi = [[UINavigationController alloc] initWithRootViewController:yuyueVC];
     
-    MyViewController * myVC = [[MyViewController alloc] init];
+    MyTableViewController * myVC = [[MyTableViewController alloc] init];
     myVC.tabBarItem.title = @"我";
     myVC.tabBarItem.image = [[UIImage imageNamed:@"img_tab_me"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     myVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_me_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

@@ -30,6 +30,50 @@
 		05075B7F1C47615F0076EF31 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05075B7E1C47615F0076EF31 /* SystemConfiguration.framework */; };
 		05075B881C4762670076EF31 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05075B861C4762670076EF31 /* libBPush.a */; };
 		05075B891C4762670076EF31 /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 05075B871C4762670076EF31 /* test.caf */; };
+		05075B9F1C47A0C30076EF31 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B8C1C47A0C30076EF31 /* MyTableViewController.m */; };
+		05075BA01C47A0C30076EF31 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B8C1C47A0C30076EF31 /* MyTableViewController.m */; };
+		05075BA11C47A0C30076EF31 /* MyMemberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B8E1C47A0C30076EF31 /* MyMemberTableViewController.m */; };
+		05075BA21C47A0C30076EF31 /* MyMemberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B8E1C47A0C30076EF31 /* MyMemberTableViewController.m */; };
+		05075BA31C47A0C30076EF31 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B901C47A0C30076EF31 /* SettingTableViewController.m */; };
+		05075BA41C47A0C30076EF31 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B901C47A0C30076EF31 /* SettingTableViewController.m */; };
+		05075BA51C47A0C30076EF31 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B921C47A0C30076EF31 /* ShareViewController.m */; };
+		05075BA61C47A0C30076EF31 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B921C47A0C30076EF31 /* ShareViewController.m */; };
+		05075BA71C47A0C30076EF31 /* CouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B941C47A0C30076EF31 /* CouponsViewController.m */; };
+		05075BA81C47A0C30076EF31 /* CouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B941C47A0C30076EF31 /* CouponsViewController.m */; };
+		05075BA91C47A0C30076EF31 /* BillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B961C47A0C30076EF31 /* BillTableViewController.m */; };
+		05075BAA1C47A0C30076EF31 /* BillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B961C47A0C30076EF31 /* BillTableViewController.m */; };
+		05075BAB1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B981C47A0C30076EF31 /* ChangeMyDataViewController.m */; };
+		05075BAC1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B981C47A0C30076EF31 /* ChangeMyDataViewController.m */; };
+		05075BAD1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9A1C47A0C30076EF31 /* OpinionTableViewController.m */; };
+		05075BAE1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9A1C47A0C30076EF31 /* OpinionTableViewController.m */; };
+		05075BAF1C47A0C30076EF31 /* BillHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9C1C47A0C30076EF31 /* BillHistoryTableViewController.m */; };
+		05075BB01C47A0C30076EF31 /* BillHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9C1C47A0C30076EF31 /* BillHistoryTableViewController.m */; };
+		05075BB11C47A0C30076EF31 /* BillRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9E1C47A0C30076EF31 /* BillRecordTableViewController.m */; };
+		05075BB21C47A0C30076EF31 /* BillRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9E1C47A0C30076EF31 /* BillRecordTableViewController.m */; };
+		05075BCA1C47A10B0076EF31 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB51C47A10B0076EF31 /* MyCell.m */; };
+		05075BCB1C47A10B0076EF31 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB51C47A10B0076EF31 /* MyCell.m */; };
+		05075BCC1C47A10B0076EF31 /* PersonDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB71C47A10B0076EF31 /* PersonDataCell.m */; };
+		05075BCD1C47A10B0076EF31 /* PersonDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB71C47A10B0076EF31 /* PersonDataCell.m */; };
+		05075BCE1C47A10B0076EF31 /* MyMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB91C47A10B0076EF31 /* MyMemberTableViewCell.m */; };
+		05075BCF1C47A10B0076EF31 /* MyMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB91C47A10B0076EF31 /* MyMemberTableViewCell.m */; };
+		05075BD01C47A10B0076EF31 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBB1C47A10B0076EF31 /* SettingCell.m */; };
+		05075BD11C47A10B0076EF31 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBB1C47A10B0076EF31 /* SettingCell.m */; };
+		05075BD21C47A10B0076EF31 /* CouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBD1C47A10B0076EF31 /* CouponsCell.m */; };
+		05075BD31C47A10B0076EF31 /* CouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBD1C47A10B0076EF31 /* CouponsCell.m */; };
+		05075BD41C47A10B0076EF31 /* BillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBF1C47A10B0076EF31 /* BillCell.m */; };
+		05075BD51C47A10B0076EF31 /* BillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBF1C47A10B0076EF31 /* BillCell.m */; };
+		05075BD61C47A10B0076EF31 /* OpinionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC11C47A10B0076EF31 /* OpinionCell.m */; };
+		05075BD71C47A10B0076EF31 /* OpinionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC11C47A10B0076EF31 /* OpinionCell.m */; };
+		05075BD81C47A10B0076EF31 /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC31C47A10B0076EF31 /* ContactCell.m */; };
+		05075BD91C47A10B0076EF31 /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC31C47A10B0076EF31 /* ContactCell.m */; };
+		05075BDA1C47A10B0076EF31 /* OpinionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC51C47A10B0076EF31 /* OpinionTextView.m */; };
+		05075BDB1C47A10B0076EF31 /* OpinionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC51C47A10B0076EF31 /* OpinionTextView.m */; };
+		05075BDC1C47A10B0076EF31 /* BillHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC71C47A10B0076EF31 /* BillHistoryCell.m */; };
+		05075BDD1C47A10B0076EF31 /* BillHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC71C47A10B0076EF31 /* BillHistoryCell.m */; };
+		05075BDE1C47A10B0076EF31 /* BillRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC91C47A10B0076EF31 /* BillRecordCell.m */; };
+		05075BDF1C47A10B0076EF31 /* BillRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC91C47A10B0076EF31 /* BillRecordCell.m */; };
+		05075BE31C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */; };
+		05075BE41C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */; };
 		05BA34971C41F1FE00DC07CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34961C41F1FE00DC07CD /* main.m */; };
 		05BA349A1C41F1FE00DC07CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34991C41F1FE00DC07CD /* AppDelegate.m */; };
 		05BA349D1C41F1FE00DC07CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA349C1C41F1FE00DC07CD /* ViewController.m */; };
@@ -40,7 +84,6 @@
 		05BA34BB1C41F1FE00DC07CD /* _____UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34BA1C41F1FE00DC07CD /* _____UITests.m */; };
 		05BA34CA1C41F70A00DC07CD /* PeiZhenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34C91C41F70A00DC07CD /* PeiZhenViewController.m */; };
 		05BA34CD1C41F71400DC07CD /* YuYueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34CC1C41F71400DC07CD /* YuYueViewController.m */; };
-		05BA34D01C41F71B00DC07CD /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34CF1C41F71B00DC07CD /* MyViewController.m */; };
 		05BA34D31C41FDAB00DC07CD /* img_tab_me_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BA34D11C41FDAB00DC07CD /* img_tab_me_selected@2x.png */; };
 		05BA34D41C41FDAB00DC07CD /* img_tab_me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BA34D21C41FDAB00DC07CD /* img_tab_me@2x.png */; };
 		05BA34D91C41FE0700DC07CD /* img_tab_health_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05BA34D51C41FE0700DC07CD /* img_tab_health_selected@2x.png */; };
@@ -145,6 +188,50 @@
 		05075B851C4762670076EF31 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		05075B861C4762670076EF31 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
 		05075B871C4762670076EF31 /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
+		05075B8B1C47A0C30076EF31 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
+		05075B8C1C47A0C30076EF31 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
+		05075B8D1C47A0C30076EF31 /* MyMemberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMemberTableViewController.h; sourceTree = "<group>"; };
+		05075B8E1C47A0C30076EF31 /* MyMemberTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMemberTableViewController.m; sourceTree = "<group>"; };
+		05075B8F1C47A0C30076EF31 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
+		05075B901C47A0C30076EF31 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
+		05075B911C47A0C30076EF31 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		05075B921C47A0C30076EF31 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		05075B931C47A0C30076EF31 /* CouponsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsViewController.h; sourceTree = "<group>"; };
+		05075B941C47A0C30076EF31 /* CouponsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsViewController.m; sourceTree = "<group>"; };
+		05075B951C47A0C30076EF31 /* BillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillTableViewController.h; sourceTree = "<group>"; };
+		05075B961C47A0C30076EF31 /* BillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillTableViewController.m; sourceTree = "<group>"; };
+		05075B971C47A0C30076EF31 /* ChangeMyDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeMyDataViewController.h; sourceTree = "<group>"; };
+		05075B981C47A0C30076EF31 /* ChangeMyDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeMyDataViewController.m; sourceTree = "<group>"; };
+		05075B991C47A0C30076EF31 /* OpinionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionTableViewController.h; sourceTree = "<group>"; };
+		05075B9A1C47A0C30076EF31 /* OpinionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionTableViewController.m; sourceTree = "<group>"; };
+		05075B9B1C47A0C30076EF31 /* BillHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillHistoryTableViewController.h; sourceTree = "<group>"; };
+		05075B9C1C47A0C30076EF31 /* BillHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillHistoryTableViewController.m; sourceTree = "<group>"; };
+		05075B9D1C47A0C30076EF31 /* BillRecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillRecordTableViewController.h; sourceTree = "<group>"; };
+		05075B9E1C47A0C30076EF31 /* BillRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillRecordTableViewController.m; sourceTree = "<group>"; };
+		05075BB41C47A10B0076EF31 /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
+		05075BB51C47A10B0076EF31 /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
+		05075BB61C47A10B0076EF31 /* PersonDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDataCell.h; sourceTree = "<group>"; };
+		05075BB71C47A10B0076EF31 /* PersonDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDataCell.m; sourceTree = "<group>"; };
+		05075BB81C47A10B0076EF31 /* MyMemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMemberTableViewCell.h; sourceTree = "<group>"; };
+		05075BB91C47A10B0076EF31 /* MyMemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMemberTableViewCell.m; sourceTree = "<group>"; };
+		05075BBA1C47A10B0076EF31 /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
+		05075BBB1C47A10B0076EF31 /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
+		05075BBC1C47A10B0076EF31 /* CouponsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsCell.h; sourceTree = "<group>"; };
+		05075BBD1C47A10B0076EF31 /* CouponsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsCell.m; sourceTree = "<group>"; };
+		05075BBE1C47A10B0076EF31 /* BillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCell.h; sourceTree = "<group>"; };
+		05075BBF1C47A10B0076EF31 /* BillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillCell.m; sourceTree = "<group>"; };
+		05075BC01C47A10B0076EF31 /* OpinionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionCell.h; sourceTree = "<group>"; };
+		05075BC11C47A10B0076EF31 /* OpinionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionCell.m; sourceTree = "<group>"; };
+		05075BC21C47A10B0076EF31 /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
+		05075BC31C47A10B0076EF31 /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
+		05075BC41C47A10B0076EF31 /* OpinionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionTextView.h; sourceTree = "<group>"; };
+		05075BC51C47A10B0076EF31 /* OpinionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionTextView.m; sourceTree = "<group>"; };
+		05075BC61C47A10B0076EF31 /* BillHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillHistoryCell.h; sourceTree = "<group>"; };
+		05075BC71C47A10B0076EF31 /* BillHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillHistoryCell.m; sourceTree = "<group>"; };
+		05075BC81C47A10B0076EF31 /* BillRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillRecordCell.h; sourceTree = "<group>"; };
+		05075BC91C47A10B0076EF31 /* BillRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillRecordCell.m; sourceTree = "<group>"; };
+		05075BE11C47A3E20076EF31 /* UIBarButtonItem+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extention.h"; sourceTree = "<group>"; };
+		05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extention.m"; sourceTree = "<group>"; };
 		05BA34921C41F1FE00DC07CD /* 小趣用户端.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小趣用户端.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BA34961C41F1FE00DC07CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		05BA34981C41F1FE00DC07CD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -165,8 +252,6 @@
 		05BA34C91C41F70A00DC07CD /* PeiZhenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeiZhenViewController.m; sourceTree = "<group>"; };
 		05BA34CB1C41F71400DC07CD /* YuYueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YuYueViewController.h; sourceTree = "<group>"; };
 		05BA34CC1C41F71400DC07CD /* YuYueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YuYueViewController.m; sourceTree = "<group>"; };
-		05BA34CE1C41F71B00DC07CD /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
-		05BA34CF1C41F71B00DC07CD /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		05BA34D11C41FDAB00DC07CD /* img_tab_me_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_me_selected@2x.png"; sourceTree = "<group>"; };
 		05BA34D21C41FDAB00DC07CD /* img_tab_me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_me@2x.png"; sourceTree = "<group>"; };
 		05BA34D51C41FE0700DC07CD /* img_tab_health_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_tab_health_selected@2x.png"; sourceTree = "<group>"; };
@@ -306,6 +391,42 @@
 			name = "百度推送";
 			sourceTree = "<group>";
 		};
+		05075BB31C47A0F70076EF31 /* MyView */ = {
+			isa = PBXGroup;
+			children = (
+				05075BB41C47A10B0076EF31 /* MyCell.h */,
+				05075BB51C47A10B0076EF31 /* MyCell.m */,
+				05075BB61C47A10B0076EF31 /* PersonDataCell.h */,
+				05075BB71C47A10B0076EF31 /* PersonDataCell.m */,
+				05075BB81C47A10B0076EF31 /* MyMemberTableViewCell.h */,
+				05075BB91C47A10B0076EF31 /* MyMemberTableViewCell.m */,
+				05075BBA1C47A10B0076EF31 /* SettingCell.h */,
+				05075BBB1C47A10B0076EF31 /* SettingCell.m */,
+				05075BBC1C47A10B0076EF31 /* CouponsCell.h */,
+				05075BBD1C47A10B0076EF31 /* CouponsCell.m */,
+				05075BBE1C47A10B0076EF31 /* BillCell.h */,
+				05075BBF1C47A10B0076EF31 /* BillCell.m */,
+				05075BC01C47A10B0076EF31 /* OpinionCell.h */,
+				05075BC11C47A10B0076EF31 /* OpinionCell.m */,
+				05075BC21C47A10B0076EF31 /* ContactCell.h */,
+				05075BC31C47A10B0076EF31 /* ContactCell.m */,
+				05075BC41C47A10B0076EF31 /* OpinionTextView.h */,
+				05075BC51C47A10B0076EF31 /* OpinionTextView.m */,
+				05075BC61C47A10B0076EF31 /* BillHistoryCell.h */,
+				05075BC71C47A10B0076EF31 /* BillHistoryCell.m */,
+				05075BC81C47A10B0076EF31 /* BillRecordCell.h */,
+				05075BC91C47A10B0076EF31 /* BillRecordCell.m */,
+			);
+			name = MyView;
+			sourceTree = "<group>";
+		};
+		05075BE01C47A1610076EF31 /* 我的 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "我的";
+			sourceTree = "<group>";
+		};
 		05BA34891C41F1FE00DC07CD = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +462,7 @@
 				05BA34E11C41FF0000DC07CD /* 陪诊 */,
 				05BA34E21C41FF0C00DC07CD /* 预约单 */,
 				05BA34E31C41FF1D00DC07CD /* 我 */,
+				05075BB31C47A0F70076EF31 /* MyView */,
 				05BA34DD1C41FE7D00DC07CD /* PrefixHeader.pch */,
 				05BA34DE1C41FECC00DC07CD /* UIColor+Util.h */,
 				05BA34DF1C41FECC00DC07CD /* UIColor+Util.m */,
@@ -365,6 +487,7 @@
 				05BA34D71C41FE0700DC07CD /* img_tab_order_selected@2x.png */,
 				05BA34D81C41FE0700DC07CD /* img_tab_order@2x.png */,
 				05BA34961C41F1FE00DC07CD /* main.m */,
+				05075BE01C47A1610076EF31 /* 我的 */,
 				05BA34F01C434C5200DC07CD /* 陪诊img */,
 			);
 			name = "Supporting Files";
@@ -421,8 +544,28 @@
 		05BA34E31C41FF1D00DC07CD /* 我 */ = {
 			isa = PBXGroup;
 			children = (
-				05BA34CE1C41F71B00DC07CD /* MyViewController.h */,
-				05BA34CF1C41F71B00DC07CD /* MyViewController.m */,
+				05075B8B1C47A0C30076EF31 /* MyTableViewController.h */,
+				05075B8C1C47A0C30076EF31 /* MyTableViewController.m */,
+				05075B8D1C47A0C30076EF31 /* MyMemberTableViewController.h */,
+				05075B8E1C47A0C30076EF31 /* MyMemberTableViewController.m */,
+				05075B8F1C47A0C30076EF31 /* SettingTableViewController.h */,
+				05075B901C47A0C30076EF31 /* SettingTableViewController.m */,
+				05075B911C47A0C30076EF31 /* ShareViewController.h */,
+				05075B921C47A0C30076EF31 /* ShareViewController.m */,
+				05075B931C47A0C30076EF31 /* CouponsViewController.h */,
+				05075B941C47A0C30076EF31 /* CouponsViewController.m */,
+				05075B951C47A0C30076EF31 /* BillTableViewController.h */,
+				05075B961C47A0C30076EF31 /* BillTableViewController.m */,
+				05075B971C47A0C30076EF31 /* ChangeMyDataViewController.h */,
+				05075B981C47A0C30076EF31 /* ChangeMyDataViewController.m */,
+				05075B991C47A0C30076EF31 /* OpinionTableViewController.h */,
+				05075B9A1C47A0C30076EF31 /* OpinionTableViewController.m */,
+				05075B9B1C47A0C30076EF31 /* BillHistoryTableViewController.h */,
+				05075B9C1C47A0C30076EF31 /* BillHistoryTableViewController.m */,
+				05075B9D1C47A0C30076EF31 /* BillRecordTableViewController.h */,
+				05075B9E1C47A0C30076EF31 /* BillRecordTableViewController.m */,
+				05075BE11C47A3E20076EF31 /* UIBarButtonItem+Extention.h */,
+				05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */,
 			);
 			name = "我";
 			sourceTree = "<group>";
@@ -745,25 +888,37 @@
 			files = (
 				05075B481C4528E50076EF31 /* MemberEntity.m in Sources */,
 				05BA35171C4382C400DC07CD /* BaseTableViewCell.m in Sources */,
-				05BA34D01C41F71B00DC07CD /* MyViewController.m in Sources */,
+				05075BD41C47A10B0076EF31 /* BillCell.m in Sources */,
+				05075BAB1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */,
 				05075B551C45FDBC0076EF31 /* TXOrderViewController.m in Sources */,
+				05075BA31C47A0C30076EF31 /* SettingTableViewController.m in Sources */,
 				05BA35371C43ACA100DC07CD /* AddFamilyViewController.m in Sources */,
 				05BA34FF1C43738400DC07CD /* HospitalTableViewCell.m in Sources */,
+				05075BAD1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */,
 				05BA34CA1C41F70A00DC07CD /* PeiZhenViewController.m in Sources */,
+				05075BA91C47A0C30076EF31 /* BillTableViewController.m in Sources */,
 				05BA35521C43DD1C00DC07CD /* BaseTwoLevelView.m in Sources */,
 				05BA35311C43A36A00DC07CD /* SelectFamilyViewController.m in Sources */,
+				05075BCC1C47A10B0076EF31 /* PersonDataCell.m in Sources */,
 				05BA35341C43A8B500DC07CD /* FamileTableViewCell.m in Sources */,
 				05BA35541C43DD1C00DC07CD /* InsetsLabel.m in Sources */,
 				05BA35531C43DD1C00DC07CD /* HeaderTableView.m in Sources */,
 				05BA353A1C43B31900DC07CD /* AddFamilyTableViewCell.m in Sources */,
 				05BA349D1C41F1FE00DC07CD /* ViewController.m in Sources */,
+				05075BD61C47A10B0076EF31 /* OpinionCell.m in Sources */,
+				05075BD21C47A10B0076EF31 /* CouponsCell.m in Sources */,
 				05075B4C1C45E53C0076EF31 /* SelectDoctorViewController.m in Sources */,
 				05075B3C1C4497D70076EF31 /* RightTableViewCell.m in Sources */,
 				05BA34E01C41FECC00DC07CD /* UIColor+Util.m in Sources */,
+				05075BA51C47A0C30076EF31 /* ShareViewController.m in Sources */,
+				05075BE31C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */,
 				05075B3F1C44A3560076EF31 /* PTSureOrderViewController.m in Sources */,
 				05BA350E1C437E8100DC07CD /* PuTongPZViewController.m in Sources */,
+				05075BA11C47A0C30076EF31 /* MyMemberTableViewController.m in Sources */,
+				05075BDE1C47A10B0076EF31 /* BillRecordCell.m in Sources */,
 				05BA35551C43DD1C00DC07CD /* TwoLevelViewController.m in Sources */,
 				05075B5F1C463CCB0076EF31 /* SignInViewController.m in Sources */,
+				05075BA71C47A0C30076EF31 /* CouponsViewController.m in Sources */,
 				05075B661C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05075B581C461EDD0076EF31 /* TXOrderTableViewCell.m in Sources */,
 				05075B521C45FCA30076EF31 /* SelectTimeViewController.m in Sources */,
@@ -771,9 +926,18 @@
 				05075B4F1C45EAB30076EF31 /* SelectDoctorTableViewCell.m in Sources */,
 				05075B621C4688320076EF31 /* DoctorDetailTableViewCell.m in Sources */,
 				05BA34CD1C41F71400DC07CD /* YuYueViewController.m in Sources */,
+				05075BDC1C47A10B0076EF31 /* BillHistoryCell.m in Sources */,
 				05BA35491C43D15600DC07CD /* UITextField+ResignKeyboard.m in Sources */,
+				05075BD81C47A10B0076EF31 /* ContactCell.m in Sources */,
 				05075B5C1C4622150076EF31 /* HospitalViewController.m in Sources */,
+				05075BD01C47A10B0076EF31 /* SettingCell.m in Sources */,
 				05BA34971C41F1FE00DC07CD /* main.m in Sources */,
+				05075BDA1C47A10B0076EF31 /* OpinionTextView.m in Sources */,
+				05075BAF1C47A0C30076EF31 /* BillHistoryTableViewController.m in Sources */,
+				05075BB11C47A0C30076EF31 /* BillRecordTableViewController.m in Sources */,
+				05075B9F1C47A0C30076EF31 /* MyTableViewController.m in Sources */,
+				05075BCA1C47A10B0076EF31 /* MyCell.m in Sources */,
+				05075BCE1C47A10B0076EF31 /* MyMemberTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,9 +945,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05075BDD1C47A10B0076EF31 /* BillHistoryCell.m in Sources */,
+				05075BD71C47A10B0076EF31 /* OpinionCell.m in Sources */,
+				05075BA81C47A0C30076EF31 /* CouponsViewController.m in Sources */,
 				05075B671C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05BA34B01C41F1FE00DC07CD /* _____Tests.m in Sources */,
+				05075BCF1C47A10B0076EF31 /* MyMemberTableViewCell.m in Sources */,
+				05075BCD1C47A10B0076EF31 /* PersonDataCell.m in Sources */,
+				05075BAA1C47A0C30076EF31 /* BillTableViewController.m in Sources */,
+				05075BAE1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */,
+				05075BD51C47A10B0076EF31 /* BillCell.m in Sources */,
+				05075BD31C47A10B0076EF31 /* CouponsCell.m in Sources */,
+				05075BAC1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */,
+				05075BD11C47A10B0076EF31 /* SettingCell.m in Sources */,
+				05075BDF1C47A10B0076EF31 /* BillRecordCell.m in Sources */,
+				05075BDB1C47A10B0076EF31 /* OpinionTextView.m in Sources */,
+				05075BD91C47A10B0076EF31 /* ContactCell.m in Sources */,
 				05075B631C4688320076EF31 /* DoctorDetailTableViewCell.m in Sources */,
+				05075BA01C47A0C30076EF31 /* MyTableViewController.m in Sources */,
+				05075BA61C47A0C30076EF31 /* ShareViewController.m in Sources */,
+				05075BA41C47A0C30076EF31 /* SettingTableViewController.m in Sources */,
+				05075BB01C47A0C30076EF31 /* BillHistoryTableViewController.m in Sources */,
+				05075BA21C47A0C30076EF31 /* MyMemberTableViewController.m in Sources */,
+				05075BB21C47A0C30076EF31 /* BillRecordTableViewController.m in Sources */,
+				05075BCB1C47A10B0076EF31 /* MyCell.m in Sources */,
+				05075BE41C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
