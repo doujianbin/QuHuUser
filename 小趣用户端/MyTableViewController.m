@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.title = @"我的";
+    self.title = @"我的";
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
