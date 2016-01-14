@@ -1,0 +1,26 @@
+//
+//  PrefixHeader.pch
+//  小趣用户端
+//
+//  Created by 窦建斌 on 16/1/10.
+//  Copyright © 2016年 窦建斌. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "UIColor+Util.h"
+#import "UITextField+ResignKeyboard.h"
+#import <AFNetworking/AFNetworking.h>
+
+
+
+
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define MAX_TIMEREMAINING 60
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
