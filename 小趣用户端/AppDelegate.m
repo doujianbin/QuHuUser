@@ -43,19 +43,19 @@
 //    [self.window setRootViewController:nav_signIn];
     
     PeiZhenViewController *peizhenVC = [[PeiZhenViewController alloc] init];
-    peizhenVC.tabBarItem.title = @"陪诊";
-    peizhenVC.tabBarItem.image = [[UIImage imageNamed:@"img_tab_order"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    peizhenVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_order_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    peizhenVC.tabBarItem.title = @"首页";
+    peizhenVC.tabBarItem.image = [[UIImage imageNamed:@"Triangle 1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    peizhenVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"Triangle s1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 //    UINavigationController *peizhenNavibar = [[UINavigationController alloc] initWithRootViewController:peizhenVC];
     
     YuYueViewController *yuyueVC = [[YuYueViewController alloc] init];
-    yuyueVC.tabBarItem.title = @"预约单";
+    yuyueVC.tabBarItem.title = @"订单";
     yuyueVC.tabBarItem.image = [[UIImage imageNamed:@"img_tab_health"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     yuyueVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_health_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UINavigationController *yuyueNavi = [[UINavigationController alloc] initWithRootViewController:yuyueVC];
     
     MyTableViewController * myVC = [[MyTableViewController alloc] init];
-    myVC.tabBarItem.title = @"我";
+    myVC.tabBarItem.title = @"我的";
     myVC.tabBarItem.image = [[UIImage imageNamed:@"img_tab_me"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     myVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_me_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UINavigationController *myNavi = [[UINavigationController alloc] initWithRootViewController:myVC];

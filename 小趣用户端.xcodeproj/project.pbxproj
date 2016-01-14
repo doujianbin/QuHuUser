@@ -74,6 +74,28 @@
 		05075BDF1C47A10B0076EF31 /* BillRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC91C47A10B0076EF31 /* BillRecordCell.m */; };
 		05075BE31C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */; };
 		05075BE41C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */; };
+		05075BEA1C47BB0C0076EF31 /* 58 - Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE51C47BB0C0076EF31 /* 58 - Settings.png */; };
+		05075BEB1C47BB0C0076EF31 /* 58 - Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE51C47BB0C0076EF31 /* 58 - Settings.png */; };
+		05075BEC1C47BB0C0076EF31 /* 80 - Spotlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE61C47BB0C0076EF31 /* 80 - Spotlight.png */; };
+		05075BED1C47BB0C0076EF31 /* 80 - Spotlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE61C47BB0C0076EF31 /* 80 - Spotlight.png */; };
+		05075BEE1C47BB0C0076EF31 /* 87.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE71C47BB0C0076EF31 /* 87.png */; };
+		05075BEF1C47BB0C0076EF31 /* 87.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE71C47BB0C0076EF31 /* 87.png */; };
+		05075BF01C47BB0C0076EF31 /* 120 - iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE81C47BB0C0076EF31 /* 120 - iPhone.png */; };
+		05075BF11C47BB0C0076EF31 /* 120 - iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE81C47BB0C0076EF31 /* 120 - iPhone.png */; };
+		05075BF21C47BB0C0076EF31 /* 180 - iPhone 6 Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE91C47BB0C0076EF31 /* 180 - iPhone 6 Plus.png */; };
+		05075BF31C47BB0C0076EF31 /* 180 - iPhone 6 Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE91C47BB0C0076EF31 /* 180 - iPhone 6 Plus.png */; };
+		05075BF71C47BCEF0076EF31 /* Triangle 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BF41C47BCEF0076EF31 /* Triangle 1.png */; };
+		05075BF81C47BCEF0076EF31 /* Triangle 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BF41C47BCEF0076EF31 /* Triangle 1.png */; };
+		05075BF91C47BCEF0076EF31 /* Triangle 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BF51C47BCEF0076EF31 /* Triangle 1@2x.png */; };
+		05075BFA1C47BCEF0076EF31 /* Triangle 1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BF51C47BCEF0076EF31 /* Triangle 1@2x.png */; };
+		05075BFB1C47BCEF0076EF31 /* Triangle 1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BF61C47BCEF0076EF31 /* Triangle 1@3x.png */; };
+		05075BFC1C47BCEF0076EF31 /* Triangle 1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BF61C47BCEF0076EF31 /* Triangle 1@3x.png */; };
+		05075C001C47BD350076EF31 /* Triangle s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BFD1C47BD350076EF31 /* Triangle s1.png */; };
+		05075C011C47BD350076EF31 /* Triangle s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BFD1C47BD350076EF31 /* Triangle s1.png */; };
+		05075C021C47BD350076EF31 /* Triangle s1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BFE1C47BD350076EF31 /* Triangle s1@2x.png */; };
+		05075C031C47BD350076EF31 /* Triangle s1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BFE1C47BD350076EF31 /* Triangle s1@2x.png */; };
+		05075C041C47BD350076EF31 /* Triangle s1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BFF1C47BD350076EF31 /* Triangle s1@3x.png */; };
+		05075C051C47BD350076EF31 /* Triangle s1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BFF1C47BD350076EF31 /* Triangle s1@3x.png */; };
 		05BA34971C41F1FE00DC07CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34961C41F1FE00DC07CD /* main.m */; };
 		05BA349A1C41F1FE00DC07CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34991C41F1FE00DC07CD /* AppDelegate.m */; };
 		05BA349D1C41F1FE00DC07CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA349C1C41F1FE00DC07CD /* ViewController.m */; };
@@ -232,6 +254,17 @@
 		05075BC91C47A10B0076EF31 /* BillRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillRecordCell.m; sourceTree = "<group>"; };
 		05075BE11C47A3E20076EF31 /* UIBarButtonItem+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extention.h"; sourceTree = "<group>"; };
 		05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extention.m"; sourceTree = "<group>"; };
+		05075BE51C47BB0C0076EF31 /* 58 - Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "58 - Settings.png"; sourceTree = "<group>"; };
+		05075BE61C47BB0C0076EF31 /* 80 - Spotlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "80 - Spotlight.png"; sourceTree = "<group>"; };
+		05075BE71C47BB0C0076EF31 /* 87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 87.png; sourceTree = "<group>"; };
+		05075BE81C47BB0C0076EF31 /* 120 - iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "120 - iPhone.png"; sourceTree = "<group>"; };
+		05075BE91C47BB0C0076EF31 /* 180 - iPhone 6 Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "180 - iPhone 6 Plus.png"; sourceTree = "<group>"; };
+		05075BF41C47BCEF0076EF31 /* Triangle 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Triangle 1.png"; sourceTree = "<group>"; };
+		05075BF51C47BCEF0076EF31 /* Triangle 1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Triangle 1@2x.png"; sourceTree = "<group>"; };
+		05075BF61C47BCEF0076EF31 /* Triangle 1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Triangle 1@3x.png"; sourceTree = "<group>"; };
+		05075BFD1C47BD350076EF31 /* Triangle s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Triangle s1.png"; sourceTree = "<group>"; };
+		05075BFE1C47BD350076EF31 /* Triangle s1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Triangle s1@2x.png"; sourceTree = "<group>"; };
+		05075BFF1C47BD350076EF31 /* Triangle s1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Triangle s1@3x.png"; sourceTree = "<group>"; };
 		05BA34921C41F1FE00DC07CD /* 小趣用户端.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小趣用户端.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BA34961C41F1FE00DC07CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		05BA34981C41F1FE00DC07CD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -480,6 +513,11 @@
 		05BA34951C41F1FE00DC07CD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				05075BE51C47BB0C0076EF31 /* 58 - Settings.png */,
+				05075BE61C47BB0C0076EF31 /* 80 - Spotlight.png */,
+				05075BE71C47BB0C0076EF31 /* 87.png */,
+				05075BE81C47BB0C0076EF31 /* 120 - iPhone.png */,
+				05075BE91C47BB0C0076EF31 /* 180 - iPhone 6 Plus.png */,
 				05BA34D11C41FDAB00DC07CD /* img_tab_me_selected@2x.png */,
 				05BA34D21C41FDAB00DC07CD /* img_tab_me@2x.png */,
 				05BA34D51C41FE0700DC07CD /* img_tab_health_selected@2x.png */,
@@ -573,6 +611,12 @@
 		05BA34F01C434C5200DC07CD /* 陪诊img */ = {
 			isa = PBXGroup;
 			children = (
+				05075BFD1C47BD350076EF31 /* Triangle s1.png */,
+				05075BFE1C47BD350076EF31 /* Triangle s1@2x.png */,
+				05075BFF1C47BD350076EF31 /* Triangle s1@3x.png */,
+				05075BF41C47BCEF0076EF31 /* Triangle 1.png */,
+				05075BF51C47BCEF0076EF31 /* Triangle 1@2x.png */,
+				05075BF61C47BCEF0076EF31 /* Triangle 1@3x.png */,
 				05075B401C44AD710076EF31 /* Oval 91 + Path 52.png */,
 				05075B411C44AD710076EF31 /* Oval 91 + Path 52@2x.png */,
 				05075B421C44AD710076EF31 /* Oval 91 + Path 52@3x.png */,
@@ -780,11 +824,15 @@
 				05BA34EA1C434C4D00DC07CD /* Oval 50 + Oval-52 + Shape.png in Resources */,
 				05BA351C1C43893800DC07CD /* jiantou@2x.png in Resources */,
 				05BA34D91C41FE0700DC07CD /* img_tab_health_selected@2x.png in Resources */,
+				05075BF91C47BCEF0076EF31 /* Triangle 1@2x.png in Resources */,
 				05BA35421C43C6E700DC07CD /* normarl@2x.png in Resources */,
 				05BA34ED1C434C4D00DC07CD /* Oval 50 Copy + Group.png in Resources */,
 				05BA35131C4381BD00DC07CD /* Rectangle 91 + Line + Line Copy@2x.png in Resources */,
+				05075C021C47BD350076EF31 /* Triangle s1@2x.png in Resources */,
+				05075BFB1C47BCEF0076EF31 /* Triangle 1@3x.png in Resources */,
 				05BA35431C43C6E700DC07CD /* normarl@3x.png in Resources */,
 				05BA34FA1C43524100DC07CD /* Rectangle 39.png in Resources */,
+				05075BEE1C47BB0C0076EF31 /* 87.png in Resources */,
 				05BA34A21C41F1FE00DC07CD /* Assets.xcassets in Resources */,
 				05075B441C44AD710076EF31 /* Oval 91 + Path 52@2x.png in Resources */,
 				05075B451C44AD710076EF31 /* Oval 91 + Path 52@3x.png in Resources */,
@@ -796,11 +844,17 @@
 				05075B431C44AD710076EF31 /* Oval 91 + Path 52.png in Resources */,
 				05BA34EB1C434C4D00DC07CD /* Oval 50 + Oval-52 + Shape@2x.png in Resources */,
 				05BA35451C43C6E700DC07CD /* Oval 70 + Oval 70@2x.png in Resources */,
+				05075C001C47BD350076EF31 /* Triangle s1.png in Resources */,
+				05075BF01C47BB0C0076EF31 /* 120 - iPhone.png in Resources */,
 				05BA34F81C43524100DC07CD /* Path 3@2x.png in Resources */,
 				05BA35411C43C6E700DC07CD /* normarl.png in Resources */,
+				05075BF21C47BB0C0076EF31 /* 180 - iPhone 6 Plus.png in Resources */,
 				05BA34FB1C43524100DC07CD /* Rectangle 39@2x.png in Resources */,
 				05BA34D41C41FDAB00DC07CD /* img_tab_me@2x.png in Resources */,
 				05BA34DC1C41FE0700DC07CD /* img_tab_order@2x.png in Resources */,
+				05075BEC1C47BB0C0076EF31 /* 80 - Spotlight.png in Resources */,
+				05075C041C47BD350076EF31 /* Triangle s1@3x.png in Resources */,
+				05075BF71C47BCEF0076EF31 /* Triangle 1.png in Resources */,
 				05BA34FC1C43524100DC07CD /* Rectangle 39@3x.png in Resources */,
 				05BA35461C43C6E700DC07CD /* Oval 70 + Oval 70@3x.png in Resources */,
 				05BA35031C4377EA00DC07CD /* Oval 56.png in Resources */,
@@ -810,6 +864,7 @@
 				05BA35441C43C6E700DC07CD /* Oval 70 + Oval 70.png in Resources */,
 				05BA35121C4381BD00DC07CD /* Rectangle 91 + Line + Line Copy.png in Resources */,
 				05BA35041C4377EA00DC07CD /* Oval 56@2x.png in Resources */,
+				05075BEA1C47BB0C0076EF31 /* 58 - Settings.png in Resources */,
 				05BA34EE1C434C4D00DC07CD /* Oval 50 Copy + Group@2x.png in Resources */,
 				05BA350A1C437E5E00DC07CD /* Path 4@2x.png in Resources */,
 				05BA35091C437E5E00DC07CD /* Path 4.png in Resources */,
@@ -821,6 +876,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05075BED1C47BB0C0076EF31 /* 80 - Spotlight.png in Resources */,
+				05075BFA1C47BCEF0076EF31 /* Triangle 1@2x.png in Resources */,
+				05075BEB1C47BB0C0076EF31 /* 58 - Settings.png in Resources */,
+				05075C011C47BD350076EF31 /* Triangle s1.png in Resources */,
+				05075BF81C47BCEF0076EF31 /* Triangle 1.png in Resources */,
+				05075C031C47BD350076EF31 /* Triangle s1@2x.png in Resources */,
+				05075C051C47BD350076EF31 /* Triangle s1@3x.png in Resources */,
+				05075BF31C47BB0C0076EF31 /* 180 - iPhone 6 Plus.png in Resources */,
+				05075BF11C47BB0C0076EF31 /* 120 - iPhone.png in Resources */,
+				05075BFC1C47BCEF0076EF31 /* Triangle 1@3x.png in Resources */,
+				05075BEF1C47BB0C0076EF31 /* 87.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
