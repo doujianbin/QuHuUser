@@ -188,13 +188,6 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if([tabBarController.selectedViewController isEqual:viewController]){
-        UINavigationController *navigation =(UINavigationController *)viewController;
-        id vc = navigation.topViewController;
-        if([vc respondsToSelector:@selector(refreshData)]){
-            [vc performSelector:@selector(refreshData)];
-        }
-    }
     return YES;
 }
 
