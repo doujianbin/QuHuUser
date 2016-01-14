@@ -47,9 +47,9 @@
     [super layoutSubviews];
     
     self.iconImageView.frame = CGRectMake(14.5, 16.5, 24, 24);
+
     
     self.personCenterLabel.frame = CGRectMake(53, 16.5, 68, 24);
-        
     self.lineView.frame = CGRectMake(0, 56.5, [UIScreen mainScreen].bounds.size.width, 0.5);
 }
 - (void)awakeFromNib {
