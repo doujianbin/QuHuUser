@@ -12,8 +12,7 @@
 #import "UIColor+Util.h"
 #import "UITextField+ResignKeyboard.h"
 #import <AFNetworking/AFNetworking.h>
-
-
+#import "AFNManager.h"
 
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
