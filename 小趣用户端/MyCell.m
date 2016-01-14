@@ -46,7 +46,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.iconImageView.frame = CGRectMake(14.5, 16.5, 24, 24);
+//    self.iconImageView.frame = CGRectMake(14.5, 16.5, 24, 24);
     
     self.personCenterLabel.frame = CGRectMake(53, 16.5, 68, 24);
         
