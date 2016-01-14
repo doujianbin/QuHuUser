@@ -33,7 +33,7 @@
         [self.contentView addSubview:chargeLabel];
         self.chargeLabel = chargeLabel;
         
-        self.contentView.backgroundColor = COLOR(245, 246, 247, 1);
+        self.contentView.backgroundColor = COLOR(245, 246, 246, 1);
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
