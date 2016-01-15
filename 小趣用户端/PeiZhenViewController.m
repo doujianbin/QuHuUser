@@ -33,6 +33,7 @@
     [self addMidView];
     [self addKeshiView];
     [self addYiYuanView];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{

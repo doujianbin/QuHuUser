@@ -97,6 +97,8 @@
 		05075C041C47BD350076EF31 /* Triangle s1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BFF1C47BD350076EF31 /* Triangle s1@3x.png */; };
 		05075C051C47BD350076EF31 /* Triangle s1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BFF1C47BD350076EF31 /* Triangle s1@3x.png */; };
 		053AB0F41C47E8C500982B01 /* AFNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB0F31C47E8C500982B01 /* AFNManager.m */; };
+		053AB0F71C48AA5B00982B01 /* KDCycleBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB0F61C48AA5B00982B01 /* KDCycleBannerView.m */; };
+		053AB0F81C48AA5B00982B01 /* KDCycleBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB0F61C48AA5B00982B01 /* KDCycleBannerView.m */; };
 		05BA34971C41F1FE00DC07CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34961C41F1FE00DC07CD /* main.m */; };
 		05BA349A1C41F1FE00DC07CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34991C41F1FE00DC07CD /* AppDelegate.m */; };
 		05BA349D1C41F1FE00DC07CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA349C1C41F1FE00DC07CD /* ViewController.m */; };
@@ -268,6 +270,9 @@
 		05075BFF1C47BD350076EF31 /* Triangle s1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Triangle s1@3x.png"; sourceTree = "<group>"; };
 		053AB0F21C47E8C500982B01 /* AFNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNManager.h; sourceTree = "<group>"; };
 		053AB0F31C47E8C500982B01 /* AFNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNManager.m; sourceTree = "<group>"; };
+		053AB0F51C48AA5B00982B01 /* KDCycleBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDCycleBannerView.h; sourceTree = "<group>"; };
+		053AB0F61C48AA5B00982B01 /* KDCycleBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDCycleBannerView.m; sourceTree = "<group>"; };
+		053AB0FA1C48F2CE00982B01 /* APIConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIConfig.h; sourceTree = "<group>"; };
 		05BA34921C41F1FE00DC07CD /* 小趣用户端.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小趣用户端.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BA34961C41F1FE00DC07CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		05BA34981C41F1FE00DC07CD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -496,6 +501,7 @@
 				05075B5E1C463CCB0076EF31 /* SignInViewController.m */,
 				053AB0F21C47E8C500982B01 /* AFNManager.h */,
 				053AB0F31C47E8C500982B01 /* AFNManager.m */,
+				053AB0FA1C48F2CE00982B01 /* APIConfig.h */,
 				05075B8A1C4769840076EF31 /* 百度推送 */,
 				05BA34E11C41FF0000DC07CD /* 陪诊 */,
 				05BA34E21C41FF0C00DC07CD /* 预约单 */,
@@ -567,6 +573,8 @@
 				05BA34FE1C43738400DC07CD /* HospitalTableViewCell.m */,
 				05BA35151C4382C400DC07CD /* BaseTableViewCell.h */,
 				05BA35161C4382C400DC07CD /* BaseTableViewCell.m */,
+				053AB0F51C48AA5B00982B01 /* KDCycleBannerView.h */,
+				053AB0F61C48AA5B00982B01 /* KDCycleBannerView.m */,
 				05BA351E1C43978800DC07CD /* 选择医院 */,
 				05BA352E1C43A32E00DC07CD /* 选择成员 */,
 				05075B491C45E5080076EF31 /* 特需陪诊－选择医生 */,
@@ -981,6 +989,7 @@
 				05075BD21C47A10B0076EF31 /* CouponsCell.m in Sources */,
 				05075B4C1C45E53C0076EF31 /* SelectDoctorViewController.m in Sources */,
 				05075B3C1C4497D70076EF31 /* RightTableViewCell.m in Sources */,
+				053AB0F71C48AA5B00982B01 /* KDCycleBannerView.m in Sources */,
 				05BA34E01C41FECC00DC07CD /* UIColor+Util.m in Sources */,
 				05075BA51C47A0C30076EF31 /* ShareViewController.m in Sources */,
 				05075BE31C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */,
@@ -1017,6 +1026,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				053AB0F81C48AA5B00982B01 /* KDCycleBannerView.m in Sources */,
 				05075BDD1C47A10B0076EF31 /* BillHistoryCell.m in Sources */,
 				05075BD71C47A10B0076EF31 /* OpinionCell.m in Sources */,
 				05075BA81C47A0C30076EF31 /* CouponsViewController.m in Sources */,
