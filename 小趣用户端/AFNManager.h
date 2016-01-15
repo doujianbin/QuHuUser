@@ -2,8 +2,8 @@
 //  AFNManager.h
 //  Halo+
 //
-//  Created by 洋赵 on 15/12/30.
-//  Copyright © 2015年 洋赵. All rights reserved.
+//  Created by 窦建斌 on 15/12/30.
+//  Copyright © 2015年 窦建斌. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
