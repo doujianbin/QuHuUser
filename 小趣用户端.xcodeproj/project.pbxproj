@@ -99,6 +99,12 @@
 		053AB0F41C47E8C500982B01 /* AFNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB0F31C47E8C500982B01 /* AFNManager.m */; };
 		053AB0F71C48AA5B00982B01 /* KDCycleBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB0F61C48AA5B00982B01 /* KDCycleBannerView.m */; };
 		053AB0F81C48AA5B00982B01 /* KDCycleBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB0F61C48AA5B00982B01 /* KDCycleBannerView.m */; };
+		053AB0FD1C4A1EDE00982B01 /* LoginStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB0FC1C4A1EDE00982B01 /* LoginStorage.m */; };
+		053AB0FE1C4A1EDE00982B01 /* LoginStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB0FC1C4A1EDE00982B01 /* LoginStorage.m */; };
+		053AB1011C4A1EFD00982B01 /* UserDefaultsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB1001C4A1EFD00982B01 /* UserDefaultsUtils.m */; };
+		053AB1021C4A1EFD00982B01 /* UserDefaultsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB1001C4A1EFD00982B01 /* UserDefaultsUtils.m */; };
+		053AB1051C4A44FC00982B01 /* CommonFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB1041C4A44FC00982B01 /* CommonFunc.m */; };
+		053AB1061C4A44FC00982B01 /* CommonFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 053AB1041C4A44FC00982B01 /* CommonFunc.m */; };
 		05BA34971C41F1FE00DC07CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34961C41F1FE00DC07CD /* main.m */; };
 		05BA349A1C41F1FE00DC07CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA34991C41F1FE00DC07CD /* AppDelegate.m */; };
 		05BA349D1C41F1FE00DC07CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05BA349C1C41F1FE00DC07CD /* ViewController.m */; };
@@ -273,6 +279,12 @@
 		053AB0F51C48AA5B00982B01 /* KDCycleBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KDCycleBannerView.h; sourceTree = "<group>"; };
 		053AB0F61C48AA5B00982B01 /* KDCycleBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KDCycleBannerView.m; sourceTree = "<group>"; };
 		053AB0FA1C48F2CE00982B01 /* APIConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIConfig.h; sourceTree = "<group>"; };
+		053AB0FB1C4A1EDE00982B01 /* LoginStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginStorage.h; sourceTree = "<group>"; };
+		053AB0FC1C4A1EDE00982B01 /* LoginStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginStorage.m; sourceTree = "<group>"; };
+		053AB0FF1C4A1EFD00982B01 /* UserDefaultsUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsUtils.h; sourceTree = "<group>"; };
+		053AB1001C4A1EFD00982B01 /* UserDefaultsUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsUtils.m; sourceTree = "<group>"; };
+		053AB1031C4A44FC00982B01 /* CommonFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonFunc.h; sourceTree = "<group>"; };
+		053AB1041C4A44FC00982B01 /* CommonFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonFunc.m; sourceTree = "<group>"; };
 		05BA34921C41F1FE00DC07CD /* 小趣用户端.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小趣用户端.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		05BA34961C41F1FE00DC07CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		05BA34981C41F1FE00DC07CD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -502,6 +514,12 @@
 				053AB0F21C47E8C500982B01 /* AFNManager.h */,
 				053AB0F31C47E8C500982B01 /* AFNManager.m */,
 				053AB0FA1C48F2CE00982B01 /* APIConfig.h */,
+				053AB0FB1C4A1EDE00982B01 /* LoginStorage.h */,
+				053AB0FC1C4A1EDE00982B01 /* LoginStorage.m */,
+				053AB0FF1C4A1EFD00982B01 /* UserDefaultsUtils.h */,
+				053AB1001C4A1EFD00982B01 /* UserDefaultsUtils.m */,
+				053AB1031C4A44FC00982B01 /* CommonFunc.h */,
+				053AB1041C4A44FC00982B01 /* CommonFunc.m */,
 				05075B8A1C4769840076EF31 /* 百度推送 */,
 				05BA34E11C41FF0000DC07CD /* 陪诊 */,
 				05BA34E21C41FF0C00DC07CD /* 预约单 */,
@@ -972,6 +990,7 @@
 				05075BAB1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */,
 				05075B551C45FDBC0076EF31 /* TXOrderViewController.m in Sources */,
 				05075BA31C47A0C30076EF31 /* SettingTableViewController.m in Sources */,
+				053AB0FD1C4A1EDE00982B01 /* LoginStorage.m in Sources */,
 				05BA35371C43ACA100DC07CD /* AddFamilyViewController.m in Sources */,
 				05BA34FF1C43738400DC07CD /* HospitalTableViewCell.m in Sources */,
 				05075BAD1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */,
@@ -1002,6 +1021,7 @@
 				05075BA71C47A0C30076EF31 /* CouponsViewController.m in Sources */,
 				05075B661C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05075B581C461EDD0076EF31 /* TXOrderTableViewCell.m in Sources */,
+				053AB1011C4A1EFD00982B01 /* UserDefaultsUtils.m in Sources */,
 				05075B521C45FCA30076EF31 /* SelectTimeViewController.m in Sources */,
 				05BA349A1C41F1FE00DC07CD /* AppDelegate.m in Sources */,
 				05075B4F1C45EAB30076EF31 /* SelectDoctorTableViewCell.m in Sources */,
@@ -1011,6 +1031,7 @@
 				05BA35491C43D15600DC07CD /* UITextField+ResignKeyboard.m in Sources */,
 				05075BD81C47A10B0076EF31 /* ContactCell.m in Sources */,
 				05075B5C1C4622150076EF31 /* HospitalViewController.m in Sources */,
+				053AB1051C4A44FC00982B01 /* CommonFunc.m in Sources */,
 				05075BD01C47A10B0076EF31 /* SettingCell.m in Sources */,
 				05BA34971C41F1FE00DC07CD /* main.m in Sources */,
 				05075BDA1C47A10B0076EF31 /* OpinionTextView.m in Sources */,
@@ -1029,12 +1050,15 @@
 				053AB0F81C48AA5B00982B01 /* KDCycleBannerView.m in Sources */,
 				05075BDD1C47A10B0076EF31 /* BillHistoryCell.m in Sources */,
 				05075BD71C47A10B0076EF31 /* OpinionCell.m in Sources */,
+				053AB0FE1C4A1EDE00982B01 /* LoginStorage.m in Sources */,
 				05075BA81C47A0C30076EF31 /* CouponsViewController.m in Sources */,
 				05075B671C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05BA34B01C41F1FE00DC07CD /* _____Tests.m in Sources */,
+				053AB1061C4A44FC00982B01 /* CommonFunc.m in Sources */,
 				05075BCF1C47A10B0076EF31 /* MyMemberTableViewCell.m in Sources */,
 				05075BCD1C47A10B0076EF31 /* PersonDataCell.m in Sources */,
 				05075BAA1C47A0C30076EF31 /* BillTableViewController.m in Sources */,
+				053AB1021C4A1EFD00982B01 /* UserDefaultsUtils.m in Sources */,
 				05075BAE1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */,
 				05075BD51C47A10B0076EF31 /* BillCell.m in Sources */,
 				05075BD31C47A10B0076EF31 /* CouponsCell.m in Sources */,

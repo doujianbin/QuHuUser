@@ -7,14 +7,18 @@
 //
 
 #import "SignInViewController.h"
+#import "CommonFunc.h"
+#import "AppDelegate.h"
 
-@interface SignInViewController ()
+@interface SignInViewController ()<UITextFieldDelegate>
 
 @property (nonatomic ,retain)UITextField *tef_phoneNum;
 @property (nonatomic ,retain)UITextField *tef_yanzhengma;
 @property (nonatomic ,retain)UIButton *btn_yanzhengma;
 @property (nonatomic ,retain)UIButton *btn_denglu;
 @property (nonatomic        )int timeRemaining;//剩余时间
+
+@property (nonatomic ,strong)AFNManager *manager;
 
 @end
 
@@ -50,6 +54,7 @@
     [self.tef_phoneNum setBackgroundColor:[UIColor whiteColor]];
     self.tef_phoneNum.keyboardType = UIKeyboardTypePhonePad;
     self.tef_phoneNum.font = [UIFont systemFontOfSize:17];
+    self.tef_phoneNum.delegate = self;
     self.tef_phoneNum.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
     [self.tef_phoneNum setPlaceholder:@"手机号"];
     
@@ -66,6 +71,7 @@
     [self.tef_yanzhengma setBackgroundColor:[UIColor whiteColor]];
     self.tef_yanzhengma.keyboardType = UIKeyboardTypePhonePad;
     self.tef_yanzhengma.font = [UIFont systemFontOfSize:17];
+    self.tef_yanzhengma.delegate = self;
     self.tef_yanzhengma.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
     [self.tef_yanzhengma setPlaceholder:@"验证码"];
     
@@ -87,11 +93,28 @@
     [self.btn_denglu setTitle:@"登录" forState:UIControlStateNormal];
     [self.btn_denglu setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:UIControlStateNormal];
     self.btn_denglu.titleLabel.font = [UIFont systemFontOfSize:18];
+    [self.btn_denglu addTarget:self action:@selector(btnDengLuAction) forControlEvents:UIControlEventTouchUpInside];
+
+
     
 }
 
 -(void)yanzhengmaAction:(id)sender{
     UIButton *button = (UIButton *)sender;
+    
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,MessageCode];
+    self.manager = [[AFNManager alloc]init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.tef_phoneNum.text, @"phoneNumber", nil];
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
+        NSLog(@"%@",responseDic);
+        if ([[responseDic objectForKey:@"status"] isEqualToString:SUCCESS]) {
+            NSLog(@"发送成功");
+        }
+        
+    } fail:^(NSError *error) {
+        
+    }];
+    
     button.enabled = NO;
     self.timeRemaining = MAX_TIMEREMAINING;
     [button setTitle:[NSString stringWithFormat:@"%d秒",MAX_TIMEREMAINING] forState:UIControlStateDisabled];
@@ -135,6 +158,73 @@
     [self.btn_yanzhengma setBackgroundColor:[UIColor colorWithHexString:@"#FA6262"]];
     [self.btn_yanzhengma setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:UIControlStateNormal];
 }
+
+-(void)btnDengLuAction{
+    self.manager = [[AFNManager alloc]init];
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,RegisterOrRefresh];
+    NSString *strUserName = [NSString stringWithFormat:@"U_%@",self.tef_phoneNum.text];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:strUserName, @"username",self.tef_yanzhengma.text,@"password", nil];
+    
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
+        NSLog(@"验证是否正确=%@",responseDic);
+        
+        if ([[responseDic objectForKey:@"status"] isEqualToString:SUCCESS]) {
+            [self GetLoginToken];
+            
+        }
+//        if ([[responseDic objectForKey:@"status"] isEqualToString:ERROR]) {
+//            NSLog(@"错误信息:%@",[responseDic objectForKey:@"message"]);
+//        }
+    } fail:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
+-(void)GetLoginToken{
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetToken];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",  @"text/json", @"text/html", @"text/javascript",@"x-www-form-urlencoded",nil]];
+    
+    NSMutableURLRequest *request =
+    [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:strUrl]];
+    [request setHTTPMethod:@"POST"];
+    NSString *strHttpHeader = [NSString stringWithFormat:@"Basic %@",[CommonFunc base64StringFromText:@"accompany-user-client:ccbPASSquyiyuan20154421"]];
+    [request setValue:strHttpHeader
+   forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSString *strUserName = [NSString stringWithFormat:@"U_%@",self.tef_phoneNum.text];
+    NSString *token = [NSString stringWithFormat:@"grant_type=password&username=%@&password=%@",strUserName,self.tef_yanzhengma.text];
+    NSData *data = [token dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:data];
+    
+    NSOperation *operation =
+    [manager HTTPRequestOperationWithRequest:request
+                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                         // 成功后的处理
+                                         NSLog(@"登陆成功返回 == %@",responseObject);
+                                         NSString *token_type = [responseObject objectForKey:@"token_type"];
+                                         NSString *access_token = [responseObject objectForKey:@"access_token"];
+                                         NSString *httpHeader = [NSString stringWithFormat:@"%@ %@",token_type,access_token];
+                                         [LoginStorage savePhoneNum:self.tef_phoneNum.text];
+                                         [LoginStorage saveYanZhengMa:self.tef_yanzhengma.text];
+                                         [LoginStorage saveHTTPHeader:httpHeader];
+                                         [LoginStorage saveIsLogin:YES];
+                                         if (self.isSetRootView) {
+                                             [(AppDelegate*)[UIApplication sharedApplication].delegate setTabBarRootView];
+                                         }
+                                     }
+                                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         // 失败后的处理
+                                         NSLog(@"%@", error);
+                                     }];
+    [manager.operationQueue addOperation:operation];
+
+}
+
 
 -(void)viewAction{
     [self.tef_phoneNum resignFirstResponder];

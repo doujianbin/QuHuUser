@@ -31,7 +31,10 @@
         _manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
         [_manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",  @"text/json", @"text/html", @"text/javascript",nil]];
-        
+        if ([LoginStorage GetHTTPHeader].length != 0) {
+            
+            [_manager.requestSerializer setValue:[LoginStorage GetHTTPHeader] forHTTPHeaderField:@"Authorization"];
+        }
         
     }
     return self;
@@ -40,6 +43,7 @@
 - (void)RequestJsonWithUrl:(NSString *)url method:(NSString *)method parameter:(NSDictionary *)parameter result:(void (^)(id responseDic))success fail:(void (^)(NSError *error))fail
 {
     if ([method isEqualToString:@"GET"]) {
+        
         [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             
             if (success) {

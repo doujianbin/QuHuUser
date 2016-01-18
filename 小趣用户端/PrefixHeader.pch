@@ -14,7 +14,8 @@
 #import <AFNetworking/AFNetworking.h>
 #import "AFNManager.h"
 #import "APIConfig.h"
-
+#import "LoginStorage.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height

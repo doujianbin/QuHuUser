@@ -16,6 +16,7 @@
 @property(nonatomic,strong)NSArray*     fldData;
 @property(nonatomic,strong)NSArray*     sldData;
 @property(nonatomic,strong)NSIndexPath* indexPath;
+@property(nonatomic ,retain)AFNManager *manager;
 
 @end
 
@@ -52,6 +53,16 @@
 }
 
 - (void)loadData{
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,AreaForHospital];
+    self.manager = [[AFNManager alloc]init];
+    [self.manager RequestJsonWithUrl:strUrl method:@"GET" parameter:nil result:^(id responseDic) {
+        NSLog(@"区域医院:%@",responseDic);
+    } fail:^(NSError *error) {
+        NSLog(@"error=%ld",(long)error.code);
+        NSLog(@"%@",error.domain);
+        NSLog(@"%@",error.userInfo);
+        
+    }];
     self.fldData = @[@"赵扬区",@"钱扬区",@"孙扬区",@"李扬区",@"周扬区",@"吴扬区",@"郑扬区",@"王扬区"];
     self.allSldData = @[@[@"赵晓豆",@"赵晓豆",@"赵晓豆",@"赵晓豆",@"赵晓豆"],@[@"钱小豆",@"钱小豆",@"钱小豆",@"钱小豆",@"钱小豆"],@[@"孙晓豆",@"孙晓豆",@"孙晓豆",@"孙晓豆",@"孙晓豆"],@[@"李晓豆",@"李晓豆",@"李晓豆",@"李晓豆",@"李晓豆"],@[@"周小豆",@"周小豆",@"周小豆",@"周小豆",@"周小豆"],@[@"吴晓豆",@"吴晓豆",@"吴晓豆",@"吴晓豆",@"吴晓豆"],@[@"郑小豆",@"郑小豆",@"郑小豆",@"郑小豆",@"郑小豆"],@[@"王晓豆",@"王晓豆",@"王晓豆",@"王晓豆",@"王晓豆"]];
     self.sldData = [self.allSldData firstObject];
