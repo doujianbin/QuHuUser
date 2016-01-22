@@ -129,10 +129,13 @@
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:[responseDic objectForKey:@"message"] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
             [alert show];
         }else {
-        
-            NSLog(@"fail");
+           
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:[responseDic objectForKey:@"message"] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            [alert show];
+            
         }
         
+        [self makeURLRequest];
         
     } fail:^(NSError *error) {
         
