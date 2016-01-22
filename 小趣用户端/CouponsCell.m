@@ -2,7 +2,7 @@
 //  CouponsCell.m
 //  小趣用户端
 //
-//  Created by 李禹 on 16/1/11.
+//  Created by 刘宇飞 on 16/1/11.
 //  Copyright © 2016年 窦建斌. All rights reserved.
 //
 
@@ -43,9 +43,13 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.couponImageView.frame = CGRectMake(15, 0, [UIScreen mainScreen].bounds.size.width - 30, 150);
+    self.couponImageView.frame = CGRectMake(15, 0, [UIScreen mainScreen].bounds.size.width - 30, 114.5);
     
-    self.chargeLabel.frame = CGRectMake(200, 10, 100, 20);
+    self.couponTypeLabel.frame = CGRectMake(35.5, 33.5, 54, 19);
+    
+    self.endTimeLabel.frame =CGRectMake(35.5, 59, 129, 14.5);
+    
+    self.chargeLabel.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 89, 35.5, 55.5, 37.5);
 }
 
 @end

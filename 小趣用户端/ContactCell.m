@@ -2,7 +2,7 @@
 //  ContactCell.m
 //  小趣用户端
 //
-//  Created by 李禹 on 16/1/12.
+//  Created by 刘宇飞 on 16/1/12.
 //  Copyright © 2016年 窦建斌. All rights reserved.
 //
 
