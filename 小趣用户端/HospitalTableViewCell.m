@@ -32,9 +32,9 @@
         self.lab_hospitalAddress.font = [UIFont systemFontOfSize:12];
         self.lab_hospitalAddress.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
         
-        self.img_dingwei = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 67, 17.5, 8, 10.5)];
-        [self.contentView addSubview:self.img_dingwei];
-        [self.img_dingwei setImage:[UIImage imageNamed:@"Oval 56"]];
+//        self.img_dingwei = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 67, 17.5, 8, 10.5)];
+//        [self.contentView addSubview:self.img_dingwei];
+//        [self.img_dingwei setImage:[UIImage imageNamed:@"Oval 56"]];
         
         self.lab_juli = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 55.5, 14, 40, 17.5)];
         [self.contentView addSubview:self.lab_juli];

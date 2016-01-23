@@ -9,8 +9,8 @@
 #import "AppDelegate.h"
 #import "PeiZhenViewController.h"
 #import "YuYueViewController.h"
-#import "MyViewController.h"
 #import "SignInViewController.h"
+#import "MyTableViewController.h"
 #import "BPush.h"
 // rgb颜色转换（16进制->10进制）
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
@@ -27,58 +27,38 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-
+    
     //设置navigationbar标题的字体和颜色
     
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:@"#FA6262"], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:@"#C7CAD1"], NSForegroundColorAttributeName, nil] forState:UIControlStateDisabled];
     
-    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
-    tabBarVC.delegate = self;
-    self.window.rootViewController = tabBarVC;
-    
-//    SignInViewController *signInView = [[SignInViewController alloc]init];
-//    UINavigationController *nav_signIn = [[UINavigationController alloc]initWithRootViewController:signInView];
-//    [self.window setRootViewController:nav_signIn];
-    
-    PeiZhenViewController *peizhenVC = [[PeiZhenViewController alloc] init];
-    peizhenVC.tabBarItem.title = @"陪诊";
-    peizhenVC.tabBarItem.image = [[UIImage imageNamed:@"img_tab_order"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    peizhenVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_order_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    UINavigationController *peizhenNavibar = [[UINavigationController alloc] initWithRootViewController:peizhenVC];
-    
-    YuYueViewController *yuyueVC = [[YuYueViewController alloc] init];
-    yuyueVC.tabBarItem.title = @"预约单";
-    yuyueVC.tabBarItem.image = [[UIImage imageNamed:@"img_tab_health"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    yuyueVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_health_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UINavigationController *yuyueNavi = [[UINavigationController alloc] initWithRootViewController:yuyueVC];
-    
-    MyViewController * myVC = [[MyViewController alloc] init];
-    myVC.tabBarItem.title = @"我";
-    myVC.tabBarItem.image = [[UIImage imageNamed:@"img_tab_me"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    myVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_me_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UINavigationController *myNavi = [[UINavigationController alloc] initWithRootViewController:myVC];
-    
-    tabBarVC.viewControllers = @[peizhenVC, yuyueNavi, myNavi];
-    
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor blackColor], NSForegroundColorAttributeName,
                                                           [UIFont systemFontOfSize:18.0], NSFontAttributeName, nil]];
     
+    SignInViewController *signInView = [[SignInViewController alloc]init];
+    UINavigationController *nav_signIn = [[UINavigationController alloc]initWithRootViewController:signInView];
+    signInView.isSetRootView = YES;
+    if ([LoginStorage isLogin] == NO) {
+        [self.window setRootViewController:nav_signIn];
+    }else{
+        [self setTabBarRootView];
+    }
     
     /// 推送
     
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0)
-//    {
-//        [nav.navigationBar setBarTintColor:UIColorFromRGB(0x39526d)];
-//        [_tabBarCtr.tabBar setBarTintColor:UIColorFromRGB(0x39526d)];
-//    }
-//    else
-//    {
-//        [nav.navigationBar setTintColor:UIColorFromRGB(0x39526d)];
-//        [_tabBarCtr.tabBar setTintColor:UIColorFromRGB(0x39526d)];
-//    }
+    //    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0)
+    //    {
+    //        [nav.navigationBar setBarTintColor:UIColorFromRGB(0x39526d)];
+    //        [_tabBarCtr.tabBar setBarTintColor:UIColorFromRGB(0x39526d)];
+    //    }
+    //    else
+    //    {
+    //        [nav.navigationBar setTintColor:UIColorFromRGB(0x39526d)];
+    //        [_tabBarCtr.tabBar setTintColor:UIColorFromRGB(0x39526d)];
+    //    }
     // iOS8 下需要使用新的 API
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         UIUserNotificationType myTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
@@ -110,11 +90,37 @@
      // 测试本地通知
      [self performSelector:@selector(testLocalNotifi) withObject:nil afterDelay:1.0];
      */
-
+    
     
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)setTabBarRootView{
+    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
+    tabBarVC.delegate = self;
+    self.window.rootViewController = tabBarVC;
+    
+    PeiZhenViewController *peizhenVC = [[PeiZhenViewController alloc] init];
+    peizhenVC.tabBarItem.title = @"首页";
+    peizhenVC.tabBarItem.image = [[UIImage imageNamed:@"Triangle 1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    peizhenVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"Triangle s1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    //    UINavigationController *peizhenNavibar = [[UINavigationController alloc] initWithRootViewController:peizhenVC];
+    
+    YuYueViewController *yuyueVC = [[YuYueViewController alloc] init];
+    yuyueVC.tabBarItem.title = @"订单";
+    yuyueVC.tabBarItem.image = [[UIImage imageNamed:@"img_tab_health"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    yuyueVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_health_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UINavigationController *yuyueNavi = [[UINavigationController alloc] initWithRootViewController:yuyueVC];
+    
+    MyTableViewController * myVC = [[MyTableViewController alloc] init];
+    myVC.tabBarItem.title = @"我的";
+    myVC.tabBarItem.image = [[UIImage imageNamed:@"img_tab_me"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    myVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"img_tab_me_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UINavigationController *myNavi = [[UINavigationController alloc] initWithRootViewController:myVC];
+    
+    tabBarVC.viewControllers = @[peizhenVC, yuyueNavi, myNavi];
 }
 
 
@@ -161,13 +167,13 @@
     [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
         
         // 需要在绑定成功后进行 settag listtag deletetag unbind 操作否则会失败
-//        if (result) {
-//            [BPush setTag:@"Mytag" withCompleteHandler:^(id result, NSError *error) {
-//                if (result) {
-//                    NSLog(@"设置tag成功");
-//                }
-//            }];
-//        }
+        //        if (result) {
+        //            [BPush setTag:@"Mytag" withCompleteHandler:^(id result, NSError *error) {
+        //                if (result) {
+        //                    NSLog(@"设置tag成功");
+        //                }
+        //            }];
+        //        }
     }];
     
     
@@ -188,13 +194,7 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if([tabBarController.selectedViewController isEqual:viewController]){
-        UINavigationController *navigation =(UINavigationController *)viewController;
-        id vc = navigation.topViewController;
-        if([vc respondsToSelector:@selector(refreshData)]){
-            [vc performSelector:@selector(refreshData)];
-        }
-    }
+    
     return YES;
 }
 
@@ -202,7 +202,7 @@
     if ([viewController isKindOfClass:[UINavigationController class]]) {
         NSArray *arr_vcstack = [(UINavigationController *)viewController viewControllers];
         if ([arr_vcstack count]) {
-          
+            
         }
     }
 }

@@ -17,12 +17,21 @@
     UIButton *btn_texu;
     UITableView *tableView_hospital;
     UIScrollView *scl_back;
+    NSMutableArray *arr_hospital;
 }
+@property (nonatomic ,retain)AFNManager *manager;
 
 @end
 
 @implementation PeiZhenViewController
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        arr_hospital = [[NSMutableArray alloc]init];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
@@ -33,6 +42,27 @@
     [self addMidView];
     [self addKeshiView];
     [self addYiYuanView];
+    [self getMsg];
+}
+
+- (void)getMsg{
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetShouYeMsg];
+    self.manager = [[AFNManager alloc]init];
+    [self.manager RequestJsonWithUrl:strUrl method:@"GET" parameter:nil result:^(id responseDic) {
+        NSLog(@"首页信息＝%@",responseDic);
+        if ([Status isEqualToString:SUCCESS]) {
+            [LoginStorage saveCommonOrderDic:[[responseDic objectForKey:@"data"] objectForKey:@"commonSet"]];
+            [LoginStorage saveSpecialOrderDic:[[responseDic objectForKey:@"data"] objectForKey:@"specialSet"]];
+            arr_hospital = [[responseDic objectForKey:@"data"] objectForKey:@"hospitalList"];
+            [tableView_hospital reloadData];
+//            NSArray *arr = [[responseDic objectForKey:@"data"] objectForKey:@"hospitalList"];
+//            [arr_hospital addObjectsFromArray:arr];
+        }
+        
+    } fail:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -178,7 +208,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return arr_hospital.count;
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -199,9 +229,15 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HospitalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableViewHospital"];
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-    [cell.lab_juli setText:@"1.3KM"];
-    [cell.lab_hospitalAddress setText:@"生生世世生生世世啊收拾收拾收拾"];
-    
+    [cell.lab_hospital setText:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"hospitalName"]];
+    [cell.lab_hospitalAddress setText:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"address"]];
+//    [cell.lab_juli setText:@"1.3KM"];
+    NSString *picUrl = [[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"picUrl"];
+    if (![picUrl isKindOfClass:[NSNull class]]) {
+        
+        [cell.img_hospitalPic setImageWithURL:[NSURL URLWithString:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"picUrl"]] placeholderImage:nil];
+    }
+
     return cell;
 }
 
