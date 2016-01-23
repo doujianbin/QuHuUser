@@ -11,7 +11,7 @@
 #import "PersonDataCell.h"
 #import "MyCell.h"
 
-#import "CouponsViewController.h"
+#import "CouponsTableViewController.h"
 #import "BillTableViewController.h"
 #import "ShareViewController.h"
 #import "SettingTableViewController.h"
@@ -26,6 +26,9 @@
 
 @property (nonatomic, weak)PersonDataCell *personDataCell;
 
+@property (nonatomic, strong)NSMutableArray *dataArray;
+
+
 @end
 
 @implementation MyTableViewController
@@ -35,14 +38,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"我的";
+    self.title = @"个人中心";
+    
+    self.view.backgroundColor = COLOR(245, 246, 247, 1);
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark 页面设置相关
@@ -76,7 +76,7 @@
     
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0)];
     
-    headerView.backgroundColor = COLOR(219, 220, 221, 1);
+    headerView.backgroundColor = COLOR(245, 246, 247, 1);
     
     return headerView;
     
@@ -95,30 +95,35 @@
     static NSString *cellId2 = @"cell2";
     
     if (section == 0) {
-        PersonDataCell *cell1 = [tableView dequeueReusableCellWithIdentifier:cellId2];
-        if (cell1 == nil) {
+        PersonDataCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId2];
+        if (cell == nil) {
             
-            cell1 = [[PersonDataCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId2];
-            cell1.iconImageView.image = [UIImage imageNamed:@"coupons"];
-            NSString *nickname = [[NSUserDefaults standardUserDefaults]stringForKey:@"nickname"];
-            cell1.nameLabel.text = nickname;
-            cell1.creditLabel.text = @"jlk";
+            cell = [[PersonDataCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId2];
             
-            self.personDataCell = cell1;
         }
         
-        return cell1;
+        cell.iconImageView.image = [UIImage imageNamed:@"coupons"];
+        NSString *nickname = [[NSUserDefaults standardUserDefaults]stringForKey:@"nickname"];
+        cell.nameLabel.text = nickname;
+        
+        cell.creditLabel.text = @"积分：247";
+        
+        self.personDataCell = cell;
+        
+        return cell;
 
     }else {
             MyCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId1];
             if (cell == nil) {
 
                 cell = [[MyCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId1];
-                cell.iconImageView.image = [UIImage imageNamed:self.personCenterImageArray[indexPath.row]];
-                cell.personCenterLabel.text = self.personCenterLabelArray[indexPath.row];
+                
             }
-            
-            return cell;
+        
+        cell.iconImageView.image = [UIImage imageNamed:self.personCenterImageArray[indexPath.row]];
+        cell.personCenterLabel.text = self.personCenterLabelArray[indexPath.row];
+        
+        return cell;
         
     }
     
@@ -140,7 +145,7 @@
         }
     }else {
         if (row == 1) {
-            CouponsViewController *couponsViewController = [[CouponsViewController alloc]init];
+            CouponsTableViewController *couponsViewController = [[CouponsTableViewController alloc]init];
             [self.navigationController pushViewController:couponsViewController animated:YES];
         }
         
@@ -182,6 +187,15 @@
 
     self.personDataCell.nameLabel.text = name;
 }
+
+- (NSMutableArray *)dataArray {
+    if (_dataArray == nil) {
+        
+        
+    }
+    return _dataArray;
+}
+
 
 @end
 

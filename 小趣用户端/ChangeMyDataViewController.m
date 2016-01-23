@@ -2,7 +2,7 @@
 //  ChangeMyDataViewController.m
 //  小趣用户端
 //
-//  Created by 李禹 on 16/1/12.
+//  Created by 刘宇飞 on 16/1/12.
 //  Copyright © 2016年 窦建斌. All rights reserved.
 //
 
@@ -28,7 +28,7 @@
     UIBarButtonItem *item = [UIBarButtonItem barButtonitemWithNormalImageName:@"backArrow" highlightedImageName:@"backArrow" target:self action:@selector(backItemClick)];
     self.navigationItem.leftBarButtonItem = item;
     
-    self.view.backgroundColor = COLOR(219, 220, 221, 1);
+    self.view.backgroundColor = COLOR(245, 246, 247, 1);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -46,7 +46,6 @@
     [iconView addSubview:iconLabel];
     
     UIImageView *iconImageView = [[UIImageView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 89, 7.5, 60, 60)];
-//    iconImageView.image = [UIImage imageNamed:@"member"];
     iconImageView.contentMode = UIViewContentModeScaleToFill;
     [iconView addSubview:iconImageView];
     self.iconImageView = iconImageView;
@@ -119,19 +118,33 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
+    NSLog(@"%ld",buttonIndex);
+    
     if (buttonIndex == 0) {
         UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-        if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
-            sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = sourceType;
+            [self presentViewController:picker animated:YES completion:nil];
+            
         }
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.sourceType = sourceType;
-        [self presentViewController:picker animated:YES completion:nil];
-    }
-    else if (buttonIndex == 1) {
+        NSLog(@"拍照不可用");
+    }else if (buttonIndex == 1) {
         NSLog(@"xiangce");
+        
+        UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+           
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = sourceType;
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+        
     }else {
         NSLog(@"quxiao");
     }
@@ -143,31 +156,8 @@
     
     UIImage *iconImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-//    [[NSUserDefaults standardUserDefaults]setObject:iconImage forKey:@"image"];
-    
-    
-//    UIImage *image = [[NSUserDefaults standardUserDefaults]objectForKey:@"icmage"];
-    
-    [self saveImage:iconImage withName:@"currentImage.png"];
-    
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
-    
-    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    
     self.iconImageView.image = iconImage;
     
-}
-
-- (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
-{
-    
-    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
-    // 获取沙盒目录
-    
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
-    // 将图片写入文件
-    
-    [imageData writeToFile:fullPath atomically:NO];
 }
 
 @end

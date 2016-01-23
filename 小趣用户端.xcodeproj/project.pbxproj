@@ -38,8 +38,8 @@
 		05075BA41C47A0C30076EF31 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B901C47A0C30076EF31 /* SettingTableViewController.m */; };
 		05075BA51C47A0C30076EF31 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B921C47A0C30076EF31 /* ShareViewController.m */; };
 		05075BA61C47A0C30076EF31 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B921C47A0C30076EF31 /* ShareViewController.m */; };
-		05075BA71C47A0C30076EF31 /* CouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B941C47A0C30076EF31 /* CouponsViewController.m */; };
-		05075BA81C47A0C30076EF31 /* CouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B941C47A0C30076EF31 /* CouponsViewController.m */; };
+		05075BA71C47A0C30076EF31 /* CouponsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B941C47A0C30076EF31 /* CouponsTableViewController.m */; };
+		05075BA81C47A0C30076EF31 /* CouponsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B941C47A0C30076EF31 /* CouponsTableViewController.m */; };
 		05075BA91C47A0C30076EF31 /* BillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B961C47A0C30076EF31 /* BillTableViewController.m */; };
 		05075BAA1C47A0C30076EF31 /* BillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B961C47A0C30076EF31 /* BillTableViewController.m */; };
 		05075BAB1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B981C47A0C30076EF31 /* ChangeMyDataViewController.m */; };
@@ -286,8 +286,8 @@
 		05075B901C47A0C30076EF31 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
 		05075B911C47A0C30076EF31 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		05075B921C47A0C30076EF31 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
-		05075B931C47A0C30076EF31 /* CouponsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsViewController.h; sourceTree = "<group>"; };
-		05075B941C47A0C30076EF31 /* CouponsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsViewController.m; sourceTree = "<group>"; };
+		05075B931C47A0C30076EF31 /* CouponsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsTableViewController.h; sourceTree = "<group>"; };
+		05075B941C47A0C30076EF31 /* CouponsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsTableViewController.m; sourceTree = "<group>"; };
 		05075B951C47A0C30076EF31 /* BillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillTableViewController.h; sourceTree = "<group>"; };
 		05075B961C47A0C30076EF31 /* BillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillTableViewController.m; sourceTree = "<group>"; };
 		05075B971C47A0C30076EF31 /* ChangeMyDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeMyDataViewController.h; sourceTree = "<group>"; };
@@ -754,8 +754,8 @@
 				05075B901C47A0C30076EF31 /* SettingTableViewController.m */,
 				05075B911C47A0C30076EF31 /* ShareViewController.h */,
 				05075B921C47A0C30076EF31 /* ShareViewController.m */,
-				05075B931C47A0C30076EF31 /* CouponsViewController.h */,
-				05075B941C47A0C30076EF31 /* CouponsViewController.m */,
+				05075B931C47A0C30076EF31 /* CouponsTableViewController.h */,
+				05075B941C47A0C30076EF31 /* CouponsTableViewController.m */,
 				05075B951C47A0C30076EF31 /* BillTableViewController.h */,
 				05075B961C47A0C30076EF31 /* BillTableViewController.m */,
 				05075B971C47A0C30076EF31 /* ChangeMyDataViewController.h */,
@@ -1230,7 +1230,7 @@
 				05075BDE1C47A10B0076EF31 /* BillRecordCell.m in Sources */,
 				05BA35551C43DD1C00DC07CD /* TwoLevelViewController.m in Sources */,
 				05075B5F1C463CCB0076EF31 /* SignInViewController.m in Sources */,
-				05075BA71C47A0C30076EF31 /* CouponsViewController.m in Sources */,
+				05075BA71C47A0C30076EF31 /* CouponsTableViewController.m in Sources */,
 				05075B661C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05075B581C461EDD0076EF31 /* TXOrderTableViewCell.m in Sources */,
 				05E8BE351C52138D00DA27C0 /* FromHospitalSelectDoctorViewController.m in Sources */,
@@ -1270,6 +1270,7 @@
 				053AB0FE1C4A1EDE00982B01 /* LoginStorage.m in Sources */,
 				05075BA81C47A0C30076EF31 /* CouponsViewController.m in Sources */,
 				05CCADC21C4E697E001D9B0D /* AppointEntity.m in Sources */,
+				05075BA81C47A0C30076EF31 /* CouponsTableViewController.m in Sources */,
 				05075B671C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05BA34B01C41F1FE00DC07CD /* _____Tests.m in Sources */,
 				053AB1061C4A44FC00982B01 /* CommonFunc.m in Sources */,

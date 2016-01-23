@@ -2,7 +2,7 @@
 //  ShareViewController.m
 //  小趣用户端
 //
-//  Created by 李禹 on 16/1/11.
+//  Created by 刘宇飞 on 16/1/11.
 //  Copyright © 2016年 窦建斌. All rights reserved.
 //
 
@@ -51,7 +51,7 @@
     [shareButton setTitle:@"分享到社交圈" forState:UIControlStateNormal];
     UIImage *image = [UIImage imageNamed:@"redbackground"];
     [shareButton setBackgroundImage:[image stretchableImageWithLeftCapWidth:image.size.width/2 topCapHeight:image.size.height/2] forState:UIControlStateNormal];
-    [shareButton setBackgroundImage:[image stretchableImageWithLeftCapWidth:image.size.width/2 topCapHeight:image.size.height/2] forState:UIControlStateHighlighted];
+//    [shareButton setBackgroundImage:[image stretchableImageWithLeftCapWidth:image.size.width/2 topCapHeight:image.size.height/2] forState:UIControlStateHighlighted];
     [shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [backgroundview addSubview:shareButton];
     
