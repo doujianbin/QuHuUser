@@ -117,6 +117,7 @@
         if (!cell){
             cell = [[DoctorDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
+        [cell contentDoctorDetailWithDoctorEntity:self.doctorEntity];
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.section == 0 && indexPath.row == 2){
@@ -125,6 +126,7 @@
         if (!cell){
             cell = [[HospitalAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         [cell.lab_left setText:[[arr_all objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
         return cell;
     }else{

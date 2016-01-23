@@ -15,5 +15,6 @@
 @property (nonatomic ,retain)NSString *age;
 @property (nonatomic ,retain)NSString *gender;
 @property (nonatomic ,retain)NSString *IdCard;
+@property (nonatomic ,retain)NSString *userId;
 
 @end

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoctorEntity.h"
 @interface SelectTimeViewController : UIViewController
+
+@property (nonatomic,strong)DoctorEntity   *doctorEntity;
 
 @end

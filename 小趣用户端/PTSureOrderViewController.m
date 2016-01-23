@@ -8,6 +8,7 @@
 
 #import "PTSureOrderViewController.h"
 #import "BaseTableViewCell.h"
+#import "CommonOrderEntity.h"
 
 
 @interface PTSureOrderViewController ()<UITableViewDataSource,UITableViewDelegate>{
@@ -18,6 +19,8 @@
     UIScrollView *scl_back;
 }
 
+@property (nonatomic ,strong)AFNManager *manager;
+@property (nonatomic ,strong)NSMutableArray *arrAll;
 @end
 
 @implementation PTSureOrderViewController
@@ -27,9 +30,11 @@
     if (self) {
         arr1 = [[NSMutableArray alloc]initWithObjects:@"订单号",@"下单时间",@"地址",@"时间",@"成员", nil];
         arr2 = [[NSMutableArray alloc]initWithObjects:@"服务",@"价格",@"优惠券",@"合计金额", nil];
+        self.arrAll = [[NSMutableArray alloc]init];
     }
     return self;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
@@ -46,6 +51,22 @@
     [self.view addSubview:scl_back];
     // Do any additional setup after loading the view.
     [self addtableView];
+    [self loadData];
+}
+
+-(void)loadData{
+    NSString *strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/user/queryOrderDetails?id=%@",Development,self.str_OrderId];
+    self.manager = [[AFNManager alloc]init];
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:nil result:^(id responseDic) {
+        NSLog(@"订单详情:%@",responseDic);
+        if ([Status isEqualToString:SUCCESS]) {
+            NSArray *arr = [CommonOrderEntity parseCommonOrderWithJson:[responseDic objectForKey:@"data"]];
+            [self.arrAll addObject:arr];
+        }
+    } fail:^(NSError *error) {
+        NSLog(@"error == %@",error);
+    }];
+    
 }
 
 -(void)addtableView{
@@ -77,7 +98,7 @@
     
     UILabel *lab_remark = [[UILabel alloc]initWithFrame:CGRectMake(15, 557, 300, 12.5)];
     [scl_back addSubview:lab_remark];
-    [lab_remark setText:@"备注：陪诊超时按照小时收费（￥60/小时）"];
+    [lab_remark setText:@"备注：陪诊超时按照小时收费（￥25/小时）"];
     [lab_remark setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
     lab_remark.font = [UIFont systemFontOfSize:12];
     
@@ -89,30 +110,26 @@
     [upView addSubview:img];
     [img setImage:[UIImage imageNamed:@"Oval 91 + Path 52"]];
     
-    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(42, 16.5, 85, 21)];
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(42, 16.5, 120, 21)];
     [upView addSubview:lab];
-    [lab setText:@"等待支付"];
+    [lab setText:@"等待护士接单"];
     lab.font = [UIFont systemFontOfSize:15];
     lab.textColor = [UIColor colorWithHexString:@"#FA6262"];
     
     UIButton *btn_zhifu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 54)];
     [upView addSubview:btn_zhifu];
     [btn_zhifu setBackgroundColor:[UIColor colorWithHexString:@"#FA6262"]];
-    [btn_zhifu setTitle:@"支付" forState:UIControlStateNormal];
+    [btn_zhifu setTitle:@"取消订单" forState:UIControlStateNormal];
     btn_zhifu.titleLabel.font = [UIFont systemFontOfSize:15];
     
     [scl_back setContentSize:CGSizeMake(SCREEN_WIDTH, 640)];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == tableView1) {
-        if (indexPath.row == 0 || indexPath.row == 3 || indexPath.row == 4) {
-            return 57;
-        }
         if (indexPath.row == 1) {
-            return 55;
-        }
-        if (indexPath.row == 2) {
             return 70;
+        }else{
+            return 57;
         }
     }
     if (tableView == tableView2) {
@@ -138,6 +155,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.img_jiantou setHidden:YES];
         [cell.lab_left setText:[arr1 objectAtIndex:indexPath.row]];
+        CommonOrderEntity *orderEntity = [self.arrAll objectAtIndex:0];
+        [cell.textLabel setText:orderEntity.orderNo];
+        
         return cell;
     }
     if (tableView == tableView2) {

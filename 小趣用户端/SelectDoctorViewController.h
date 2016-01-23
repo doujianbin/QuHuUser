@@ -10,4 +10,6 @@
 
 @interface SelectDoctorViewController : UIViewController
 
+@property (nonatomic,strong)NSString  *str_selectedType;
+
 @end

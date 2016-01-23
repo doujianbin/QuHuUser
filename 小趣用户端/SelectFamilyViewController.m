@@ -9,11 +9,13 @@
 #import "SelectFamilyViewController.h"
 #import "FamileTableViewCell.h"
 #import "AddFamilyViewController.h"
+#import "NSString+Size.h"
 
 @interface SelectFamilyViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UITableView *tableFamily;
 }
 @property (nonatomic,strong)NSMutableArray   *arr_members;
+@property (nonatomic ,retain)AFNManager *manager;
 
 @end
 
@@ -37,23 +39,50 @@
     UIBarButtonItem *btnright = [[UIBarButtonItem alloc]initWithCustomView:btnR];
     self.navigationItem.rightBarButtonItem = btnright;
     [btnR addTarget:self action:@selector(btnRAdd) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.arr_members = [NSMutableArray array];
-    for (int i = 0; i < 3; i++) {
-        MemberEntity *entity = [[MemberEntity alloc]init];
-        entity.name = @"豆豆";
-        entity.phoneNum = @"18600000000";
-        entity.IdCard = @"2222222222222222";
-        entity.age = @"13";
-        entity.gender = @"男";
-        [self.arr_members addObject:entity];
-    }
+
     [self addTableView];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self getFamilyData];
+    
+}
+
+-(void)getFamilyData{
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetFamilyList];
+    self.manager = [[AFNManager alloc]init];
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:nil result:^(id responseDic) {
+        NSLog(@"成员列表：%@",responseDic);
+        if ([Status isEqualToString:SUCCESS]) {
+            self.arr_members = [NSMutableArray array];
+            
+            for (NSDictionary *dic in [responseDic objectForKey:@"data"]) {
+                
+                MemberEntity *entity = [[MemberEntity alloc]init];
+                entity.name = [dic objectForKey:@"userName"];
+                entity.phoneNum = [dic objectForKey:@"phoneNumber"];
+                entity.IdCard = [dic objectForKey:@"idNo"];
+                entity.userId = [dic objectForKey:@"userId"];
+                if ([[dic objectForKey:@"sex"] isEqualToString:@"0"]) {
+                    
+                    entity.gender = @"男";
+                }else{
+                    entity.gender = @"女";
+                }
+                entity.age = [dic objectForKey:@"age"];
+                [self.arr_members addObject:entity];
+            }
+            [tableFamily reloadData];
+        }
+    } fail:^(NSError *error) {
+        NSLog(@"error:%@",error);
+        [SVProgressHUD showErrorWithStatus:@"网络请求失败"];
+    }];
 }
 
 -(void)addTableView{
     
-    tableFamily = [[UITableView alloc]initWithFrame:CGRectMake(0, 11, SCREEN_WIDTH, 72 * 3 + 64) style:UITableViewStylePlain];
+    tableFamily = [[UITableView alloc]initWithFrame:CGRectMake(0, 11, SCREEN_WIDTH, SCREEN_HEIGHT - 11) style:UITableViewStylePlain];
     [self.view addSubview:tableFamily];
     [tableFamily setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
     tableFamily.delegate = self;
@@ -76,8 +105,18 @@
         [img1 setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
     }
     MemberEntity *entity = [self.arr_members objectAtIndex:indexPath.row];
+    CGFloat nameWith = [entity.name fittingLabelWidthWithHeight:18 andFontSize:[UIFont systemFontOfSize:17]];
     [cell.lab_name setText:entity.name];
-    [cell.lab_sexAndphoneNum setText:entity.phoneNum];
+    [cell.lab_name setFrame:CGRectMake(20, 12, nameWith, 18)];
+    [cell.lab_sexAndphoneNum setFrame:CGRectMake(20 + 19 + nameWith, 15, 150, 18)];
+    if ([entity.gender isEqualToString:@"男"]) {
+        
+        NSString *str_genderAndphoneNum = [NSString stringWithFormat:@"男   %@",entity.phoneNum];
+        [cell.lab_sexAndphoneNum setText:str_genderAndphoneNum];
+    }else{
+        NSString *str_genderAndphoneNum = [NSString stringWithFormat:@"女   %@",entity.phoneNum];
+        [cell.lab_sexAndphoneNum setText:str_genderAndphoneNum];
+    }
     [cell.lab_IDCard setText:[NSString stringWithFormat:@"身份证号: %@",entity.IdCard]];
     return cell;
 }

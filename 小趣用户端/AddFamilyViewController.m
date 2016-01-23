@@ -19,6 +19,8 @@
     UIButton *btn_gender_man;
     UIButton *btn_gender_women;
 }
+@property (nonatomic ,retain)AFNManager *manager;
+@property (nonatomic ,strong)NSString * genderIndex;
 
 @end
 
@@ -78,6 +80,7 @@
         [cell addSubview:tef_name];
         tef_name.font = [UIFont systemFontOfSize:16];
         tef_name.textAlignment = NSTextAlignmentRight;
+        tef_name.delegate = self;
         tef_name.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
     }
     if (indexPath.row == 1) {
@@ -125,6 +128,7 @@
         tef_IdCard.font = [UIFont systemFontOfSize:16];
         tef_IdCard.textAlignment = NSTextAlignmentRight;
         tef_IdCard.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
+        tef_IdCard.delegate = self;
         tef_IdCard.keyboardType = UIKeyboardTypeNumbersAndPunctuation;// 身份证专用样式
     }
     
@@ -179,12 +183,14 @@
 -(void)btnnanAction{
     [btn_gender_man setImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
     [btn_gender_women setImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
+    self.genderIndex = @"0";
 }
 
 
 -(void)btnnvAction{
     [btn_gender_man setImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
     [btn_gender_women setImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
+    self.genderIndex = @"1";
 }
 
 -(void)NavLeftAction{
@@ -192,8 +198,23 @@
 }
 
 -(void)btnRSave{
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,CreateFamily];
+    NSDictionary *dic = @{@"name":tef_name.text,@"sex":self.genderIndex,@"relation":lab_relation.text,@"phoneNumber":tef_PhoneNum.text,@"identityNumber":tef_IdCard.text};
     
+    self.manager = [[AFNManager alloc]init];
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
+        NSLog(@"%@",responseDic);
+        if ([Status isEqualToString:SUCCESS]) {
+            [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } fail:^(NSError *error) {
+        
+    }];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

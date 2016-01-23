@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoctorEntity.h"
 @interface DoctorDetailTableViewCell : UITableViewCell
 
 @property (nonatomic ,retain)UIImageView *lab_cellImgPic;
 @property (nonatomic ,retain)UILabel *lab_cellName;
 @property (nonatomic ,retain)UILabel *lab_cellzhicheng;
 @property (nonatomic ,retain)UILabel *lab_cellyiyuankeshi;
+
+- (void)contentDoctorDetailWithDoctorEntity:(DoctorEntity *)doctorEntity;
 
 @end

@@ -10,4 +10,8 @@
 
 @interface PuTongPZViewController : UIViewController
 
+@property (nonatomic ,retain)NSString *str_hospitalName;
+@property (nonatomic ,retain)NSString *str_hospitalAddress;
+@property (nonatomic ,retain)NSString *str_hospitalId;
+
 @end

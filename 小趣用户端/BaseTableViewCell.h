@@ -13,5 +13,8 @@
 @property (nonatomic ,retain)UILabel *lab_left;
 @property (nonatomic ,retain)UILabel *lab_right;
 @property (nonatomic ,retain)UIImageView *img_jiantou;
+@property (nonatomic ,retain)UIImageView *img_heng;
+@property (nonatomic ,retain)UILabel *lab_hospitalName;
+@property (nonatomic ,retain)UILabel *lab_hospitalAddress;
 
 @end

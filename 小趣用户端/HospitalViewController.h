@@ -10,4 +10,6 @@
 
 @interface HospitalViewController : UIViewController
 
+@property (nonatomic ,strong)NSDictionary *dic_hospital;
+
 @end

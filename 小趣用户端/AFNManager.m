@@ -7,6 +7,7 @@
 //
 
 #import "AFNManager.h"
+#import "SignInViewController.h"
 
 @implementation AFNManager
 
@@ -31,7 +32,7 @@
         _manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
         [_manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",  @"text/json", @"text/html", @"text/javascript",nil]];
-        if ([LoginStorage GetHTTPHeader].length != 0) {
+        if ([LoginStorage GetHTTPHeader].length != 0 || [LoginStorage GetHTTPHeader] != nil) {
             
             [_manager.requestSerializer setValue:[LoginStorage GetHTTPHeader] forHTTPHeaderField:@"Authorization"];
         }
@@ -52,6 +53,16 @@
             
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
             fail(error);
+            NSLog(@"%ld",operation.response.statusCode);
+            if (operation.response.statusCode == 401) {
+                // 重新登录
+                NSUserDefaults *userdefaults = [[NSUserDefaults alloc]init];
+                [userdefaults removeObjectForKey:@"httpHeader"];
+                NSLog(@"%@",[LoginStorage GetHTTPHeader]);
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"loginAgain" object:self];
+            }
+  
         }];
     }else if ([method isEqualToString:@"POST"]) {
         [self.manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -94,6 +105,5 @@
     
     
 }
-
 
 @end

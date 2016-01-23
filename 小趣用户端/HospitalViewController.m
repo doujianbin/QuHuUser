@@ -7,6 +7,9 @@
 //
 
 #import "HospitalViewController.h"
+#import "NSString+Size.h"
+#import "PuTongPZViewController.h"
+#import "FromHospitalSelectDoctorViewController.h"
 
 @interface HospitalViewController (){
     UIButton *btn_putong;
@@ -22,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
-    self.title = @"医院名称";
+    self.title = [self.dic_hospital objectForKey:@"hospitalName"];
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
     UIButton *btnl = [[UIButton alloc]initWithFrame:CGRectMake(15, 21.5, 20, 20)];
@@ -94,14 +97,52 @@
     lab_texu2.font = [UIFont systemFontOfSize:12];
     [lab_texu2 setTextColor:[UIColor colorWithHexString:@"4A4A4A" alpha:0.5]];
     
+    UIView *viewHospital = [[UIView alloc]initWithFrame:CGRectMake(0, 346.5, SCREEN_WIDTH, 40)];
+    [self.view addSubview:viewHospital];
+    [viewHospital setBackgroundColor:[UIColor whiteColor]];
+    
+    UIImageView *img1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 12.5, 2, 17)];
+    [viewHospital addSubview:img1];
+    [img1 setImage:[UIImage imageNamed:@"Rectangle 39"]];
+    
+    UILabel *lab_allyiyuan = [[UILabel alloc]initWithFrame:CGRectMake(15, 13, 52, 14.5)];
+    [viewHospital addSubview:lab_allyiyuan];
+    [lab_allyiyuan setText:@"医院简介"];
+    lab_allyiyuan.font = [UIFont systemFontOfSize:13];
+    [lab_allyiyuan setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+    
+    UIImageView *imgheng = [[UIImageView alloc]initWithFrame:CGRectMake(0, 39.5, SCREEN_WIDTH, 0.5)];
+    [viewHospital addSubview:imgheng];
+    [imgheng setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
+    
+    NSString *hospitalIntroduce = [self.dic_hospital objectForKey:@"details"];
+    CGFloat strHeight = [hospitalIntroduce fittingLabelHeightWithWidth:SCREEN_WIDTH - 30 andFontSize:[UIFont systemFontOfSize:14]];
+    UIView *view_hospitalIntroduce = [[UIView alloc]initWithFrame:CGRectMake(0, 386.5, SCREEN_WIDTH, strHeight + 25)];
+    [self.view addSubview:view_hospitalIntroduce];
+    [view_hospitalIntroduce setBackgroundColor:[UIColor whiteColor]];
+    
+    UILabel *lab_hospitalIntroduce = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, strHeight)];
+    [view_hospitalIntroduce addSubview:lab_hospitalIntroduce];
+    [lab_hospitalIntroduce setText:hospitalIntroduce];
+    lab_hospitalIntroduce.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
+    lab_hospitalIntroduce.font = [UIFont systemFontOfSize:14];
+    lab_hospitalIntroduce.numberOfLines = 0;
+
+    
 }
 
 -(void)btn_putongAction{
-    
+    PuTongPZViewController *vc = [[PuTongPZViewController alloc]init];
+    vc.str_hospitalName = [self.dic_hospital objectForKey:@"hospitalName"];
+    vc.str_hospitalAddress = [self.dic_hospital objectForKey:@"address"];
+    vc.str_hospitalId = [self.dic_hospital objectForKey:@"hospitalId"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)btn_texuAction{
-    
+    FromHospitalSelectDoctorViewController *vc = [[FromHospitalSelectDoctorViewController alloc]init];
+    vc.hospitalId = [self.dic_hospital objectForKey:@"hospitalId"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)NavLeftAction{

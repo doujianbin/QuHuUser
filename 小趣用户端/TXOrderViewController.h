@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DoctorEntity.h"
+#import "AppointEntity.h"
+#import "HospitalGroupEntity.h"
 @interface TXOrderViewController : UIViewController
+
+@property (nonatomic,strong)DoctorEntity  *doctorEntity;
+@property (nonatomic,strong)AppointEntity  *appointEntity;
+@property (nonatomic,strong)HospitalGroupEntity *hospitalEntity;
 
 @end

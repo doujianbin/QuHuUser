@@ -15,11 +15,9 @@
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (assign, nonatomic) BOOL scrollViewBounces;
 
-@property (strong, nonatomic) UIPageControl *pageControl;
-
 @property (strong, nonatomic) NSArray *datasourceImages;
 @property (assign, nonatomic) NSUInteger currentSelectedPage;
-
+@property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) ReloadCompleteBlock completeBlock;
 
 @end
@@ -51,7 +49,7 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     NSArray *subViews = self.subviews;
     [subViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
@@ -90,9 +88,9 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 }
 
 - (void)initializePageControl {
-    CGRect pageControlFrame = CGRectMake(0, 0, CGRectGetWidth(_scrollView.frame), 30);
+    CGRect pageControlFrame = CGRectMake(CGRectGetWidth(_scrollView.frame) - 80, CGRectGetHeight(_scrollView.frame) - 30, 80, 30);
     _pageControl = [[UIPageControl alloc] initWithFrame:pageControlFrame];
-    _pageControl.center = CGPointMake(CGRectGetWidth(_scrollView.frame)*0.5, CGRectGetHeight(_scrollView.frame) - 12.);
+    //    _pageControl.center = CGPointMake(CGRectGetWidth(_scrollView.frame)*0.5, CGRectGetHeight(_scrollView.frame) - 12.);
     _pageControl.userInteractionEnabled = NO;
     [self addSubview:_pageControl];
 }

@@ -51,6 +51,9 @@
         self.lab_keshi.alpha = 0.6;
         [self.lab_keshi setText:@"妇产科"];
         
+        UIImageView *iv_line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 90.5, SCREEN_WIDTH, 0.5)];
+        [iv_line setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
+        [self addSubview:iv_line];
     }
     return self;
 }

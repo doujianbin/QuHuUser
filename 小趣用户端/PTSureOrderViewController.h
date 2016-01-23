@@ -10,4 +10,6 @@
 
 @interface PTSureOrderViewController : UIViewController
 
+@property (nonatomic ,strong)NSString *str_OrderId;
+
 @end

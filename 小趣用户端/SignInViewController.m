@@ -100,6 +100,8 @@
 }
 
 -(void)yanzhengmaAction:(id)sender{
+    
+    [self.tef_phoneNum resignFirstResponder];
     UIButton *button = (UIButton *)sender;
     
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,MessageCode];
@@ -108,11 +110,11 @@
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
         NSLog(@"%@",responseDic);
         if ([[responseDic objectForKey:@"status"] isEqualToString:SUCCESS]) {
-            NSLog(@"发送成功");
+            [SVProgressHUD showSuccessWithStatus:@"发送成功"];
         }
         
     } fail:^(NSError *error) {
-        
+        [SVProgressHUD showErrorWithStatus:@"发送失败"];
     }];
     
     button.enabled = NO;
@@ -215,6 +217,8 @@
                                          [LoginStorage saveIsLogin:YES];
                                          if (self.isSetRootView) {
                                              [(AppDelegate*)[UIApplication sharedApplication].delegate setTabBarRootView];
+                                         }else{
+                                             [self dismissViewControllerAnimated:YES completion:nil];
                                          }
                                      }
                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
