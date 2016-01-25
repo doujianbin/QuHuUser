@@ -12,8 +12,9 @@
 #import "TwoLevelViewController.h"
 #import "PTSureOrderViewController.h"
 #import "MemberEntity.h"
+#import "CouponsTableViewController.h"
 
-@interface PuTongPZViewController ()<UITableViewDataSource,UITableViewDelegate,SelectFamilyViewControllerDelegate,TwoLevelViewControllerDegelate>{
+@interface PuTongPZViewController ()<UITableViewDataSource,UITableViewDelegate,SelectFamilyViewControllerDelegate,TwoLevelViewControllerDegelate,CouponsTableViewControllerDegelate>{
     UITableView *tableView1;
     UITableView *tableView2;
 }
@@ -29,6 +30,8 @@
 @property (nonatomic ,retain)NSString *str_startTime;// 显示给用户看的lab
 @property (nonatomic ,retain)NSString *str_time;     // 传给服务端用的
 @property (nonatomic ,retain)AFNManager *manager;
+@property (nonatomic ,strong)NSDictionary *dic_coupon;
+@property (nonatomic ,strong)NSDictionary *partnerDic;
 
 @end
 
@@ -50,6 +53,7 @@
     [self addTableView];
     
 }
+
 
 -(void)addTableView{
     
@@ -183,15 +187,42 @@
         }
         if (indexPath.row == 2) {
             [cell.lab_left setText:@"优惠券"];
-            [cell.lab_right setText:@"－¥99"];
-            [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
-            cell.lab_right.alpha = 1.0;
+            if ([[[self.dic_coupon objectForKey:@"id"] stringValue] length] > 0) {
+                if ([[self.dic_coupon objectForKey:@"type"] intValue] == 1) {
+                    CGFloat discount = [[self.dic_coupon objectForKey:@"value"] floatValue];
+                    [cell.lab_right setText:[NSString stringWithFormat:@"%.f折",discount]];
+                    [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+                    cell.lab_right.alpha = 1.0;
+                }
+                if ([[self.dic_coupon objectForKey:@"type"] intValue] == 2) {
+                    [cell.lab_right setText:[NSString stringWithFormat:@"-¥%@",[self.dic_coupon objectForKey:@"value"]]];
+                    [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+                    cell.lab_right.alpha = 1.0;
+                }
+            }else{
+                [cell.lab_right setText:@"选择使用优惠券"];
+                [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 280, 0, 250, 57)];
+                
+            }
         }
         if (indexPath.row == 3) {
+            
             [cell.lab_left setText:@"合计金额:"];
             cell.lab_left.alpha = 0.8;
             cell.lab_right.alpha = 1.0;
-            [cell.lab_right setText:[[LoginStorage GetCommonOrderDic] objectForKey:@"info"]];
+            if ([[self.dic_coupon objectForKey:@"type"] intValue] == 1) {
+                CGFloat totalPrice = [[[LoginStorage GetCommonOrderDic] objectForKey:@"info"] floatValue];
+                CGFloat discount = [[self.dic_coupon objectForKey:@"value"] floatValue];
+                CGFloat price = totalPrice * discount / 10;
+                [cell.lab_right setText:[NSString stringWithFormat:@"%.2f",price]];
+            }else if ([[self.dic_coupon objectForKey:@"type"] intValue] == 2){
+                CGFloat totalPrice = [[[LoginStorage GetCommonOrderDic] objectForKey:@"info"] floatValue];
+                CGFloat discount = [[self.dic_coupon objectForKey:@"value"] floatValue];
+                CGFloat price = totalPrice - discount;
+                [cell.lab_right setText:[NSString stringWithFormat:@"%.2f",price]];
+            }else{
+                [cell.lab_right setText:[[LoginStorage GetCommonOrderDic] objectForKey:@"info"]];
+            }
             [cell.lab_left setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
             [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
             [cell.img_jiantou setHidden:YES];
@@ -262,6 +293,14 @@
             [self.navigationController pushViewController:seletView animated:YES];
         }
     }
+    if (tableView == tableView2) {
+        if (indexPath.row == 2) {
+            CouponsTableViewController *vc_cou = [[CouponsTableViewController alloc]init];
+            vc_cou.isFromOrder = YES;
+            vc_cou.delegate =self;
+            [self.navigationController pushViewController:vc_cou animated:YES];
+        }
+    }
 }
 
 -(void)btn_cancelAction:(UIButton *)sender{
@@ -315,6 +354,10 @@
     [tableView1 reloadData];
 }
 
+- (void)didSelectedCouponsWithDic:(NSDictionary *)couponsDic{
+    self.dic_coupon = couponsDic;
+    [tableView2 reloadData];
+}
 
 -(void)NavLeftAction{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -340,10 +383,16 @@
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,CreateCommonOrder];
     NSString *strSetId = [[LoginStorage GetCommonOrderDic] objectForKey:@"id"];
     //    NSDictionary *dic = @{@"setId":strSetId,@"hospitalId":strHospitalId,@"patientId":self.entity.userId,@"appointId":@"<null>",@"scheduleTime":self.str_time,@"couponId":@"<null>"};
-    NSDictionary *dic = @{@"setId":strSetId,@"hospitalId":self.str_hospitalId,@"patientId":self.entity.userId,@"scheduleTime":self.str_time};
+    if ([[[self.dic_coupon objectForKey:@"id"] stringValue] length] > 0) {
+        NSString *couponId = [NSString stringWithFormat:@"%@",[self.dic_coupon objectForKey:@"id"]];
+        self.partnerDic = @{@"setId":strSetId,@"hospitalId":self.str_hospitalId,@"patientId":self.entity.userId,@"scheduleTime":self.str_time,@"couponId":couponId};
+    }else{
+        
+        self.partnerDic = @{@"setId":strSetId,@"hospitalId":self.str_hospitalId,@"patientId":self.entity.userId,@"scheduleTime":self.str_time};
+    }
     
     
-    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:self.partnerDic result:^(id responseDic) {
         NSLog(@"下单(普通)返回:%@",responseDic);
         if ([Status isEqualToString:SUCCESS]) {
             

@@ -34,9 +34,7 @@
         self.chargeLabel = chargeLabel;
         
         self.contentView.backgroundColor = COLOR(245, 246, 247, 1);
-        
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+        }
     return self;
 }
 

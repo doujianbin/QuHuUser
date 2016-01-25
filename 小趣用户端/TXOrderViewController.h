@@ -10,10 +10,12 @@
 #import "DoctorEntity.h"
 #import "AppointEntity.h"
 #import "HospitalGroupEntity.h"
+#import "DayGroupEntity.h"
 @interface TXOrderViewController : UIViewController
 
 @property (nonatomic,strong)DoctorEntity  *doctorEntity;
 @property (nonatomic,strong)AppointEntity  *appointEntity;
 @property (nonatomic,strong)HospitalGroupEntity *hospitalEntity;
-
+@property (nonatomic,strong)DayGroupEntity *dayEntity;
+@property (nonatomic,strong)NSString *str_yearMonth;
 @end

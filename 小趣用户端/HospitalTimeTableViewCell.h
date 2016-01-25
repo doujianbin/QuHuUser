@@ -11,7 +11,7 @@
 #import "AppointEntity.h"
 @protocol HospitalTimeTableViewCellDelegate <NSObject>
 
-- (void)didSelectedWithAppointEntity:(AppointEntity *)appointEntity;
+- (void)didSelectedWithAppointEntity:(AppointEntity *)appointEntity withHospitalGroupEntity:(HospitalGroupEntity *)hospitalGroupEntity;
 
 @end
 

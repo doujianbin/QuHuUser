@@ -24,12 +24,11 @@
         self.lab_left.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         self.lab_left.alpha = 0.6;
         
-        self.lab_right = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 280, 0, 250, 57)];
+        self.lab_right = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 280, 0, 265, 57)];
         [self.contentView addSubview:self.lab_right];
         self.lab_right.font = [UIFont systemFontOfSize:16];
         self.lab_right.textAlignment = NSTextAlignmentRight;
         self.lab_right.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
-        self.lab_right.alpha = 0.6;
         
         self.img_heng = [[UIImageView alloc]initWithFrame:CGRectMake(0, 56.5, SCREEN_WIDTH, 0.5)];
         [self.contentView addSubview:self.img_heng];

@@ -153,7 +153,7 @@
         cell.lab_hospital.text = doctorEntity.hospitalName;
         cell.lab_zhicheng.text = doctorEntity.jobTitle;
         cell.lab_keshi.text = doctorEntity.deptName;
-        [cell.imgPic sd_setImageWithURL:[NSURL URLWithString:doctorEntity.headPortraint] placeholderImage:nil];
+        [cell.imgPic sd_setImageWithURL:[NSURL URLWithString:doctorEntity.headPortraint] placeholderImage:[UIImage imageNamed:@"ic_医生介绍@2x"]];
         CGFloat width_name = [cell.lab_name.text fittingLabelWidthWithHeight:cell.lab_name.frame.size.height andFontSize:cell.lab_name.font];
         [cell.lab_name setFrame:CGRectMake(cell.lab_name.frame.origin.x, cell.lab_name.frame.origin.y, width_name, cell.lab_name.frame.size.height)];
         [cell.lab_zhicheng setFrame:CGRectMake(CGRectGetMaxX(cell.lab_name.frame) + 10, cell.lab_zhicheng.frame.origin.y, cell.lab_zhicheng.frame.size.width, cell.lab_zhicheng.frame.size.height)];

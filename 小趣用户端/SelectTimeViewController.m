@@ -25,6 +25,7 @@
 @property (nonatomic,strong)NSMutableArray *arr_button;
 @property (nonatomic,strong)NSArray        *arr_hospitalGroup;
 @property (nonatomic,strong)UIView         *v_tableViewBack;
+@property (nonatomic,strong)DayGroupEntity *dayEntity;
 
 @end
 
@@ -137,14 +138,14 @@
 -(void)getDoctorTimeMsg{
     
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,UserSelectDoctorMsg];
-    NSDictionary *dic = @{@"doctorId":@"336"};
+    NSDictionary *dic = @{@"doctorId":self.doctorEntity.doctorId};
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
         NSMutableDictionary *dicAll = [responseDic objectForKey:@"data"];
         self.str_yearMonth = [dicAll objectForKey:@"yearMonth"];
         self.arr_dayGroup = [DayGroupEntity parseDayGroupListWithJson:[dicAll objectForKey:@"dayGroup"]];
-        DayGroupEntity *entity = [self.arr_dayGroup firstObject];
-        self.arr_hospitalGroup = entity.hospitalGroup;
+        self.dayEntity = [self.arr_dayGroup firstObject];
+        self.arr_hospitalGroup = self.dayEntity.hospitalGroup;
         [self onCreate];
     } fail:^(NSError *error) {
         
@@ -156,8 +157,8 @@
         [btn setBackgroundImage:nil forState:UIControlStateNormal];
     }
     [btn_sender setBackgroundImage:[UIImage imageNamed:@"active"] forState:UIControlStateNormal];
-    DayGroupEntity *entity = [self.arr_dayGroup objectAtIndex:btn_sender.tag];
-    self.arr_hospitalGroup = entity.hospitalGroup;
+    self.dayEntity = [self.arr_dayGroup objectAtIndex:btn_sender.tag];
+    self.arr_hospitalGroup = self.dayEntity.hospitalGroup;
     [self.tb_hospital reloadData];
     CGFloat height_tableView = 0;
     for (HospitalGroupEntity *entity in self.arr_hospitalGroup) {
@@ -226,11 +227,14 @@
     return height;
 }
 
-- (void)didSelectedWithAppointEntity:(AppointEntity *)appointEntity{
+- (void)didSelectedWithAppointEntity:(AppointEntity *)appointEntity withHospitalGroupEntity:(HospitalGroupEntity *)hospitalGroupEntity{
     
     TXOrderViewController *txorderView = [[TXOrderViewController alloc]init];
     txorderView.doctorEntity = self.doctorEntity;
     txorderView.appointEntity = appointEntity;
+    txorderView.hospitalEntity = hospitalGroupEntity;
+    txorderView.dayEntity = self.dayEntity;
+    txorderView.str_yearMonth = self.str_yearMonth;
     [self.navigationController pushViewController:txorderView animated:YES];
 }
 

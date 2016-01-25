@@ -45,10 +45,10 @@
 - (void)contentCellWithHospitalGroupEntity:(HospitalGroupEntity *)hospitalGroupEntity withIndex:(int)index{
     self.hospitalGroupEntity = hospitalGroupEntity;
     [self.lb_number setText:[NSString stringWithFormat:@"%d",index]];
-    //    [self.lb_hospitalName setText:hospitalGroupEntity.hospitalName];
-    //    [self.lb_address setText:hospitalGroupEntity.hospitalAddress];
-    [self.lb_hospitalName setText:@"上海市儿童医院（泸定路院区）"];
-    [self.lb_address setText:@"普陀区泸定路355号"];
+        [self.lb_hospitalName setText:hospitalGroupEntity.hospitalName];
+        [self.lb_address setText:hospitalGroupEntity.hospitalAddress];
+//    [self.lb_hospitalName setText:@"上海市儿童医院（泸定路院区）"];
+//    [self.lb_address setText:@"普陀区泸定路355号"];
     CGFloat width_button = 71.5;
     CGFloat height_button = 27.5;
     CGFloat height_up = 14.5;
@@ -63,6 +63,7 @@
         [btn_time setTitle:appointEntity.startTime forState:UIControlStateNormal];
         btn_time.titleLabel.font = [UIFont systemFontOfSize:14];
         [btn_time.layer setCornerRadius:3];
+        btn_time.tag = i;
         if ([appointEntity.status isEqualToString:@"0"]) {
             btn_time.alpha = 1;
             btn_time.titleLabel.attributedText = nil;
@@ -93,7 +94,7 @@
 
 - (void)addTimeAction:(UIButton *)btn_sender{
     AppointEntity *entity = [self.hospitalGroupEntity.appointList objectAtIndex:btn_sender.tag];
-    [self.delegate didSelectedWithAppointEntity:entity];
+    [self.delegate didSelectedWithAppointEntity:entity withHospitalGroupEntity:self.hospitalGroupEntity];
 }
 
 @end

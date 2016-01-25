@@ -24,6 +24,12 @@
         self.lab_left.font = [UIFont systemFontOfSize:16];
         self.lab_left.alpha = 0.6;
         
+        self.lab_right = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 295, 0, 280, 57)];
+        [self.contentView addSubview:self.lab_right];
+        [self.lab_right setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+        self.lab_right.font = [UIFont systemFontOfSize:16];
+        [self.lab_right setTextAlignment:NSTextAlignmentRight];
+        
         UIImageView *iv_line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 56.5, SCREEN_WIDTH, 0.5)];
         [iv_line setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
         [self addSubview:iv_line];

@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CouponsTableViewControllerDegelate <NSObject>
+
+- (void)didSelectedCouponsWithDic:(NSDictionary *)couponsDic;
+
+@end
+
 @interface CouponsTableViewController : UIViewController
+
+@property (nonatomic ,retain)id<CouponsTableViewControllerDegelate>delegate;
+
+@property (nonatomic )BOOL isFromOrder;
 
 @end

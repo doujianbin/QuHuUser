@@ -42,6 +42,8 @@
 #define UserSelectDoctorMsg @"/quhu/accompany/user/getAppointListAll"
 //用户创建普通陪诊
 #define CreateCommonOrder @"/quhu/accompany/user/order/createCommonOrder"
+//用户创建特需订单
+#define CreateSpecialOrder @"/quhu/accompany/user/order/createSpecialOrder"
 // 用户查询未结束的订单详情
 #define QueryUnfinishedList @"/quhu/accompany/user/order/queryUnfinishedList"
 

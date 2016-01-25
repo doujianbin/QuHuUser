@@ -223,6 +223,13 @@
 		05E8BE811C52596700DA27C0 /* 1242 × 2208.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BE781C52596700DA27C0 /* 1242 × 2208.png */; };
 		05E8BE821C52596700DA27C0 /* 1242 × 2208.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BE781C52596700DA27C0 /* 1242 × 2208.png */; };
 		05E8BE841C525CF600DA27C0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BE831C525CF600DA27C0 /* Images.xcassets */; };
+		05E8BE961C53B59A00DA27C0 /* ic_个人中心.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BE911C53B59A00DA27C0 /* ic_个人中心.png */; };
+		05E8BE971C53B59A00DA27C0 /* ic_个人中心@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BE921C53B59A00DA27C0 /* ic_个人中心@3x.png */; };
+		05E8BE981C53B59A00DA27C0 /* ic_医生介绍.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BE931C53B59A00DA27C0 /* ic_医生介绍.png */; };
+		05E8BE991C53B59A00DA27C0 /* ic_医生介绍@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BE941C53B59A00DA27C0 /* ic_医生介绍@2x.png */; };
+		05E8BE9A1C53B59A00DA27C0 /* ic_医生介绍@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BE951C53B59A00DA27C0 /* ic_医生介绍@3x.png */; };
+		05E8BE9D1C54FD8E00DA27C0 /* OrderCenterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BE9C1C54FD8E00DA27C0 /* OrderCenterTableViewCell.m */; };
+		05E8BEA01C55BD8700DA27C0 /* OrderListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BE9F1C55BD8700DA27C0 /* OrderListEntity.m */; };
 		0C4921158FB4D0CE72D44E43 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D7AF9BA97CDB3EE4EB78DA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -473,6 +480,15 @@
 		05E8BE771C52596700DA27C0 /* 750 × 1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "750 × 1334.png"; sourceTree = "<group>"; };
 		05E8BE781C52596700DA27C0 /* 1242 × 2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1242 × 2208.png"; sourceTree = "<group>"; };
 		05E8BE831C525CF600DA27C0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		05E8BE911C53B59A00DA27C0 /* ic_个人中心.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_个人中心.png"; sourceTree = "<group>"; };
+		05E8BE921C53B59A00DA27C0 /* ic_个人中心@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_个人中心@3x.png"; sourceTree = "<group>"; };
+		05E8BE931C53B59A00DA27C0 /* ic_医生介绍.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_医生介绍.png"; sourceTree = "<group>"; };
+		05E8BE941C53B59A00DA27C0 /* ic_医生介绍@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_医生介绍@2x.png"; sourceTree = "<group>"; };
+		05E8BE951C53B59A00DA27C0 /* ic_医生介绍@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_医生介绍@3x.png"; sourceTree = "<group>"; };
+		05E8BE9B1C54FD8E00DA27C0 /* OrderCenterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCenterTableViewCell.h; sourceTree = "<group>"; };
+		05E8BE9C1C54FD8E00DA27C0 /* OrderCenterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCenterTableViewCell.m; sourceTree = "<group>"; };
+		05E8BE9E1C55BD8700DA27C0 /* OrderListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListEntity.h; sourceTree = "<group>"; };
+		05E8BE9F1C55BD8700DA27C0 /* OrderListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListEntity.m; sourceTree = "<group>"; };
 		6F290DF066C62B91F644DB6A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C2D738A451B45388B6EF4027 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F4D7AF9BA97CDB3EE4EB78DA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -665,6 +681,11 @@
 			isa = PBXGroup;
 			children = (
 				05E8BE731C52595700DA27C0 /* launchImage */,
+				05E8BE911C53B59A00DA27C0 /* ic_个人中心.png */,
+				05E8BE921C53B59A00DA27C0 /* ic_个人中心@3x.png */,
+				05E8BE931C53B59A00DA27C0 /* ic_医生介绍.png */,
+				05E8BE941C53B59A00DA27C0 /* ic_医生介绍@2x.png */,
+				05E8BE951C53B59A00DA27C0 /* ic_医生介绍@3x.png */,
 				05E8BE5A1C524A2C00DA27C0 /* MyDislect.png */,
 				05E8BE5B1C524A2C00DA27C0 /* MyDislect@2x.png */,
 				05E8BE5C1C524A2C00DA27C0 /* MyDislect@3x.png */,
@@ -739,6 +760,10 @@
 			children = (
 				05BA34CB1C41F71400DC07CD /* YuYueViewController.h */,
 				05BA34CC1C41F71400DC07CD /* YuYueViewController.m */,
+				05E8BE9B1C54FD8E00DA27C0 /* OrderCenterTableViewCell.h */,
+				05E8BE9C1C54FD8E00DA27C0 /* OrderCenterTableViewCell.m */,
+				05E8BE9E1C55BD8700DA27C0 /* OrderListEntity.h */,
+				05E8BE9F1C55BD8700DA27C0 /* OrderListEntity.m */,
 			);
 			name = "预约单";
 			sourceTree = "<group>";
@@ -1015,6 +1040,7 @@
 				05CCADB31C4E41A8001D9B0D /* placeHolderChang.png in Resources */,
 				05BA350B1C437E5E00DC07CD /* Path 4@3x.png in Resources */,
 				05BA34EC1C434C4D00DC07CD /* Oval 50 + Oval-52 + Shape@3x.png in Resources */,
+				05E8BE9A1C53B59A00DA27C0 /* ic_医生介绍@3x.png in Resources */,
 				05BA351D1C43893800DC07CD /* jiantou@3x.png in Resources */,
 				05CCADB51C4E41A8001D9B0D /* placeholderZheng.png in Resources */,
 				05E8BE711C524A2C00DA27C0 /* orderSelect@3x.png in Resources */,
@@ -1026,6 +1052,7 @@
 				05075BF91C47BCEF0076EF31 /* Triangle 1@2x.png in Resources */,
 				05BA35421C43C6E700DC07CD /* normarl@2x.png in Resources */,
 				05E8BE7D1C52596700DA27C0 /* 640 × 1136.png in Resources */,
+				05E8BE981C53B59A00DA27C0 /* ic_医生介绍.png in Resources */,
 				05CCADD31C4E799F001D9B0D /* Oval 129.png in Resources */,
 				05BA34ED1C434C4D00DC07CD /* Oval 50 Copy + Group.png in Resources */,
 				05BA35131C4381BD00DC07CD /* Rectangle 91 + Line + Line Copy@2x.png in Resources */,
@@ -1033,6 +1060,7 @@
 				05075BFB1C47BCEF0076EF31 /* Triangle 1@3x.png in Resources */,
 				05BA35431C43C6E700DC07CD /* normarl@3x.png in Resources */,
 				05BA34FA1C43524100DC07CD /* Rectangle 39.png in Resources */,
+				05E8BE971C53B59A00DA27C0 /* ic_个人中心@3x.png in Resources */,
 				05075BEE1C47BB0C0076EF31 /* 87.png in Resources */,
 				05BA34A21C41F1FE00DC07CD /* Brand Assets in Resources */,
 				05075B441C44AD710076EF31 /* Oval 91 + Path 52@2x.png in Resources */,
@@ -1078,6 +1106,7 @@
 				05BA35121C4381BD00DC07CD /* Rectangle 91 + Line + Line Copy.png in Resources */,
 				05BA35041C4377EA00DC07CD /* Oval 56@2x.png in Resources */,
 				05075BEA1C47BB0C0076EF31 /* 58 - Settings.png in Resources */,
+				05E8BE961C53B59A00DA27C0 /* ic_个人中心.png in Resources */,
 				05E8BE691C524A2C00DA27C0 /* Myselect.png in Resources */,
 				05BA34EE1C434C4D00DC07CD /* Oval 50 Copy + Group@2x.png in Resources */,
 				05E8BE661C524A2C00DA27C0 /* MyDislect.png in Resources */,
@@ -1087,6 +1116,7 @@
 				05BA350A1C437E5E00DC07CD /* Path 4@2x.png in Resources */,
 				05E8BE681C524A2C00DA27C0 /* MyDislect@3x.png in Resources */,
 				05E8BE7B1C52596700DA27C0 /* 640 × 960.png in Resources */,
+				05E8BE991C53B59A00DA27C0 /* ic_医生介绍@2x.png in Resources */,
 				05E8BE701C524A2C00DA27C0 /* orderSelect@2x.png in Resources */,
 				05BA35091C437E5E00DC07CD /* Path 4.png in Resources */,
 				05CCADD51C4E799F001D9B0D /* Oval 129@2x.png in Resources */,
@@ -1230,6 +1260,7 @@
 				05075BDE1C47A10B0076EF31 /* BillRecordCell.m in Sources */,
 				05BA35551C43DD1C00DC07CD /* TwoLevelViewController.m in Sources */,
 				05075B5F1C463CCB0076EF31 /* SignInViewController.m in Sources */,
+				05E8BE9D1C54FD8E00DA27C0 /* OrderCenterTableViewCell.m in Sources */,
 				05075BA71C47A0C30076EF31 /* CouponsTableViewController.m in Sources */,
 				05075B661C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05075B581C461EDD0076EF31 /* TXOrderTableViewCell.m in Sources */,
@@ -1252,6 +1283,7 @@
 				05075BDA1C47A10B0076EF31 /* OpinionTextView.m in Sources */,
 				05075BAF1C47A0C30076EF31 /* BillHistoryTableViewController.m in Sources */,
 				053AB10C1C4D1A3300982B01 /* NSString+Size.m in Sources */,
+				05E8BEA01C55BD8700DA27C0 /* OrderListEntity.m in Sources */,
 				05075BB11C47A0C30076EF31 /* BillRecordTableViewController.m in Sources */,
 				05075B9F1C47A0C30076EF31 /* MyTableViewController.m in Sources */,
 				05075BCA1C47A10B0076EF31 /* MyCell.m in Sources */,
@@ -1268,7 +1300,7 @@
 				05075BD71C47A10B0076EF31 /* OpinionCell.m in Sources */,
 				05CCADBE1C4E6967001D9B0D /* HospitalGroupEntity.m in Sources */,
 				053AB0FE1C4A1EDE00982B01 /* LoginStorage.m in Sources */,
-				05075BA81C47A0C30076EF31 /* CouponsViewController.m in Sources */,
+				05075BA81C47A0C30076EF31 /* CouponsTableViewController.m in Sources */,
 				05CCADC21C4E697E001D9B0D /* AppointEntity.m in Sources */,
 				05075BA81C47A0C30076EF31 /* CouponsTableViewController.m in Sources */,
 				05075B671C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,

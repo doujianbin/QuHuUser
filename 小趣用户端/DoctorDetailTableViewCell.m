@@ -38,7 +38,7 @@
     
     self.lab_cellImgPic = [[UIImageView alloc]initWithFrame:CGRectMake(15, 12.5, 45, 45)];
     [self.contentView addSubview:self.lab_cellImgPic];
-    [self.lab_cellImgPic setImage:[UIImage imageNamed:@"Oval 50 + Oval-52 + Shape"]];
+//    [self.lab_cellImgPic setImage:[UIImage imageNamed:@"Oval 50 + Oval-52 + Shape"]];
     self.lab_cellName = [[UILabel alloc]initWithFrame:CGRectMake(70, 17.5, 34, 18)];
     [self.contentView addSubview:self.lab_cellName];
     self.lab_cellName.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
@@ -62,7 +62,7 @@
 }
 
 - (void)contentDoctorDetailWithDoctorEntity:(DoctorEntity *)doctorEntity{
-    [self.lab_cellImgPic sd_setImageWithURL:[NSURL URLWithString:doctorEntity.headPortraint] placeholderImage:nil];
+    [self.lab_cellImgPic sd_setImageWithURL:[NSURL URLWithString:doctorEntity.headPortraint] placeholderImage:[UIImage imageNamed:@"ic_医生介绍"]];
     self.lab_cellName.text = doctorEntity.name;
     self.lab_cellyiyuankeshi.text = [NSString stringWithFormat:@"%@  %@",doctorEntity.hospitalName,doctorEntity.deptName];
     self.lab_cellzhicheng.text = doctorEntity.jobTitle;

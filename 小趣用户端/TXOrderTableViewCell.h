@@ -11,6 +11,7 @@
 @interface TXOrderTableViewCell : UITableViewCell
 
 @property (nonatomic ,retain)UILabel *lab_left;
+@property (nonatomic ,retain)UILabel *lab_right;
 @property (nonatomic ,retain)UIImageView *img;
 
 @end

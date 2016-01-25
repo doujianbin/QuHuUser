@@ -34,13 +34,13 @@
     
     self.view.backgroundColor = COLOR(245, 246, 247, 1);
     
-    UIBarButtonItem *item = [UIBarButtonItem barButtonitemWithNormalImageName:@"backArrow" highlightedImageName:@"backArrow" target:self action:@selector(backItemClick)];
+    UIBarButtonItem *item = [UIBarButtonItem barButtonitemWithNormalImageName:@"Rectangle 91 + Line + Line Copy" highlightedImageName:@"Rectangle 91 + Line + Line Copy" target:self action:@selector(backItemClick)];
     self.navigationItem.leftBarButtonItem = item;
     
     [self setupInterface];
     
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidKeyBoard)];
-    [self.view addGestureRecognizer:tapGestureRecognizer];
+//    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidKeyBoard)];
+//    [self.view addGestureRecognizer:tapGestureRecognizer];
     
     [self makeURLRequest];
 }
@@ -69,7 +69,7 @@
 
 - (void)hidKeyBoard {
     
-    [self.view endEditing:YES];
+//    [self.view endEditing:YES];
 }
 
 - (void)backItemClick {
@@ -226,6 +226,21 @@
 
     }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.isFromOrder) {
+        if ([[[self.dataArray objectAtIndex:indexPath.row] objectForKey:@"isPast"] intValue] == 1) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"过期的优惠券暂时无法使用哦" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            [alert show];
+        }else{
+            
+            NSDictionary *dic = [self.dataArray objectAtIndex:indexPath.row];
+            [self.delegate didSelectedCouponsWithDic:dic];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

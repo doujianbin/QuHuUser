@@ -10,8 +10,11 @@
 #import "TXOrderTableViewCell.h"
 #import "DoctorDetailTableViewCell.h"
 #import "HospitalAddressTableViewCell.h"
+#import "SelectFamilyViewController.h"
+#import "CouponsTableViewController.h"
+#import "PTSureOrderViewController.h"
 
-@interface TXOrderViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface TXOrderViewController ()<UITableViewDataSource,UITableViewDelegate,SelectFamilyViewControllerDelegate,CouponsTableViewControllerDegelate>{
     NSMutableArray *arr_all;
     UITableView *tableViewTXOrder;
 }
@@ -20,6 +23,10 @@
 @property (nonatomic ,retain)UILabel *lab_cellName;
 @property (nonatomic ,retain)UILabel *lab_cellzhicheng;
 @property (nonatomic ,retain)UILabel *lab_cellyiyuankeshi;
+@property (nonatomic ,strong)MemberEntity *memberEntity;
+@property (nonatomic ,strong)NSDictionary *dicCoupon;
+@property (nonatomic ,strong)AFNManager *manager;
+@property (nonatomic ,strong)NSDictionary *partnerDic;
 
 @end
 
@@ -39,7 +46,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
-    self.title = @"医生名字";
+    self.title = self.doctorEntity.name;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
     UIButton *btnl = [[UIButton alloc]initWithFrame:CGRectMake(15, 21.5, 20, 20)];
@@ -128,6 +135,8 @@
         }//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [cell.lab_left setText:[[arr_all objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
+        [cell.lab_hospital setText:self.hospitalEntity.hospitalName];
+        [cell.lab_addressDetail setText:self.hospitalEntity.hospitalAddress];
         return cell;
     }else{
         static NSString *CellIdentifier = @"OrderCell";
@@ -136,13 +145,139 @@
             cell = [[TXOrderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.lab_left setText:[[arr_all objectAtIndex:indexPath.section] objectAtIndex:indexPath.row]];
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            NSString *yue = [[self.dayEntity.dayTime substringFromIndex:self.dayEntity.dayTime.length - 5] stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+            NSString *week = [NSString stringWithFormat:@"(周%@)",self.dayEntity.week];
+            NSString *time = self.appointEntity.startTime;
+            NSString *str = [NSString stringWithFormat:@"%@  %@  %@",yue,week,time];
+            [cell.lab_right setText:str];
+        }
+        if (indexPath.section == 1 && indexPath.row == 0) {
+            if (self.memberEntity.name.length > 0) {
+                [cell.lab_right setText:self.memberEntity.name];
+                [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+                cell.lab_right.alpha = 1.0;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 295, 0, 265, 57)];
+                [cell.lab_right setText:@"选择就诊成员"];
+                cell.lab_right.alpha = 0.6;
+            }
+        }
+        if (indexPath.section == 2 && indexPath.row == 0) {
+            [cell.lab_right setText:@"特需陪诊"];
+            [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#4A90E2"]];
+        }
+        if (indexPath.section == 2 && indexPath.row == 1) {
+            [cell.lab_right setText:[NSString stringWithFormat:@"¥%@/4小时",[[LoginStorage GetSpecialrderDic] objectForKey:@"info"]]];
+        }
+        if (indexPath.section == 2 && indexPath.row == 2) {
+            if ([[[self.dicCoupon objectForKey:@"id"] stringValue] length] > 0) {
+                if ([[self.dicCoupon objectForKey:@"type"] intValue] == 1) {
+                    CGFloat discount = [[self.dicCoupon objectForKey:@"value"] floatValue];
+                    [cell.lab_right setText:[NSString stringWithFormat:@"%.f折",discount]];
+                    [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+                    cell.lab_right.alpha = 1.0;
+                }
+                if ([[self.dicCoupon objectForKey:@"type"] intValue] == 2) {
+                    [cell.lab_right setText:[NSString stringWithFormat:@"-¥%@",[self.dicCoupon objectForKey:@"value"]]];
+                    [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+                    cell.lab_right.alpha = 1.0;
+                }
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                [cell.lab_right setText:@"选择使用优惠券"];
+                [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 295, 0, 265, 57)];
+                cell.lab_right.alpha = 0.6;
+                
+            }
+        }
+        if (indexPath.section == 2 && indexPath.row == 3) {
+            cell.lab_left.alpha = 0.8;
+            cell.lab_right.alpha = 1.0;
+            if ([[self.dicCoupon objectForKey:@"type"] intValue] == 1) {
+                CGFloat totalPrice = [[[LoginStorage GetSpecialrderDic] objectForKey:@"info"] floatValue];
+                CGFloat discount = [[self.dicCoupon objectForKey:@"value"] floatValue];
+                CGFloat price = totalPrice * discount / 10;
+                [cell.lab_right setText:[NSString stringWithFormat:@"%.2f",price]];
+            }else if ([[self.dicCoupon objectForKey:@"type"] intValue] == 2){
+                CGFloat totalPrice = [[[LoginStorage GetSpecialrderDic] objectForKey:@"info"] floatValue];
+                CGFloat discount = [[self.dicCoupon objectForKey:@"value"] floatValue];
+                CGFloat price = totalPrice - discount;
+                [cell.lab_right setText:[NSString stringWithFormat:@"%.2f",price]];
+            }else{
+                [cell.lab_right setText:[[LoginStorage GetSpecialrderDic] objectForKey:@"info"]];
+            }
+            [cell.lab_left setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+            [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+
+        }
+        
         return cell;
     }
     return nil; 
 }
 
--(void)btnTXxiadanAction{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        SelectFamilyViewController *vc = [[SelectFamilyViewController alloc]init];
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.section == 2 && indexPath.row == 2) {
+        CouponsTableViewController *vc_coupon = [[CouponsTableViewController alloc]init];
+        vc_coupon.delegate = self;
+        vc_coupon.isFromOrder = YES;
+        [self.navigationController pushViewController:vc_coupon animated:YES];
+    }
     
+}
+
+- (void)didSelectedMemberWithEntity:(MemberEntity *)memberEntity{
+    self.memberEntity = memberEntity;
+    [tableViewTXOrder reloadData];
+}
+
+- (void)didSelectedCouponsWithDic:(NSDictionary *)couponsDic{
+    self.dicCoupon = couponsDic;
+    [tableViewTXOrder reloadData];
+}
+
+-(void)btnTXxiadanAction{
+    if (self.memberEntity.name == nil) {
+        [SVProgressHUD showErrorWithStatus:@"请选择就诊人"];
+    }else{
+        [self uploadSpecialOrderData];
+    }
+}
+
+-(void)uploadSpecialOrderData{
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,CreateSpecialOrder];
+    NSString *strSetId = [[LoginStorage GetSpecialrderDic] objectForKey:@"id"];
+    NSString *time = [NSString stringWithFormat:@"%@ %@",self.dayEntity.dayTime,self.appointEntity.startTime];
+    
+    if ([[[self.dicCoupon objectForKey:@"id"] stringValue] length] > 0) {
+        NSString *couponId = [NSString stringWithFormat:@"%@",[self.dicCoupon objectForKey:@"id"]];
+        self.partnerDic = @{@"setId":strSetId,@"hospitalId":self.hospitalEntity.hospitalId,@"patientId":self.memberEntity.userId,@"scheduleTime":time,@"couponId":couponId};
+    }else{
+
+        self.partnerDic = @{@"setId":strSetId,@"hospitalId":self.hospitalEntity.hospitalId,@"patientId":self.memberEntity.userId,@"scheduleTime":time};
+    }
+    self.manager = [[AFNManager alloc]init];
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:self.partnerDic result:^(id responseDic) {
+        NSLog(@"下单(特需)返回:%@",responseDic);
+        if ([Status isEqualToString:SUCCESS]) {
+            
+            PTSureOrderViewController *orderView = [[PTSureOrderViewController alloc]init];
+            orderView.str_OrderId = [[responseDic objectForKey:@"data"] objectForKey:@"orderId"];
+            [self.navigationController pushViewController:orderView animated:YES];
+        }else{
+            [SVProgressHUD showErrorWithStatus:Message];
+        }
+    } fail:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"网络连接失败"];
+    }];
 }
 
 -(void)NavLeftAction{
