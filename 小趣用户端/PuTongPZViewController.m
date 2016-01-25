@@ -61,7 +61,7 @@
     [self.view addSubview:img1];
     [img1 setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
     
-    tableView1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 11 + 64, SCREEN_WIDTH, 57 * 3 + 64 + 13) style:UITableViewStylePlain];
+    tableView1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 11 + 64, SCREEN_WIDTH, 57 * 3 + 64) style:UITableViewStylePlain];
     [self.view addSubview:tableView1];
     [tableView1 setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
     tableView1.delegate = self;
@@ -75,7 +75,7 @@
     [self.view addSubview:img2];
     [img2 setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
     
-    tableView2 = [[UITableView alloc]initWithFrame:CGRectMake(0, 22 + 57 * 3 + 64 + 11, SCREEN_WIDTH, 57 * 4 + 64) style:UITableViewStylePlain];
+    tableView2 = [[UITableView alloc]initWithFrame:CGRectMake(0, 22 + 57 * 3 + 64, SCREEN_WIDTH, 57 * 4 + 64) style:UITableViewStylePlain];
     [self.view addSubview:tableView2];
     [tableView2 setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
     tableView2.delegate = self;
@@ -101,17 +101,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == tableView1) {
-        if (indexPath.row == 0) {
-            return 70;
-        }else{
-            return 57;
-        }
-    }
-    if (tableView == tableView2) {
-        return 57;
-    }
-    return 0;
+    return 57;
 }
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -129,19 +119,20 @@
         
         BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableView1"];
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.lab_left.alpha = 0.6;
         if (indexPath.row == 0) {
-            [cell.lab_left setFrame:CGRectMake(15, 0, SCREEN_WIDTH, 70)];
-            [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 280, 0, 250, 70)];
-            [cell.img_heng setFrame:CGRectMake(0, 69.5, SCREEN_WIDTH, 0.5)];
-            [cell.img_jiantou setFrame:CGRectMake(SCREEN_WIDTH - 20, 31, 5, 8.5)];
+            [cell.lab_left setFrame:CGRectMake(15, 0, SCREEN_WIDTH, 57)];
+            [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 280, 0, 250, 57)];
             [cell.lab_left setText:@"地址"];
             if (self.str_hospitalName.length > 0) {
                 [cell.lab_hospitalName setText:self.str_hospitalName];
                 [cell.lab_hospitalAddress setText:self.str_hospitalAddress];
                 [cell.lab_right setText:@""];
             }else{
-                
+                [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 280, 0, 250, 57)];
                 [cell.lab_right setText:@"选择咨询地址"];
+                [cell.lab_right setAlpha:0.6];
+                [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
             }
             
         }
@@ -152,13 +143,19 @@
                 [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
                 cell.lab_right.alpha = 1;
             }else{
+                [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 280, 0, 250, 57)];
                 [cell.lab_right setText:@"选择陪诊时间"];
+                [cell.lab_right setAlpha:0.6];
+                [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
             }
         }
         if (indexPath.row == 2) {
             [cell.lab_left setText:@"成员"];
             if (self.entity.name.length == 0) {
+                [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 280, 0, 250, 57)];
                 [cell.lab_right setText:@"选择成员"];
+                [cell.lab_right setAlpha:0.6];
+                [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
             }else{
                 [cell.lab_right setText:self.entity.name];
                 [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
@@ -201,6 +198,8 @@
                 }
             }else{
                 [cell.lab_right setText:@"选择使用优惠券"];
+                [cell.lab_right setAlpha:0.6];
+                [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
                 [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 280, 0, 250, 57)];
                 
             }
