@@ -10,7 +10,7 @@
 
 @interface DoctorEntity : NSObject
 
-@property (nonatomic,strong) NSString   *doctorId;
+@property (nonatomic,strong) NSString   *_id;
 @property (nonatomic,strong) NSString   *name;
 @property (nonatomic,strong) NSString   *phoneNumber;
 @property (nonatomic,strong) NSString   *headPortraint;

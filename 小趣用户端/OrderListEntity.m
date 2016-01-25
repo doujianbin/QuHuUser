@@ -19,6 +19,13 @@
     return [self parseObjectWithKeyValues:json];
 }
 
++ (NSDictionary *)replacedKeyFromPropertyName
+{
+    return @{
+             @"_id" : @"id",
+             };
+}
+
 + (NSArray *)parseObjectArrayWithKeyValues:(id)json
 {
     if([NSJSONSerialization isValidJSONObject:json]){

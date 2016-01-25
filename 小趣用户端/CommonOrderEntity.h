@@ -16,6 +16,7 @@
 @property (nonatomic ,strong)NSDictionary *hospital;  // 地址
 @property (nonatomic ,strong)NSString *scheduleTime;  // 预约时间
 @property (nonatomic ,strong)NSDictionary *patient;   // 成员
+@property (nonatomic ,strong)NSDictionary *nurse;     // 护士数据
 @property (nonatomic ,assign)int orderType;           // 订单类型 （普通陪诊／特需陪诊）
 @property (nonatomic ,assign)int couponType;          // 优惠卷类型
 @property (nonatomic ,assign)CGFloat couponValue;         // 优惠卷额度
@@ -23,6 +24,7 @@
 @property (nonatomic ,strong)NSString *overtimeAmount; // 超时价格
 @property (nonatomic ,strong)NSString *setAmount;
 @property (nonatomic ,assign)int orderStatus;  // 订单类型
+@property (nonatomic ,assign)int payStatus;     // 支付状态
 
 + (NSArray *)parseCommonOrderWithJson:(id)json;
 + (CommonOrderEntity *)parseCommonOrderListEntityWithJson:(id)json;

@@ -28,7 +28,7 @@
         [self.contentView addSubview:self.lab_right];
         self.lab_right.font = [UIFont systemFontOfSize:16];
         self.lab_right.textAlignment = NSTextAlignmentRight;
-        self.lab_right.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
+        self.lab_right.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         
         self.img_heng = [[UIImageView alloc]initWithFrame:CGRectMake(0, 56.5, SCREEN_WIDTH, 0.5)];
         [self.contentView addSubview:self.img_heng];

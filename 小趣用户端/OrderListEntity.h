@@ -10,6 +10,7 @@
 
 @interface OrderListEntity : NSObject
 
+@property (nonatomic ,strong)NSString * _id;
 @property (nonatomic ,assign)int orderType;
 @property (nonatomic ,assign)int orderStatus;
 @property (nonatomic ,assign)int payStatus;

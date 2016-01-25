@@ -21,7 +21,7 @@
 + (NSDictionary *)replacedKeyFromPropertyName
 {
     return @{
-             @"id" : @"doctorId",
+             @"_id" : @"id",
              };
 }
 

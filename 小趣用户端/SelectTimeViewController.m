@@ -138,7 +138,7 @@
 -(void)getDoctorTimeMsg{
     
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,UserSelectDoctorMsg];
-    NSDictionary *dic = @{@"doctorId":self.doctorEntity.doctorId};
+    NSDictionary *dic = @{@"doctorId":@"339"};
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
         NSMutableDictionary *dicAll = [responseDic objectForKey:@"data"];

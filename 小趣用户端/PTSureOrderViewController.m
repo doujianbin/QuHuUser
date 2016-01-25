@@ -34,6 +34,14 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.tabBarController.tabBar setHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.tabBarController.tabBar setHidden:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
@@ -49,7 +57,7 @@
     scl_back = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 54)];
     [self.view addSubview:scl_back];
     // Do any additional setup after loading the view.
-    [self addtableView];
+//    [self addtableView];
     [self loadData];
 }
 
@@ -60,13 +68,12 @@
         NSLog(@"订单详情:%@",responseDic);
         if ([Status isEqualToString:SUCCESS]) {
             self.commonOrderEntity = [CommonOrderEntity parseCommonOrderListEntityWithJson:[responseDic objectForKey:@"data"]];
-            [tableView1 reloadData];
-            [tableView2 reloadData];
+            [self addtableView];
         }
     } fail:^(NSError *error) {
         NSLog(@"error == %@",error);
     }];
-    
+
 }
 
 -(void)addtableView{
@@ -94,19 +101,26 @@
     tableView2.scrollEnabled = NO;
     tableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    if (self.commonOrderEntity.orderType == 0) {
+        [self addCommonOrderDownView];
+    }else{
+        [self addSpecialOrderDownView];
+        
+    }
+    
+    [tableView1 reloadData];
+    [tableView2 reloadData];
+
+}
+
+-(void)addCommonOrderDownView{
+    
     UILabel *lab_remark = [[UILabel alloc]initWithFrame:CGRectMake(15, 557, 300, 12.5)];
     [scl_back addSubview:lab_remark];
     [lab_remark setText:@"备注：陪诊超时按照小时收费（￥25/小时）"];
     [lab_remark setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
     lab_remark.font = [UIFont systemFontOfSize:12];
     [scl_back setContentSize:CGSizeMake(SCREEN_WIDTH, 640 - 54)];
-    
-    [self addDownViewStatus];
-
-}
-
--(void)addDownViewStatus{
-    
     
     UIView *upView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 54, SCREEN_WIDTH, 54)];
     [self.view addSubview:upView];
@@ -129,20 +143,146 @@
         lab.font = [UIFont systemFontOfSize:15];
         lab.textColor = [UIColor colorWithHexString:@"#FA6262"];
         
-        UIButton *btn_zhifu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 54)];
-        [upView addSubview:btn_zhifu];
-        [btn_zhifu setBackgroundColor:[UIColor colorWithHexString:@"#FA6262"]];
+        UIButton *btn_commonOrderzhifu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 54)];
+        [upView addSubview:btn_commonOrderzhifu];
+        [btn_commonOrderzhifu setBackgroundColor:[UIColor colorWithHexString:@"#FA6262"]];
         if (self.commonOrderEntity.orderStatus == 0) {
             
-            [btn_zhifu setTitle:@"取消订单" forState:UIControlStateNormal];
+            [btn_commonOrderzhifu setTitle:@"取消订单" forState:UIControlStateNormal];
         }
         if (self.commonOrderEntity.orderStatus == 3) {
-            [btn_zhifu setTitle:@"支付" forState:UIControlStateNormal];
+            [btn_commonOrderzhifu setTitle:@"支付" forState:UIControlStateNormal];
         }
-        btn_zhifu.titleLabel.font = [UIFont systemFontOfSize:15];
+        btn_commonOrderzhifu.titleLabel.font = [UIFont systemFontOfSize:15];
+        [btn_commonOrderzhifu addTarget:self action:@selector(btnCommonOrderZhiFu:) forControlEvents:UIControlEventTouchUpInside];
     }
     if (self.commonOrderEntity.orderStatus == 1 || self.commonOrderEntity.orderStatus == 2) {
         // 护士已经接单   ｜｜    陪诊中
+        UIImageView *img_NurseHeadPic = [[UIImageView alloc]initWithFrame:CGRectMake(15.5, 7, 40, 40)];
+        [upView addSubview:img_NurseHeadPic];
+        if ([[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"] isKindOfClass:[NSNull class]]) {
+            [img_NurseHeadPic setImage:[UIImage imageNamed:@"ic_个人中心"]];
+        }else{
+            NSURL *url_NurseHeadPic = [NSURL URLWithString:[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"]];
+            [img_NurseHeadPic sd_setImageWithURL:url_NurseHeadPic placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
+        }
+        UILabel *lab_nurseName = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 8.5, 70, 21)];
+        [upView addSubview:lab_nurseName];
+        lab_nurseName.font = [UIFont systemFontOfSize:15];
+        [lab_nurseName setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+        [lab_nurseName setText:[self.commonOrderEntity.nurse objectForKey:@"nurseName"]];
+        UILabel *lab_orderStatus = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 31, 80, 14)];
+        [upView addSubview:lab_orderStatus];
+        lab_orderStatus.font = [UIFont systemFontOfSize:10];
+        lab_orderStatus.textColor = [UIColor colorWithHexString:@"#FA6262"];
+        
+        UIButton *btn_commonOrderCallNurse = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 54)];
+        [upView addSubview:btn_commonOrderCallNurse];
+        [btn_commonOrderCallNurse setBackgroundColor:[UIColor colorWithHexString:@"#FA6262"]];
+        btn_commonOrderCallNurse.titleLabel.font = [UIFont systemFontOfSize:15];
+        [btn_commonOrderCallNurse setTitle:@"联系护士" forState:UIControlStateNormal];
+        [btn_commonOrderCallNurse addTarget:self action:@selector(btn_commonOrderCallNurseAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (self.commonOrderEntity.orderStatus == 1) {
+            [lab_orderStatus setText:@"护士已接单"];
+            UIButton *btn_quxiao = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 200, 0, 100, 54)];
+            [upView addSubview:btn_quxiao];
+            [btn_quxiao setBackgroundColor:[UIColor colorWithHexString:@"#E3E3E6"]];
+            btn_quxiao.titleLabel.font = [UIFont systemFontOfSize:15];
+            [btn_quxiao setTitle:@"取消订单" forState:UIControlStateNormal];
+            [btn_quxiao setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
+            [btn_quxiao addTarget:self action:@selector(btnCommonOrderZhiFu:) forControlEvents:UIControlEventTouchUpInside];
+
+        }else{
+            [lab_orderStatus setText:@"陪诊中"];
+        }
+    }
+    
+}
+
+-(void)addSpecialOrderDownView{
+    UIView *upView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 54, SCREEN_WIDTH, 54)];
+    [self.view addSubview:upView];
+    [upView setBackgroundColor:[UIColor colorWithHexString:@"#FFFFFF"]];
+    
+    UIButton *btn_right = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 54)];
+    [upView addSubview:btn_right];
+    [btn_right setBackgroundColor:[UIColor colorWithHexString:@"#FA6262"]];
+    btn_right.titleLabel.font = [UIFont systemFontOfSize:15];
+    [btn_right addTarget:self action:@selector(btn_rightAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *btn_left = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 200, 0, 100, 54)];
+    [upView addSubview:btn_left];
+    [btn_left setBackgroundColor:[UIColor colorWithHexString:@"#E3E3E6"]];
+    btn_left.titleLabel.font = [UIFont systemFontOfSize:15];
+    [btn_left setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
+    [btn_left addTarget:self action:@selector(btn_leftAction) forControlEvents:UIControlEventTouchUpInside];
+    if (self.commonOrderEntity.orderStatus == 0) {
+        UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(14.5, 17, 20, 20)];
+        [upView addSubview:img];
+        [img setImage:[UIImage imageNamed:@"Oval 91 + Path 52"]];
+        
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(42, 16.5, 120, 21)];
+        [upView addSubview:lab];
+        lab.font = [UIFont systemFontOfSize:15];
+        lab.textColor = [UIColor colorWithHexString:@"#FA6262"];
+        
+        if (self.commonOrderEntity.payStatus == 0) {
+            [lab setText:@"等待支付"];
+            [btn_left setTitle:@"取消订单" forState:UIControlStateNormal];
+            [btn_right setTitle:@"支付" forState:UIControlStateNormal];
+        }
+        if (self.commonOrderEntity.payStatus == 1) {
+            [lab setText:@"等待护士接单"];
+            [btn_left setHidden:YES];
+            [btn_right setTitle:@"取消订单" forState:UIControlStateNormal];
+        }
+    }
+    if (self.commonOrderEntity.orderStatus == 1) {
+        
+        UIImageView *img_NurseHeadPic = [[UIImageView alloc]initWithFrame:CGRectMake(15.5, 7, 40, 40)];
+        [upView addSubview:img_NurseHeadPic];
+        if ([[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"] isKindOfClass:[NSNull class]]) {
+            [img_NurseHeadPic setImage:[UIImage imageNamed:@"ic_个人中心"]];
+        }else{
+            NSURL *url_NurseHeadPic = [NSURL URLWithString:[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"]];
+            [img_NurseHeadPic sd_setImageWithURL:url_NurseHeadPic placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
+        }
+        UILabel *lab_nurseName = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 8.5, 70, 21)];
+        [upView addSubview:lab_nurseName];
+        lab_nurseName.font = [UIFont systemFontOfSize:15];
+        [lab_nurseName setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+        [lab_nurseName setText:[self.commonOrderEntity.nurse objectForKey:@"nurseName"]];
+        UILabel *lab_orderStatus = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 31, 80, 14)];
+        [upView addSubview:lab_orderStatus];
+        lab_orderStatus.font = [UIFont systemFontOfSize:10];
+        lab_orderStatus.textColor = [UIColor colorWithHexString:@"#FA6262"];
+        [lab_orderStatus setText:@"护士已接单"];
+        [btn_left setTitle:@"取消订单" forState:UIControlStateNormal];
+        [btn_right setTitle:@"联系护士" forState:UIControlStateNormal];
+    }
+    if (self.commonOrderEntity.orderStatus == 2) {
+        UIImageView *img_NurseHeadPic = [[UIImageView alloc]initWithFrame:CGRectMake(15.5, 7, 40, 40)];
+        [upView addSubview:img_NurseHeadPic];
+        if ([[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"] isKindOfClass:[NSNull class]]) {
+            [img_NurseHeadPic setImage:[UIImage imageNamed:@"ic_个人中心"]];
+        }else{
+            NSURL *url_NurseHeadPic = [NSURL URLWithString:[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"]];
+            [img_NurseHeadPic sd_setImageWithURL:url_NurseHeadPic placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
+        }
+        UILabel *lab_nurseName = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 8.5, 70, 21)];
+        [upView addSubview:lab_nurseName];
+        lab_nurseName.font = [UIFont systemFontOfSize:15];
+        [lab_nurseName setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+        [lab_nurseName setText:[self.commonOrderEntity.nurse objectForKey:@"nurseName"]];
+        UILabel *lab_orderStatus = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 31, 80, 14)];
+        [upView addSubview:lab_orderStatus];
+        lab_orderStatus.font = [UIFont systemFontOfSize:10];
+        lab_orderStatus.textColor = [UIColor colorWithHexString:@"#FA6262"];
+        [lab_orderStatus setText:@"陪诊中"];
+        
+        [btn_left setHidden:YES];
+        [btn_right setTitle:@"联系护士" forState:UIControlStateNormal];
     }
     
 }
@@ -258,6 +398,63 @@
         return cell;
     }
     return nil;
+}
+
+-(void)btnCommonOrderZhiFu:(UIButton *)sender{
+
+    if ([sender.titleLabel.text isEqualToString:@"取消订单"]) {
+        [self cancalOrder];
+    }
+    if ([sender.titleLabel.text isEqualToString:@"支付"]) {
+        
+    }
+}
+
+-(void)btn_commonOrderCallNurseAction{
+    NSString *str1 = @"tel://";
+    NSString *str2 = [self.commonOrderEntity.nurse objectForKey:@"nursePhone"];
+    NSString *stt = [NSString stringWithFormat:@"%@%@",str1,str2];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stt]];
+}
+
+
+-(void)btn_leftAction{
+    [self cancalOrder];
+}
+
+-(void)btn_rightAction:(UIButton *)sender{
+    if ([sender.titleLabel.text isEqualToString:@"取消订单"]) {
+        [self cancalOrder];
+    }
+    if ([sender.titleLabel.text isEqualToString:@"支付"]) {
+        
+    }
+    if ([sender.titleLabel.text isEqualToString:@"联系护士"]) {
+        NSString *str1 = @"tel://";
+        NSString *str2 = [self.commonOrderEntity.nurse objectForKey:@"nursePhone"];
+        NSString *stt = [NSString stringWithFormat:@"%@%@",str1,str2];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stt]];
+    }
+}
+
+-(void)cancalOrder{
+    NSString *strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/user/order/cancelOrder?orderId=%@",Development,self.str_OrderId];
+    self.manager = [[AFNManager alloc]init];
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:nil result:^(id responseDic) {
+        NSLog(@"取消订单结果 :%@",responseDic);
+        if ([Status isEqualToString:SUCCESS]) {
+            [SVProgressHUD showSuccessWithStatus:@"取消成功"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:Message];
+        }
+        [NSTimer scheduledTimerWithTimeInterval:1.5
+                                         target:self
+                                       selector:@selector(NavLeftAction)
+                                       userInfo:nil
+                                        repeats:NO];
+    } fail:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"网络加载失败"];
+    }];
 }
 
 -(void)NavLeftAction{
