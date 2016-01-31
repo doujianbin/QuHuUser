@@ -16,6 +16,7 @@
 #import "APIConfig.h"
 #import "LoginStorage.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "NSArray+Extension.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height

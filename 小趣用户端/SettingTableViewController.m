@@ -54,8 +54,10 @@
     SettingCell *settingCell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (settingCell == nil) {
         settingCell = [[SettingCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        settingCell.settingLabel.text = self.settingDetailArray[indexPath.row];
     }
+    
+    settingCell.settingLabel.text = self.settingDetailArray[indexPath.row];
+    
     return settingCell;
 }
 

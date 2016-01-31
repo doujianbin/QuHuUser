@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0109645D1C5755AB0006DB6D /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0109645C1C5755AB0006DB6D /* ButtonCell.m */; };
+		010964601C5782AB0006DB6D /* MakeBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0109645F1C5782AB0006DB6D /* MakeBillCell.m */; };
+		010964631C5789550006DB6D /* CharacterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 010964621C5789550006DB6D /* CharacterCell.m */; };
+		010964661C578AFA0006DB6D /* MakeBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010964651C578AFA0006DB6D /* MakeBillTableViewController.m */; };
+		012088161C5CF6730031EFF6 /* NSArray+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 012088151C5CF6730031EFF6 /* NSArray+Extension.m */; };
+		0120881A1C5CF8250031EFF6 /* HistoryBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 012088191C5CF8250031EFF6 /* HistoryBillModel.m */; };
 		05075B3C1C4497D70076EF31 /* RightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B3B1C4497D70076EF31 /* RightTableViewCell.m */; };
 		05075B3F1C44A3560076EF31 /* PTSureOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B3E1C44A3560076EF31 /* PTSureOrderViewController.m */; };
 		05075B431C44AD710076EF31 /* Oval 91 + Path 52.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075B401C44AD710076EF31 /* Oval 91 + Path 52.png */; };
@@ -185,6 +191,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0109645B1C5755AB0006DB6D /* ButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonCell.h; sourceTree = "<group>"; };
+		0109645C1C5755AB0006DB6D /* ButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonCell.m; sourceTree = "<group>"; };
+		0109645E1C5782AB0006DB6D /* MakeBillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeBillCell.h; sourceTree = "<group>"; };
+		0109645F1C5782AB0006DB6D /* MakeBillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeBillCell.m; sourceTree = "<group>"; };
+		010964611C5789550006DB6D /* CharacterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterCell.h; sourceTree = "<group>"; };
+		010964621C5789550006DB6D /* CharacterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterCell.m; sourceTree = "<group>"; };
+		010964641C578AFA0006DB6D /* MakeBillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeBillTableViewController.h; sourceTree = "<group>"; };
+		010964651C578AFA0006DB6D /* MakeBillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeBillTableViewController.m; sourceTree = "<group>"; };
+		012088141C5CF6730031EFF6 /* NSArray+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extension.h"; sourceTree = "<group>"; };
+		012088151C5CF6730031EFF6 /* NSArray+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extension.m"; sourceTree = "<group>"; };
+		012088181C5CF8250031EFF6 /* HistoryBillModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBillModel.h; sourceTree = "<group>"; };
+		012088191C5CF8250031EFF6 /* HistoryBillModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBillModel.m; sourceTree = "<group>"; };
 		05075B3A1C4497D70076EF31 /* RightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightTableViewCell.h; sourceTree = "<group>"; };
 		05075B3B1C4497D70076EF31 /* RightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightTableViewCell.m; sourceTree = "<group>"; };
 		05075B3D1C44A3560076EF31 /* PTSureOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSureOrderViewController.h; sourceTree = "<group>"; };
@@ -404,6 +422,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		012088131C5CF6590031EFF6 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				012088141C5CF6730031EFF6 /* NSArray+Extension.h */,
+				012088151C5CF6730031EFF6 /* NSArray+Extension.m */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		012088171C5CF80B0031EFF6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				012088181C5CF8250031EFF6 /* HistoryBillModel.h */,
+				012088191C5CF8250031EFF6 /* HistoryBillModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		05075B491C45E5080076EF31 /* 特需陪诊－选择医生 */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +505,12 @@
 				05075BC71C47A10B0076EF31 /* BillHistoryCell.m */,
 				05075BC81C47A10B0076EF31 /* BillRecordCell.h */,
 				05075BC91C47A10B0076EF31 /* BillRecordCell.m */,
+				0109645B1C5755AB0006DB6D /* ButtonCell.h */,
+				0109645C1C5755AB0006DB6D /* ButtonCell.m */,
+				0109645E1C5782AB0006DB6D /* MakeBillCell.h */,
+				0109645F1C5782AB0006DB6D /* MakeBillCell.m */,
+				010964611C5789550006DB6D /* CharacterCell.h */,
+				010964621C5789550006DB6D /* CharacterCell.m */,
 			);
 			name = MyView;
 			sourceTree = "<group>";
@@ -505,6 +547,7 @@
 		05BA34941C41F1FE00DC07CD /* 小趣用户端 */ = {
 			isa = PBXGroup;
 			children = (
+				012088131C5CF6590031EFF6 /* Lib */,
 				05BA34981C41F1FE00DC07CD /* AppDelegate.h */,
 				05BA34991C41F1FE00DC07CD /* AppDelegate.m */,
 				05BA349B1C41F1FE00DC07CD /* ViewController.h */,
@@ -613,6 +656,7 @@
 		05BA34E31C41FF1D00DC07CD /* 我 */ = {
 			isa = PBXGroup;
 			children = (
+				012088171C5CF80B0031EFF6 /* Model */,
 				05075B8B1C47A0C30076EF31 /* MyTableViewController.h */,
 				05075B8C1C47A0C30076EF31 /* MyTableViewController.m */,
 				05075B8D1C47A0C30076EF31 /* MyMemberTableViewController.h */,
@@ -635,6 +679,8 @@
 				05075B9E1C47A0C30076EF31 /* BillRecordTableViewController.m */,
 				05075BE11C47A3E20076EF31 /* UIBarButtonItem+Extention.h */,
 				05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */,
+				010964641C578AFA0006DB6D /* MakeBillTableViewController.h */,
+				010964651C578AFA0006DB6D /* MakeBillTableViewController.m */,
 			);
 			name = "我";
 			sourceTree = "<group>";
@@ -988,6 +1034,7 @@
 				05BA35171C4382C400DC07CD /* BaseTableViewCell.m in Sources */,
 				05075BD41C47A10B0076EF31 /* BillCell.m in Sources */,
 				05075BAB1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */,
+				0109645D1C5755AB0006DB6D /* ButtonCell.m in Sources */,
 				05075B551C45FDBC0076EF31 /* TXOrderViewController.m in Sources */,
 				05075BA31C47A0C30076EF31 /* SettingTableViewController.m in Sources */,
 				053AB0FD1C4A1EDE00982B01 /* LoginStorage.m in Sources */,
@@ -998,6 +1045,7 @@
 				05075BA91C47A0C30076EF31 /* BillTableViewController.m in Sources */,
 				05BA35521C43DD1C00DC07CD /* BaseTwoLevelView.m in Sources */,
 				05BA35311C43A36A00DC07CD /* SelectFamilyViewController.m in Sources */,
+				0120881A1C5CF8250031EFF6 /* HistoryBillModel.m in Sources */,
 				05075BCC1C47A10B0076EF31 /* PersonDataCell.m in Sources */,
 				05BA35341C43A8B500DC07CD /* FamileTableViewCell.m in Sources */,
 				05BA35541C43DD1C00DC07CD /* InsetsLabel.m in Sources */,
@@ -1006,6 +1054,7 @@
 				05BA349D1C41F1FE00DC07CD /* ViewController.m in Sources */,
 				05075BD61C47A10B0076EF31 /* OpinionCell.m in Sources */,
 				05075BD21C47A10B0076EF31 /* CouponsCell.m in Sources */,
+				010964661C578AFA0006DB6D /* MakeBillTableViewController.m in Sources */,
 				05075B4C1C45E53C0076EF31 /* SelectDoctorViewController.m in Sources */,
 				05075B3C1C4497D70076EF31 /* RightTableViewCell.m in Sources */,
 				053AB0F71C48AA5B00982B01 /* KDCycleBannerView.m in Sources */,
@@ -1021,12 +1070,15 @@
 				05075BA71C47A0C30076EF31 /* CouponsTableViewController.m in Sources */,
 				05075B661C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05075B581C461EDD0076EF31 /* TXOrderTableViewCell.m in Sources */,
+				010964631C5789550006DB6D /* CharacterCell.m in Sources */,
 				053AB1011C4A1EFD00982B01 /* UserDefaultsUtils.m in Sources */,
 				05075B521C45FCA30076EF31 /* SelectTimeViewController.m in Sources */,
 				05BA349A1C41F1FE00DC07CD /* AppDelegate.m in Sources */,
 				05075B4F1C45EAB30076EF31 /* SelectDoctorTableViewCell.m in Sources */,
 				05075B621C4688320076EF31 /* DoctorDetailTableViewCell.m in Sources */,
 				05BA34CD1C41F71400DC07CD /* YuYueViewController.m in Sources */,
+				010964601C5782AB0006DB6D /* MakeBillCell.m in Sources */,
+				012088161C5CF6730031EFF6 /* NSArray+Extension.m in Sources */,
 				05075BDC1C47A10B0076EF31 /* BillHistoryCell.m in Sources */,
 				05BA35491C43D15600DC07CD /* UITextField+ResignKeyboard.m in Sources */,
 				05075BD81C47A10B0076EF31 /* ContactCell.m in Sources */,

@@ -144,10 +144,19 @@
     }];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return self.dataArray.count;
+    
+    if (self.dataArray.count == 0) {
+        return 0;
+    }else {
+        
+        return self.dataArray.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
