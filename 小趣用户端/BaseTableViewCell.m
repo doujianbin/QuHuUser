@@ -44,7 +44,7 @@
         [self.lab_hospitalName setFont:[UIFont systemFontOfSize:16]];
         self.lab_hospitalName.textAlignment = NSTextAlignmentRight;
         
-        self.lab_hospitalAddress = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 288.5, 31.5, 250, 20)];
+        self.lab_hospitalAddress = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 280.5, 31.5, 250, 20)];
         [self.contentView addSubview:self.lab_hospitalAddress];
         [self.lab_hospitalAddress setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         self.lab_hospitalAddress.alpha = 0.6;

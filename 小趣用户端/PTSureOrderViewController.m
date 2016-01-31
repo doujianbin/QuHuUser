@@ -13,6 +13,7 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 #import "WXApi.h"
+#import "SelectDoctorViewController.h"
 
 @interface PTSureOrderViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UITableView *tableView1;
@@ -444,7 +445,7 @@
 -(void)cancalOrder{
     NSString *strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/user/order/cancelOrder?orderId=%@",Development,self.str_OrderId];
     self.manager = [[AFNManager alloc]init];
-    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:nil result:^(id responseDic) {
+    [self.manager RequestJsonWithUrl:strUrl method:@"GET" parameter:nil result:^(id responseDic) {
         NSLog(@"取消订单结果 :%@",responseDic);
         if ([Status isEqualToString:SUCCESS]) {
             [SVProgressHUD showSuccessWithStatus:@"取消成功"];
@@ -465,7 +466,7 @@
     [SVProgressHUD showWithStatus:@"下单中"];
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,CreateWeiXinPay];
     NSString *DeviceIp = [self deviceIPAdress];
-    NSDictionary *dic = @{@"appid":@"wxca05a9ac9c6686df",@"mch_id":@"1308372701",@"body":@"商品描述",@"out_trade_no":self.commonOrderEntity.orderNo,@"spbill_create_ip":DeviceIp,@"trade_type":@"APP",@"pay_type":@"0"};
+    NSDictionary *dic = @{@"appid":@"wxca05a9ac9c6686df",@"mch_id":@"1308372701",@"body":@"商品描述",@"out_trade_no":self.commonOrderEntity.orderNo,@"spbill_create_ip":DeviceIp,@"trade_type":@"APP",@"pay_type":@"0",@"notify_url":@"www.haohushi.me"};
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
         NSLog(@"微信预付订单生成结果:%@",responseDic);
@@ -490,7 +491,11 @@
 }
 
 -(void)NavLeftAction{
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.orderFromType == 2) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (NSString *)deviceIPAdress {

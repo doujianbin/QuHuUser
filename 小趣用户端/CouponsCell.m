@@ -16,6 +16,7 @@
         UIImageView *couponImageView = [[UIImageView alloc]init];
         couponImageView.contentMode = UIViewContentModeScaleToFill;
         [self.contentView addSubview:couponImageView];
+        couponImageView.userInteractionEnabled = NO;
         self.couponImageView = couponImageView;
         
         UILabel *couponTypeLabel = [[UILabel alloc]init];
@@ -35,7 +36,6 @@
         
         self.contentView.backgroundColor = COLOR(245, 246, 247, 1);
         
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

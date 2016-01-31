@@ -123,6 +123,7 @@
     self.window.rootViewController = tabBarVC;
     
     PeiZhenViewController *peizhenVC = [[PeiZhenViewController alloc] init];
+    UINavigationController *navpei = [[UINavigationController alloc]initWithRootViewController:peizhenVC];
     peizhenVC.tabBarItem.title = @"首页";
     peizhenVC.tabBarItem.image = [[UIImage imageNamed:@"Triangle 1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     peizhenVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"Triangle s1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -140,7 +141,7 @@
     myVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"Myselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UINavigationController *myNavi = [[UINavigationController alloc] initWithRootViewController:myVC];
     
-    tabBarVC.viewControllers = @[peizhenVC, yuyueNavi, myNavi];
+    tabBarVC.viewControllers = @[navpei, yuyueNavi, myNavi];
 }
 
 - (void)enterMainViewController{
@@ -253,6 +254,7 @@
     
     if ([sourceApplication isEqualToString:@"com.tencent.xin"]) {
         return [WXApi handleOpenURL:url delegate:self];
+       
     }
     return YES;
     

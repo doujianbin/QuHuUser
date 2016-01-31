@@ -167,6 +167,7 @@
     OrderListEntity *entity = [self.arr_orderList objectAtIndex:indexPath.row];
     PTSureOrderViewController *vc = [[PTSureOrderViewController alloc]init];
     vc.str_OrderId = entity._id;
+    vc.orderFromType = 2;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

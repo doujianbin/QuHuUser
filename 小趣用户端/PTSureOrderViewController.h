@@ -11,5 +11,6 @@
 @interface PTSureOrderViewController : UIViewController
 
 @property (nonatomic ,strong)NSString *str_OrderId;
+@property (nonatomic ,assign)int       orderFromType;   // 如果为2  则是从订单列表进入
 
 @end

@@ -43,6 +43,7 @@
     }
     return self;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
@@ -94,6 +95,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
     if(arr_bannerImg.count == 0){
         [self getMsg];
     }
@@ -101,6 +103,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO;
     [self.cycleBannerView cancelAutoSwitchBannerView];
 }
 
@@ -317,31 +320,34 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HospitalViewController *hospitalView = [[HospitalViewController alloc]init];
     hospitalView.dic_hospital = [arr_hospital objectAtIndex:indexPath.row];
-    UINavigationController *nav_hospital = [[UINavigationController alloc]initWithRootViewController:hospitalView];
-    [self presentViewController:nav_hospital animated:YES completion:nil];
+//    UINavigationController *nav_hospital = [[UINavigationController alloc]initWithRootViewController:hospitalView];
+    hospitalView.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:hospitalView animated:YES];
 }
 
 -(void)btn_putongAction{
     NSLog(@"普通陪诊");
     PuTongPZViewController *pt = [[PuTongPZViewController alloc]init];
-    UINavigationController *nav_pt = [[UINavigationController alloc]initWithRootViewController:pt];
-    [self presentViewController:nav_pt animated:YES completion:nil];
+//    UINavigationController *nav_pt = [[UINavigationController alloc]initWithRootViewController:pt];
+    pt.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:pt animated:YES];
 }
 
 -(void)btn_texuAction{
     NSLog(@"特需陪诊");
     SelectDoctorViewController *selectDoctor = [[SelectDoctorViewController alloc]init];
-    UINavigationController *nnav_Sd = [[UINavigationController alloc]initWithRootViewController:selectDoctor];
-    [self presentViewController:nnav_Sd animated:YES completion:nil];
+//    UINavigationController *nnav_Sd = [[UINavigationController alloc]initWithRootViewController:selectDoctor];
+    selectDoctor.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:selectDoctor animated:YES];
 }
 
 -(void)btn_keshiAction:(UIButton *)sender{
     NSLog(@"%ld",(long)sender.tag);
     SelectDoctorViewController *vc = [[SelectDoctorViewController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     vc.str_selectedType = sender.titleLabel.text;
-    //    vc.hidesBottomBarWhenPushed = YES;//隐藏tabbar
-    [self presentViewController:nav animated:YES completion:nil];
+    vc.hidesBottomBarWhenPushed = YES;//隐藏tabbar
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)loginAgainAction{
@@ -379,9 +385,10 @@
 - (void)cycleBannerView:(KDCycleBannerView *)bannerView didSelectedAtIndex:(NSUInteger)index {
     if([[arr_bannerLink objectAtIndex:index] length] > 0){
         BannerWebViewController *vc = [[BannerWebViewController alloc]init];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
         vc.str_url = [arr_bannerLink objectAtIndex:index];
-        [self presentViewController:nav animated:YES completion:nil];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

@@ -63,7 +63,7 @@
                 entity.name = [dic objectForKey:@"userName"];
                 entity.phoneNum = [dic objectForKey:@"phoneNumber"];
                 entity.IdCard = [dic objectForKey:@"idNo"];
-                entity.userId = [dic objectForKey:@"userId"];
+                entity.userId = [dic objectForKey:@"id"];
                 if ([[dic objectForKey:@"sex"] isEqualToString:@"0"]) {
                     
                     entity.gender = @"男";

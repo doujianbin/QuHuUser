@@ -39,9 +39,6 @@
     
     [self setupInterface];
     
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidKeyBoard)];
-    [self.view addGestureRecognizer:tapGestureRecognizer];
-    
     [self makeURLRequest];
 }
 
@@ -65,11 +62,6 @@
         NSLog(@"%@",error);
         
     }];
-}
-
-- (void)hidKeyBoard {
-    
-    [self.view endEditing:YES];
 }
 
 - (void)backItemClick {
@@ -163,7 +155,7 @@
     
     static NSString *cellId = @"cell";
     
-    CouponsCell *cell = [self.couponsTableView dequeueReusableCellWithIdentifier:cellId];
+    CouponsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
         cell = [[CouponsCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
         
@@ -238,6 +230,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (self.isFromOrder) {
         if ([[[self.dataArray objectAtIndex:indexPath.row] objectForKey:@"isPast"] intValue] == 1) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"过期的优惠券暂时无法使用哦" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
@@ -255,6 +248,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return 124.5;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+     [self.view endEditing:YES];
 }
 
 @end

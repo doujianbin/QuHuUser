@@ -38,7 +38,7 @@
 }
 
 -(void)NavLeftAction{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated

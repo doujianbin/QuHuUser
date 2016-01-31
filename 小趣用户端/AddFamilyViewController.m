@@ -199,7 +199,7 @@
 
 -(void)btnRSave{
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,CreateFamily];
-    NSDictionary *dic = @{@"name":tef_name.text,@"sex":self.genderIndex,@"relation":lab_relation.text,@"phoneNumber":tef_PhoneNum.text,@"identityNumber":tef_IdCard.text};
+    NSDictionary *dic = @{@"userName":tef_name.text,@"sex":self.genderIndex,@"relation":lab_relation.text,@"phoneNumber":tef_PhoneNum.text,@"idNo":tef_IdCard.text};
     
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
