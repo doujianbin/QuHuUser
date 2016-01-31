@@ -30,7 +30,7 @@
         self.personCenterLabel = personCenterLabel;
         
         UIView *lineView = [[UIView alloc]init];
-        lineView.backgroundColor = COLOR(219, 220, 221, 1);
+        lineView.backgroundColor = COLOR(219, 220, 220, 1);
         self.lineView = lineView;
         
         [self.contentView addSubview:iconImageView];
