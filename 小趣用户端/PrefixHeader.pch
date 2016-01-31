@@ -28,4 +28,8 @@
 
 #define COLOR(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
 
+#define iPhone5 ([UIScreen mainScreen].bounds.size.height == 568)
+#define iPhone4 ([UIScreen mainScreen].bounds.size.height == 480)
+#define iPhone6 ([UIScreen mainScreen].bounds.size.height == 667)
+
 #endif /* PrefixHeader_pch */

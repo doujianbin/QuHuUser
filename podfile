@@ -4,3 +4,4 @@ pod "SDWebImage"
 pod "MJRefresh"
 pod "SVProgressHUD"
 pod 'MJExtension'
+pod 'Bugtags'

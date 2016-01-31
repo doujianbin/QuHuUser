@@ -138,9 +138,10 @@
 -(void)getDoctorTimeMsg{
     
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,UserSelectDoctorMsg];
-    NSDictionary *dic = @{@"doctorId":@"339"};
+    NSDictionary *dic = @{@"doctorId":self.doctorEntity._id};
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
+        NSLog(@"加号明细:%@",responseDic);
         NSMutableDictionary *dicAll = [responseDic objectForKey:@"data"];
         self.str_yearMonth = [dicAll objectForKey:@"yearMonth"];
         self.arr_dayGroup = [DayGroupEntity parseDayGroupListWithJson:[dicAll objectForKey:@"dayGroup"]];
@@ -173,8 +174,7 @@
         [self.scl_back setContentSize:CGSizeMake(SCREEN_WIDTH, CGRectGetMaxY(self.tb_hospital.frame))];
         [self.tb_hospital setBackgroundView:self.v_tableViewBack];
     }
-    
-    
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

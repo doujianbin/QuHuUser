@@ -15,7 +15,7 @@
 @property (nonatomic ,strong)AFNManager *manager;
 @property (nonatomic ,strong)NSMutableArray *arr_orderList;
 @property (nonatomic ,strong)UITableView *tb_orderList;
-
+@property (nonatomic ,strong)UIView *tab_backGroundView;
 @end
 
 @implementation YuYueViewController
@@ -33,8 +33,9 @@
     self.title = @"订单";
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
-    // Do any additional setup after loading the view.
+//     Do any additional setup after loading the view.
     [self onCreate];
+    [self onNoOrderView];
     [self loadOrderList];
 }
 
@@ -48,8 +49,16 @@
         if ([Status isEqualToString:SUCCESS]) {
             
             for (NSDictionary *dic in [responseDic objectForKey:@"data"]) {
-                [self.arr_orderList addObject:[OrderListEntity parseOrderListEntityWithJson:dic]];
-                [self.tb_orderList reloadData];
+                if ([[responseDic objectForKey:@"data"] count] > 0) {
+                    
+                    [self.arr_orderList addObject:[OrderListEntity parseOrderListEntityWithJson:dic]];
+                    [self.tb_orderList reloadData];
+                    [self.tb_orderList setBackgroundView:nil];
+                    
+                }else{
+                    // 没有订单
+                    [self.tb_orderList setBackgroundView:self.tab_backGroundView];
+                }
             }
         }else{
             [SVProgressHUD showErrorWithStatus:Message];
@@ -71,6 +80,20 @@
     self.tb_orderList.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self loadOrderList];
     }];
+}
+
+-(void)onNoOrderView{
+    self.tab_backGroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,self.tb_orderList.frame.size.width, self.tb_orderList.frame.size.height)];
+    UIImageView *img_nothing = [[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - 115) / 2 ,(self.tab_backGroundView.frame.size.height - 127)/2 - 80, 115, 127)];
+    [self.tab_backGroundView addSubview:img_nothing];
+    [img_nothing setImage:[UIImage imageNamed:@"nothingView"]];
+    
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(img_nothing.frame) + 20 , SCREEN_WIDTH, 20)];
+    [self.tab_backGroundView addSubview:lab];
+    lab.font = [UIFont boldSystemFontOfSize:16];
+    lab.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
+    lab.textAlignment = NSTextAlignmentCenter;
+    [lab setText:@"您还没有订单哦～"];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

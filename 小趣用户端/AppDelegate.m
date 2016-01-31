@@ -12,10 +12,16 @@
 #import "SignInViewController.h"
 #import "MyTableViewController.h"
 #import "BPush.h"
+#import "LinkPageViewController.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import <Bugtags/Bugtags.h>
+
 // rgb颜色转换（16进制->10进制）
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@interface AppDelegate ()<UITabBarControllerDelegate>
+@interface AppDelegate ()<UITabBarControllerDelegate,LinkPageViewControllerDelegate,WXApiDelegate>
+@property (nonatomic,strong)LinkPageViewController *vc_linePage;
 
 @end
 
@@ -39,15 +45,25 @@
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor blackColor], NSForegroundColorAttributeName,
                                                           [UIFont systemFontOfSize:18.0], NSFontAttributeName, nil]];
+//    if (![LoginStorage isFirstEnter]) {
+//        self.vc_linePage = [[LinkPageViewController alloc]initWithImageArray:@[@"linkPage_one",@"linkPage_two",@"linkPage_three",@"linkPage_four"]];
+//        self.vc_linePage.delegate = self;
+//        
+//        [self.window setRootViewController:_vc_linePage];
+//        
+//    }else{
+//        
+        SignInViewController *signInView = [[SignInViewController alloc]init];
+        UINavigationController *nav_signIn = [[UINavigationController alloc]initWithRootViewController:signInView];
+        signInView.isSetRootView = YES;
+        
+        if ([LoginStorage isLogin] == NO) {
+            [self.window setRootViewController:nav_signIn];
+        }else{
+            [self setTabBarRootView];
+        }
+//    }
     
-    SignInViewController *signInView = [[SignInViewController alloc]init];
-    UINavigationController *nav_signIn = [[UINavigationController alloc]initWithRootViewController:signInView];
-    signInView.isSetRootView = YES;
-    if ([LoginStorage isLogin] == NO) {
-        [self.window setRootViewController:nav_signIn];
-    }else{
-        [self setTabBarRootView];
-    }
     
     /// 推送
     
@@ -92,7 +108,9 @@
      // 测试本地通知
      [self performSelector:@selector(testLocalNotifi) withObject:nil afterDelay:1.0];
      */
+    [WXApi registerApp:@"wxca05a9ac9c6686df" withDescription:@"小趣好护士"];
     
+    [Bugtags startWithAppKey:@"889fb84e3179391c44711a9023d652c0" invocationEvent:BTGInvocationEventBubble];
     
     [self.window makeKeyAndVisible];
     
@@ -123,6 +141,21 @@
     UINavigationController *myNavi = [[UINavigationController alloc] initWithRootViewController:myVC];
     
     tabBarVC.viewControllers = @[peizhenVC, yuyueNavi, myNavi];
+}
+
+- (void)enterMainViewController{
+    [LoginStorage saveFirstEnterStatus:YES];
+    [self.vc_linePage.view removeFromSuperview];
+    
+    SignInViewController *signInView = [[SignInViewController alloc]init];
+    UINavigationController *nav_signIn = [[UINavigationController alloc]initWithRootViewController:signInView];
+    signInView.isSetRootView = YES;
+    
+    if ([LoginStorage isLogin] == NO) {
+        [self.window setRootViewController:nav_signIn];
+    }else{
+        [self setTabBarRootView];
+    }
 }
 
 
@@ -209,6 +242,21 @@
     }
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    NSLog(@"source = %@", sourceApplication);
+    
+    if ([sourceApplication isEqualToString:@"com.tencent.xin"]) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    return YES;
+    
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

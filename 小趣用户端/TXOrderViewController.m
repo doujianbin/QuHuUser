@@ -259,10 +259,10 @@
     
     if ([[[self.dicCoupon objectForKey:@"id"] stringValue] length] > 0) {
         NSString *couponId = [NSString stringWithFormat:@"%@",[self.dicCoupon objectForKey:@"id"]];
-        self.partnerDic = @{@"setId":strSetId,@"hospitalId":self.hospitalEntity.hospitalId,@"patientId":self.memberEntity.userId,@"scheduleTime":time,@"couponId":couponId,@"appointId":self.appointEntity._id};
+        self.partnerDic = @{@"setId":strSetId,@"hospitalId":self.hospitalEntity.hospitalId,@"patientId":self.memberEntity.userId,@"scheduleTime":time,@"couponId":couponId,@"appointId":self.appointEntity.appointId};
     }else{
-
-        self.partnerDic = @{@"setId":strSetId,@"hospitalId":self.hospitalEntity.hospitalId,@"patientId":self.memberEntity.userId,@"scheduleTime":time,@"appointId":self.appointEntity._id};
+        
+        self.partnerDic = @{@"setId":strSetId,@"hospitalId":self.hospitalEntity.hospitalId,@"patientId":self.memberEntity.userId,@"scheduleTime":time,@"appointId":self.appointEntity.appointId};
     }
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:self.partnerDic result:^(id responseDic) {

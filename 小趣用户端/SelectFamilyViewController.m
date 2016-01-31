@@ -16,7 +16,7 @@
 }
 @property (nonatomic,strong)NSMutableArray   *arr_members;
 @property (nonatomic ,retain)AFNManager *manager;
-
+@property (nonatomic ,strong)UIView *tab_backGroundView;
 @end
 
 @implementation SelectFamilyViewController
@@ -55,8 +55,9 @@
         NSLog(@"成员列表：%@",responseDic);
         if ([Status isEqualToString:SUCCESS]) {
             self.arr_members = [NSMutableArray array];
-            
-            for (NSDictionary *dic in [responseDic objectForKey:@"data"]) {
+            if ([[responseDic objectForKey:@"data"] count] > 0) {
+
+               for (NSDictionary *dic in [responseDic objectForKey:@"data"]) {
                 
                 MemberEntity *entity = [[MemberEntity alloc]init];
                 entity.name = [dic objectForKey:@"userName"];
@@ -72,7 +73,12 @@
                 entity.age = [dic objectForKey:@"age"];
                 [self.arr_members addObject:entity];
             }
-            [tableFamily reloadData];
+                [tableFamily reloadData];
+                [tableFamily setBackgroundView:nil];
+            }else{
+                // 没有成员列表
+                [tableFamily setBackgroundView:self.tab_backGroundView];
+            }
         }
     } fail:^(NSError *error) {
         NSLog(@"error:%@",error);
@@ -90,6 +96,18 @@
     tableFamily.rowHeight = 72;
     tableFamily.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableFamily registerClass:[FamileTableViewCell class] forCellReuseIdentifier:@"tableView"];
+    
+    self.tab_backGroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,tableFamily.frame.size.width, tableFamily.frame.size.height)];
+    UIImageView *img_nothing = [[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - 115) / 2 ,(self.tab_backGroundView.frame.size.height - 127)/2 - 80, 115, 127)];
+    [self.tab_backGroundView addSubview:img_nothing];
+    [img_nothing setImage:[UIImage imageNamed:@"nothingView"]];
+    
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(img_nothing.frame) + 20 , SCREEN_WIDTH, 20)];
+    [self.tab_backGroundView addSubview:lab];
+    lab.font = [UIFont boldSystemFontOfSize:16];
+    lab.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
+    lab.textAlignment = NSTextAlignmentCenter;
+    [lab setText:@"您暂时还没有添加成员哦~"];
 }
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

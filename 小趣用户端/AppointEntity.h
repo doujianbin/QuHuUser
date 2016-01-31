@@ -10,7 +10,7 @@
 
 @interface AppointEntity : NSObject
 
-@property (nonatomic,assign)NSString   *_id;
+@property (nonatomic,strong)NSString   *appointId;
 @property (nonatomic,strong)NSString   *startTime;
 @property (nonatomic,strong)NSString   *status;
 

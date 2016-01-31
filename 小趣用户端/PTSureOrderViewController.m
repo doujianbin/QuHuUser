@@ -10,6 +10,9 @@
 #import "BaseTableViewCell.h"
 #import "CommonOrderEntity.h"
 #import "HospitalAddressTableViewCell.h"
+#include <ifaddrs.h>
+#include <arpa/inet.h>
+#import "WXApi.h"
 
 @interface PTSureOrderViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UITableView *tableView1;
@@ -406,7 +409,7 @@
         [self cancalOrder];
     }
     if ([sender.titleLabel.text isEqualToString:@"支付"]) {
-        
+        [self weixinPay];
     }
 }
 
@@ -427,7 +430,8 @@
         [self cancalOrder];
     }
     if ([sender.titleLabel.text isEqualToString:@"支付"]) {
-        
+        // 支付
+        [self weixinPay];
     }
     if ([sender.titleLabel.text isEqualToString:@"联系护士"]) {
         NSString *str1 = @"tel://";
@@ -457,9 +461,67 @@
     }];
 }
 
+-(void)weixinPay{
+    [SVProgressHUD showWithStatus:@"下单中"];
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,CreateWeiXinPay];
+    NSString *DeviceIp = [self deviceIPAdress];
+    NSDictionary *dic = @{@"appid":@"wxca05a9ac9c6686df",@"mch_id":@"1308372701",@"body":@"商品描述",@"out_trade_no":self.commonOrderEntity.orderNo,@"spbill_create_ip":DeviceIp,@"trade_type":@"APP",@"pay_type":@"0"};
+    self.manager = [[AFNManager alloc]init];
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
+        NSLog(@"微信预付订单生成结果:%@",responseDic);
+        [SVProgressHUD dismiss];
+        if ([Status isEqualToString:SUCCESS]) {
+
+            PayReq *request = [[PayReq alloc] init];
+            
+            request.partnerId = [[responseDic objectForKey:@"data"] objectForKey:@"partnerid"];
+            request.nonceStr = [[responseDic objectForKey:@"data"] objectForKey:@"noncestr"];
+            request.package = [[responseDic objectForKey:@"data"] objectForKey:@"package"];
+            request.sign = [[responseDic objectForKey:@"data"] objectForKey:@"sign"];
+            request.prepayId = [[responseDic objectForKey:@"data"] objectForKey:@"prepayid"];
+            request.timeStamp = [[[responseDic objectForKey:@"data"] objectForKey:@"timestamp"] intValue];
+            
+            [WXApi sendReq:request];
+        }
+        
+    } fail:^(NSError *error) {
+        NSLog(@"error == %@",error);
+    }];
+}
+
 -(void)NavLeftAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (NSString *)deviceIPAdress {
+    NSString *address = @"an error occurred when obtaining ip address";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    
+    success = getifaddrs(&interfaces);
+    
+    if (success == 0) { // 0 表示获取成功
+        
+        temp_addr = interfaces;
+        while (temp_addr != NULL) {
+            if( temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if ([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                }
+            }
+            
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    
+    freeifaddrs(interfaces);  
+    
+    return address;  
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

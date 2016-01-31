@@ -32,4 +32,8 @@
 + (void)saveSpecialOrderDic:(NSDictionary *)dic;
 + (NSDictionary *)GetSpecialrderDic;
 
++ (void)saveFirstEnterStatus:(BOOL)isFirstEnter;
+
++ (BOOL)isFirstEnter;
+
 @end

@@ -14,6 +14,7 @@ static NSString * const CommonOrderDic = @"commonOrderDic";
 static NSString * const SpecialOrderDic = @"specialOrderDic";
 static NSString * const PhoneNum = @"PhoneNum";
 static NSString * const YanZhengMa = @"YanZhengMa";
+static NSString *const firstEnter = @"isFirstEnter";
 
 @implementation LoginStorage
 
@@ -79,6 +80,13 @@ static NSString * const YanZhengMa = @"YanZhengMa";
 }
 + (NSDictionary *)GetSpecialrderDic{
     return [UserDefaultsUtils valueWithKey:SpecialOrderDic];
+}
+
++ (void)saveFirstEnterStatus:(BOOL)isFirstEnter{
+    [UserDefaultsUtils saveBoolValue:isFirstEnter withKey:firstEnter];
+}
++ (BOOL)isFirstEnter{
+    return [UserDefaultsUtils boolValueWithKey:firstEnter];
 }
 
 

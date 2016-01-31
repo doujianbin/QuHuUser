@@ -41,6 +41,7 @@
 - (void)createView{
     self.img_hospitalPic = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 180)];
     [self.view addSubview:self.img_hospitalPic];
+    [self.img_hospitalPic sd_setImageWithURL:[self.dic_hospital objectForKey:@"bigImgPath"] placeholderImage:nil];
 
 }
 
@@ -58,7 +59,7 @@
     
     UIImageView *img_putong = [[UIImageView alloc]initWithFrame:CGRectMake(15, 22, 51, 51)];
     [btn_putong addSubview:img_putong];
-    [img_putong setImage:[UIImage imageNamed:@"Oval 50 + Oval-52 + Shape"]];
+    [img_putong setImage:[UIImage imageNamed:@"ic_hushi"]];
     
     UILabel *lab_putong = [[UILabel alloc]initWithFrame:CGRectMake(76, 30, 68, 18)];
     [btn_putong addSubview:lab_putong];
@@ -83,7 +84,7 @@
     
     UIImageView *img_texu = [[UIImageView alloc]initWithFrame:CGRectMake(15, 22, 51, 51)];
     [btn_texu addSubview:img_texu];
-    [img_texu setImage:[UIImage imageNamed:@"Oval 50 Copy + Group"]];
+    [img_texu setImage:[UIImage imageNamed:@"ic_texu"]];
     
     UILabel *lab_texu = [[UILabel alloc]initWithFrame:CGRectMake(76, 30, 68, 18)];
     [btn_texu addSubview:lab_texu];
