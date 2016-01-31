@@ -37,6 +37,8 @@
 - (void)backItemClick {
     
     [self.navigationController popViewControllerAnimated:YES];
+    
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 #pragma mark cell设置相关

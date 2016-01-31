@@ -7,13 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HistoryBillModel.h"
+
+@class BillHistoryCell;
+@protocol BillHistoryCellDelegate <NSObject>
+
+- (void)billHistoryCell:(BillHistoryCell *)cell didSelected:(BOOL)isSelected;
+
+@end
 
 @interface BillHistoryCell : UITableViewCell
 
-@property (nonatomic, strong)UILabel *chargeLabel;
+@property (nonatomic, assign) id<BillHistoryCellDelegate> delegate;
 
-@property (nonatomic, strong)UILabel *dateLabel;
+@property (nonatomic, strong) HistoryBillModel *historyBillInfo;
 
-@property (nonatomic, strong)UIImageView *selecteImageView;
 
 @end

@@ -30,50 +30,6 @@
 		05075B7F1C47615F0076EF31 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05075B7E1C47615F0076EF31 /* SystemConfiguration.framework */; };
 		05075B881C4762670076EF31 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05075B861C4762670076EF31 /* libBPush.a */; };
 		05075B891C4762670076EF31 /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = 05075B871C4762670076EF31 /* test.caf */; };
-		05075B9F1C47A0C30076EF31 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B8C1C47A0C30076EF31 /* MyTableViewController.m */; };
-		05075BA01C47A0C30076EF31 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B8C1C47A0C30076EF31 /* MyTableViewController.m */; };
-		05075BA11C47A0C30076EF31 /* MyMemberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B8E1C47A0C30076EF31 /* MyMemberTableViewController.m */; };
-		05075BA21C47A0C30076EF31 /* MyMemberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B8E1C47A0C30076EF31 /* MyMemberTableViewController.m */; };
-		05075BA31C47A0C30076EF31 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B901C47A0C30076EF31 /* SettingTableViewController.m */; };
-		05075BA41C47A0C30076EF31 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B901C47A0C30076EF31 /* SettingTableViewController.m */; };
-		05075BA51C47A0C30076EF31 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B921C47A0C30076EF31 /* ShareViewController.m */; };
-		05075BA61C47A0C30076EF31 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B921C47A0C30076EF31 /* ShareViewController.m */; };
-		05075BA71C47A0C30076EF31 /* CouponsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B941C47A0C30076EF31 /* CouponsTableViewController.m */; };
-		05075BA81C47A0C30076EF31 /* CouponsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B941C47A0C30076EF31 /* CouponsTableViewController.m */; };
-		05075BA91C47A0C30076EF31 /* BillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B961C47A0C30076EF31 /* BillTableViewController.m */; };
-		05075BAA1C47A0C30076EF31 /* BillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B961C47A0C30076EF31 /* BillTableViewController.m */; };
-		05075BAB1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B981C47A0C30076EF31 /* ChangeMyDataViewController.m */; };
-		05075BAC1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B981C47A0C30076EF31 /* ChangeMyDataViewController.m */; };
-		05075BAD1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9A1C47A0C30076EF31 /* OpinionTableViewController.m */; };
-		05075BAE1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9A1C47A0C30076EF31 /* OpinionTableViewController.m */; };
-		05075BAF1C47A0C30076EF31 /* BillHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9C1C47A0C30076EF31 /* BillHistoryTableViewController.m */; };
-		05075BB01C47A0C30076EF31 /* BillHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9C1C47A0C30076EF31 /* BillHistoryTableViewController.m */; };
-		05075BB11C47A0C30076EF31 /* BillRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9E1C47A0C30076EF31 /* BillRecordTableViewController.m */; };
-		05075BB21C47A0C30076EF31 /* BillRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075B9E1C47A0C30076EF31 /* BillRecordTableViewController.m */; };
-		05075BCA1C47A10B0076EF31 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB51C47A10B0076EF31 /* MyCell.m */; };
-		05075BCB1C47A10B0076EF31 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB51C47A10B0076EF31 /* MyCell.m */; };
-		05075BCC1C47A10B0076EF31 /* PersonDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB71C47A10B0076EF31 /* PersonDataCell.m */; };
-		05075BCD1C47A10B0076EF31 /* PersonDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB71C47A10B0076EF31 /* PersonDataCell.m */; };
-		05075BCE1C47A10B0076EF31 /* MyMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB91C47A10B0076EF31 /* MyMemberTableViewCell.m */; };
-		05075BCF1C47A10B0076EF31 /* MyMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BB91C47A10B0076EF31 /* MyMemberTableViewCell.m */; };
-		05075BD01C47A10B0076EF31 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBB1C47A10B0076EF31 /* SettingCell.m */; };
-		05075BD11C47A10B0076EF31 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBB1C47A10B0076EF31 /* SettingCell.m */; };
-		05075BD21C47A10B0076EF31 /* CouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBD1C47A10B0076EF31 /* CouponsCell.m */; };
-		05075BD31C47A10B0076EF31 /* CouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBD1C47A10B0076EF31 /* CouponsCell.m */; };
-		05075BD41C47A10B0076EF31 /* BillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBF1C47A10B0076EF31 /* BillCell.m */; };
-		05075BD51C47A10B0076EF31 /* BillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BBF1C47A10B0076EF31 /* BillCell.m */; };
-		05075BD61C47A10B0076EF31 /* OpinionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC11C47A10B0076EF31 /* OpinionCell.m */; };
-		05075BD71C47A10B0076EF31 /* OpinionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC11C47A10B0076EF31 /* OpinionCell.m */; };
-		05075BD81C47A10B0076EF31 /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC31C47A10B0076EF31 /* ContactCell.m */; };
-		05075BD91C47A10B0076EF31 /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC31C47A10B0076EF31 /* ContactCell.m */; };
-		05075BDA1C47A10B0076EF31 /* OpinionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC51C47A10B0076EF31 /* OpinionTextView.m */; };
-		05075BDB1C47A10B0076EF31 /* OpinionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC51C47A10B0076EF31 /* OpinionTextView.m */; };
-		05075BDC1C47A10B0076EF31 /* BillHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC71C47A10B0076EF31 /* BillHistoryCell.m */; };
-		05075BDD1C47A10B0076EF31 /* BillHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC71C47A10B0076EF31 /* BillHistoryCell.m */; };
-		05075BDE1C47A10B0076EF31 /* BillRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC91C47A10B0076EF31 /* BillRecordCell.m */; };
-		05075BDF1C47A10B0076EF31 /* BillRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BC91C47A10B0076EF31 /* BillRecordCell.m */; };
-		05075BE31C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */; };
-		05075BE41C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */; };
 		05075BEA1C47BB0C0076EF31 /* 58 - Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE51C47BB0C0076EF31 /* 58 - Settings.png */; };
 		05075BEB1C47BB0C0076EF31 /* 58 - Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE51C47BB0C0076EF31 /* 58 - Settings.png */; };
 		05075BEC1C47BB0C0076EF31 /* 80 - Spotlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 05075BE61C47BB0C0076EF31 /* 80 - Spotlight.png */; };
@@ -263,6 +219,34 @@
 		05E8BEF71C5CFB3C00DA27C0 /* ic_texu.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BEF11C5CFB3C00DA27C0 /* ic_texu.png */; };
 		05E8BEF81C5CFB3C00DA27C0 /* ic_texu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BEF21C5CFB3C00DA27C0 /* ic_texu@2x.png */; };
 		05E8BEF91C5CFB3C00DA27C0 /* ic_texu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E8BEF31C5CFB3C00DA27C0 /* ic_texu@3x.png */; };
+		05E8BF121C5DC0FC00DA27C0 /* BillHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF0D1C5DC0FC00DA27C0 /* BillHistoryTableViewController.m */; };
+		05E8BF131C5DC0FC00DA27C0 /* BillRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF0F1C5DC0FC00DA27C0 /* BillRecordTableViewController.m */; };
+		05E8BF141C5DC0FC00DA27C0 /* BillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF111C5DC0FC00DA27C0 /* BillTableViewController.m */; };
+		05E8BF171C5DC11E00DA27C0 /* ChangeMyDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF161C5DC11E00DA27C0 /* ChangeMyDataViewController.m */; };
+		05E8BF1A1C5DC13600DA27C0 /* CouponsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF191C5DC13600DA27C0 /* CouponsTableViewController.m */; };
+		05E8BF2B1C5DC1AA00DA27C0 /* HistoryBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF1C1C5DC1AA00DA27C0 /* HistoryBillModel.m */; };
+		05E8BF2C1C5DC1AA00DA27C0 /* MakeBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF1E1C5DC1AA00DA27C0 /* MakeBillTableViewController.m */; };
+		05E8BF2D1C5DC1AA00DA27C0 /* MyMemberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF201C5DC1AA00DA27C0 /* MyMemberTableViewController.m */; };
+		05E8BF2E1C5DC1AA00DA27C0 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF221C5DC1AA00DA27C0 /* MyTableViewController.m */; };
+		05E8BF2F1C5DC1AA00DA27C0 /* OpinionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF241C5DC1AA00DA27C0 /* OpinionTableViewController.m */; };
+		05E8BF301C5DC1AA00DA27C0 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF261C5DC1AA00DA27C0 /* SettingTableViewController.m */; };
+		05E8BF311C5DC1AA00DA27C0 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF281C5DC1AA00DA27C0 /* ShareViewController.m */; };
+		05E8BF321C5DC1AA00DA27C0 /* UIBarButtonItem+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF2A1C5DC1AA00DA27C0 /* UIBarButtonItem+Extention.m */; };
+		05E8BF4F1C5DC2E700DA27C0 /* BillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF341C5DC2E600DA27C0 /* BillCell.m */; };
+		05E8BF501C5DC2E700DA27C0 /* BillHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF361C5DC2E600DA27C0 /* BillHistoryCell.m */; };
+		05E8BF511C5DC2E700DA27C0 /* BillRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF381C5DC2E600DA27C0 /* BillRecordCell.m */; };
+		05E8BF521C5DC2E700DA27C0 /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF3A1C5DC2E600DA27C0 /* ButtonCell.m */; };
+		05E8BF531C5DC2E700DA27C0 /* CharacterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF3C1C5DC2E600DA27C0 /* CharacterCell.m */; };
+		05E8BF541C5DC2E700DA27C0 /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF3E1C5DC2E600DA27C0 /* ContactCell.m */; };
+		05E8BF551C5DC2E700DA27C0 /* CouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF401C5DC2E600DA27C0 /* CouponsCell.m */; };
+		05E8BF561C5DC2E700DA27C0 /* MakeBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF421C5DC2E600DA27C0 /* MakeBillCell.m */; };
+		05E8BF571C5DC2E700DA27C0 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF441C5DC2E600DA27C0 /* MyCell.m */; };
+		05E8BF581C5DC2E700DA27C0 /* MyMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF461C5DC2E600DA27C0 /* MyMemberTableViewCell.m */; };
+		05E8BF591C5DC2E700DA27C0 /* OpinionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF481C5DC2E600DA27C0 /* OpinionCell.m */; };
+		05E8BF5A1C5DC2E700DA27C0 /* OpinionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF4A1C5DC2E600DA27C0 /* OpinionTextView.m */; };
+		05E8BF5B1C5DC2E700DA27C0 /* PersonDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF4C1C5DC2E600DA27C0 /* PersonDataCell.m */; };
+		05E8BF5C1C5DC2E700DA27C0 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF4E1C5DC2E600DA27C0 /* SettingCell.m */; };
+		05E8BF5F1C5DC30F00DA27C0 /* NSArray+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8BF5E1C5DC30F00DA27C0 /* NSArray+Extension.m */; };
 		0C4921158FB4D0CE72D44E43 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4D7AF9BA97CDB3EE4EB78DA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -318,50 +302,6 @@
 		05075B851C4762670076EF31 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		05075B861C4762670076EF31 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
 		05075B871C4762670076EF31 /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
-		05075B8B1C47A0C30076EF31 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
-		05075B8C1C47A0C30076EF31 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
-		05075B8D1C47A0C30076EF31 /* MyMemberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMemberTableViewController.h; sourceTree = "<group>"; };
-		05075B8E1C47A0C30076EF31 /* MyMemberTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMemberTableViewController.m; sourceTree = "<group>"; };
-		05075B8F1C47A0C30076EF31 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
-		05075B901C47A0C30076EF31 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
-		05075B911C47A0C30076EF31 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
-		05075B921C47A0C30076EF31 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
-		05075B931C47A0C30076EF31 /* CouponsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsTableViewController.h; sourceTree = "<group>"; };
-		05075B941C47A0C30076EF31 /* CouponsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsTableViewController.m; sourceTree = "<group>"; };
-		05075B951C47A0C30076EF31 /* BillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillTableViewController.h; sourceTree = "<group>"; };
-		05075B961C47A0C30076EF31 /* BillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillTableViewController.m; sourceTree = "<group>"; };
-		05075B971C47A0C30076EF31 /* ChangeMyDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeMyDataViewController.h; sourceTree = "<group>"; };
-		05075B981C47A0C30076EF31 /* ChangeMyDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeMyDataViewController.m; sourceTree = "<group>"; };
-		05075B991C47A0C30076EF31 /* OpinionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionTableViewController.h; sourceTree = "<group>"; };
-		05075B9A1C47A0C30076EF31 /* OpinionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionTableViewController.m; sourceTree = "<group>"; };
-		05075B9B1C47A0C30076EF31 /* BillHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillHistoryTableViewController.h; sourceTree = "<group>"; };
-		05075B9C1C47A0C30076EF31 /* BillHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillHistoryTableViewController.m; sourceTree = "<group>"; };
-		05075B9D1C47A0C30076EF31 /* BillRecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillRecordTableViewController.h; sourceTree = "<group>"; };
-		05075B9E1C47A0C30076EF31 /* BillRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillRecordTableViewController.m; sourceTree = "<group>"; };
-		05075BB41C47A10B0076EF31 /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
-		05075BB51C47A10B0076EF31 /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
-		05075BB61C47A10B0076EF31 /* PersonDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDataCell.h; sourceTree = "<group>"; };
-		05075BB71C47A10B0076EF31 /* PersonDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDataCell.m; sourceTree = "<group>"; };
-		05075BB81C47A10B0076EF31 /* MyMemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMemberTableViewCell.h; sourceTree = "<group>"; };
-		05075BB91C47A10B0076EF31 /* MyMemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMemberTableViewCell.m; sourceTree = "<group>"; };
-		05075BBA1C47A10B0076EF31 /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
-		05075BBB1C47A10B0076EF31 /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
-		05075BBC1C47A10B0076EF31 /* CouponsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsCell.h; sourceTree = "<group>"; };
-		05075BBD1C47A10B0076EF31 /* CouponsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsCell.m; sourceTree = "<group>"; };
-		05075BBE1C47A10B0076EF31 /* BillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCell.h; sourceTree = "<group>"; };
-		05075BBF1C47A10B0076EF31 /* BillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillCell.m; sourceTree = "<group>"; };
-		05075BC01C47A10B0076EF31 /* OpinionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionCell.h; sourceTree = "<group>"; };
-		05075BC11C47A10B0076EF31 /* OpinionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionCell.m; sourceTree = "<group>"; };
-		05075BC21C47A10B0076EF31 /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
-		05075BC31C47A10B0076EF31 /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
-		05075BC41C47A10B0076EF31 /* OpinionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionTextView.h; sourceTree = "<group>"; };
-		05075BC51C47A10B0076EF31 /* OpinionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionTextView.m; sourceTree = "<group>"; };
-		05075BC61C47A10B0076EF31 /* BillHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillHistoryCell.h; sourceTree = "<group>"; };
-		05075BC71C47A10B0076EF31 /* BillHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillHistoryCell.m; sourceTree = "<group>"; };
-		05075BC81C47A10B0076EF31 /* BillRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillRecordCell.h; sourceTree = "<group>"; };
-		05075BC91C47A10B0076EF31 /* BillRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillRecordCell.m; sourceTree = "<group>"; };
-		05075BE11C47A3E20076EF31 /* UIBarButtonItem+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extention.h"; sourceTree = "<group>"; };
-		05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extention.m"; sourceTree = "<group>"; };
 		05075BE51C47BB0C0076EF31 /* 58 - Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "58 - Settings.png"; sourceTree = "<group>"; };
 		05075BE61C47BB0C0076EF31 /* 80 - Spotlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "80 - Spotlight.png"; sourceTree = "<group>"; };
 		05075BE71C47BB0C0076EF31 /* 87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 87.png; sourceTree = "<group>"; };
@@ -544,6 +484,62 @@
 		05E8BEF11C5CFB3C00DA27C0 /* ic_texu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_texu.png; sourceTree = "<group>"; };
 		05E8BEF21C5CFB3C00DA27C0 /* ic_texu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_texu@2x.png"; sourceTree = "<group>"; };
 		05E8BEF31C5CFB3C00DA27C0 /* ic_texu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_texu@3x.png"; sourceTree = "<group>"; };
+		05E8BF0C1C5DC0FC00DA27C0 /* BillHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillHistoryTableViewController.h; sourceTree = "<group>"; };
+		05E8BF0D1C5DC0FC00DA27C0 /* BillHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillHistoryTableViewController.m; sourceTree = "<group>"; };
+		05E8BF0E1C5DC0FC00DA27C0 /* BillRecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillRecordTableViewController.h; sourceTree = "<group>"; };
+		05E8BF0F1C5DC0FC00DA27C0 /* BillRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillRecordTableViewController.m; sourceTree = "<group>"; };
+		05E8BF101C5DC0FC00DA27C0 /* BillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillTableViewController.h; sourceTree = "<group>"; };
+		05E8BF111C5DC0FC00DA27C0 /* BillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillTableViewController.m; sourceTree = "<group>"; };
+		05E8BF151C5DC11E00DA27C0 /* ChangeMyDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeMyDataViewController.h; sourceTree = "<group>"; };
+		05E8BF161C5DC11E00DA27C0 /* ChangeMyDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeMyDataViewController.m; sourceTree = "<group>"; };
+		05E8BF181C5DC13600DA27C0 /* CouponsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsTableViewController.h; sourceTree = "<group>"; };
+		05E8BF191C5DC13600DA27C0 /* CouponsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsTableViewController.m; sourceTree = "<group>"; };
+		05E8BF1B1C5DC1AA00DA27C0 /* HistoryBillModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryBillModel.h; sourceTree = "<group>"; };
+		05E8BF1C1C5DC1AA00DA27C0 /* HistoryBillModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBillModel.m; sourceTree = "<group>"; };
+		05E8BF1D1C5DC1AA00DA27C0 /* MakeBillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeBillTableViewController.h; sourceTree = "<group>"; };
+		05E8BF1E1C5DC1AA00DA27C0 /* MakeBillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeBillTableViewController.m; sourceTree = "<group>"; };
+		05E8BF1F1C5DC1AA00DA27C0 /* MyMemberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMemberTableViewController.h; sourceTree = "<group>"; };
+		05E8BF201C5DC1AA00DA27C0 /* MyMemberTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMemberTableViewController.m; sourceTree = "<group>"; };
+		05E8BF211C5DC1AA00DA27C0 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
+		05E8BF221C5DC1AA00DA27C0 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
+		05E8BF231C5DC1AA00DA27C0 /* OpinionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionTableViewController.h; sourceTree = "<group>"; };
+		05E8BF241C5DC1AA00DA27C0 /* OpinionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionTableViewController.m; sourceTree = "<group>"; };
+		05E8BF251C5DC1AA00DA27C0 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
+		05E8BF261C5DC1AA00DA27C0 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
+		05E8BF271C5DC1AA00DA27C0 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		05E8BF281C5DC1AA00DA27C0 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		05E8BF291C5DC1AA00DA27C0 /* UIBarButtonItem+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extention.h"; sourceTree = "<group>"; };
+		05E8BF2A1C5DC1AA00DA27C0 /* UIBarButtonItem+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extention.m"; sourceTree = "<group>"; };
+		05E8BF331C5DC2E600DA27C0 /* BillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCell.h; sourceTree = "<group>"; };
+		05E8BF341C5DC2E600DA27C0 /* BillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillCell.m; sourceTree = "<group>"; };
+		05E8BF351C5DC2E600DA27C0 /* BillHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillHistoryCell.h; sourceTree = "<group>"; };
+		05E8BF361C5DC2E600DA27C0 /* BillHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillHistoryCell.m; sourceTree = "<group>"; };
+		05E8BF371C5DC2E600DA27C0 /* BillRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillRecordCell.h; sourceTree = "<group>"; };
+		05E8BF381C5DC2E600DA27C0 /* BillRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BillRecordCell.m; sourceTree = "<group>"; };
+		05E8BF391C5DC2E600DA27C0 /* ButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonCell.h; sourceTree = "<group>"; };
+		05E8BF3A1C5DC2E600DA27C0 /* ButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonCell.m; sourceTree = "<group>"; };
+		05E8BF3B1C5DC2E600DA27C0 /* CharacterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterCell.h; sourceTree = "<group>"; };
+		05E8BF3C1C5DC2E600DA27C0 /* CharacterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterCell.m; sourceTree = "<group>"; };
+		05E8BF3D1C5DC2E600DA27C0 /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
+		05E8BF3E1C5DC2E600DA27C0 /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
+		05E8BF3F1C5DC2E600DA27C0 /* CouponsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsCell.h; sourceTree = "<group>"; };
+		05E8BF401C5DC2E600DA27C0 /* CouponsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsCell.m; sourceTree = "<group>"; };
+		05E8BF411C5DC2E600DA27C0 /* MakeBillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeBillCell.h; sourceTree = "<group>"; };
+		05E8BF421C5DC2E600DA27C0 /* MakeBillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeBillCell.m; sourceTree = "<group>"; };
+		05E8BF431C5DC2E600DA27C0 /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
+		05E8BF441C5DC2E600DA27C0 /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
+		05E8BF451C5DC2E600DA27C0 /* MyMemberTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMemberTableViewCell.h; sourceTree = "<group>"; };
+		05E8BF461C5DC2E600DA27C0 /* MyMemberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMemberTableViewCell.m; sourceTree = "<group>"; };
+		05E8BF471C5DC2E600DA27C0 /* OpinionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionCell.h; sourceTree = "<group>"; };
+		05E8BF481C5DC2E600DA27C0 /* OpinionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionCell.m; sourceTree = "<group>"; };
+		05E8BF491C5DC2E600DA27C0 /* OpinionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionTextView.h; sourceTree = "<group>"; };
+		05E8BF4A1C5DC2E600DA27C0 /* OpinionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionTextView.m; sourceTree = "<group>"; };
+		05E8BF4B1C5DC2E600DA27C0 /* PersonDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonDataCell.h; sourceTree = "<group>"; };
+		05E8BF4C1C5DC2E600DA27C0 /* PersonDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonDataCell.m; sourceTree = "<group>"; };
+		05E8BF4D1C5DC2E600DA27C0 /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
+		05E8BF4E1C5DC2E600DA27C0 /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
+		05E8BF5D1C5DC30F00DA27C0 /* NSArray+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extension.h"; sourceTree = "<group>"; };
+		05E8BF5E1C5DC30F00DA27C0 /* NSArray+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extension.m"; sourceTree = "<group>"; };
 		6F290DF066C62B91F644DB6A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C2D738A451B45388B6EF4027 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F4D7AF9BA97CDB3EE4EB78DA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -641,28 +637,36 @@
 		05075BB31C47A0F70076EF31 /* MyView */ = {
 			isa = PBXGroup;
 			children = (
-				05075BB41C47A10B0076EF31 /* MyCell.h */,
-				05075BB51C47A10B0076EF31 /* MyCell.m */,
-				05075BB61C47A10B0076EF31 /* PersonDataCell.h */,
-				05075BB71C47A10B0076EF31 /* PersonDataCell.m */,
-				05075BB81C47A10B0076EF31 /* MyMemberTableViewCell.h */,
-				05075BB91C47A10B0076EF31 /* MyMemberTableViewCell.m */,
-				05075BBA1C47A10B0076EF31 /* SettingCell.h */,
-				05075BBB1C47A10B0076EF31 /* SettingCell.m */,
-				05075BBC1C47A10B0076EF31 /* CouponsCell.h */,
-				05075BBD1C47A10B0076EF31 /* CouponsCell.m */,
-				05075BBE1C47A10B0076EF31 /* BillCell.h */,
-				05075BBF1C47A10B0076EF31 /* BillCell.m */,
-				05075BC01C47A10B0076EF31 /* OpinionCell.h */,
-				05075BC11C47A10B0076EF31 /* OpinionCell.m */,
-				05075BC21C47A10B0076EF31 /* ContactCell.h */,
-				05075BC31C47A10B0076EF31 /* ContactCell.m */,
-				05075BC41C47A10B0076EF31 /* OpinionTextView.h */,
-				05075BC51C47A10B0076EF31 /* OpinionTextView.m */,
-				05075BC61C47A10B0076EF31 /* BillHistoryCell.h */,
-				05075BC71C47A10B0076EF31 /* BillHistoryCell.m */,
-				05075BC81C47A10B0076EF31 /* BillRecordCell.h */,
-				05075BC91C47A10B0076EF31 /* BillRecordCell.m */,
+				05E8BF5D1C5DC30F00DA27C0 /* NSArray+Extension.h */,
+				05E8BF5E1C5DC30F00DA27C0 /* NSArray+Extension.m */,
+				05E8BF331C5DC2E600DA27C0 /* BillCell.h */,
+				05E8BF341C5DC2E600DA27C0 /* BillCell.m */,
+				05E8BF351C5DC2E600DA27C0 /* BillHistoryCell.h */,
+				05E8BF361C5DC2E600DA27C0 /* BillHistoryCell.m */,
+				05E8BF371C5DC2E600DA27C0 /* BillRecordCell.h */,
+				05E8BF381C5DC2E600DA27C0 /* BillRecordCell.m */,
+				05E8BF391C5DC2E600DA27C0 /* ButtonCell.h */,
+				05E8BF3A1C5DC2E600DA27C0 /* ButtonCell.m */,
+				05E8BF3B1C5DC2E600DA27C0 /* CharacterCell.h */,
+				05E8BF3C1C5DC2E600DA27C0 /* CharacterCell.m */,
+				05E8BF3D1C5DC2E600DA27C0 /* ContactCell.h */,
+				05E8BF3E1C5DC2E600DA27C0 /* ContactCell.m */,
+				05E8BF3F1C5DC2E600DA27C0 /* CouponsCell.h */,
+				05E8BF401C5DC2E600DA27C0 /* CouponsCell.m */,
+				05E8BF411C5DC2E600DA27C0 /* MakeBillCell.h */,
+				05E8BF421C5DC2E600DA27C0 /* MakeBillCell.m */,
+				05E8BF431C5DC2E600DA27C0 /* MyCell.h */,
+				05E8BF441C5DC2E600DA27C0 /* MyCell.m */,
+				05E8BF451C5DC2E600DA27C0 /* MyMemberTableViewCell.h */,
+				05E8BF461C5DC2E600DA27C0 /* MyMemberTableViewCell.m */,
+				05E8BF471C5DC2E600DA27C0 /* OpinionCell.h */,
+				05E8BF481C5DC2E600DA27C0 /* OpinionCell.m */,
+				05E8BF491C5DC2E600DA27C0 /* OpinionTextView.h */,
+				05E8BF4A1C5DC2E600DA27C0 /* OpinionTextView.m */,
+				05E8BF4B1C5DC2E600DA27C0 /* PersonDataCell.h */,
+				05E8BF4C1C5DC2E600DA27C0 /* PersonDataCell.m */,
+				05E8BF4D1C5DC2E600DA27C0 /* SettingCell.h */,
+				05E8BF4E1C5DC2E600DA27C0 /* SettingCell.m */,
 			);
 			name = MyView;
 			sourceTree = "<group>";
@@ -823,28 +827,32 @@
 		05BA34E31C41FF1D00DC07CD /* 我 */ = {
 			isa = PBXGroup;
 			children = (
-				05075B8B1C47A0C30076EF31 /* MyTableViewController.h */,
-				05075B8C1C47A0C30076EF31 /* MyTableViewController.m */,
-				05075B8D1C47A0C30076EF31 /* MyMemberTableViewController.h */,
-				05075B8E1C47A0C30076EF31 /* MyMemberTableViewController.m */,
-				05075B8F1C47A0C30076EF31 /* SettingTableViewController.h */,
-				05075B901C47A0C30076EF31 /* SettingTableViewController.m */,
-				05075B911C47A0C30076EF31 /* ShareViewController.h */,
-				05075B921C47A0C30076EF31 /* ShareViewController.m */,
-				05075B931C47A0C30076EF31 /* CouponsTableViewController.h */,
-				05075B941C47A0C30076EF31 /* CouponsTableViewController.m */,
-				05075B951C47A0C30076EF31 /* BillTableViewController.h */,
-				05075B961C47A0C30076EF31 /* BillTableViewController.m */,
-				05075B971C47A0C30076EF31 /* ChangeMyDataViewController.h */,
-				05075B981C47A0C30076EF31 /* ChangeMyDataViewController.m */,
-				05075B991C47A0C30076EF31 /* OpinionTableViewController.h */,
-				05075B9A1C47A0C30076EF31 /* OpinionTableViewController.m */,
-				05075B9B1C47A0C30076EF31 /* BillHistoryTableViewController.h */,
-				05075B9C1C47A0C30076EF31 /* BillHistoryTableViewController.m */,
-				05075B9D1C47A0C30076EF31 /* BillRecordTableViewController.h */,
-				05075B9E1C47A0C30076EF31 /* BillRecordTableViewController.m */,
-				05075BE11C47A3E20076EF31 /* UIBarButtonItem+Extention.h */,
-				05075BE21C47A3E20076EF31 /* UIBarButtonItem+Extention.m */,
+				05E8BF0C1C5DC0FC00DA27C0 /* BillHistoryTableViewController.h */,
+				05E8BF0D1C5DC0FC00DA27C0 /* BillHistoryTableViewController.m */,
+				05E8BF0E1C5DC0FC00DA27C0 /* BillRecordTableViewController.h */,
+				05E8BF0F1C5DC0FC00DA27C0 /* BillRecordTableViewController.m */,
+				05E8BF101C5DC0FC00DA27C0 /* BillTableViewController.h */,
+				05E8BF111C5DC0FC00DA27C0 /* BillTableViewController.m */,
+				05E8BF151C5DC11E00DA27C0 /* ChangeMyDataViewController.h */,
+				05E8BF161C5DC11E00DA27C0 /* ChangeMyDataViewController.m */,
+				05E8BF181C5DC13600DA27C0 /* CouponsTableViewController.h */,
+				05E8BF191C5DC13600DA27C0 /* CouponsTableViewController.m */,
+				05E8BF1B1C5DC1AA00DA27C0 /* HistoryBillModel.h */,
+				05E8BF1C1C5DC1AA00DA27C0 /* HistoryBillModel.m */,
+				05E8BF1D1C5DC1AA00DA27C0 /* MakeBillTableViewController.h */,
+				05E8BF1E1C5DC1AA00DA27C0 /* MakeBillTableViewController.m */,
+				05E8BF1F1C5DC1AA00DA27C0 /* MyMemberTableViewController.h */,
+				05E8BF201C5DC1AA00DA27C0 /* MyMemberTableViewController.m */,
+				05E8BF211C5DC1AA00DA27C0 /* MyTableViewController.h */,
+				05E8BF221C5DC1AA00DA27C0 /* MyTableViewController.m */,
+				05E8BF231C5DC1AA00DA27C0 /* OpinionTableViewController.h */,
+				05E8BF241C5DC1AA00DA27C0 /* OpinionTableViewController.m */,
+				05E8BF251C5DC1AA00DA27C0 /* SettingTableViewController.h */,
+				05E8BF261C5DC1AA00DA27C0 /* SettingTableViewController.m */,
+				05E8BF271C5DC1AA00DA27C0 /* ShareViewController.h */,
+				05E8BF281C5DC1AA00DA27C0 /* ShareViewController.m */,
+				05E8BF291C5DC1AA00DA27C0 /* UIBarButtonItem+Extention.h */,
+				05E8BF2A1C5DC1AA00DA27C0 /* UIBarButtonItem+Extention.m */,
 			);
 			name = "我";
 			sourceTree = "<group>";
@@ -1354,73 +1362,79 @@
 				053AB0F41C47E8C500982B01 /* AFNManager.m in Sources */,
 				05075B481C4528E50076EF31 /* MemberEntity.m in Sources */,
 				05BA35171C4382C400DC07CD /* BaseTableViewCell.m in Sources */,
-				05075BD41C47A10B0076EF31 /* BillCell.m in Sources */,
-				05075BAB1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */,
+				05E8BF131C5DC0FC00DA27C0 /* BillRecordTableViewController.m in Sources */,
 				05075B551C45FDBC0076EF31 /* TXOrderViewController.m in Sources */,
-				05075BA31C47A0C30076EF31 /* SettingTableViewController.m in Sources */,
 				05E8BE201C50C91B00DA27C0 /* BannerWebViewController.m in Sources */,
+				05E8BF541C5DC2E700DA27C0 /* ContactCell.m in Sources */,
 				053AB0FD1C4A1EDE00982B01 /* LoginStorage.m in Sources */,
+				05E8BF5C1C5DC2E700DA27C0 /* SettingCell.m in Sources */,
+				05E8BF321C5DC1AA00DA27C0 /* UIBarButtonItem+Extention.m in Sources */,
+				05E8BF2B1C5DC1AA00DA27C0 /* HistoryBillModel.m in Sources */,
 				05E8BEC91C566C6100DA27C0 /* LinkPageViewController.m in Sources */,
 				05BA35371C43ACA100DC07CD /* AddFamilyViewController.m in Sources */,
 				05BA34FF1C43738400DC07CD /* HospitalTableViewCell.m in Sources */,
-				05075BAD1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */,
+				05E8BF571C5DC2E700DA27C0 /* MyCell.m in Sources */,
 				05BA34CA1C41F70A00DC07CD /* PeiZhenViewController.m in Sources */,
+				05E8BF511C5DC2E700DA27C0 /* BillRecordCell.m in Sources */,
 				05CCAE3B1C507864001D9B0D /* HospitalTimeTableViewCell.m in Sources */,
-				05075BA91C47A0C30076EF31 /* BillTableViewController.m in Sources */,
 				05BA35521C43DD1C00DC07CD /* BaseTwoLevelView.m in Sources */,
 				05BA35311C43A36A00DC07CD /* SelectFamilyViewController.m in Sources */,
-				05075BCC1C47A10B0076EF31 /* PersonDataCell.m in Sources */,
 				05E8BE321C52065000DA27C0 /* CommonOrderEntity.m in Sources */,
+				05E8BF591C5DC2E700DA27C0 /* OpinionCell.m in Sources */,
 				05BA35341C43A8B500DC07CD /* FamileTableViewCell.m in Sources */,
+				05E8BF5A1C5DC2E700DA27C0 /* OpinionTextView.m in Sources */,
+				05E8BF301C5DC1AA00DA27C0 /* SettingTableViewController.m in Sources */,
+				05E8BF521C5DC2E700DA27C0 /* ButtonCell.m in Sources */,
+				05E8BF121C5DC0FC00DA27C0 /* BillHistoryTableViewController.m in Sources */,
 				05BA35541C43DD1C00DC07CD /* InsetsLabel.m in Sources */,
 				05BA35531C43DD1C00DC07CD /* HeaderTableView.m in Sources */,
+				05E8BF561C5DC2E700DA27C0 /* MakeBillCell.m in Sources */,
 				05BA353A1C43B31900DC07CD /* AddFamilyTableViewCell.m in Sources */,
 				05BA349D1C41F1FE00DC07CD /* ViewController.m in Sources */,
+				05E8BF551C5DC2E700DA27C0 /* CouponsCell.m in Sources */,
 				05CCADBD1C4E6967001D9B0D /* HospitalGroupEntity.m in Sources */,
-				05075BD61C47A10B0076EF31 /* OpinionCell.m in Sources */,
-				05075BD21C47A10B0076EF31 /* CouponsCell.m in Sources */,
 				05075B4C1C45E53C0076EF31 /* SelectDoctorViewController.m in Sources */,
 				05075B3C1C4497D70076EF31 /* RightTableViewCell.m in Sources */,
+				05E8BF1A1C5DC13600DA27C0 /* CouponsTableViewController.m in Sources */,
 				05CCADC11C4E697E001D9B0D /* AppointEntity.m in Sources */,
+				05E8BF5F1C5DC30F00DA27C0 /* NSArray+Extension.m in Sources */,
 				053AB0F71C48AA5B00982B01 /* KDCycleBannerView.m in Sources */,
+				05E8BF5B1C5DC2E700DA27C0 /* PersonDataCell.m in Sources */,
 				05BA34E01C41FECC00DC07CD /* UIColor+Util.m in Sources */,
-				05075BA51C47A0C30076EF31 /* ShareViewController.m in Sources */,
-				05075BE31C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */,
+				05E8BF2D1C5DC1AA00DA27C0 /* MyMemberTableViewController.m in Sources */,
 				05075B3F1C44A3560076EF31 /* PTSureOrderViewController.m in Sources */,
 				05BA350E1C437E8100DC07CD /* PuTongPZViewController.m in Sources */,
 				05CCADC51C4E766A001D9B0D /* DayButton.m in Sources */,
-				05075BA11C47A0C30076EF31 /* MyMemberTableViewController.m in Sources */,
-				05075BDE1C47A10B0076EF31 /* BillRecordCell.m in Sources */,
 				05BA35551C43DD1C00DC07CD /* TwoLevelViewController.m in Sources */,
 				05075B5F1C463CCB0076EF31 /* SignInViewController.m in Sources */,
 				05E8BE9D1C54FD8E00DA27C0 /* OrderCenterTableViewCell.m in Sources */,
-				05075BA71C47A0C30076EF31 /* CouponsTableViewController.m in Sources */,
+				05E8BF141C5DC0FC00DA27C0 /* BillTableViewController.m in Sources */,
 				05075B661C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
+				05E8BF4F1C5DC2E700DA27C0 /* BillCell.m in Sources */,
+				05E8BF581C5DC2E700DA27C0 /* MyMemberTableViewCell.m in Sources */,
 				05075B581C461EDD0076EF31 /* TXOrderTableViewCell.m in Sources */,
+				05E8BF2E1C5DC1AA00DA27C0 /* MyTableViewController.m in Sources */,
+				05E8BF2C1C5DC1AA00DA27C0 /* MakeBillTableViewController.m in Sources */,
+				05E8BF171C5DC11E00DA27C0 /* ChangeMyDataViewController.m in Sources */,
 				05E8BE351C52138D00DA27C0 /* FromHospitalSelectDoctorViewController.m in Sources */,
 				053AB1011C4A1EFD00982B01 /* UserDefaultsUtils.m in Sources */,
+				05E8BF2F1C5DC1AA00DA27C0 /* OpinionTableViewController.m in Sources */,
 				05075B521C45FCA30076EF31 /* SelectTimeViewController.m in Sources */,
 				05BA349A1C41F1FE00DC07CD /* AppDelegate.m in Sources */,
 				05075B4F1C45EAB30076EF31 /* SelectDoctorTableViewCell.m in Sources */,
 				05075B621C4688320076EF31 /* DoctorDetailTableViewCell.m in Sources */,
 				05BA34CD1C41F71400DC07CD /* YuYueViewController.m in Sources */,
-				05075BDC1C47A10B0076EF31 /* BillHistoryCell.m in Sources */,
 				05BA35491C43D15600DC07CD /* UITextField+ResignKeyboard.m in Sources */,
-				05075BD81C47A10B0076EF31 /* ContactCell.m in Sources */,
 				05075B5C1C4622150076EF31 /* HospitalViewController.m in Sources */,
+				05E8BF531C5DC2E700DA27C0 /* CharacterCell.m in Sources */,
 				053AB1051C4A44FC00982B01 /* CommonFunc.m in Sources */,
-				05075BD01C47A10B0076EF31 /* SettingCell.m in Sources */,
 				05BA34971C41F1FE00DC07CD /* main.m in Sources */,
+				05E8BF501C5DC2E700DA27C0 /* BillHistoryCell.m in Sources */,
 				05CCADB91C4E68C3001D9B0D /* DayGroupEntity.m in Sources */,
 				053AB1091C4D154600982B01 /* DoctorEntity.m in Sources */,
-				05075BDA1C47A10B0076EF31 /* OpinionTextView.m in Sources */,
-				05075BAF1C47A0C30076EF31 /* BillHistoryTableViewController.m in Sources */,
 				053AB10C1C4D1A3300982B01 /* NSString+Size.m in Sources */,
+				05E8BF311C5DC1AA00DA27C0 /* ShareViewController.m in Sources */,
 				05E8BEA01C55BD8700DA27C0 /* OrderListEntity.m in Sources */,
-				05075BB11C47A0C30076EF31 /* BillRecordTableViewController.m in Sources */,
-				05075B9F1C47A0C30076EF31 /* MyTableViewController.m in Sources */,
-				05075BCA1C47A10B0076EF31 /* MyCell.m in Sources */,
-				05075BCE1C47A10B0076EF31 /* MyMemberTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1429,43 +1443,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				053AB0F81C48AA5B00982B01 /* KDCycleBannerView.m in Sources */,
-				05075BDD1C47A10B0076EF31 /* BillHistoryCell.m in Sources */,
-				05075BD71C47A10B0076EF31 /* OpinionCell.m in Sources */,
 				05CCADBE1C4E6967001D9B0D /* HospitalGroupEntity.m in Sources */,
 				053AB0FE1C4A1EDE00982B01 /* LoginStorage.m in Sources */,
-				05075BA81C47A0C30076EF31 /* CouponsTableViewController.m in Sources */,
 				05CCADC21C4E697E001D9B0D /* AppointEntity.m in Sources */,
-				05075BA81C47A0C30076EF31 /* CouponsTableViewController.m in Sources */,
 				05075B671C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05BA34B01C41F1FE00DC07CD /* _____Tests.m in Sources */,
 				053AB1061C4A44FC00982B01 /* CommonFunc.m in Sources */,
-				05075BCF1C47A10B0076EF31 /* MyMemberTableViewCell.m in Sources */,
 				053AB10D1C4D1A3300982B01 /* NSString+Size.m in Sources */,
-				05075BCD1C47A10B0076EF31 /* PersonDataCell.m in Sources */,
-				05075BAA1C47A0C30076EF31 /* BillTableViewController.m in Sources */,
 				053AB10A1C4D154600982B01 /* DoctorEntity.m in Sources */,
 				053AB1021C4A1EFD00982B01 /* UserDefaultsUtils.m in Sources */,
-				05075BAE1C47A0C30076EF31 /* OpinionTableViewController.m in Sources */,
-				05075BD51C47A10B0076EF31 /* BillCell.m in Sources */,
-				05075BD31C47A10B0076EF31 /* CouponsCell.m in Sources */,
-				05075BAC1C47A0C30076EF31 /* ChangeMyDataViewController.m in Sources */,
-				05075BD11C47A10B0076EF31 /* SettingCell.m in Sources */,
 				05CCADBA1C4E68C3001D9B0D /* DayGroupEntity.m in Sources */,
-				05075BDF1C47A10B0076EF31 /* BillRecordCell.m in Sources */,
-				05075BDB1C47A10B0076EF31 /* OpinionTextView.m in Sources */,
 				05E8BECA1C566C6100DA27C0 /* LinkPageViewController.m in Sources */,
 				05CCAE3C1C507864001D9B0D /* HospitalTimeTableViewCell.m in Sources */,
-				05075BD91C47A10B0076EF31 /* ContactCell.m in Sources */,
 				05075B631C4688320076EF31 /* DoctorDetailTableViewCell.m in Sources */,
 				05CCADC61C4E766A001D9B0D /* DayButton.m in Sources */,
-				05075BA01C47A0C30076EF31 /* MyTableViewController.m in Sources */,
-				05075BA61C47A0C30076EF31 /* ShareViewController.m in Sources */,
-				05075BA41C47A0C30076EF31 /* SettingTableViewController.m in Sources */,
-				05075BB01C47A0C30076EF31 /* BillHistoryTableViewController.m in Sources */,
-				05075BA21C47A0C30076EF31 /* MyMemberTableViewController.m in Sources */,
-				05075BB21C47A0C30076EF31 /* BillRecordTableViewController.m in Sources */,
-				05075BCB1C47A10B0076EF31 /* MyCell.m in Sources */,
-				05075BE41C47A3E20076EF31 /* UIBarButtonItem+Extention.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

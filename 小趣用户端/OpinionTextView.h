@@ -12,6 +12,6 @@
 
 @property (nonatomic, copy) NSString *placeholder;
 
-@property (nonatomic, strong)UILabel *wordsLabel;
+@property (nonatomic, strong)UITextField *wordsLabel;
 
 @end

@@ -43,6 +43,36 @@
     self.view.backgroundColor = COLOR(245, 246, 247, 1);
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self makeNSURLRequest];
+}
+
+- (void)makeNSURLRequest {
+    
+    AFNManager *manager = [AFNManager shareManager];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/queryPersonalInfo",Development];
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults]stringForKey:@"nickname"];
+    
+    if (userName == nil) {
+        userName = @"123";
+    }
+    NSDictionary *dic = @{@"userId":userName};
+    
+    [manager RequestJsonWithUrl:url method:@"POST" parameter:dic result:^(id responseDic) {
+        
+        NSLog(@"~~~~~success %@",responseDic);
+        
+        self.personDataCell.nameLabel.text = [responseDic objectForKey:@"nickName"];
+
+        self.personDataCell.creditLabel.text = [[responseDic objectForKey:@"integralIn"]stringValue];
+
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"~~~~~~~~~fail %@",error);
+    }];
 }
 
 #pragma mark 页面设置相关
@@ -103,10 +133,6 @@
         }
         
         cell.iconImageView.image = [UIImage imageNamed:@"coupons"];
-        NSString *nickname = [[NSUserDefaults standardUserDefaults]stringForKey:@"nickname"];
-        cell.nameLabel.text = nickname;
-        
-        cell.creditLabel.text = @"积分：247";
         
         self.personDataCell = cell;
         
@@ -152,6 +178,7 @@
         if (row == 2) {
             BillTableViewController *billTableViewController = [[BillTableViewController alloc]init];
             [self.navigationController pushViewController:billTableViewController animated:YES];
+            self.tabBarController.tabBar.hidden = YES;
         }
         
         if (row == 3) {

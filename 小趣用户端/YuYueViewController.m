@@ -47,18 +47,17 @@
         [self.tb_orderList.mj_header endRefreshing];
         [self.arr_orderList removeAllObjects];
         if ([Status isEqualToString:SUCCESS]) {
-            
-            for (NSDictionary *dic in [responseDic objectForKey:@"data"]) {
-                if ([[responseDic objectForKey:@"data"] count] > 0) {
+            NSArray *arr = [responseDic objectForKey:@"data"];
+            if (arr.count > 0) {
+                
+                for (NSDictionary *dic in [responseDic objectForKey:@"data"]) {
                     
                     [self.arr_orderList addObject:[OrderListEntity parseOrderListEntityWithJson:dic]];
                     [self.tb_orderList reloadData];
                     [self.tb_orderList setBackgroundView:nil];
-                    
-                }else{
-                    // 没有订单
-                    [self.tb_orderList setBackgroundView:self.tab_backGroundView];
                 }
+            }else{
+                [self.tb_orderList setBackgroundView:self.tab_backGroundView];
             }
         }else{
             [SVProgressHUD showErrorWithStatus:Message];

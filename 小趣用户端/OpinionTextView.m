@@ -26,19 +26,21 @@
         self.placeholderLabel = placeholderLabel;
 
         
-        UILabel *wordsLabel = [[UILabel alloc]init];
+        UITextField *wordsLabel = [[UITextField alloc]init];
         wordsLabel.textColor = COLOR(208, 208, 208, 1);
         wordsLabel.adjustsFontSizeToFitWidth = YES;
-        wordsLabel.text =@"还可输入300字";
+        wordsLabel.enabled = NO;
+        wordsLabel.font = [UIFont systemFontOfSize:8];
+        wordsLabel.placeholder =@"还可输入300字";
         [self addSubview:wordsLabel];
+                
         self.wordsLabel = wordsLabel;
         
         self.font = [UIFont systemFontOfSize:16];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewDidChange:) name:UITextViewTextDidChangeNotification object:nil];
-        
-    }
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChange:) name:UITextViewTextDidChangeNotification object:nil];
     
+    }
     return self;
 }
 
@@ -48,8 +50,9 @@
     self.placeholderLabel.font = font;
 }
 
--(void)textViewDidChange:(NSNotification *)notification{
+-(void)textViewChange:(NSNotification *)notification{
     self.placeholderLabel.hidden =  self.text.length > 0;
+    
 }
 
 -(void)setPlaceholder:(NSString *)placeholder{
@@ -75,12 +78,6 @@
     
 }
 
-#warning 字数限制还没有做
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-
-    return NO;
-    //TODO:jlkj
-}
 
 
 @end

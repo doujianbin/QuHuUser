@@ -51,7 +51,6 @@
     [shareButton setTitle:@"分享到社交圈" forState:UIControlStateNormal];
     UIImage *image = [UIImage imageNamed:@"redbackground"];
     [shareButton setBackgroundImage:[image stretchableImageWithLeftCapWidth:image.size.width/2 topCapHeight:image.size.height/2] forState:UIControlStateNormal];
-//    [shareButton setBackgroundImage:[image stretchableImageWithLeftCapWidth:image.size.width/2 topCapHeight:image.size.height/2] forState:UIControlStateHighlighted];
     [shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [backgroundview addSubview:shareButton];
     

@@ -34,13 +34,13 @@
     
     self.view.backgroundColor = COLOR(245, 246, 247, 1);
     
-    UIBarButtonItem *item = [UIBarButtonItem barButtonitemWithNormalImageName:@"Rectangle 91 + Line + Line Copy" highlightedImageName:@"Rectangle 91 + Line + Line Copy" target:self action:@selector(backItemClick)];
+    UIBarButtonItem *item = [UIBarButtonItem barButtonitemWithNormalImageName:@"backArrow" highlightedImageName:@"backArrow" target:self action:@selector(backItemClick)];
     self.navigationItem.leftBarButtonItem = item;
     
     [self setupInterface];
     
-//    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidKeyBoard)];
-//    [self.view addGestureRecognizer:tapGestureRecognizer];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidKeyBoard)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
     [self makeURLRequest];
 }
@@ -69,7 +69,7 @@
 
 - (void)hidKeyBoard {
     
-//    [self.view endEditing:YES];
+    [self.view endEditing:YES];
 }
 
 - (void)backItemClick {
@@ -144,10 +144,19 @@
     }];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return self.dataArray.count;
+    
+    if (self.dataArray.count == 0) {
+        return 0;
+    }else {
+        
+        return self.dataArray.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

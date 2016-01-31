@@ -12,8 +12,13 @@
 
 #import "OpinionCell.h"
 #import "ContactCell.h"
+#import "ButtonCell.h"
 
 @interface OpinionTableViewController ()
+
+@property (nonatomic, weak)ContactCell *contactCell;
+
+@property (nonatomic, weak)OpinionCell *opinionCell;
 
 @end
 
@@ -48,7 +53,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -61,34 +66,110 @@
 
     NSString *cellId1 = @"cell1";
     NSString *cellId2 = @"cell2";
+    NSString *cellId3 = @"cell3";
     
     if (indexPath.section == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId1];
+        OpinionCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId1];
         if (cell == nil) {
             cell = [[OpinionCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId1];
         }
+    
+        self.opinionCell = cell;
+        
         return cell;
-    }else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId2];
+    }else if (indexPath.section == 1) {
+        ContactCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId2];
         if (cell == nil) {
             cell = [[ContactCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId2];
         }
+        
+        self.contactCell = cell;
+        
+        return cell;
+    }else {
+    
+        ButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId3];
+        if (cell == nil) {
+            cell = [[ButtonCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId3];
+        }
+        [cell.button setTitle:@"提交" forState:UIControlStateNormal];
+        
+        [cell.button addTarget:self action:@selector(commitButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        
         return cell;
     }
+}
+
+- (void)commitButtonClick {
+
+    AFNManager *manager = [AFNManager shareManager];
     
+    NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/saveSuggest",Development];
+    
+    NSString *contactString = self.contactCell.contactTextField.text;
+    NSLog(@"%@",contactString);
+//    NSString *contextString = 
+
+    NSDictionary *dic = @{@"contact":self.contactCell.contactTextField.text};
+    
+    [manager RequestJsonWithUrl:url method:@"POST" parameter:dic result:^(id responseDic) {
+        
+        NSLog(@"~~~~~~success %@",responseDic);
+        
+    } fail:^(NSError *error) {
+        
+        NSLog(@"#######fail %@",error);
+    }];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
-    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0)];
-    headerView.backgroundColor = COLOR(245, 246, 247, 1);
     
-    return headerView;
+    
+    if (section == 0) {
+        
+        UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 100)];
+        headerView.backgroundColor = COLOR(245, 246, 247, 1);
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(15, 5.5, 56, 20)];
+        label.text = @"意见反馈";
+        label.adjustsFontSizeToFitWidth = YES;
+        label.textColor = COLOR(155, 155, 155, 1);
+        
+        [headerView addSubview:label];
+        
+        return headerView;
+        
+    }else if (section == 1) {
+    
+        UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0)];
+        headerView.backgroundColor = COLOR(245, 246, 247, 1);
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(15, 5.5, 84, 20)];
+        label.text = @"您的联系方式";
+        label.adjustsFontSizeToFitWidth = YES;
+        label.textColor = COLOR(155, 155, 155, 1);
+        
+        [headerView addSubview:label];
+        
+        return headerView;
+    }else {
+    
+        return nil;
+    }
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
-    return 30.5;
+    if (section == 2) {
+
+        return 70;
+    }else {
+    
+        return 30.5;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,9 +178,12 @@
         
         return 150;
         
-    }else {
+    }else if (indexPath.section == 1) {
         
         return 57;
+    }else {
+        
+        return 44;
     }
 }
 
