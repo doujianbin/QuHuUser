@@ -45,14 +45,14 @@
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor blackColor], NSForegroundColorAttributeName,
                                                           [UIFont systemFontOfSize:18.0], NSFontAttributeName, nil]];
-//    if (![LoginStorage isFirstEnter]) {
-//        self.vc_linePage = [[LinkPageViewController alloc]initWithImageArray:@[@"linkPage_one",@"linkPage_two",@"linkPage_three",@"linkPage_four"]];
-//        self.vc_linePage.delegate = self;
-//        
-//        [self.window setRootViewController:_vc_linePage];
-//        
-//    }else{
-//        
+    if (![LoginStorage isFirstEnter]) {
+        self.vc_linePage = [[LinkPageViewController alloc]initWithImageArray:@[@"linkPage_one",@"linkPage_two",@"linkPage_three",@"linkPage_four"]];
+        self.vc_linePage.delegate = self;
+        
+        [self.window setRootViewController:_vc_linePage];
+        
+    }else{
+        
         SignInViewController *signInView = [[SignInViewController alloc]init];
         UINavigationController *nav_signIn = [[UINavigationController alloc]initWithRootViewController:signInView];
         signInView.isSetRootView = YES;
@@ -62,7 +62,7 @@
         }else{
             [self setTabBarRootView];
         }
-//    }
+    }
     
     
     /// 推送
@@ -91,7 +91,7 @@
 #warning 测试 开发环境 时需要修改BPushMode为BPushModeDevelopment 需要修改Apikey为自己的Apikey
     
     // 在 App 启动时注册百度云推送服务，需要提供 Apikey
-    [BPush registerChannel:launchOptions apiKey:@"iGYHDPZg6WBdG5HlovROutQG"pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES];
+    [BPush registerChannel:launchOptions apiKey:@"iGYHDPZg6WBdG5HlovROutQG"pushMode:BPushModeProduction withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES];
     // App 是用户点击推送消息启动
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
@@ -243,6 +243,26 @@
     }
 }
 
+-(void) onResp:(BaseResp*)resp
+{
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        
+        switch (resp.errCode) {
+            case WXSuccess:
+                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"weixinjieguo" object:self];
+                
+                break;
+                
+            default:
+                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"weixinshibai" object:self];
+                break;
+        }
+    }
+}
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     return [WXApi handleOpenURL:url delegate:self];
@@ -253,6 +273,7 @@
     NSLog(@"source = %@", sourceApplication);
     
     if ([sourceApplication isEqualToString:@"com.tencent.xin"]) {
+        // 微信回调   发送消息通知  支付界面接收 查询订单是否支付成功
         return [WXApi handleOpenURL:url delegate:self];
        
     }

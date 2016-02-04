@@ -41,7 +41,7 @@
 - (void)createView{
     self.img_hospitalPic = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 180)];
     [self.view addSubview:self.img_hospitalPic];
-    [self.img_hospitalPic sd_setImageWithURL:[self.dic_hospital objectForKey:@"bigImgPath"] placeholderImage:nil];
+    [self.img_hospitalPic sd_setImageWithURL:[self.dic_hospital objectForKey:@"bigImgPath"] placeholderImage:[UIImage imageNamed:@"big"]];
 
 }
 

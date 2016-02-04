@@ -140,6 +140,9 @@
         [tef_name becomeFirstResponder];
     }
     if (indexPath.row == 2) {
+        [tef_name resignFirstResponder];
+        [tef_IdCard resignFirstResponder];
+        [tef_PhoneNum resignFirstResponder];
         UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                       initWithTitle:nil
                                       delegate:self

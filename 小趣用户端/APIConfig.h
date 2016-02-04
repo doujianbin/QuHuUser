@@ -46,7 +46,12 @@
 #define CreateSpecialOrder @"/quhu/accompany/user/order/createSpecialOrder"
 // 用户查询未结束的订单详情
 #define QueryUnfinishedList @"/quhu/accompany/user/order/queryUnfinishedList"
+// 用户查询历史订单
+#define QueryHistoryList @"/quhu/accompany/user/order/queryHistoryList"
 // 微信支付 创建预付订单
 #define CreateWeiXinPay @"/quhu/accompany/user/pay/unifiedorder"
+// 微信支付回调查询
+#define SelectWXPay @"/quhu/accompany/user/pay/orderquery"
+
 
 #endif /* APIConfig_h */

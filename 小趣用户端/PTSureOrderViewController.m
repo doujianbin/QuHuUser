@@ -25,6 +25,9 @@
 
 @property (nonatomic ,strong)AFNManager *manager;
 @property (nonatomic ,strong)CommonOrderEntity *commonOrderEntity;
+@property (nonatomic ,strong)NSString *out_trade_no;
+@property (nonatomic ,strong)UILabel *lab_remark;
+@property (nonatomic ,strong)UIView *upView;
 @end
 
 @implementation PTSureOrderViewController
@@ -61,8 +64,11 @@
     scl_back = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 54)];
     [self.view addSubview:scl_back];
     // Do any additional setup after loading the view.
-//    [self addtableView];
+    [self addtableView];
     [self loadData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weixinjieguotongzhi) name:@"weixinjieguo" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weixinshibaitongzhi) name:@"weixinshibai" object:nil];
 }
 
 -(void)loadData{
@@ -71,13 +77,39 @@
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:nil result:^(id responseDic) {
         NSLog(@"订单详情:%@",responseDic);
         if ([Status isEqualToString:SUCCESS]) {
+            [self.lab_remark removeFromSuperview];
+            [self.upView removeFromSuperview];
             self.commonOrderEntity = [CommonOrderEntity parseCommonOrderListEntityWithJson:[responseDic objectForKey:@"data"]];
-            [self addtableView];
+            [self refershData];
         }
     } fail:^(NSError *error) {
         NSLog(@"error == %@",error);
+        [SVProgressHUD dismiss];
+        
     }];
 
+}
+
+-(void)refershData{
+    
+    if (self.commonOrderEntity.orderStatus == 4) {
+        [SVProgressHUD showSuccessWithStatus:@"您的订单已结束,可在历史订单列表查看"];
+    }else{
+        
+        if (self.commonOrderEntity.orderType == 0) {
+            
+            [self addCommonOrderDownView];
+        }else{
+            [self addSpecialOrderDownView];
+            
+        }
+        
+        [tableView1 reloadData];
+        [tableView2 reloadData];
+        [SVProgressHUD dismiss];
+    }
+    
+    
 }
 
 -(void)addtableView{
@@ -104,39 +136,29 @@
     tableView2.dataSource = self;
     tableView2.scrollEnabled = NO;
     tableView2.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    if (self.commonOrderEntity.orderType == 0) {
-        [self addCommonOrderDownView];
-    }else{
-        [self addSpecialOrderDownView];
-        
-    }
-    
-    [tableView1 reloadData];
-    [tableView2 reloadData];
 
 }
 
 -(void)addCommonOrderDownView{
     
-    UILabel *lab_remark = [[UILabel alloc]initWithFrame:CGRectMake(15, 557, 300, 12.5)];
-    [scl_back addSubview:lab_remark];
-    [lab_remark setText:@"备注：陪诊超时按照小时收费（￥25/小时）"];
-    [lab_remark setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
-    lab_remark.font = [UIFont systemFontOfSize:12];
+    self.lab_remark = [[UILabel alloc]initWithFrame:CGRectMake(15, 557, 300, 12.5)];
+    [scl_back addSubview:self.lab_remark];
+    [self.lab_remark setText:@"备注：陪诊超时按照小时收费（￥25/小时）"];
+    [self.lab_remark setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
+    self.lab_remark.font = [UIFont systemFontOfSize:12];
     [scl_back setContentSize:CGSizeMake(SCREEN_WIDTH, 640 - 54)];
     
-    UIView *upView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 54, SCREEN_WIDTH, 54)];
-    [self.view addSubview:upView];
-    [upView setBackgroundColor:[UIColor whiteColor]];
+    self.upView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 54, SCREEN_WIDTH, 54)];
+    [self.view addSubview:self.upView];
+    [self.upView setBackgroundColor:[UIColor whiteColor]];
    
     if (self.commonOrderEntity.orderStatus == 0 || self.commonOrderEntity.orderStatus == 3) {
         UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(14.5, 17, 20, 20)];
-        [upView addSubview:img];
+        [self.upView addSubview:img];
         [img setImage:[UIImage imageNamed:@"Oval 91 + Path 52"]];
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(42, 16.5, 120, 21)];
-        [upView addSubview:lab];
+        [self.upView addSubview:lab];
         if (self.commonOrderEntity.orderStatus == 0) {
             
             [lab setText:@"等待护士接单"];
@@ -148,7 +170,7 @@
         lab.textColor = [UIColor colorWithHexString:@"#FA6262"];
         
         UIButton *btn_commonOrderzhifu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 54)];
-        [upView addSubview:btn_commonOrderzhifu];
+        [self.upView addSubview:btn_commonOrderzhifu];
         [btn_commonOrderzhifu setBackgroundColor:[UIColor colorWithHexString:@"#FA6262"]];
         if (self.commonOrderEntity.orderStatus == 0) {
             
@@ -163,7 +185,7 @@
     if (self.commonOrderEntity.orderStatus == 1 || self.commonOrderEntity.orderStatus == 2) {
         // 护士已经接单   ｜｜    陪诊中
         UIImageView *img_NurseHeadPic = [[UIImageView alloc]initWithFrame:CGRectMake(15.5, 7, 40, 40)];
-        [upView addSubview:img_NurseHeadPic];
+        [self.upView addSubview:img_NurseHeadPic];
         if ([[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"] isKindOfClass:[NSNull class]]) {
             [img_NurseHeadPic setImage:[UIImage imageNamed:@"ic_个人中心"]];
         }else{
@@ -171,17 +193,17 @@
             [img_NurseHeadPic sd_setImageWithURL:url_NurseHeadPic placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
         }
         UILabel *lab_nurseName = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 8.5, 70, 21)];
-        [upView addSubview:lab_nurseName];
+        [self.upView addSubview:lab_nurseName];
         lab_nurseName.font = [UIFont systemFontOfSize:15];
         [lab_nurseName setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [lab_nurseName setText:[self.commonOrderEntity.nurse objectForKey:@"nurseName"]];
         UILabel *lab_orderStatus = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 31, 80, 14)];
-        [upView addSubview:lab_orderStatus];
+        [self.upView addSubview:lab_orderStatus];
         lab_orderStatus.font = [UIFont systemFontOfSize:10];
         lab_orderStatus.textColor = [UIColor colorWithHexString:@"#FA6262"];
         
         UIButton *btn_commonOrderCallNurse = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 54)];
-        [upView addSubview:btn_commonOrderCallNurse];
+        [self.upView addSubview:btn_commonOrderCallNurse];
         [btn_commonOrderCallNurse setBackgroundColor:[UIColor colorWithHexString:@"#FA6262"]];
         btn_commonOrderCallNurse.titleLabel.font = [UIFont systemFontOfSize:15];
         [btn_commonOrderCallNurse setTitle:@"联系护士" forState:UIControlStateNormal];
@@ -190,7 +212,7 @@
         if (self.commonOrderEntity.orderStatus == 1) {
             [lab_orderStatus setText:@"护士已接单"];
             UIButton *btn_quxiao = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 200, 0, 100, 54)];
-            [upView addSubview:btn_quxiao];
+            [self.upView addSubview:btn_quxiao];
             [btn_quxiao setBackgroundColor:[UIColor colorWithHexString:@"#E3E3E6"]];
             btn_quxiao.titleLabel.font = [UIFont systemFontOfSize:15];
             [btn_quxiao setTitle:@"取消订单" forState:UIControlStateNormal];
@@ -205,29 +227,29 @@
 }
 
 -(void)addSpecialOrderDownView{
-    UIView *upView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 54, SCREEN_WIDTH, 54)];
-    [self.view addSubview:upView];
-    [upView setBackgroundColor:[UIColor colorWithHexString:@"#FFFFFF"]];
+    self.upView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 54, SCREEN_WIDTH, 54)];
+    [self.view addSubview:self.upView];
+    [self.upView setBackgroundColor:[UIColor colorWithHexString:@"#FFFFFF"]];
     
     UIButton *btn_right = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 54)];
-    [upView addSubview:btn_right];
+    [self.upView addSubview:btn_right];
     [btn_right setBackgroundColor:[UIColor colorWithHexString:@"#FA6262"]];
     btn_right.titleLabel.font = [UIFont systemFontOfSize:15];
     [btn_right addTarget:self action:@selector(btn_rightAction:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *btn_left = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 200, 0, 100, 54)];
-    [upView addSubview:btn_left];
+    [self.upView addSubview:btn_left];
     [btn_left setBackgroundColor:[UIColor colorWithHexString:@"#E3E3E6"]];
     btn_left.titleLabel.font = [UIFont systemFontOfSize:15];
     [btn_left setTitleColor:[UIColor colorWithHexString:@"#4A4A4A"] forState:UIControlStateNormal];
     [btn_left addTarget:self action:@selector(btn_leftAction) forControlEvents:UIControlEventTouchUpInside];
     if (self.commonOrderEntity.orderStatus == 0) {
         UIImageView *img = [[UIImageView alloc]initWithFrame:CGRectMake(14.5, 17, 20, 20)];
-        [upView addSubview:img];
+        [self.upView addSubview:img];
         [img setImage:[UIImage imageNamed:@"Oval 91 + Path 52"]];
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(42, 16.5, 120, 21)];
-        [upView addSubview:lab];
+        [self.upView addSubview:lab];
         lab.font = [UIFont systemFontOfSize:15];
         lab.textColor = [UIColor colorWithHexString:@"#FA6262"];
         
@@ -245,7 +267,7 @@
     if (self.commonOrderEntity.orderStatus == 1) {
         
         UIImageView *img_NurseHeadPic = [[UIImageView alloc]initWithFrame:CGRectMake(15.5, 7, 40, 40)];
-        [upView addSubview:img_NurseHeadPic];
+        [self.upView addSubview:img_NurseHeadPic];
         if ([[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"] isKindOfClass:[NSNull class]]) {
             [img_NurseHeadPic setImage:[UIImage imageNamed:@"ic_个人中心"]];
         }else{
@@ -253,12 +275,12 @@
             [img_NurseHeadPic sd_setImageWithURL:url_NurseHeadPic placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
         }
         UILabel *lab_nurseName = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 8.5, 70, 21)];
-        [upView addSubview:lab_nurseName];
+        [self.upView addSubview:lab_nurseName];
         lab_nurseName.font = [UIFont systemFontOfSize:15];
         [lab_nurseName setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [lab_nurseName setText:[self.commonOrderEntity.nurse objectForKey:@"nurseName"]];
         UILabel *lab_orderStatus = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 31, 80, 14)];
-        [upView addSubview:lab_orderStatus];
+        [self.upView addSubview:lab_orderStatus];
         lab_orderStatus.font = [UIFont systemFontOfSize:10];
         lab_orderStatus.textColor = [UIColor colorWithHexString:@"#FA6262"];
         [lab_orderStatus setText:@"护士已接单"];
@@ -267,7 +289,7 @@
     }
     if (self.commonOrderEntity.orderStatus == 2) {
         UIImageView *img_NurseHeadPic = [[UIImageView alloc]initWithFrame:CGRectMake(15.5, 7, 40, 40)];
-        [upView addSubview:img_NurseHeadPic];
+        [self.upView addSubview:img_NurseHeadPic];
         if ([[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"] isKindOfClass:[NSNull class]]) {
             [img_NurseHeadPic setImage:[UIImage imageNamed:@"ic_个人中心"]];
         }else{
@@ -275,12 +297,12 @@
             [img_NurseHeadPic sd_setImageWithURL:url_NurseHeadPic placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
         }
         UILabel *lab_nurseName = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 8.5, 70, 21)];
-        [upView addSubview:lab_nurseName];
+        [self.upView addSubview:lab_nurseName];
         lab_nurseName.font = [UIFont systemFontOfSize:15];
         [lab_nurseName setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [lab_nurseName setText:[self.commonOrderEntity.nurse objectForKey:@"nurseName"]];
         UILabel *lab_orderStatus = [[UILabel alloc]initWithFrame:CGRectMake(70.5, 31, 80, 14)];
-        [upView addSubview:lab_orderStatus];
+        [self.upView addSubview:lab_orderStatus];
         lab_orderStatus.font = [UIFont systemFontOfSize:10];
         lab_orderStatus.textColor = [UIColor colorWithHexString:@"#FA6262"];
         [lab_orderStatus setText:@"陪诊中"];
@@ -466,13 +488,15 @@
     [SVProgressHUD showWithStatus:@"下单中"];
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,CreateWeiXinPay];
     NSString *DeviceIp = [self deviceIPAdress];
-    NSDictionary *dic = @{@"appid":@"wxca05a9ac9c6686df",@"mch_id":@"1308372701",@"body":@"商品描述",@"out_trade_no":self.commonOrderEntity.orderNo,@"spbill_create_ip":DeviceIp,@"trade_type":@"APP",@"pay_type":@"0",@"notify_url":@"www.haohushi.me"};
+    NSDictionary *dic = @{@"appid":@"wxca05a9ac9c6686df",@"mch_id":@"1308372701",@"body":@"商品描述",@"out_trade_no":self.commonOrderEntity.orderNo,@"spbill_create_ip":DeviceIp,@"trade_type":@"APP",@"pay_type":@"0",@"notify_url":@"http://sr.haohushi.me/quhu/accompany/public/pay/APP/wxPayNotify"};
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
         NSLog(@"微信预付订单生成结果:%@",responseDic);
         [SVProgressHUD dismiss];
         if ([Status isEqualToString:SUCCESS]) {
 
+            self.out_trade_no = [[responseDic objectForKey:@"data"] objectForKey:@"out_trade_no"];
+            
             PayReq *request = [[PayReq alloc] init];
             
             request.partnerId = [[responseDic objectForKey:@"data"] objectForKey:@"partnerid"];
@@ -488,6 +512,34 @@
     } fail:^(NSError *error) {
         NSLog(@"error == %@",error);
     }];
+}
+
+-(void)weixinjieguotongzhi{
+    self.manager = [[AFNManager alloc]init];
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,SelectWXPay];
+    NSDictionary *dic = @{@"appid":@"wxca05a9ac9c6686df",@"mch_id":@"1308372701",@"out_trade_no":self.out_trade_no,@"trade_type":@"APP"};
+    [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
+        NSLog(@"微信支付回调结果:%@",responseDic);
+        if ([Status isEqualToString:SUCCESS]) {
+            [SVProgressHUD showSuccessWithStatus:@"支付成功!"];
+            [NSTimer scheduledTimerWithTimeInterval:1.0
+                                             target:self
+                                           selector:@selector(PaySuccessComplete)
+                                           userInfo:nil
+                                            repeats:NO];
+        }
+    } fail:^(NSError *error) {
+        
+    }];
+}
+
+-(void)weixinshibaitongzhi{
+    [SVProgressHUD showErrorWithStatus:@"支付失败"];
+}
+
+-(void)PaySuccessComplete{
+    [SVProgressHUD showWithStatus:@"正在刷新数据"];
+    [self loadData];
 }
 
 -(void)NavLeftAction{

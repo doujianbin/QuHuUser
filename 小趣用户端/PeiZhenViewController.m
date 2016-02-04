@@ -89,7 +89,7 @@
         
     } fail:^(NSError *error) {
         NSLog(@"%@",error);
-        [SVProgressHUD showErrorWithStatus:@"网络加载失败"];
+//        [SVProgressHUD showErrorWithStatus:@"网络加载失败"];
     }];
     
 }
@@ -310,7 +310,7 @@
     //
     //        [cell.img_hospitalPic setImageWithURL:[NSURL URLWithString:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"picUrl"]] placeholderImage:nil];
     //    }
-    [cell.img_hospitalPic sd_setImageWithURL:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"picUrl"] placeholderImage:[UIImage imageNamed:@"placeHolderChang"]];
+    [cell.img_hospitalPic sd_setImageWithURL:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"picUrl"] placeholderImage:[UIImage imageNamed:@"mid"]];
     
     return cell;
 }
