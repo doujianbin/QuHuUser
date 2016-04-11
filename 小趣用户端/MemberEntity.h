@@ -10,11 +10,14 @@
 
 @interface MemberEntity : NSObject
 
-@property (nonatomic ,retain)NSString *name;
-@property (nonatomic ,retain)NSString *phoneNum;
+@property (nonatomic ,retain)NSString *userName;
+@property (nonatomic ,retain)NSString *phoneNumber;
 @property (nonatomic ,retain)NSString *age;
-@property (nonatomic ,retain)NSString *gender;
-@property (nonatomic ,retain)NSString *IdCard;
-@property (nonatomic ,retain)NSString *userId;
+@property (nonatomic ,retain)NSString *sex;
+@property (nonatomic ,retain)NSString *idNo;
+@property (nonatomic ,retain)NSString *zhurenID;
+@property (nonatomic ,retain)NSString *userId;  // 就诊人id
+@property (nonatomic ,retain)NSString *relation;
 
++ (MemberEntity *)parseMemberEntityWithJson:(id)json;
 @end

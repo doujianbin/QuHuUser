@@ -109,7 +109,7 @@
     [lb_memo setFont:[UIFont systemFontOfSize:14]];
     [lb_memo setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
     [lb_memo setTextAlignment:NSTextAlignmentCenter];
-    [lb_memo setText:@"今日休息，看看其他时间吧~"];
+    [lb_memo setText:@"医生休息，看看其他时间吧～"];
     [self.v_tableViewBack addSubview:lb_memo];
     
     CGFloat height_tableView = 0;

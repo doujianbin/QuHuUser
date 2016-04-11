@@ -13,6 +13,8 @@
 #import "SelectFamilyViewController.h"
 #import "CouponsTableViewController.h"
 #import "PTSureOrderViewController.h"
+#import "SignInViewController.h"
+#import "Toast+UIView.h"
 
 @interface TXOrderViewController ()<UITableViewDataSource,UITableViewDelegate,SelectFamilyViewControllerDelegate,CouponsTableViewControllerDegelate>{
     NSMutableArray *arr_all;
@@ -69,11 +71,6 @@
 //    [tableViewTXOrder registerClass:[TXOrderTableViewCell class]forCellReuseIdentifier:@"TableView"];
 //    [tableViewTXOrder registerClass:[TXOrderTableViewCell class]forCellReuseIdentifier:@"HospitaltTableView"];
     
-    UILabel *lab_remark = [[UILabel alloc]initWithFrame:CGRectMake(15, 572.5, 300, 12.5)];
-    [self.view addSubview:lab_remark];
-    [lab_remark setText:@"备注：陪诊超时按照小时收费（￥60/小时）"];
-    [lab_remark setTextColor:[UIColor colorWithHexString:@"#9B9B9B"]];
-    lab_remark.font = [UIFont systemFontOfSize:12];
     
     UIButton *btn_xiadan = [[UIButton alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44)];
     [self.view addSubview:btn_xiadan];
@@ -153,14 +150,14 @@
             [cell.lab_right setText:str];
         }
         if (indexPath.section == 1 && indexPath.row == 0) {
-            if (self.memberEntity.name.length > 0) {
-                [cell.lab_right setText:self.memberEntity.name];
+            if (self.memberEntity.userName.length > 0) {
+                [cell.lab_right setText:self.memberEntity.userName];
                 [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
                 cell.lab_right.alpha = 1.0;
             }else{
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 [cell.lab_right setFrame:CGRectMake(SCREEN_WIDTH - 295, 0, 265, 57)];
-                [cell.lab_right setText:@"选择就诊成员"];
+                [cell.lab_right setText:@"选择成员"];
                 cell.lab_right.alpha = 0.6;
             }
         }
@@ -221,15 +218,26 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 1 && indexPath.row == 0) {
-        SelectFamilyViewController *vc = [[SelectFamilyViewController alloc]init];
-        vc.delegate = self;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([LoginStorage isLogin] == YES) {
+            
+            SelectFamilyViewController *vc = [[SelectFamilyViewController alloc]init];
+            vc.delegate = self;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            SignInViewController *vc = [[SignInViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     if (indexPath.section == 2 && indexPath.row == 2) {
-        CouponsTableViewController *vc_coupon = [[CouponsTableViewController alloc]init];
-        vc_coupon.delegate = self;
-        vc_coupon.isFromOrder = YES;
-        [self.navigationController pushViewController:vc_coupon animated:YES];
+        if ([LoginStorage isLogin] == YES) {
+            CouponsTableViewController *vc_coupon = [[CouponsTableViewController alloc]init];
+            vc_coupon.delegate = self;
+            vc_coupon.isFromOrder = YES;
+            [self.navigationController pushViewController:vc_coupon animated:YES];
+        }else{
+            SignInViewController *vc = [[SignInViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     
 }
@@ -245,8 +253,8 @@
 }
 
 -(void)btnTXxiadanAction{
-    if (self.memberEntity.name == nil) {
-        [SVProgressHUD showErrorWithStatus:@"请选择就诊人"];
+    if (self.memberEntity.userName == nil) {
+        [self.view makeToast:@"请选择成员" duration:1.0 position:@"center"];
     }else{
         [self uploadSpecialOrderData];
     }
@@ -264,19 +272,21 @@
         
         self.partnerDic = @{@"setId":strSetId,@"hospitalId":self.hospitalEntity.hospitalId,@"patientId":self.memberEntity.userId,@"scheduleTime":time,@"appointId":self.appointEntity.appointId};
     }
+    BeginActivity;
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:self.partnerDic result:^(id responseDic) {
         NSLog(@"下单(特需)返回:%@",responseDic);
         if ([Status isEqualToString:SUCCESS]) {
-            
+            EndActivity;
             PTSureOrderViewController *orderView = [[PTSureOrderViewController alloc]init];
             orderView.str_OrderId = [[responseDic objectForKey:@"data"] objectForKey:@"orderId"];
             [self.navigationController pushViewController:orderView animated:YES];
         }else{
-            [SVProgressHUD showErrorWithStatus:Message];
+            [self.view makeToast:Message duration:1.0 position:@"center"];
         }
     } fail:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"网络连接失败"];
+        EndActivity;
+        NetError;
     }];
 }
 

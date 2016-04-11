@@ -31,6 +31,8 @@
     UIBarButtonItem *item = [UIBarButtonItem barButtonitemWithNormalImageName:@"backArrow" highlightedImageName:@"backArrow" target:self action:@selector(backItemClick)];
     self.navigationItem.leftBarButtonItem = item;
     
+    self.view.backgroundColor = COLOR(245, 246, 247, 1);
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
@@ -38,7 +40,6 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     
-    self.tabBarController.tabBar.hidden = NO;
 }
 
 #pragma mark cell设置相关

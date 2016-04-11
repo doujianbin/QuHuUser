@@ -19,6 +19,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         
+
         UILabel *placeholderLabel = [[UILabel alloc] init];
         placeholderLabel.textColor = [UIColor lightGrayColor];
         placeholderLabel.numberOfLines = 0;
@@ -28,9 +29,9 @@
         
         UITextField *wordsLabel = [[UITextField alloc]init];
         wordsLabel.textColor = COLOR(208, 208, 208, 1);
-        wordsLabel.adjustsFontSizeToFitWidth = YES;
+//        wordsLabel.adjustsFontSizeToFitWidth = YES;
         wordsLabel.enabled = NO;
-        wordsLabel.font = [UIFont systemFontOfSize:8];
+        wordsLabel.font = [UIFont systemFontOfSize:12];
         wordsLabel.placeholder =@"还可输入300字";
         [self addSubview:wordsLabel];
                 
@@ -74,7 +75,7 @@
     
     self.placeholderLabel.frame = CGRectMake(5, 8, titleSize.width, titleSize.height);
     
-    self.wordsLabel.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 73.5, self.frame.size.height - 14.5, 67, 10.5);
+    self.wordsLabel.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 110.5, self.frame.size.height - 14.5, 87, 10.5);
     
 }
 

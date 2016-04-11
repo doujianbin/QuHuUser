@@ -11,6 +11,7 @@
 #import "SelectTimeViewController.h"
 #import "DoctorEntity.h"
 #import "NSString+Size.h"
+#import "Toast+UIView.h"
 
 @interface FromHospitalSelectDoctorViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -74,10 +75,12 @@
 }
 
 - (void)loadData{
-    NSString *strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/user/getDeptDoctorListByHospital?hospitalId=%@",Development,self.hospitalId];
+    BeginActivity;
+    NSString *strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/public/getDeptDoctorListByHospital?hospitalId=%@",Development,self.hospitalId];
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"GET" parameter:nil result:^(id responseDic) {
         NSLog(@"科室医生列表:%@",responseDic);
+        EndActivity;
         for (NSDictionary *dic in [responseDic objectForKey:@"data"]) {
             NSString *deptName = [dic objectForKey:@"deptName"];
             if (deptName.length > 0) {
@@ -101,6 +104,8 @@
         [self.rightTableView reloadData];
     } fail:^(NSError *error) {
         NSLog(@"网络加载失败");
+        EndActivity;
+        NetError;
     }];
 }
 

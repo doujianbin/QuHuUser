@@ -14,6 +14,8 @@
 #import "SignInViewController.h"
 #import "KDCycleBannerView.h"
 #import "BannerWebViewController.h"
+#import "Toast+UIView.h"
+#import "TalkingData.h"
 
 @interface PeiZhenViewController ()<UITableViewDataSource,UITableViewDelegate,KDCycleBannerViewDataource,KDCycleBannerViewDelegate>{
     UIButton *btn_putong;
@@ -24,6 +26,7 @@
     NSMutableArray *arr_department;
     NSMutableArray *arr_bannerImg;
     NSMutableArray *arr_bannerLink;
+    NSMutableArray *arr_title;
     UIView         *sec;
     UIView         *view_keshi;
 }
@@ -40,6 +43,7 @@
         arr_department = [[NSMutableArray alloc]init];
         arr_bannerImg = [NSMutableArray array];
         arr_bannerLink = [NSMutableArray array];
+        arr_title = [NSMutableArray array];
     }
     return self;
 }
@@ -48,20 +52,26 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
     // Do any additional setup after loading the view.
+    
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     scl_back = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -5, SCREEN_WIDTH, SCREEN_HEIGHT - 44)];
     [self.view addSubview:scl_back];
     
     [self getMsg];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loginAgainAction) name:@"loginAgain" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loginAgainAction) name:@"login" object:nil];
 }
 
 - (void)getMsg{
+    BeginActivity;
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetShouYeMsg];
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"GET" parameter:nil result:^(id responseDic) {
         NSLog(@"首页信息＝%@",responseDic);
         if ([Status isEqualToString:SUCCESS]) {
+            EndActivity;
             [LoginStorage saveCommonOrderDic:[[responseDic objectForKey:@"data"] objectForKey:@"commonSet"]];
             [LoginStorage saveSpecialOrderDic:[[responseDic objectForKey:@"data"] objectForKey:@"specialSet"]];
             arr_hospital = [[responseDic objectForKey:@"data"] objectForKey:@"hospitalList"];
@@ -76,20 +86,27 @@
                 }else{
                     [arr_bannerImg addObject:[dic objectForKey:@"imgUrl"]];
                 }
-                if ([[dic objectForKey:@"linkPath"] length] == 0) {
+                if ([[dic objectForKey:@"linkPath"] isKindOfClass:[NSNull class]]) {
                     [arr_bannerLink addObject:@""];
                 }else{
                     [arr_bannerLink addObject:[dic objectForKey:@"linkPath"]];
                 }
+                if ([[dic objectForKey:@"title"] isKindOfClass:[NSNull class]]) {
+                    [arr_title addObject:@"推广"];
+                }else{
+                    [arr_title addObject:[dic objectForKey:@"title"]];
+                }
             }
         }
         [self addMidView];
-        [self addKeshiView];
+//        [self addKeshiView];
         [self addYiYuanView];
         
     } fail:^(NSError *error) {
         NSLog(@"%@",error);
-//        [SVProgressHUD showErrorWithStatus:@"网络加载失败"];
+        EndActivity;
+        NetError;
+        
     }];
     
 }
@@ -110,81 +127,97 @@
 // 中间普通陪诊和特需陪诊两个按钮
 -(void)addMidView{
     self.cycleBannerView = [KDCycleBannerView new];
-    self.cycleBannerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame) / 375 * 225);
+    self.cycleBannerView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame) / 375 * 225);
     self.cycleBannerView.delegate = self;
     self.cycleBannerView.datasource = self;
     self.cycleBannerView.continuous = YES;
     self.cycleBannerView.autoPlayTimeInterval = 5;
     [scl_back addSubview:self.cycleBannerView];
     
-    UILabel *lb_place = [[UILabel alloc]initWithFrame:CGRectMake(15, 33, 34, 18)];
-    [lb_place setFont:[UIFont systemFontOfSize:17]];
-    [lb_place setText:@"北京"];
-    [lb_place setTextColor:[UIColor colorWithHexString:@"#FFFFFF"]];
-    [scl_back addSubview:lb_place];
+//    UILabel *lb_place = [[UILabel alloc]initWithFrame:CGRectMake(15, 33, 34, 18)];
+//    [lb_place setFont:[UIFont systemFontOfSize:17]];
+//    [lb_place setText:@"北京"];
+//    [lb_place setTextColor:[UIColor colorWithHexString:@"#FFFFFF"]];
+//    [scl_back addSubview:lb_place];
+//    
+//    UIImage *im_down = [UIImage imageNamed:@"Oval 21"];
+//    UIImageView *iv_down = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lb_place.frame) + 5, 39.5, im_down.size.width, im_down.size.height)];
+//    [iv_down setImage:im_down];
+//    [scl_back addSubview:iv_down];
     
-    UIImage *im_down = [UIImage imageNamed:@"Oval 21"];
-    UIImageView *iv_down = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lb_place.frame) + 5, 39.5, im_down.size.width, im_down.size.height)];
-    [iv_down setImage:im_down];
-    [scl_back addSubview:iv_down];
-    
-    sec = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.cycleBannerView.frame), SCREEN_WIDTH, 129)];
+    sec = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.cycleBannerView.frame), SCREEN_WIDTH, SCREEN_HEIGHT * 0.127)];
     [scl_back addSubview:sec];
     [sec setBackgroundColor:[UIColor whiteColor]];
     UIImageView *img_heng = [[UIImageView alloc]initWithFrame:CGRectMake(0,128.5, SCREEN_WIDTH, 0.5)];
     [sec addSubview:img_heng];
     [img_heng setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
     
-    btn_putong = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 2, 129)];
+    btn_putong = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.127)];
     [sec addSubview:btn_putong];
+    
     [btn_putong addTarget:self action:@selector(btn_putongAction) forControlEvents:UIControlEventTouchUpInside];
     
     UIImage *im_putong = [UIImage imageNamed:@"ic_hushi"];
-    UIImageView *img_putong = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/4 - im_putong.size.width/2, 17,im_putong.size.width,im_putong.size.height)];
+    UIImageView *img_putong = [[UIImageView alloc]initWithFrame:CGRectMake(15, (btn_putong.frame.size.height - 55) / 2,55,55)];
     [btn_putong addSubview:img_putong];
     [img_putong setImage:im_putong];
-    
-    UILabel *lab_putong = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(img_putong.frame) + 7.5, SCREEN_WIDTH/2, 18)];
+
+    UILabel *lab_putong = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(img_putong.frame) - 15,(btn_putong.frame.size.height - 18) / 2, 200, 18)];
     [btn_putong addSubview:lab_putong];
-    [lab_putong setText:@"普通陪诊"];
     [lab_putong setTextAlignment:NSTextAlignmentCenter];
-    lab_putong.font = [UIFont boldSystemFontOfSize:17];
+    lab_putong.font = [UIFont systemFontOfSize:22];
     [lab_putong setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
     
-    UILabel *lab_putong2 = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(lab_putong.frame) + 5, SCREEN_WIDTH/2, 12.5)];
-    [btn_putong addSubview:lab_putong2];
-    [lab_putong2 setText:@"挂号排队一条龙"];
-    [lab_putong2 setTextAlignment:NSTextAlignmentCenter];
-    lab_putong2.font = [UIFont systemFontOfSize:12];
-    [lab_putong2 setTextColor:[UIColor colorWithHexString:@"4A4A4A" alpha:0.5]];
+    NSMutableAttributedString *myStr = [[NSMutableAttributedString alloc] initWithString:@"预约陪诊服务"];
     
-    UIImageView *img_shu = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 2, 0, 0.5, 129)];
-    [sec addSubview:img_shu];
-    [img_shu setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
+    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4A4A4A"] range:NSMakeRange(0, 2)];
+    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22.0f] range:NSMakeRange(0, 2)];
     
+    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#FA6262"] range:NSMakeRange(2,2)];
+    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22.0f] range:NSMakeRange(2, 2)];
     
-    btn_texu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, 129)];
-    [sec addSubview:btn_texu];
-    [btn_texu addTarget:self action:@selector(btn_texuAction) forControlEvents:UIControlEventTouchUpInside];
+    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4A4A4A"] range:NSMakeRange(4,2)];
+    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22.0f] range:NSMakeRange(4, 2)];
+    [lab_putong setAttributedText:myStr];
     
-    UIImage *im_texu = [UIImage imageNamed:@"ic_texu"];
-    UIImageView *img_texu = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/4 - im_putong.size.width/2, 17,im_putong.size.width,im_putong.size.height)];
-    [btn_texu addSubview:img_texu];
-    [img_texu setImage:im_texu];
-    
-    UILabel *lab_texu = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(img_texu.frame) + 7.5, SCREEN_WIDTH/2, 18)];
-    [btn_texu addSubview:lab_texu];
-    [lab_texu setText:@"特需陪诊"];
-    [lab_texu setTextAlignment:NSTextAlignmentCenter];
-    lab_texu.font = [UIFont boldSystemFontOfSize:17];
-    [lab_texu setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
-    
-    UILabel *lab_texu2 = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(lab_texu.frame) + 5, SCREEN_WIDTH/2, 12.5)];
-    [btn_texu addSubview:lab_texu2];
-    [lab_texu2 setText:@"妥妥专家号预约"];
-    [lab_texu2 setTextAlignment:NSTextAlignmentCenter];
-    lab_texu2.font = [UIFont systemFontOfSize:12];
-    [lab_texu2 setTextColor:[UIColor colorWithHexString:@"4A4A4A" alpha:0.5]];
+    UIImageView *imgjiantou = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - SCREEN_HEIGHT * 0.127 * 0.69, 0, SCREEN_HEIGHT * 0.127 * 0.69, SCREEN_HEIGHT * 0.127)];
+    [btn_putong addSubview:imgjiantou];
+    [imgjiantou setImage:[UIImage imageNamed:@"peizhen_arrow"]];
+//
+//    UILabel *lab_putong2 = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(lab_putong.frame) + 5, SCREEN_WIDTH/2, 12.5)];
+//    [btn_putong addSubview:lab_putong2];
+//    [lab_putong2 setText:@"挂号排队一条龙"];
+//    [lab_putong2 setTextAlignment:NSTextAlignmentCenter];
+//    lab_putong2.font = [UIFont systemFontOfSize:12];
+//    [lab_putong2 setTextColor:[UIColor colorWithHexString:@"4A4A4A" alpha:0.5]];
+//    
+//    UIImageView *img_shu = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 2, 0, 0.5, 129)];
+//    [sec addSubview:img_shu];
+//    [img_shu setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
+//    
+//    
+//    btn_texu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, 129)];
+//    [sec addSubview:btn_texu];
+//    [btn_texu addTarget:self action:@selector(btn_texuAction) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UIImage *im_texu = [UIImage imageNamed:@"ic_texu"];
+//    UIImageView *img_texu = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/4 - im_putong.size.width/2, 17,im_putong.size.width,im_putong.size.height)];
+//    [btn_texu addSubview:img_texu];
+//    [img_texu setImage:im_texu];
+//    
+//    UILabel *lab_texu = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(img_texu.frame) + 7.5, SCREEN_WIDTH/2, 18)];
+//    [btn_texu addSubview:lab_texu];
+//    [lab_texu setText:@"特需陪诊"];
+//    [lab_texu setTextAlignment:NSTextAlignmentCenter];
+//    lab_texu.font = [UIFont boldSystemFontOfSize:17];
+//    [lab_texu setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+//    
+//    UILabel *lab_texu2 = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(lab_texu.frame) + 5, SCREEN_WIDTH/2, 12.5)];
+//    [btn_texu addSubview:lab_texu2];
+//    [lab_texu2 setText:@"妥妥专家号预约"];
+//    [lab_texu2 setTextAlignment:NSTextAlignmentCenter];
+//    lab_texu2.font = [UIFont systemFontOfSize:12];
+//    [lab_texu2 setTextColor:[UIColor colorWithHexString:@"4A4A4A" alpha:0.5]];
     
 }
 
@@ -245,7 +278,7 @@
 }
 
 -(void)addYiYuanView{
-    UIButton *btn_allyiyuan = [[UIButton alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(view_keshi.frame) + 5, SCREEN_WIDTH, 40)];
+    UIButton *btn_allyiyuan = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(sec.frame) + 10, SCREEN_WIDTH, 40)];
     [scl_back addSubview:btn_allyiyuan];
     [btn_allyiyuan setBackgroundColor:[UIColor whiteColor]];
     
@@ -255,7 +288,7 @@
     
     UILabel *lab_allyiyuan = [[UILabel alloc]initWithFrame:CGRectMake(15, 12.5, 52, 14.5)];
     [btn_allyiyuan addSubview:lab_allyiyuan];
-    [lab_allyiyuan setText:@"推荐医院"];
+    [lab_allyiyuan setText:@"热门医院"];
     lab_allyiyuan.font = [UIFont systemFontOfSize:13];
     [lab_allyiyuan setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
     
@@ -276,7 +309,7 @@
     [tableView_hospital registerClass:[HospitalTableViewCell class] forCellReuseIdentifier:@"tableViewHospital"];
     tableView_hospital.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [scl_back setContentSize:CGSizeMake(SCREEN_WIDTH, CGRectGetMaxY(tableView_hospital.frame) + 10)];
+    [scl_back setContentSize:CGSizeMake(SCREEN_WIDTH, CGRectGetMaxY(tableView_hospital.frame) - 20)];
     
 }
 
@@ -304,12 +337,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     [cell.lab_hospital setText:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"hospitalName"]];
     [cell.lab_hospitalAddress setText:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"address"]];
-    //    [cell.lab_juli setText:@"1.3KM"];
-    //    NSString *picUrl = [[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"picUrl"];
-    //    if (![picUrl isKindOfClass:[NSNull class]]) {
-    //
-    //        [cell.img_hospitalPic setImageWithURL:[NSURL URLWithString:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"picUrl"]] placeholderImage:nil];
-    //    }
     [cell.img_hospitalPic sd_setImageWithURL:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"picUrl"] placeholderImage:[UIImage imageNamed:@"mid"]];
     
     return cell;
@@ -327,6 +354,7 @@
 
 -(void)btn_putongAction{
     NSLog(@"普通陪诊");
+    [TalkingData trackEvent:@"用户点击陪诊按钮"];
     PuTongPZViewController *pt = [[PuTongPZViewController alloc]init];
 //    UINavigationController *nav_pt = [[UINavigationController alloc]initWithRootViewController:pt];
     pt.hidesBottomBarWhenPushed = YES;
@@ -352,9 +380,10 @@
 
 -(void)loginAgainAction{
     SignInViewController *sign = [[SignInViewController alloc]init];
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:sign];
-    [self presentViewController:nav animated:YES completion:nil];
+    sign.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:sign animated:YES];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -385,8 +414,8 @@
 - (void)cycleBannerView:(KDCycleBannerView *)bannerView didSelectedAtIndex:(NSUInteger)index {
     if([[arr_bannerLink objectAtIndex:index] length] > 0){
         BannerWebViewController *vc = [[BannerWebViewController alloc]init];
-//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
         vc.str_url = [arr_bannerLink objectAtIndex:index];
+        vc.strTitle = [arr_title objectAtIndex:index];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

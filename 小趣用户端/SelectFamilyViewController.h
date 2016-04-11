@@ -16,6 +16,8 @@
 @end
 @interface SelectFamilyViewController : UIViewController
 
+@property (nonatomic)BOOL FromVc;  //YES 是从个人中心 我的成员进入
+
 @property (nonatomic ,retain)id<SelectFamilyViewControllerDelegate>delegate;
 
 @end

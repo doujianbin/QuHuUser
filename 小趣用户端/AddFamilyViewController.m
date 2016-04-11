@@ -8,6 +8,7 @@
 
 #import "AddFamilyViewController.h"
 #import "AddFamilyTableViewCell.h"
+#import "Toast+UIView.h"
 
 @interface AddFamilyViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIActionSheetDelegate>{
     UITableView *tableAddFamily;
@@ -29,14 +30,19 @@
 {
     self = [super init];
     if (self) {
-        arr = [[NSMutableArray alloc]initWithObjects:@"姓名",@"性别",@"关系",@"手机",@"身份证", nil];
+//        arr = [[NSMutableArray alloc]initWithObjects:@"姓名",@"性别",@"关系",@"手机",@"身份证", nil];
+        arr = [[NSMutableArray alloc]initWithObjects:@"姓名",@"性别",@"手机",@"身份证", nil];
     }
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我的成员";
+    self.title = @"添加就诊人";
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
+    
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+
     
     UIButton *btnl = [[UIButton alloc]initWithFrame:CGRectMake(15, 21.5, 20, 20)];
     [btnl setBackgroundImage:[UIImage imageNamed:@"Rectangle 91 + Line + Line Copy"] forState:UIControlStateNormal];
@@ -56,7 +62,7 @@
 }
 
 -(void)addFamilyTableView{
-    tableAddFamily = [[UITableView alloc]initWithFrame:CGRectMake(0, 11, SCREEN_WIDTH, 57 * 5 + 64) style:UITableViewStylePlain];
+    tableAddFamily = [[UITableView alloc]initWithFrame:CGRectMake(0, 11, SCREEN_WIDTH, 57 * 4 + 64) style:UITableViewStylePlain];
     [self.view addSubview:tableAddFamily];
     [tableAddFamily setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
     tableAddFamily.delegate = self;
@@ -65,10 +71,18 @@
     tableAddFamily.scrollEnabled = NO;
     tableAddFamily.separatorStyle = UITableViewCellSeparatorStyleNone;
     [tableAddFamily registerClass:[AddFamilyTableViewCell class] forCellReuseIdentifier:@"tableViewAddFamily"];
+    self.genderIndex = @"0";
+    
+    UILabel *lab_tixing = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(tableAddFamily.frame) + 10 - 64 - 10, SCREEN_WIDTH - 30, 50)];
+    [self.view addSubview:lab_tixing];
+    [lab_tixing setText:@"陪诊服务中我们会为就诊人免费提供平安意外险一份，请输入真实身份证号"];
+    [lab_tixing setTextColor:[UIColor colorWithHexString:@"#a4a4a4"]];
+    [lab_tixing setFont:[UIFont systemFontOfSize:12]];
+    lab_tixing.numberOfLines = 0;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return arr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -86,7 +100,8 @@
     if (indexPath.row == 1) {
         btn_gender_man = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 151, 17.5, 22, 22)];
         [cell addSubview:btn_gender_man];
-        [btn_gender_man setImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
+        [btn_gender_man setImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
+
         UILabel *labnan = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 117, 18, 15, 21)];
         [cell addSubview:labnan];
         [labnan setText:@"男"];
@@ -105,25 +120,26 @@
         [btn_gender_women addTarget:self action:@selector(btnnvAction) forControlEvents:UIControlEventTouchUpInside];
         
     }
+//    if (indexPath.row == 2) {
+//        lab_relation = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 115, 21, 100, 16.5)];
+//        [cell addSubview:lab_relation];
+//        lab_relation.font = [UIFont systemFontOfSize:16];
+//        lab_relation.textAlignment = NSTextAlignmentRight;
+//        lab_relation.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
+//        
+//    }
     if (indexPath.row == 2) {
-        lab_relation = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 115, 21, 100, 16.5)];
-        [cell addSubview:lab_relation];
-        lab_relation.font = [UIFont systemFontOfSize:16];
-        lab_relation.textAlignment = NSTextAlignmentRight;
-        lab_relation.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
-        
-    }
-    if (indexPath.row == 3) {
-        tef_PhoneNum = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 115, 20.5, 100, 16.5)];
+        tef_PhoneNum = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 215, 20.5, 200, 16.5)];
         [cell addSubview:tef_PhoneNum];
         tef_PhoneNum.font = [UIFont systemFontOfSize:16];
         tef_PhoneNum.textAlignment = NSTextAlignmentRight;
         tef_PhoneNum.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         tef_PhoneNum.keyboardType = UIKeyboardTypeNumberPad;
+        tef_PhoneNum.delegate = self;
         [tef_PhoneNum setNormalInputAccessory];
     }
-    if (indexPath.row == 4) {
-        tef_IdCard = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 185, 20.5, 170, 16.5)];
+    if (indexPath.row == 3) {
+        tef_IdCard = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 235, 20.5, 220, 16.5)];
         [cell addSubview:tef_IdCard];
         tef_IdCard.font = [UIFont systemFontOfSize:16];
         tef_IdCard.textAlignment = NSTextAlignmentRight;
@@ -139,23 +155,23 @@
     if (indexPath.row == 0) {
         [tef_name becomeFirstResponder];
     }
+//    if (indexPath.row == 2) {
+//        [tef_name resignFirstResponder];
+//        [tef_IdCard resignFirstResponder];
+//        [tef_PhoneNum resignFirstResponder];
+//        UIActionSheet *actionSheet = [[UIActionSheet alloc]
+//                                      initWithTitle:nil
+//                                      delegate:self
+//                                      cancelButtonTitle:@"取消"
+//                                      destructiveButtonTitle:nil
+//                                      otherButtonTitles:@"父母", @"子女",@"亲属",@"朋友",@"自己",@"其他",nil];
+//        actionSheet.actionSheetStyle = UIBarStyleDefault;
+//        [actionSheet showInView:self.view];
+//    }
     if (indexPath.row == 2) {
-        [tef_name resignFirstResponder];
-        [tef_IdCard resignFirstResponder];
-        [tef_PhoneNum resignFirstResponder];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                      initWithTitle:nil
-                                      delegate:self
-                                      cancelButtonTitle:@"取消"
-                                      destructiveButtonTitle:nil
-                                      otherButtonTitles:@"父母", @"子女",@"亲属",@"朋友",@"其他",nil];
-        actionSheet.actionSheetStyle = UIBarStyleDefault;
-        [actionSheet showInView:self.view];
-    }
-    if (indexPath.row == 3) {
         [tef_PhoneNum becomeFirstResponder];
     }
-    if (indexPath.row == 4) {
+    if (indexPath.row == 3) {
         [tef_IdCard becomeFirstResponder];
     }
 }
@@ -172,6 +188,8 @@
         [lab_relation setText:@"朋友"];
     }
     else if(buttonIndex == 4) {
+        [lab_relation setText:@"自己"];
+    }else if(buttonIndex == 5) {
         [lab_relation setText:@"其他"];
     }
     
@@ -201,21 +219,116 @@
 }
 
 -(void)btnRSave{
+    if (tef_name.text.length == 0) {
+        [self.view makeToast:@"请输入姓名" duration:1.0 position:@"center"];
+        return;
+    }
+//    if (lab_relation.text.length == 0) {
+//        [self.view makeToast:@"请选择关系" duration:1.0 position:@"center"];
+//        return;
+//    }
+    if (tef_PhoneNum.text.length == 0) {
+        [self.view makeToast:@"请输入手机号" duration:1.0 position:@"center"];
+        return;
+    }
+    if (tef_PhoneNum.text.length != 11) {
+        [self.view makeToast:@"请输入正确手机号" duration:1.0 position:@"center"];
+        return;
+    }
+    if (tef_IdCard.text.length == 0) {
+        [self.view makeToast:@"请输入身份证号" duration:1.0 position:@"center"];
+    }else{
+        [self upLoadMember];
+        BeginActivity;
+    }
+}
+
+-(void)upLoadMember{
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,CreateFamily];
-    NSDictionary *dic = @{@"userName":tef_name.text,@"sex":self.genderIndex,@"relation":lab_relation.text,@"phoneNumber":tef_PhoneNum.text,@"idNo":tef_IdCard.text};
+    NSDictionary *dic = @{@"userName":tef_name.text,@"sex":self.genderIndex,@"phoneNumber":tef_PhoneNum.text,@"idNo":tef_IdCard.text};
     
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
         NSLog(@"%@",responseDic);
+        EndActivity;
         if ([Status isEqualToString:SUCCESS]) {
-            [SVProgressHUD showSuccessWithStatus:@"添加成功"];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.view makeToast:@"添加成功" duration:1.0 position:@"center"];
+            [NSTimer scheduledTimerWithTimeInterval:1.0
+                                             target:self
+                                           selector:@selector(NavLeftAction)
+                                           userInfo:nil
+                                            repeats:NO];
+            
+        }else{
+            FailMessage;
         }
         
     } fail:^(NSError *error) {
-        
+        NetError;
+        EndActivity;
     }];
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == tef_name) {
+        if (string.length == 0)
+            return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > 10) {
+            return NO;
+        }
+        if (string.length < 10) {
+//            NSLog(@"小于11");
+        }
+        if (existedLength - selectedLength + replaceLength == 10) {
+            
+//            NSLog(@"等于11");
+        }
+    }
+    if (textField == tef_PhoneNum) {
+        if (string.length == 0)
+            return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > 11) {
+            return NO;
+        }
+        if (string.length < 11) {
+//            NSLog(@"小于11");
+        }
+        if (existedLength - selectedLength + replaceLength == 11) {
+            
+//            NSLog(@"等于11");
+        }
+    }
+    if (textField == tef_IdCard) {
+        if (string.length == 0)
+            return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > 18) {
+            return NO;
+        }
+        if (string.length < 18) {
+//            NSLog(@"小于11");
+        }
+        if (existedLength - selectedLength + replaceLength == 18) {
+            
+//            NSLog(@"等于11");
+        }
+    }
+    
+    return YES;
+}
+
 
 
 

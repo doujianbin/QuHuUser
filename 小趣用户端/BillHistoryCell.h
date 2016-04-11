@@ -18,7 +18,7 @@
 
 @interface BillHistoryCell : UITableViewCell
 
-@property (nonatomic, assign) id<BillHistoryCellDelegate> delegate;
+@property (nonatomic, weak) id<BillHistoryCellDelegate> delegate;
 
 @property (nonatomic, strong) HistoryBillModel *historyBillInfo;
 

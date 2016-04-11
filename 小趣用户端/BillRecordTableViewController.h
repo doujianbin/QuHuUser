@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface BillRecordTableViewController : UITableViewController
-
+@property (nonatomic)BOOL isFromKaifapiao; 
 @end

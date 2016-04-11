@@ -10,4 +10,9 @@
 
 @interface MakeBillTableViewController : UITableViewController
 
+@property (nonatomic, assign)CGFloat totalPrice;
+
+@property (nonatomic, strong)NSArray *billIdArray;
+
+
 @end

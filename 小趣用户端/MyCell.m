@@ -20,21 +20,22 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        UIImageView *iconImageView = [[UIImageView alloc]init];
-        iconImageView.contentMode = UIViewContentModeScaleToFill;
+        UIImageView *iconImageView = [[UIImageView alloc]initWithFrame:CGRectMake(14.5, 16.5, 24, 24)];
+//        iconImageView.contentMode = UIViewContentModeScaleToFill;
         self.iconImageView = iconImageView;
         
-        UILabel *personCenterLabel = [[UILabel alloc]init];
-        personCenterLabel.adjustsFontSizeToFitWidth = YES;
-        personCenterLabel.textColor = COLOR(74, 74, 74, 1);
-        self.personCenterLabel = personCenterLabel;
+        self.personCenterLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(iconImageView.frame) + 15, 16.5, 150, 24)];
+
+        self.personCenterLabel.font = [UIFont systemFontOfSize:17];
+        self.personCenterLabel.textColor = [UIColor colorWithHexString:@"#4a4a4a"];
+
         
         UIView *lineView = [[UIView alloc]init];
         lineView.backgroundColor = COLOR(219, 220, 220, 1);
         self.lineView = lineView;
         
         [self.contentView addSubview:iconImageView];
-        [self.contentView addSubview:personCenterLabel];
+        [self.contentView addSubview:self.personCenterLabel];
         [self.contentView addSubview:lineView];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -49,7 +50,7 @@
     self.iconImageView.frame = CGRectMake(14.5, 16.5, 24, 24);
 
     
-    self.personCenterLabel.frame = CGRectMake(53, 16.5, 68, 24);
+    self.personCenterLabel.frame = CGRectMake(53, 16.5, 150, 24);
     self.lineView.frame = CGRectMake(0, 56.5, [UIScreen mainScreen].bounds.size.width, 0.5);
 }
 

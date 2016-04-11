@@ -9,12 +9,13 @@
 #import "ChangeMyDataViewController.h"
 
 #import "UIBarButtonItem+Extention.h"
+#import "Toast+UIView.h"
 
 @interface ChangeMyDataViewController ()<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, weak)UILabel *nickNameLabel;
 
-@property (nonatomic, weak)UIImageView *iconImageView;
+@property (nonatomic, strong)UIButton *iconButton;
 
 @end
 
@@ -29,15 +30,18 @@
     self.navigationItem.leftBarButtonItem = item;
     
     self.view.backgroundColor = COLOR(245, 246, 247, 1);
+    
+    [self setupInterface];
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+
+- (void)setupInterface {
+  
 //头像
     UIView *iconView = [[UIView alloc]initWithFrame:CGRectMake(0, 74, [UIScreen mainScreen].bounds.size.width, 75)];
     iconView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:iconView];
-    [self addTapGestureWithView:iconView action:@selector(iconViewClick)];
     
     UILabel *iconLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 25, 36, 25)];
     iconLabel.adjustsFontSizeToFitWidth = YES;
@@ -45,10 +49,12 @@
     iconLabel.textColor = COLOR(150, 150, 150, 1);
     [iconView addSubview:iconLabel];
     
-    UIImageView *iconImageView = [[UIImageView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 89, 7.5, 60, 60)];
-    iconImageView.contentMode = UIViewContentModeScaleToFill;
-    [iconView addSubview:iconImageView];
-    self.iconImageView = iconImageView;
+    UIButton *iconButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    iconButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 89, 7.5, 60, 60);
+    [iconButton setImage:self.personImage forState:UIControlStateNormal];
+    [iconButton addTarget:self action:@selector(iconButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [iconView addSubview:iconButton];
+    self.iconButton = iconButton;
     
     UIImageView *arrowImageView = [[UIImageView alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 19, 33.5, 4, 8)];
     arrowImageView.contentMode = UIViewContentModeScaleToFill;
@@ -68,13 +74,12 @@
     [nicknameView addSubview:nickLabel];
     
     UILabel *nickNameLabel = [[UILabel alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 95, 17.5, 80, 22.5)];
-    NSString *nickname = [[NSUserDefaults standardUserDefaults]stringForKey:@"nickname"];
-    nickNameLabel.text = nickname;
     nickNameLabel.textColor = [UIColor blackColor];
     nickNameLabel.adjustsFontSizeToFitWidth = YES;
+    nickNameLabel.text = self.personName;
     nickNameLabel.textAlignment = NSTextAlignmentRight;
-    self.nickNameLabel = nickNameLabel;
     [nicknameView addSubview:nickNameLabel];
+    self.nickNameLabel = nickNameLabel;
     
 }
 
@@ -88,6 +93,13 @@
     [view addGestureRecognizer:tapGesture];
 }
 
+- (void)iconButtonClick:(UIButton *)button {
+
+    UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:@"请选择头像上传方式" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册", nil];
+    
+    [sheet showInView:self.view];
+}
+
 - (void)nicknameViewClick {
 
     UIAlertView *alertview = [[UIAlertView alloc]initWithTitle:@"请输入昵称" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -96,11 +108,7 @@
     [alertview show];
 }
 
-- (void)iconViewClick {
 
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"从相册选择", nil];
-    [actionSheet showInView:self.view];
-}
 
 #pragma mark 代理方法
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -108,56 +116,88 @@
     UITextField *textField = [alertView textFieldAtIndex:0];
     
     if (buttonIndex == 1) {
+        BeginActivity;
         self.nickNameLabel.text = textField.text;
-        [[NSUserDefaults standardUserDefaults]setObject:textField.text forKey:@"nickname"];
-        if ([self.delegate respondsToSelector:@selector(changeMyDataViewControllerDidChangeName:)]) {
-            [self.delegate changeMyDataViewControllerDidChangeName:textField.text];
-        }
+        
+        AFNManager *manager = [[AFNManager alloc]init];
+        
+        NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/savePersonalInfo",Development];
+        
+        NSDictionary *dic = @{@"nickName":self.nickNameLabel.text};
+        
+        [manager RequestJsonWithUrl:url method:@"POST" parameter:dic result:^(id responseDic) {
+            
+            if ([[responseDic objectForKey:@"status"]isEqualToString:SUCCESS]) {
+                
+                NSLog(@"%@",responseDic);
+                
+//                [SVProgressHUD showSuccessWithStatus:Message];
+            }else {
+                
+//                [SVProgressHUD showErrorWithStatus:Message];
+            }
+            
+        } fail:^(NSError *error) {
+            
+            
+        }];
     }
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    NSLog(@"%ld",buttonIndex);
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
     
-    if (buttonIndex == 0) {
-        UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-        if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
-
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            picker.delegate = self;
-            picker.allowsEditing = YES;
-            picker.sourceType = sourceType;
-            [self presentViewController:picker animated:YES completion:nil];
-            
-        }
-        NSLog(@"拍照不可用");
-    }else if (buttonIndex == 1) {
-        NSLog(@"xiangce");
-        
-        UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-           
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            picker.delegate = self;
-            picker.allowsEditing = YES;
-            picker.sourceType = sourceType;
-            [self presentViewController:picker animated:YES completion:nil];
-        }
-        
-    }else {
-        NSLog(@"quxiao");
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    
+    switch (buttonIndex) {
+        case 0:
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            break;
+        case 1:
+            picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            break;
+        default:
+            return;
     }
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-
+    
+    UIImage *iconImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    
+    [self.iconButton setBackgroundImage:iconImage forState:UIControlStateNormal];
+    
+    AFNManager *manager = [[AFNManager alloc]init];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/savePersonalInfo",Development];
+    
+    NSData *data = UIImageJPEGRepresentation(iconImage, 0.6);
+    NSString *imageString = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    NSDictionary *dic = @{@"photo":imageString,@"photoExt":@"JPEG"};
+    BeginActivity;
+    [manager RequestJsonWithUrl:url method:@"POST" parameter:dic result:^(id responseDic) {
+        
+        [self.view makeToast:Message duration:1.0 position:@"center"];
+        
+    } fail:^(NSError *error) {
+        
+        EndActivity;
+        NetError;
+    }];
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    UIImage *iconImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    self.iconImageView.image = iconImage;
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self.tabBarController.tabBar setHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 @end

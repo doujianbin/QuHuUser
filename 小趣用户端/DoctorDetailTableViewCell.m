@@ -50,7 +50,7 @@
     self.lab_cellzhicheng.alpha = 0.6;
     self.lab_cellzhicheng.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
     
-    self.lab_cellyiyuankeshi = [[UILabel alloc]initWithFrame:CGRectMake(70, 40, 200, 12.5)];
+    self.lab_cellyiyuankeshi = [[UILabel alloc]initWithFrame:CGRectMake(70, 40, SCREEN_WIDTH - 90, 12.5)];
     [self.contentView addSubview:self.lab_cellyiyuankeshi];
     self.lab_cellyiyuankeshi.font = [UIFont systemFontOfSize:11];
     self.lab_cellyiyuankeshi.textColor = [UIColor colorWithHexString:@"#4A4A4A"];

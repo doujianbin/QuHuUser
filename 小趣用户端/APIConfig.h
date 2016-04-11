@@ -16,10 +16,12 @@
 #define Status [responseDic objectForKey:@"status"]
 #define Message [responseDic objectForKey:@"message"]
 // 开发环境
-#define Development @"http://101.201.223.151:7001"
-
+#define Development @"https://ci.haohushi.me:7009"
+//正式环境 http://app.haohushi.me:8080    https://app.haohushi.me:8443
+//开发环境 http://101.201.223.151:7001
+//测试环境 https://ci.haohushi.me:7009
 //发送验证码
-#define MessageCode @"/quhu/accompany/public/messageCode"
+#define MessageCode @"/quhu/accompany/public/U/messageCode"
 //验证验证码
 #define RegisterOrRefresh @"/quhu/accompany/public/registerOrRefresh"
 //登录获取token
@@ -28,18 +30,22 @@
 #define GetUserInfo @"/quhu/accompany/public/getUserInfo"
 
 //获取首页显示信息（普通订单价格，特殊订单价格，banner图片，热门科室，热门医院）
-#define GetShouYeMsg @"/quhu/accompany/user/getHomePageInfo?cityId=1"
+#define GetShouYeMsg @"/quhu/accompany/public/getHomePageInfo?cityId=110100"
 
 //根据区域选择医院
-#define AreaForHospital @"/quhu/accompany/public/getAreaHospitalList?cityId=1"
+#define AreaForHospital @"/quhu/accompany/public/getAreaHospitalList?cityId=110100"
 // 查询用户下所有家庭成员
 #define GetFamilyList @"/quhu/accompany/user/getFamilyList"
 // 添加成员
 #define CreateFamily @"/quhu/accompany/user/createFamily"
+// 删除成员
+#define DeleteFamily @"/quhu/accompany/user/deleteUserFamilyMemberById"
+// 修改成员
+#define UpdateFamily @"/quhu/accompany/user/updateFamily"
 // 查询  科室 医生
-#define GetDeptGroupDoctor @"/quhu/accompany/user/getDeptGroupDoctorList?cityId=1"
+#define GetDeptGroupDoctor @"/quhu/accompany/public/getDeptGroupDoctorList?cityId=110100"
 //用户查询医生加号信息
-#define UserSelectDoctorMsg @"/quhu/accompany/user/getAppointListAll"
+#define UserSelectDoctorMsg @"/quhu/accompany/public/getAppointListAll"
 //用户创建普通陪诊
 #define CreateCommonOrder @"/quhu/accompany/user/order/createCommonOrder"
 //用户创建特需订单
@@ -48,10 +54,30 @@
 #define QueryUnfinishedList @"/quhu/accompany/user/order/queryUnfinishedList"
 // 用户查询历史订单
 #define QueryHistoryList @"/quhu/accompany/user/order/queryHistoryList"
+//用户查询全部订单列表
+#define GetOrderList @"/quhu/accompany/user/order/getOrderList"
 // 微信支付 创建预付订单
 #define CreateWeiXinPay @"/quhu/accompany/user/pay/unifiedorder"
 // 微信支付回调查询
 #define SelectWXPay @"/quhu/accompany/user/pay/orderquery"
-
-
+// 上传channelID
+#define SaveChannelId @"/quhu/accompany/user/saveChannelId"
+// 版本升级
+#define VersionInfo @"/quhu/accompany/common/versionInfo"
+// 获取就诊人列表
+#define GetPatientListByPage @"/quhu/accompany/user/getAllPatientsList"
+// 获取就诊人档案列表
+#define GetPatientRecordsByPage @"/quhu/accompany/user/getPatientRecordsByPage"
+// 更新就诊人档案
+#define UpdatePatientRecords @"/quhu/accompany/user/updatePatientRecords"
+// 获取可选陪诊时间列表
+#define GetSelectiveAccompanyTimeSchedule @"/quhu/accompany/public/getSelectiveAccompanyTimeSchedule"
+// 用户评价
+#define RemarkOrder @"/quhu/accompany/user/userRemark/remarkOrder"
+// 更新取消原因
+#define UpdateCancelreason @"/quhu/accompany/user/updateCancelreason"
+// 从订单列表删除订单
+#define DeleteOrder @"/quhu/accompany/user/order/deleteOrder"
+// 是否在孕期
+#define UpdatePregnancyStatus @"/quhu/accompany/user/updatePregnancyStatus"
 #endif /* APIConfig_h */

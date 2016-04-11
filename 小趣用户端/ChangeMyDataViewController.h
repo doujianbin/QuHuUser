@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol changeMyDataViewControllerDelegate <NSObject>
-
-- (void)changeMyDataViewControllerDidChangeName:(NSString *)name;
-
-@end
 
 @interface ChangeMyDataViewController : UIViewController
 
-@property (nonatomic,weak) id <changeMyDataViewControllerDelegate> delegate;
+@property (nonatomic, strong)UIImage *personImage;
+
+@property (nonatomic, copy)NSString *personName;
 
 @end

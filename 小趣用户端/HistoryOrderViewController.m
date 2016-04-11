@@ -10,6 +10,7 @@
 #import "OrderListEntity.h"
 #import "OrderCenterTableViewCell.h"
 #import <MJRefresh/MJRefresh.h>
+#import "Toast+UIView.h"
 
 @interface HistoryOrderViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,strong)AFNManager *manager;
@@ -50,6 +51,7 @@
 }
 
 -(void)loadOrderList{
+    BeginActivity;
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,QueryHistoryList];
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"POST" parameter:nil result:^(id responseDic) {
@@ -57,6 +59,7 @@
         [self.tb_orderList.mj_header endRefreshing];
         [self.arr_orderList removeAllObjects];
         if ([Status isEqualToString:SUCCESS]) {
+            EndActivity;
             NSArray *arr = [responseDic objectForKey:@"data"];
             if (arr.count > 0) {
                 
@@ -70,10 +73,11 @@
                 [self.tb_orderList setBackgroundView:self.tab_backGroundView];
             }
         }else{
-            [SVProgressHUD showErrorWithStatus:Message];
+            [self.view makeToast:Message duration:1.0 position:@"center"];
         }
     } fail:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"网络加载失败"];
+        EndActivity;
+        NetError;
         [self.tb_orderList.mj_header endRefreshing];
     }];
     

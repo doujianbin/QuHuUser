@@ -16,6 +16,12 @@ static NSString * const PhoneNum = @"PhoneNum";
 static NSString * const YanZhengMa = @"YanZhengMa";
 static NSString *const firstEnter = @"isFirstEnter";
 
+static NSString *const nickName = @"nickName";
+static NSString *const photo = @"photo";
+static NSString * const KeFuNum = @"KeFuNum";
+static NSString * const PregnancyStatus = @"PregnancyStatus";
+static NSString * const IsFirstMakeOrder = @"IsFirstMakeOrder";
+
 @implementation LoginStorage
 
 /**
@@ -87,6 +93,41 @@ static NSString *const firstEnter = @"isFirstEnter";
 }
 + (BOOL)isFirstEnter{
     return [UserDefaultsUtils boolValueWithKey:firstEnter];
+}
+
++ (void)savenickName:(NSString *)dic{
+    [UserDefaultsUtils saveValue:dic forKey:nickName];
+}
++ (NSString *)GetnickName{
+    return [UserDefaultsUtils valueWithKey:nickName];
+}
+
++ (void)savephoto:(NSString *)dic{
+    [UserDefaultsUtils saveValue:dic forKey:photo];
+}
++ (NSString *)Getphoto{
+    return [UserDefaultsUtils valueWithKey:photo];
+}
+
++ (void)saveKefuPhoneNum:(NSString *)phonenum{
+    [UserDefaultsUtils saveValue:phonenum forKey:KeFuNum];
+}
++ (NSString *)phonenum{
+    return [UserDefaultsUtils valueWithKey:KeFuNum];
+}
+
++ (void)savePregnancyStatus:(NSString *)pregnancyStatus{
+    [UserDefaultsUtils saveValue:pregnancyStatus forKey:PregnancyStatus];
+}
++ (NSString *)PregnancyStatus{
+    return [UserDefaultsUtils valueWithKey:PregnancyStatus];
+}
+
++ (void)saveFirstMakeOrder:(BOOL)isFirstMakeOrder{
+    [UserDefaultsUtils saveBoolValue:isFirstMakeOrder withKey:IsFirstMakeOrder];
+}
++ (BOOL)isFirstMakeOrder{
+    return [UserDefaultsUtils boolValueWithKey:IsFirstMakeOrder];
 }
 
 

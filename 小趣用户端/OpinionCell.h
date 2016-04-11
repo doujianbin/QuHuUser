@@ -14,4 +14,7 @@
 
 @property (nonatomic, strong)OpinionTextView *opinionTextView;
 
+@property (nonatomic, copy)NSString *opinionTextViewText;
+
+
 @end

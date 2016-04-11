@@ -37,6 +37,10 @@
     self.navigationItem.leftBarButtonItem = btnleft;
     [btnl addTarget:self action:@selector(NavLeftAction) forControlEvents:UIControlEventTouchUpInside];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     [self onCreate];
     // Do any additional setup after loading the view.
 }
@@ -46,7 +50,7 @@
     
     [self.view addSubview:[UIView new]];
     
-    self.leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 110, SCREEN_HEIGHT - 64)];
+    self.leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 110, SCREEN_HEIGHT)];
     [self.leftTableView setDelegate:self];
     [self.leftTableView setDataSource:self];
     [self.leftTableView setTableFooterView:[UIView new]];
@@ -54,7 +58,7 @@
     [self.leftTableView setBackgroundColor:[UIColor colorWithHexString:@"#F2F2F2"]];
     [self.view addSubview:self.leftTableView];
     
-    self.rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(110, 64,SCREEN_WIDTH - 110, SCREEN_HEIGHT - 64)];
+    self.rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(110, 0,SCREEN_WIDTH - 110, SCREEN_HEIGHT)];
     [self.rightTableView setDelegate:self];
     [self.rightTableView setDataSource:self];
     [self.rightTableView setTableFooterView:[UIView new]];

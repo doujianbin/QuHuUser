@@ -11,5 +11,6 @@
 @interface SignInViewController : UIViewController
 
 @property (nonatomic)BOOL  isSetRootView;
+@property (nonatomic)BOOL  notBack;
 
 @end

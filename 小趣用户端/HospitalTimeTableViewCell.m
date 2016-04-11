@@ -23,12 +23,12 @@
         [self.lb_number setTextColor:[UIColor colorWithHexString:@"#FFFFFFFF"]];
         [self addSubview:self.lb_number];
         
-        self.lb_hospitalName = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.lb_number.frame) + 10, 13.5, 250, 22.5)];
+        self.lb_hospitalName = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.lb_number.frame) + 10, 13.5, SCREEN_WIDTH - (CGRectGetMaxX(self.lb_number.frame) + 10) - 10, 22.5)];
         [self.lb_hospitalName setFont:[UIFont systemFontOfSize:16]];
         [self.lb_hospitalName setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [self addSubview:self.lb_hospitalName];
         
-        self.lb_address = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.lb_number.frame) + 10, CGRectGetMaxY(self.lb_hospitalName.frame) + 1.5, 300, 20)];
+        self.lb_address = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.lb_number.frame) + 10, CGRectGetMaxY(self.lb_hospitalName.frame) + 1.5, SCREEN_WIDTH - (CGRectGetMaxX(self.lb_number.frame) + 10) - 10, 20)];
         [self.lb_address setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
         [self.lb_address setFont:[UIFont systemFontOfSize:14]];
         [self addSubview:self.lb_address];

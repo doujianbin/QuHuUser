@@ -35,5 +35,20 @@
 + (void)saveFirstEnterStatus:(BOOL)isFirstEnter;
 
 + (BOOL)isFirstEnter;
++ (void)savenickName:(NSString *)dic;
+
++ (NSString *)GetnickName;
++ (void)savephoto:(NSString *)dic;
+
++ (NSString *)Getphoto;
+
++ (void)saveKefuPhoneNum:(NSString *)phonenum;
++ (NSString *)phonenum;
+
++ (void)savePregnancyStatus:(NSString *)pregnancyStatus;
++ (NSString *)PregnancyStatus;
+
++ (void)saveFirstMakeOrder:(BOOL)isFirstMakeOrder;
++ (BOOL)isFirstMakeOrder;
 
 @end

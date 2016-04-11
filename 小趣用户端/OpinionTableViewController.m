@@ -13,6 +13,7 @@
 #import "OpinionCell.h"
 #import "ContactCell.h"
 #import "ButtonCell.h"
+#import "Toast+UIView.h"
 
 @interface OpinionTableViewController ()
 
@@ -86,7 +87,7 @@
         self.contactCell = cell;
         
         return cell;
-    }else {
+    }else if (indexPath.section == 2){
     
         ButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId3];
         if (cell == nil) {
@@ -97,6 +98,9 @@
         [cell.button addTarget:self action:@selector(commitButtonClick) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
+    }else {
+    
+        return nil; 
     }
 }
 
@@ -107,19 +111,41 @@
     NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/saveSuggest",Development];
     
     NSString *contactString = self.contactCell.contactTextField.text;
+    NSString *string = self.opinionCell.opinionTextViewText;
+    NSLog(@"%@",string);
     NSLog(@"%@",contactString);
-//    NSString *contextString = 
 
-    NSDictionary *dic = @{@"contact":self.contactCell.contactTextField.text};
-    
-    [manager RequestJsonWithUrl:url method:@"POST" parameter:dic result:^(id responseDic) {
+    if (string.length < 11) {
         
-        NSLog(@"~~~~~~success %@",responseDic);
+        [self.view makeToast:@"请输入10字以上意见或建议" duration:1.0 position:@"center"];
+    }else if (contactString.length == 0){
         
-    } fail:^(NSError *error) {
+        [self.view makeToast:@"请输入联系方式" duration:1.0 position:@"center"];
         
-        NSLog(@"#######fail %@",error);
-    }];
+    }else {
+        BeginActivity;
+        NSDictionary *dic = @{@"contact":self.contactCell.contactTextField.text,@"context":string};
+        
+        [manager RequestJsonWithUrl:url method:@"POST" parameter:dic result:^(id responseDic) {
+            EndActivity;
+            if (SUCCESS) {
+               
+                NSLog(@"~~~~~~success %@",responseDic);
+                
+                [self.view makeToast:@"提交成功" duration:1.0 position:@"center"];
+                [NSTimer scheduledTimerWithTimeInterval:1.2
+                                                 target:self
+                                               selector:@selector(backItemClick)
+                                               userInfo:nil
+                                                repeats:NO];
+            }
+            
+        } fail:^(NSError *error) {
+            EndActivity;
+            NetError;
+            NSLog(@"#######fail %@",error);
+        }];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

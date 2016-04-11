@@ -14,11 +14,13 @@
 
 @property (nonatomic, weak)UIView *lineView;
 
-@property (nonatomic, strong)UILabel *chargeLabel;
+@property (nonatomic, weak)UILabel *chargeLabel;
 
-@property (nonatomic, strong)UILabel *dateLabel;
+@property (nonatomic, weak)UILabel *dateLabel;
 
-@property (nonatomic, strong)UIButton *selecteButton;
+@property (nonatomic, weak)UIButton *selecteButton;
+
+@property (nonatomic, copy)NSString *billId;
 
 @end
 
@@ -31,17 +33,11 @@
         billHistoryView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:billHistoryView];
         self.billHistoryView = billHistoryView;
-
+        
         UILabel *chargeLabel = [[UILabel alloc]init];
         chargeLabel.adjustsFontSizeToFitWidth = YES;
         [billHistoryView addSubview:chargeLabel];
-        NSString *priceString = @"专业陪诊199元";
         
-        NSMutableAttributedString *chargeString = [[NSMutableAttributedString alloc]initWithString:priceString];
-        
-        [chargeString addAttribute:NSForegroundColorAttributeName value:COLOR(74, 74, 74, 1) range:NSMakeRange(0, 4)];
-        [chargeString addAttribute:NSForegroundColorAttributeName value:COLOR(250, 98, 98, 1) range:NSMakeRange(4, 4)];
-        chargeLabel.attributedText = chargeString;
         self.chargeLabel = chargeLabel;
         
         UILabel *dateLabel = [[UILabel alloc]init];
@@ -52,10 +48,11 @@
         
         UIButton *selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [selectButton setImage:[UIImage imageNamed:@"diangray"] forState:UIControlStateNormal];
+        selectButton.userInteractionEnabled = NO;
         [selectButton setImage:[UIImage imageNamed:@"dianred"] forState:UIControlStateSelected];
         selectButton.adjustsImageWhenHighlighted = NO;
         [billHistoryView addSubview:selectButton];
-        [selectButton addTarget:self action:@selector(selecteButtonDidSelected:) forControlEvents:UIControlEventTouchUpInside];
+        
         self.selecteButton = selectButton;
         
         UIView *lineView = [[UIView alloc]init];
@@ -74,19 +71,25 @@
 - (void)setHistoryBillInfo:(HistoryBillModel *)historyBillInfo {
     _historyBillInfo = historyBillInfo;
     
-    self.dateLabel.text = historyBillInfo.create_time;
+    NSString *time = [historyBillInfo.create_time substringToIndex:historyBillInfo.create_time.length - 3];
+    self.dateLabel.text = time;
     
     self.selecteButton.selected = historyBillInfo.selected;
-}
-
-
-- (void)selecteButtonDidSelected:(UIButton *)btn {
-    btn.selected = !btn.selected;
     
-    if ([self.delegate respondsToSelector:@selector(billHistoryCell:didSelected:)]) {
-        [self.delegate billHistoryCell:self didSelected:btn.selected];
-    }
+    self.billId = historyBillInfo.billId;
+    
+    NSString *priceString = [NSString stringWithFormat:@"专业陪诊%.2f元", historyBillInfo.price];
+    
+    NSMutableAttributedString *chargeString = [[NSMutableAttributedString alloc]initWithString:priceString];
+    
+    NSRange prefRange = [priceString rangeOfString:@"专业陪诊"];
+    NSRange suffixRange = NSMakeRange(prefRange.length, priceString.length-prefRange.length-prefRange.location);
+    [chargeString addAttribute:NSForegroundColorAttributeName value:COLOR(74, 74, 74, 1) range:prefRange];
+    [chargeString addAttribute:NSForegroundColorAttributeName value:COLOR(250, 98, 98, 1) range:suffixRange];
+    self.chargeLabel.attributedText = chargeString;
 }
+
+
 
 - (void)layoutSubviews {
     [super layoutSubviews];

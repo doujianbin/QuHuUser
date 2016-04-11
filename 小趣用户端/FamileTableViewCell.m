@@ -18,9 +18,9 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        self.lab_name = [[UILabel alloc]initWithFrame:CGRectMake(20, 12, 34, 18)];
+        self.lab_name = [[UILabel alloc]initWithFrame:CGRectMake(20, 15, 34, 18)];
         [self.contentView addSubview:self.lab_name];
-        self.lab_name.font = [UIFont systemFontOfSize:17];
+        self.lab_name.font = [UIFont systemFontOfSize:16];
         self.lab_name.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         
         self.lab_sexAndphoneNum = [[UILabel alloc]initWithFrame:CGRectMake(73, 15, 150, 18)];

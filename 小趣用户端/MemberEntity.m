@@ -7,9 +7,54 @@
 //
 
 #import "MemberEntity.h"
+#import <MJExtension/MJExtension.h>
 
 @implementation MemberEntity
 
++ (NSArray *)parseMemberWithJson:(id)json {
+    return [self parseObjectArrayWithKeyValues:json];
+}
+
++ (MemberEntity *)parseMemberEntityWithJson:(id)json{
+    return [self parseObjectWithKeyValues:json];
+}
+
++ (NSDictionary *)replacedKeyFromPropertyName
+{
+    return @{
+             @"userId" : @"id",
+             };
+}
+
++ (NSArray *)parseObjectArrayWithKeyValues:(id)json
+{
+    if([NSJSONSerialization isValidJSONObject:json]){
+        
+        NSArray * result = nil;
+        @try {
+            result = [self objectArrayWithKeyValuesArray:json];
+        }
+        @catch (NSException *exception) {
+            
+            return nil;
+        }
+        return result;
+    }else{
+        return [NSArray array];
+    }
+}
+
++ (id)parseObjectWithKeyValues:(NSDictionary *)keyValues
+{
+    id result = nil;
+    @try {
+        result = [self objectWithKeyValues:keyValues];
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+    return result;
+}
 
 
 @end

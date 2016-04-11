@@ -14,5 +14,9 @@
 
 @property (nonatomic, copy) NSString *create_time;
 
+@property (nonatomic, assign) CGFloat price;
+
+@property (nonatomic, copy)NSString *billId;
+
 
 @end

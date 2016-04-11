@@ -20,7 +20,8 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title= @"推广";
+    self.navigationController.navigationBar.translucent = NO;
+    self.title= self.strTitle;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
     

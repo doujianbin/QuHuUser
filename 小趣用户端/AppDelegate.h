@@ -14,5 +14,7 @@
 
 - (void)setTabBarRootView;
 
+- (void)gotoSignIn;
+
 @end
 

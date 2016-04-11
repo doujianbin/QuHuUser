@@ -8,7 +8,8 @@
 
 #import "AFNManager.h"
 #import "SignInViewController.h"
-
+#import "AppDelegate.h"
+#import "CommonFunc.h"
 @implementation AFNManager
 
 + (AFNManager *)shareManager
@@ -37,6 +38,18 @@
             [_manager.requestSerializer setValue:[LoginStorage GetHTTPHeader] forHTTPHeaderField:@"Authorization"];
         }
         
+        NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"douhttps" ofType:@"cer"];
+        NSData * certData =[NSData dataWithContentsOfFile:cerPath];
+        
+        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+        
+        [securityPolicy setAllowInvalidCertificates:YES];
+        // 设置证书
+        securityPolicy.validatesDomainName = YES;
+        securityPolicy.pinnedCertificates = @[certData];
+        
+        _manager.securityPolicy = securityPolicy;
+        
     }
     return self;
 }
@@ -56,22 +69,106 @@
             NSLog(@"%ld",operation.response.statusCode);
             if (operation.response.statusCode == 401) {
                 // 重新登录
-                NSUserDefaults *userdefaults = [[NSUserDefaults alloc]init];
-                [userdefaults removeObjectForKey:@"httpHeader"];
-                NSLog(@"%@",[LoginStorage GetHTTPHeader]);
+//                NSUserDefaults *userdefaults = [[NSUserDefaults alloc]init];
+//                [userdefaults removeObjectForKey:@"httpHeader"];
+//                NSLog(@"%@",[LoginStorage GetHTTPHeader]);
+//                
+//                [(AppDelegate*)[UIApplication sharedApplication].delegate gotoSignIn];
                 
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"loginAgain" object:self];
+                NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetToken];
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",  @"text/json", @"text/html", @"text/javascript",@"x-www-form-urlencoded",nil]];
+                
+                NSMutableURLRequest *request =
+                [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:strUrl]];
+                [request setHTTPMethod:@"POST"];
+                NSString *strHttpHeader = [NSString stringWithFormat:@"Basic %@",[CommonFunc base64StringFromText:@"accompany-user-client:ccbPASSquyiyuan20154421"]];
+                [request setValue:strHttpHeader
+               forHTTPHeaderField:@"Authorization"];
+                [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+                
+                NSString *strUserName = [NSString stringWithFormat:@"U_%@",[LoginStorage GetPhoneNum]];
+                NSString *token = [NSString stringWithFormat:@"grant_type=password&username=%@&password=%@",strUserName,[LoginStorage GetYanZhengMa]];
+                NSData *data = [token dataUsingEncoding:NSUTF8StringEncoding];
+                [request setHTTPBody:data];
+                
+                NSOperation *operation =
+                [manager HTTPRequestOperationWithRequest:request
+                                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                     // 成功后的处理
+                                                     NSLog(@"登陆成功返回 == %@",responseObject);
+                                                     NSString *token_type = [responseObject objectForKey:@"token_type"];
+                                                     NSString *access_token = [responseObject objectForKey:@"access_token"];
+                                                     NSString *httpHeader = [NSString stringWithFormat:@"%@ %@",token_type,access_token];
+                                                     
+                                                     [LoginStorage saveHTTPHeader:httpHeader];
+                                                     [LoginStorage saveIsLogin:YES];
+                                                     
+                                                     [(AppDelegate*)[UIApplication sharedApplication].delegate setTabBarRootView];
+                                                 }
+                                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                     // 失败后的处理
+                                                     NSLog(@"%@", error);
+                                                    
+                                                 }];
+                [manager.operationQueue addOperation:operation];
             }
-  
+            
         }];
     }else if ([method isEqualToString:@"POST"]) {
         [self.manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             if (success) {
                 success(responseObject);
             }
-            
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
             fail(error);
+            if (operation.response.statusCode == 401) {
+                // 重新登录
+//                NSUserDefaults *userdefaults = [[NSUserDefaults alloc]init];
+//                [userdefaults removeObjectForKey:@"httpHeader"];
+//                NSLog(@"%@",[LoginStorage GetHTTPHeader]);
+//                
+//                [(AppDelegate*)[UIApplication sharedApplication].delegate gotoSignIn];
+                NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetToken];
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",  @"text/json", @"text/html", @"text/javascript",@"x-www-form-urlencoded",nil]];
+                
+                NSMutableURLRequest *request =
+                [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:strUrl]];
+                [request setHTTPMethod:@"POST"];
+                NSString *strHttpHeader = [NSString stringWithFormat:@"Basic %@",[CommonFunc base64StringFromText:@"accompany-user-client:ccbPASSquyiyuan20154421"]];
+                [request setValue:strHttpHeader
+               forHTTPHeaderField:@"Authorization"];
+                [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+                
+                NSString *strUserName = [NSString stringWithFormat:@"U_%@",[LoginStorage GetPhoneNum]];
+                NSString *token = [NSString stringWithFormat:@"grant_type=password&username=%@&password=%@",strUserName,[LoginStorage GetYanZhengMa]];
+                NSData *data = [token dataUsingEncoding:NSUTF8StringEncoding];
+                [request setHTTPBody:data];
+                
+                NSOperation *operation =
+                [manager HTTPRequestOperationWithRequest:request
+                                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                     // 成功后的处理
+                                                     NSLog(@"登陆成功返回 == %@",responseObject);
+                                                     NSString *token_type = [responseObject objectForKey:@"token_type"];
+                                                     NSString *access_token = [responseObject objectForKey:@"access_token"];
+                                                     NSString *httpHeader = [NSString stringWithFormat:@"%@ %@",token_type,access_token];
+                                                     
+                                                     [LoginStorage saveHTTPHeader:httpHeader];
+                                                     [LoginStorage saveIsLogin:YES];
+                                                     
+                                                     [(AppDelegate*)[UIApplication sharedApplication].delegate setTabBarRootView];
+                                                 }
+                                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                     // 失败后的处理
+                                                     NSLog(@"%@", error);
+                                                     
+                                                 }];
+                [manager.operationQueue addOperation:operation];
+            }
         }];
     }
 }
@@ -87,21 +184,21 @@
     
     NSOperation *operation =
     [_manager HTTPRequestOperationWithRequest:request
-                                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                         // 成功后的处理
-                                         if (success) {
-                                             success(responseObject);
-                                         }
-                                         
-                                         
-                                     }
-                                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         // 失败后的处理
-                                         fail(error);
-                                     }];
+                                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                          // 成功后的处理
+                                          if (success) {
+                                              success(responseObject);
+                                          }
+                                          
+                                          
+                                      }
+                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                          // 失败后的处理
+                                          fail(error);
+                                      }];
     [_manager.operationQueue addOperation:operation];
     
-
+    
     
     
 }

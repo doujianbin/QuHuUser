@@ -18,12 +18,12 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        self.lab_hospitalName = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 8.5, 200, 24)];
+        self.lab_hospitalName = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 8.5, SCREEN_WIDTH - 30 - 100, 24)];
         [self.contentView addSubview:self.lab_hospitalName];
         self.lab_hospitalName.font = [UIFont systemFontOfSize:17];
         self.lab_hospitalName.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         
-        self.lab_address = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 32, 200, 18.5)];
+        self.lab_address = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 32, SCREEN_WIDTH - 30 - 100, 18.5)];
         [self.contentView addSubview:self.lab_address];
         self.lab_address.font = [UIFont systemFontOfSize:13];
         self.lab_address.textColor = [UIColor colorWithHexString:@"#4A4A4A"];

@@ -27,17 +27,23 @@
         UIImageView *iconImageView = [[UIImageView alloc]init];
         iconImageView.contentMode = UIViewContentModeScaleToFill;
         [personDataView addSubview:iconImageView];
+        iconImageView.layer.cornerRadius = 30.0f;
+        iconImageView.layer.masksToBounds = YES;
+        iconImageView.layer.borderWidth = 1.0f;
+        iconImageView.layer.borderColor = [[UIColor colorWithHexString:@"#EEEEEE"] CGColor];
         self.iconImageView = iconImageView;
         
         UILabel *nameLabel = [[UILabel alloc]init];
         nameLabel.textColor = COLOR(74, 74, 74, 1);
         nameLabel.adjustsFontSizeToFitWidth = YES;
+        nameLabel.font = [UIFont systemFontOfSize:18];
         [personDataView addSubview:nameLabel];
         self.nameLabel = nameLabel;
         
         UILabel *creditLabel = [[UILabel alloc]init];
         creditLabel.adjustsFontSizeToFitWidth = YES;
         [personDataView addSubview:creditLabel];
+        creditLabel.font = [UIFont systemFontOfSize:13];
         self.creditLabel = creditLabel;
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -56,7 +62,7 @@
     
     self.iconImageView.frame = CGRectMake(15, 15, 60, 60);
     
-    self.nameLabel.frame = CGRectMake(90, 20.5, 90, 25);
+    self.nameLabel.frame = CGRectMake(90, 20.5, SCREEN_WIDTH - 110, 25);
     
     self.creditLabel.frame = CGRectMake(90, 50.5, 62, 18.5);
 }

@@ -15,3 +15,47 @@
 @property (nonatomic, strong)UITextField *detailtextField;
 
 @end
+
+
+@interface billHeaderCell : UITableViewCell
+
+@property (nonatomic, strong)UILabel *titleLabel;
+
+@property (nonatomic, strong)UITextField *detailtextField;
+
+@end
+
+@interface billContentCell : UITableViewCell
+
+@property (nonatomic, strong)UILabel *titleLabel;
+
+@property (nonatomic, strong)UITextField *detailtextField;
+
+@end
+
+@interface recipientNameCell : UITableViewCell
+
+@property (nonatomic, strong)UILabel *titleLabel;
+
+@property (nonatomic, strong)UITextField *detailtextField;
+
+@end
+
+@interface phoneNumberCell : UITableViewCell
+
+@property (nonatomic, strong)UILabel *titleLabel;
+
+@property (nonatomic, strong)UITextField *detailtextField;
+
+@end
+
+@interface addressCell : UITableViewCell
+
+@property (nonatomic, strong)UILabel *titleLabel;
+
+@property (nonatomic, strong)UITextField *detailtextField;
+
+@end
+
+
+

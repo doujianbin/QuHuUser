@@ -27,12 +27,14 @@
         UILabel *endTimeLabel = [[UILabel alloc]init];
         endTimeLabel.adjustsFontSizeToFitWidth = YES;
         [self.contentView addSubview:endTimeLabel];
+        endTimeLabel.font = [UIFont systemFontOfSize:14];
         self.endTimeLabel = endTimeLabel;
         
         UILabel *chargeLabel = [[UILabel alloc]init];
         chargeLabel.adjustsFontSizeToFitWidth = YES;
         [self.contentView addSubview:chargeLabel];
         self.chargeLabel = chargeLabel;
+        self.chargeLabel.textAlignment = NSTextAlignmentRight;
         
         self.contentView.backgroundColor = COLOR(245, 246, 247, 1);
         
@@ -43,13 +45,13 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.couponImageView.frame = CGRectMake(15, 0, [UIScreen mainScreen].bounds.size.width - 30, 114.5);
+    self.couponImageView.frame = CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width - 20, 114.5);
     
-    self.couponTypeLabel.frame = CGRectMake(35.5, 33.5, 54, 19);
+    self.couponTypeLabel.frame = CGRectMake(35.5, 43.5, 54, 19);
     
-    self.endTimeLabel.frame =CGRectMake(35.5, 59, 129, 14.5);
+    self.endTimeLabel.frame =CGRectMake(35.5, 72, 200, 14.5);
     
-    self.chargeLabel.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 89, 35.5, 55.5, 37.5);
+    self.chargeLabel.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 89, 45.5, 55.5, 37.5);
 }
 
 @end

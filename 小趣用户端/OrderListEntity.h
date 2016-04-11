@@ -18,6 +18,12 @@
 @property (nonatomic ,strong)NSString *hospitalName;
 @property (nonatomic ,strong)NSString *doctorName;
 @property (nonatomic ,strong)NSString *patientName;
+@property (nonatomic ,strong)NSString *scheduleTime;
+@property (nonatomic ,strong)NSString *totalAmount;
+@property (nonatomic ,strong)NSString *nursePhoneNumber;
+@property (nonatomic ,strong)NSString *remark;
+@property (nonatomic ,strong)NSString *orderNo;
+@property (nonatomic        )int stars;
 
 + (NSArray *)parseOrderListWithJson:(id)json;
 + (OrderListEntity *)parseOrderListEntityWithJson:(id)json;

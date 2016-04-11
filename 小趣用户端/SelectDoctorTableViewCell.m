@@ -38,13 +38,13 @@
         self.lab_zhicheng.alpha = 0.6;
         [self.lab_zhicheng setText:@"院长"];
         
-        self.lab_hospital = [[UILabel alloc]initWithFrame:CGRectMake(91, 41, SCREEN_WIDTH - 50 - 91 - 20, 16.5)];
+        self.lab_hospital = [[UILabel alloc]initWithFrame:CGRectMake(91, 41, SCREEN_WIDTH - 110 - 91 - 10, 16.5)];
         [self.contentView addSubview:self.lab_hospital];
         self.lab_hospital.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         self.lab_hospital.font = [UIFont systemFontOfSize:12];
         [self.lab_hospital setText:@"北京协和医院"];
         
-        self.lab_keshi = [[UILabel alloc]initWithFrame:CGRectMake(91, 59.5, 100, 16.5)];
+        self.lab_keshi = [[UILabel alloc]initWithFrame:CGRectMake(91, 59.5, SCREEN_WIDTH - 110 - 91 - 10, 16.5)];
         [self.contentView addSubview:self.lab_keshi];
         self.lab_keshi.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
         self.lab_keshi.font = [UIFont systemFontOfSize:12];

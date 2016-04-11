@@ -16,9 +16,12 @@
 #import "ShareViewController.h"
 #import "SettingTableViewController.h"
 #import "ChangeMyDataViewController.h"
+#import "SignInViewController.h"
+#import "SelectFamilyViewController.h"
+#import "UserInfoDetailViewController.h"
+#import "PatientViewController.h"
 
-
-@interface MyTableViewController ()<changeMyDataViewControllerDelegate>
+@interface MyTableViewController ()
 
 @property (nonatomic, strong)NSArray *personCenterImageArray;
 
@@ -27,7 +30,8 @@
 @property (nonatomic, weak)PersonDataCell *personDataCell;
 
 @property (nonatomic, strong)NSMutableArray *dataArray;
-
+@property (nonatomic ,strong)NSString *points;
+@property (nonatomic ,strong)NSString *str_points;
 
 @end
 
@@ -44,7 +48,23 @@
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [self makeNSURLRequest];
+    self.tableView.scrollEnabled = NO;
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loginAgainAction) name:@"loginIn" object:nil];
+}
+
+-(void)loginAgainAction{
+    SignInViewController *sign = [[SignInViewController alloc]init];
+    sign.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:sign animated:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    if ([LoginStorage isLogin] == YES) {
+        
+        [self makeNSURLRequest];
+    }
+    [self.tableView reloadData];
 }
 
 - (void)makeNSURLRequest {
@@ -53,22 +73,36 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/queryPersonalInfo",Development];
     
-    NSString *userName = [[NSUserDefaults standardUserDefaults]stringForKey:@"nickname"];
     
-    if (userName == nil) {
-        userName = @"123";
-    }
-    NSDictionary *dic = @{@"userId":userName};
-    
-    [manager RequestJsonWithUrl:url method:@"POST" parameter:dic result:^(id responseDic) {
+    [manager RequestJsonWithUrl:url method:@"POST" parameter:nil result:^(id responseDic) {
         
         NSLog(@"~~~~~success %@",responseDic);
         
-        self.personDataCell.nameLabel.text = [responseDic objectForKey:@"nickName"];
-
-        self.personDataCell.creditLabel.text = [[responseDic objectForKey:@"integralIn"]stringValue];
-
-        
+        self.points = [NSString stringWithFormat:@"%@  积分",[[responseDic objectForKey:@"data"]objectForKey:@"points"]];
+        self.str_points = [NSString stringWithFormat:@"%@",[[responseDic objectForKey:@"data"]objectForKey:@"points"]];
+//        NSString *nickName = [[responseDic objectForKey:@"data"]objectForKey:@"nickName"];
+//        if ([nickName isKindOfClass:[NSNull class]]) {
+//           self.personDataCell.nameLabel.text = @"小趣好护士";
+//        }else{
+//            self.personDataCell.nameLabel.text = nickName;
+//        }
+//        self.personDataCell.creditLabel.text = [[responseDic objectForKey:@"data"]objectForKey:@"points"];
+//        
+//        NSString *url = [[responseDic objectForKey:@"data"]objectForKey:@"photo"];
+//
+//        if ([url isKindOfClass:[NSNull class]]) {
+//            
+//            self.personDataCell.iconImageView.image = [UIImage imageNamed:@"morenicon"];
+//
+//        }else {
+//        
+//            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+//            self.personDataCell.iconImageView.image = [UIImage imageWithData:imageData];
+//
+//        }
+//        
+//
+        [self.tableView reloadData];
     } fail:^(NSError *error) {
         
         NSLog(@"~~~~~~~~~fail %@",error);
@@ -114,7 +148,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 5;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,15 +160,44 @@
     
     if (section == 0) {
         PersonDataCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId2];
-        if (cell == nil) {
             
             cell = [[PersonDataCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId2];
             
-        }
-        
-        cell.iconImageView.image = [UIImage imageNamed:@"coupons"];
-        
-        self.personDataCell = cell;
+            if ([LoginStorage isLogin] == YES) {
+                if (self.points.length > 0) {
+                    
+                    NSMutableAttributedString *myStr = [[NSMutableAttributedString alloc] initWithString:self.points];
+                    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ffc73d"] range:NSMakeRange(0,myStr.length - 4)];
+                    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13.0f] range:NSMakeRange(0, myStr.length - 4)];
+                    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#9b9b9b"] range:NSMakeRange(myStr.length - 4, 2)];
+                    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13.0f] range:NSMakeRange(myStr.length - 4,2)];
+                    [cell.creditLabel setAttributedText:myStr];
+                }
+                NSString *nickName = [LoginStorage GetnickName];
+                if (nickName.length == 0) {
+                    cell.nameLabel.text = @"小趣好护士";
+                }else{
+                    cell.nameLabel.text = nickName;
+                }
+                
+                NSString *url = [LoginStorage Getphoto];
+                
+                if (url.length == 0) {
+                    
+                    cell.iconImageView.image = [UIImage imageNamed:@"HeadImg"];
+                    cell.iconImageView.layer.borderColor = [[UIColor clearColor] CGColor];
+                    
+                }else {
+                    
+                    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+                    cell.iconImageView.image = [UIImage imageWithData:imageData];
+                    
+                }
+            }else{
+                cell.iconImageView.image = [UIImage imageNamed:@"HeadImg"];
+                cell.iconImageView.layer.borderColor = [[UIColor clearColor] CGColor];
+                cell.nameLabel.text = @"登录/注册";
+            }
         
         return cell;
 
@@ -164,30 +227,76 @@
     
     if (section == 0) {
         if (row == 0) {
-            ChangeMyDataViewController *changeMyDataViewController = [[ChangeMyDataViewController alloc]init];
-            changeMyDataViewController.delegate = self;
-            [self.navigationController pushViewController:changeMyDataViewController animated:YES];
+            if ([LoginStorage isLogin] == YES) {
+                
+//                ChangeMyDataViewController *changeMyDataViewController = [[ChangeMyDataViewController alloc]init];
+//                
+//                changeMyDataViewController.personImage = self.personDataCell.iconImageView.image;
+//                changeMyDataViewController.personName = self.personDataCell.nameLabel.text;
+                UserInfoDetailViewController *vc = [[UserInfoDetailViewController alloc]init];
+                vc.points = self.str_points;
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                SignInViewController *vc = [[SignInViewController alloc]init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
             
         }
     }else {
+        if (row == 0) {
+            if ([LoginStorage isLogin] == YES) {
+                PatientViewController *vc = [[PatientViewController alloc]init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                SignInViewController *vc = [[SignInViewController alloc]init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }
         if (row == 1) {
-            CouponsTableViewController *couponsViewController = [[CouponsTableViewController alloc]init];
-            [self.navigationController pushViewController:couponsViewController animated:YES];
+            if ([LoginStorage isLogin] == YES) {
+                CouponsTableViewController *couponsViewController = [[CouponsTableViewController alloc]init];
+                couponsViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:couponsViewController animated:YES];
+            }else{
+                SignInViewController *vc = [[SignInViewController alloc]init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
         
         if (row == 2) {
-            BillTableViewController *billTableViewController = [[BillTableViewController alloc]init];
-            [self.navigationController pushViewController:billTableViewController animated:YES];
-            self.tabBarController.tabBar.hidden = YES;
+            if ([LoginStorage isLogin] == YES) {
+                BillTableViewController *billTableViewController = [[BillTableViewController alloc]init];
+                billTableViewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:billTableViewController animated:YES];
+            }else{
+                SignInViewController *vc = [[SignInViewController alloc]init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+
         }
+        
+//        if (row == 3) {
+//            if ([LoginStorage isLogin] == YES) {
+//                ShareViewController *shareViewController = [[ShareViewController alloc]init];
+//                shareViewController.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:shareViewController animated:YES];
+//            }else{
+//                SignInViewController *vc = [[SignInViewController alloc]init];
+//                vc.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:vc animated:YES];
+//            }
+//    
+//        }
         
         if (row == 3) {
-            ShareViewController *shareViewController = [[ShareViewController alloc]init];
-            [self.navigationController pushViewController:shareViewController animated:YES];
-        }
-        
-        if (row == 4) {
             SettingTableViewController *settingTvc = [[SettingTableViewController alloc]init];
+            settingTvc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:settingTvc animated:YES];
         }
     }
@@ -197,14 +306,14 @@
 #pragma mark 懒加载数据
 - (NSArray *)personCenterImageArray {
     if (!_personCenterImageArray) {
-        _personCenterImageArray = [NSArray arrayWithObjects:@"member",@"coupons",@"bill",@"share",@"setting", nil];
+        _personCenterImageArray = [NSArray arrayWithObjects:@"1.1个人中心@2x_03",@"coupons",@"bill",@"设置icon", nil];
     }
     return _personCenterImageArray;
 }
 
 - (NSArray *)personCenterLabelArray {
     if (!_personCenterLabelArray) {
-        _personCenterLabelArray = [NSArray arrayWithObjects:@"我的成员",@"优惠券",@"发票",@"推荐有奖",@"设置", nil];
+        _personCenterLabelArray = [NSArray arrayWithObjects:@"就诊人档案",@"优惠券",@"发票",@"设置", nil];
     }
     return _personCenterLabelArray;
 }

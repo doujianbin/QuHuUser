@@ -34,10 +34,10 @@
     [scl_back setContentSize:CGSizeMake(self.view.frame.size.width * self.arr_images.count, self.view.frame.size.height)];
     [self.view addSubview:scl_back];
     
-    self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0,self.view.frame.size.height - 15 - 15, self.view.frame.size.width, 15)];
-    self.pageControl.numberOfPages = self.arr_images.count;
-    self.pageControl.currentPage = 0;
-    [self.view addSubview:self.pageControl];
+//    self.pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0,self.view.frame.size.height - 15 - 15, self.view.frame.size.width, 15)];
+//    self.pageControl.numberOfPages = self.arr_images.count;
+//    self.pageControl.currentPage = 0;
+//    [self.view addSubview:self.pageControl];
     
     for (int i = 0; i < self.arr_images.count; i++) {
         UIImageView *iv_image = [[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.size.width * i,0, self.view.frame.size.width , self.view.frame.size.height)];
@@ -45,7 +45,7 @@
         [iv_image setImage:[UIImage imageNamed:[self.arr_images objectAtIndex:i]]];
         [scl_back addSubview:iv_image];
     }
-    UIButton *btn_enter = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width * 3 +self.view.frame.size.width / 2 - 90,self.view.frame.size.height - 30 - 230 , 180, 100)];
+    UIButton *btn_enter = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width * 4 +self.view.frame.size.width / 2 - 90,self.view.frame.size.height - 30 - 230 , 180, 260)];
     [btn_enter addTarget:self action:@selector(enterAction) forControlEvents:UIControlEventTouchUpInside];
     [scl_back addSubview:btn_enter];
     
@@ -61,9 +61,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    self.pageControl.currentPage = scrollView.contentOffset.x/self.view.frame.size.width;
-}
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+//    self.pageControl.currentPage = scrollView.contentOffset.x/self.view.frame.size.width;
+//}
 
 /*
  #pragma mark - Navigation
