@@ -21,6 +21,10 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
+    
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     self.title= self.strTitle;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
@@ -32,7 +36,7 @@
     [btnl addTarget:self action:@selector(NavLeftAction) forControlEvents:UIControlEventTouchUpInside];
 
     
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     self.webView.delegate = self;
     [self.view addSubview:_webView];
     

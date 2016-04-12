@@ -143,7 +143,7 @@
     
     UILabel *lab_xiangqing2 = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(lab_xiangqing1.frame) + 10, 200, 13)];
     [self.v_detail addSubview:lab_xiangqing2];
-    [lab_xiangqing2 setText:@"超时费 (25 元 / 小时)"];
+    [lab_xiangqing2 setText:@"超时费 (25 元 / 半小时)"];
     [lab_xiangqing2 setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
     [lab_xiangqing2 setFont:[UIFont systemFontOfSize:13]];
     

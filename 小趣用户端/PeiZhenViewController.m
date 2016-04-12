@@ -127,7 +127,7 @@
 // 中间普通陪诊和特需陪诊两个按钮
 -(void)addMidView{
     self.cycleBannerView = [KDCycleBannerView new];
-    self.cycleBannerView.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame) / 375 * 225);
+    self.cycleBannerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame) / 375 * 225);
     self.cycleBannerView.delegate = self;
     self.cycleBannerView.datasource = self;
     self.cycleBannerView.continuous = YES;
