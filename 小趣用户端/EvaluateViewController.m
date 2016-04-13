@@ -113,7 +113,7 @@
     [lab_totlePrice setTextColor:[UIColor colorWithHexString:@"#fa6262"]];
     [lab_totlePrice setTextAlignment:NSTextAlignmentCenter];
     [lab_totlePrice setFont:[UIFont systemFontOfSize:25]];
-    [lab_totlePrice setText:[NSString stringWithFormat:@"%@ 元",self.commonOrderEntity.totalAmount]];
+    [lab_totlePrice setText:[NSString stringWithFormat:@"%@ 元",self.commonOrderEntity.payAmount]];
     
     UILabel *lab_feiyong = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 30, CGRectGetMaxY(lab_totlePrice.frame) + 10, 60, 13)];
     [self.v_detail addSubview:lab_feiyong];
@@ -138,7 +138,7 @@
     
     UILabel *lab_xiangqing11 = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 115, CGRectGetMaxY(lab_feiyong.frame) + 10, 100, 13)];
     [self.v_detail addSubview:lab_xiangqing11];
-    [lab_xiangqing11 setText:[NSString stringWithFormat:@"%@ 元",[[LoginStorage GetCommonOrderDic] objectForKey:@"info"]]];
+    [lab_xiangqing11 setText:[NSString stringWithFormat:@"%@ 元",self.commonOrderEntity.setAmount]];
     [lab_xiangqing11 setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
     [lab_xiangqing11 setFont:[UIFont systemFontOfSize:13]];
     [lab_xiangqing11 setTextAlignment:NSTextAlignmentRight];
