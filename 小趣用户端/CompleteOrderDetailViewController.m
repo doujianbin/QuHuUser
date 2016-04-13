@@ -86,7 +86,12 @@
     [self.v_total addSubview:img_head];
     img_head.layer.cornerRadius = 30.0f;
     img_head.layer.masksToBounds = YES;
-    [img_head sd_setImageWithURL:[NSURL URLWithString:[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"]] placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
+    if ([[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"] isKindOfClass:[NSNull class]]) {
+        [img_head setImage:[UIImage imageNamed:@"ic_个人中心"]];
+    }else{
+        
+        [img_head sd_setImageWithURL:[NSURL URLWithString:[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"]] placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
+    }
     UILabel *lab_nurseName = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(img_head.frame) + 15, 35, 200, 16)];
     [self.v_total addSubview:lab_nurseName];
     [lab_nurseName setText:[self.commonOrderEntity.nurse objectForKey:@"nurseName"]];

@@ -73,7 +73,12 @@
         
         UIImageView *img_head = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15, 60, 60)];
         [self.v_total addSubview:img_head];
-        [img_head sd_setImageWithURL:[NSURL URLWithString:[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"]] placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
+        if ([[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"] isKindOfClass:[NSNull class]]) {
+            [img_head setImage:[UIImage imageNamed:@"ic_个人中心"]];
+        }else{
+            
+            [img_head sd_setImageWithURL:[NSURL URLWithString:[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"]] placeholderImage:[UIImage imageNamed:@"ic_个人中心"]];
+        }
         UILabel *lab_nurseName = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(img_head.frame) + 15, 35, 200, 16)];
         [self.v_total addSubview:lab_nurseName];
         [lab_nurseName setText:[self.commonOrderEntity.nurse objectForKey:@"nurseName"]];
