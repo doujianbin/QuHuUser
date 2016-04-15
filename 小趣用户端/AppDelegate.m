@@ -49,7 +49,7 @@
                                                           [UIColor blackColor], NSForegroundColorAttributeName,
                                                           [UIFont systemFontOfSize:18.0], NSFontAttributeName, nil]];
     if (![LoginStorage isFirstEnter]) {
-        self.vc_linePage = [[LinkPageViewController alloc]initWithImageArray:@[@"linkPage_one",@"linkPage_two",@"linkPage_three",@"linkPage_four",@"linkPage_five",]];
+        self.vc_linePage = [[LinkPageViewController alloc]initWithImageArray:@[@"linkPage_one",@"linkPage_two",@"linkPage_three",@"linkPage_four"]];
         self.vc_linePage.delegate = self;
         
         [self.window setRootViewController:_vc_linePage];
@@ -107,7 +107,19 @@
     [WXApi registerApp:@"wxca05a9ac9c6686df" withDescription:@"小趣好护士"];
     [TalkingData setExceptionReportEnabled:YES];
     [TalkingData sessionStarted:@"0B036ECEBFFE54906ADCAB12D2AC2761" withChannelId:@"AppStore"];
+    
 //    [Bugtags startWithAppKey:@"889fb84e3179391c44711a9023d652c0" invocationEvent:BTGInvocationEventBubble];
+    
+    BugtagsOptions *options = [[BugtagsOptions alloc] init];
+    options.trackingCrashes = YES;
+    [Bugtags startWithAppKey:@"889fb84e3179391c44711a9023d652c0" invocationEvent:BTGInvocationEventBubble options:options];
+#ifdef BUGTAGS_TEST
+    [Bugtags setInvocationEvent:BTGInv
+     ocationEventBubble];
+#else
+    [Bugtags setInvocationEvent:BTGInvocationEventNone];
+#endif
+    
     [TalkingData trackEvent:@"用户启动"];
     [self loadVersionMsg];
     

@@ -45,7 +45,7 @@
         [iv_image setImage:[UIImage imageNamed:[self.arr_images objectAtIndex:i]]];
         [scl_back addSubview:iv_image];
     }
-    UIButton *btn_enter = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width * 4 +self.view.frame.size.width / 2 - 90,self.view.frame.size.height - 30 - 230 , 180, 260)];
+    UIButton *btn_enter = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width * (self.arr_images.count - 1) +self.view.frame.size.width / 2 - 90,self.view.frame.size.height - 30 - 230 , 180, 260)];
     [btn_enter addTarget:self action:@selector(enterAction) forControlEvents:UIControlEventTouchUpInside];
     [scl_back addSubview:btn_enter];
     

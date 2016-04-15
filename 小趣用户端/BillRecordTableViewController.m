@@ -154,7 +154,7 @@
     
     NSMutableAttributedString *chargeString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"专业陪诊%@元",[dic objectForKey:@"amount"]]];
     [chargeString addAttribute:NSForegroundColorAttributeName value:COLOR(74, 74, 74, 1) range:NSMakeRange(0, 4)];
-    [chargeString addAttribute:NSForegroundColorAttributeName value:COLOR(250, 98, 98, 1) range:NSMakeRange(4, 4)];
+    [chargeString addAttribute:NSForegroundColorAttributeName value:COLOR(250, 98, 98, 1) range:NSMakeRange(4, chargeString.length - 4)];
     cell.chargeLabel.attributedText = chargeString;
     NSString *CreTime = [dic objectForKey:@"create_time"];
     NSString *time = [CreTime substringToIndex:CreTime.length - 3];
