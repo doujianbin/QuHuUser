@@ -13,7 +13,6 @@
 
 #import "CouponsTableViewController.h"
 #import "BillTableViewController.h"
-#import "ShareViewController.h"
 #import "SettingTableViewController.h"
 #import "ChangeMyDataViewController.h"
 #import "SignInViewController.h"
@@ -69,10 +68,9 @@
 
 - (void)makeNSURLRequest {
     
-    AFNManager *manager = [AFNManager shareManager];
+    AFNManager *manager = [[AFNManager alloc] init];
     
     NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/queryPersonalInfo",Development];
-    
     
     [manager RequestJsonWithUrl:url method:@"POST" parameter:nil result:^(id responseDic) {
         

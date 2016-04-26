@@ -21,6 +21,7 @@ static NSString *const photo = @"photo";
 static NSString * const KeFuNum = @"KeFuNum";
 static NSString * const PregnancyStatus = @"PregnancyStatus";
 static NSString * const IsFirstMakeOrder = @"IsFirstMakeOrder";
+static NSString * const Package = @"Package";     // 套餐  dic
 
 @implementation LoginStorage
 
@@ -86,6 +87,17 @@ static NSString * const IsFirstMakeOrder = @"IsFirstMakeOrder";
 }
 + (NSDictionary *)GetSpecialrderDic{
     return [UserDefaultsUtils valueWithKey:SpecialOrderDic];
+}
+
+/**
+ *  存/取  首页获得的套餐套餐信息
+ */
+
++ (void)savePackageArr:(NSArray *)arr{
+    [UserDefaultsUtils saveValue:arr forKey:Package];
+}
++ (NSArray *)GetPackageArr{
+    return [UserDefaultsUtils valueWithKey:Package];
 }
 
 + (void)saveFirstEnterStatus:(BOOL)isFirstEnter{

@@ -14,10 +14,9 @@
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (assign, nonatomic) BOOL scrollViewBounces;
-
+@property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) NSArray *datasourceImages;
 @property (assign, nonatomic) NSUInteger currentSelectedPage;
-@property (strong, nonatomic) UIPageControl *pageControl;
 @property (strong, nonatomic) ReloadCompleteBlock completeBlock;
 
 @end
@@ -113,6 +112,12 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
     
     _pageControl.numberOfPages = _datasourceImages.count;
     _pageControl.currentPage = 0;
+    
+    if (_datasourceImages.count == 1) {
+        _pageControl.hidden = YES;
+    }else{
+        _pageControl.hidden = NO;
+    }
     
     if (self.isContinuous) {
         NSMutableArray *cycleDatasource = [_datasourceImages mutableCopy];

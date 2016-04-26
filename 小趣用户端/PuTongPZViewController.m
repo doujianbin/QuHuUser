@@ -16,7 +16,7 @@
 #import "Toast+UIView.h"
 #import "TalkingData.h"
 
-@interface PuTongPZViewController ()<UITableViewDataSource,UITableViewDelegate,SelectFamilyViewControllerDelegate,TwoLevelViewControllerDegelate,CouponsTableViewControllerDegelate,UIPickerViewDataSource,UIPickerViewDelegate>{
+@interface PuTongPZViewController ()<UITableViewDataSource,UITableViewDelegate,SelectFamilyViewControllerDelegate,TwoLevelViewControllerDegelate,CouponsTableViewControllerDegelate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>{
     UITableView *tableView1;
     UITableView *tableView2;
 }
@@ -50,6 +50,10 @@
 
 @property(nonatomic, assign) UIWindow *awindow;
 
+@property (nonatomic ,strong)UIButton *btn_yunfu;
+@property (nonatomic ,strong)UIButton *btn_NoYunfu;
+@property (nonatomic,assign)int   int_isyunfu;   // 0 为是孕妇  1 为不是孕妇
+@property (nonatomic ,strong)NSString *zhifu_orderID; // 引导跳转支付传的订单Id(风控)
 @end
 
 @implementation PuTongPZViewController
@@ -61,9 +65,11 @@
     self.arr_hour = [NSMutableArray array];
     self.arr_min = [NSMutableArray array];
     
-    self.navigationController.navigationBar.translucent = NO;
-    [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
     self.title = @"预约陪诊";
+    
+    self.navigationController.navigationBar.translucent = NO;
+    
+    [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
     UIButton *btnl = [[UIButton alloc]initWithFrame:CGRectMake(15, 21.5, 20, 20)];
@@ -71,7 +77,6 @@
     UIBarButtonItem *btnleft = [[UIBarButtonItem alloc]initWithCustomView:btnl];
     self.navigationItem.leftBarButtonItem = btnleft;
     [btnl addTarget:self action:@selector(NavLeftAction) forControlEvents:UIControlEventTouchUpInside];
-    
     UIView *bv = [[UIView alloc]init];
     [self.view addSubview:bv];
     
@@ -80,7 +85,7 @@
     // Do any additional setup after loading the view.
     [self addTimeSelect];
 
-    
+    self.int_isyunfu = 1;
 }
 
 -(void)addTimeData{
@@ -126,7 +131,7 @@
 -(void)addTableView{
 
     
-    tableView1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 11, SCREEN_WIDTH, 57 * 3 ) style:UITableViewStylePlain];
+    tableView1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 11, SCREEN_WIDTH, 57 * 4 ) style:UITableViewStylePlain];
     [self.view addSubview:tableView1];
     [tableView1 setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
     tableView1.delegate = self;
@@ -222,7 +227,7 @@
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == tableView1) {
-        return 3;
+        return 4;
     }
     if (tableView == tableView2) {
         return 1;
@@ -279,26 +284,37 @@
                 cell.lab_right.alpha = 1;
             }
         }
+        if (indexPath.row == 3) {
+            [cell.img_jiantou setHidden:YES];
+            [cell.lab_left setText:@"是否孕妇"];
+            self.btn_yunfu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 120, 17, 23, 23)];
+            [cell addSubview:self.btn_yunfu];
+            [self.btn_yunfu setBackgroundImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
+            [self.btn_yunfu addTarget:self action:@selector(btn_yunfuAction) forControlEvents:UIControlEventTouchUpInside];
+            
+            UILabel *lab_yes = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_yunfu.frame) + 10, 20, 16, 16)];
+            [lab_yes setText:@"是"];
+            [lab_yes setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+            [lab_yes setFont:[UIFont systemFontOfSize:16]];
+            [cell addSubview:lab_yes];
+            
+            self.btn_NoYunfu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 63, 17, 23, 23)];
+            [cell addSubview:self.btn_NoYunfu];
+            [self.btn_NoYunfu setBackgroundImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
+            [self.btn_NoYunfu addTarget:self action:@selector(btn_NoYunfuAction) forControlEvents:UIControlEventTouchUpInside];
+            
+            UILabel *lab_no = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_NoYunfu.frame) + 9, 20, 16, 16)];
+            [lab_no setText:@"否"];
+            [lab_no setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+            [lab_no setFont:[UIFont systemFontOfSize:16]];
+            [cell addSubview:lab_no];
+            
+        }
         return cell;
     }
     if (tableView == tableView2) {
         BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableView2"];
-        //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //        if (indexPath.row == 0) {
-        //            [cell.lab_left setText:@"服务"];
-        //            [cell.lab_right setText:@"普通陪诊"];
-        //            [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#4A90E2"]];
-        //            [cell.img_jiantou setHidden:YES];
-        //            cell.lab_right.alpha = 1.0;
-        //        }
-        //        if (indexPath.row == 1) {
-        //            [cell.lab_left setText:@"价格"];
-        //            NSString *price = [[LoginStorage GetCommonOrderDic] objectForKey:@"info"];
-        //            [cell.lab_right setText:[NSString stringWithFormat:@"¥%@/4小时",price]];
-        //            [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
-        //            [cell.img_jiantou setHidden:YES];
-        //            cell.lab_right.alpha = 1.0;
-        //        }
+
         if (indexPath.row == 0) {
             [cell.lab_left setText:@"优惠券"];
             if ([[[self.dic_coupon objectForKey:@"id"] stringValue] length] > 0) {
@@ -585,8 +601,8 @@
     if ([[self.dic_coupon objectForKey:@"type"] intValue] == 1) {
         CGFloat totalPrice = [[[LoginStorage GetCommonOrderDic] objectForKey:@"info"] floatValue];
         CGFloat discount = [[self.dic_coupon objectForKey:@"value"] floatValue];
-        CGFloat price = totalPrice * discount / 10;
-        if (price < 1) {
+        CGFloat price = totalPrice * discount;
+        if (price < 0) {
             NSMutableAttributedString *myStr = [[NSMutableAttributedString alloc] initWithString:@"预估金额：0 元"];
             [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a4a4a"] range:NSMakeRange(0, 5)];
             [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0f] range:NSMakeRange(0, 5)];
@@ -630,6 +646,18 @@
     }
 }
 
+-(void)btn_yunfuAction{
+    self.int_isyunfu = 0;
+    [self.btn_yunfu setBackgroundImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
+    [self.btn_NoYunfu setBackgroundImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
+}
+
+-(void)btn_NoYunfuAction{
+    self.int_isyunfu = 1;
+    [self.btn_NoYunfu setBackgroundImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
+    [self.btn_yunfu setBackgroundImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
+}
+
 -(void)NavLeftAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -641,7 +669,7 @@
         [self selectTime];
         
     }else if (self.entity.userId == nil){
-        [self.view makeToast:@"请选择成员" duration:1.0 position:@"center"];
+        [self.view makeToast:@"请选择就诊人" duration:1.0 position:@"center"];
     }else{
         [TalkingData trackEvent:@"用户点击下单按钮"];
         [self UploadCommonOrder];
@@ -654,7 +682,13 @@
 -(void)UploadCommonOrder{
     self.manager = [[AFNManager alloc]init];
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,CreateCommonOrder];
-    NSString *strSetId = [[LoginStorage GetCommonOrderDic] objectForKey:@"id"];
+    NSString *strSetId;
+    if (self.int_isyunfu == 0) {
+        strSetId = @"23";
+    }else{
+        strSetId = @"21";
+    }
+//    NSString *strSetId = [[LoginStorage GetCommonOrderDic] objectForKey:@"id"];
     
     if ([[[self.dic_coupon objectForKey:@"id"] stringValue] length] > 0) {
         NSString *couponId = [NSString stringWithFormat:@"%@",[self.dic_coupon objectForKey:@"id"]];
@@ -676,7 +710,16 @@
             orderView.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:orderView animated:YES];
         }else{
-            [self.view makeToast:Message duration:1.0 position:@"center"];
+            self.zhifu_orderID = [responseDic objectForKey:@"data"];
+            if ([[responseDic objectForKey:@"errorCode"] isEqualToString:@"A301"]) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"您有一笔订单未支付，请先进行支付" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"支付", nil];
+                alert.tag = 101;
+                alert.delegate = self;
+                [alert show];
+            }else{
+                
+                [self.view makeToast:Message duration:1.0 position:@"center"];
+            }
         }
     } fail:^(NSError *error) {
         EndActivity;
@@ -698,6 +741,17 @@
     
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(removeView)];
     [self.backV addGestureRecognizer:tgr];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 101) {
+        if (buttonIndex == 1) {
+            PTSureOrderViewController *vc = [[PTSureOrderViewController alloc]init];
+            vc.str_OrderId = self.zhifu_orderID;
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 
 -(void)removeView{

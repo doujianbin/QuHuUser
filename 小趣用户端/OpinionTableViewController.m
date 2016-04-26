@@ -7,19 +7,21 @@
 //
 
 #import "OpinionTableViewController.h"
-
 #import "UIBarButtonItem+Extention.h"
-
 #import "OpinionCell.h"
 #import "ContactCell.h"
 #import "ButtonCell.h"
 #import "Toast+UIView.h"
+#import "GCPlaceholderTextView.h"
+#import "UITextView+ResignKeyboard.h"
 
-@interface OpinionTableViewController ()
+@interface OpinionTableViewController ()<UITextViewDelegate>
 
 @property (nonatomic, weak)ContactCell *contactCell;
 
 @property (nonatomic, weak)OpinionCell *opinionCell;
+
+@property (nonatomic ,strong)GCPlaceholderTextView *tf_opinion;
 
 @end
 
@@ -70,12 +72,19 @@
     NSString *cellId3 = @"cell3";
     
     if (indexPath.section == 0) {
-        OpinionCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId1];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId1];
         if (cell == nil) {
-            cell = [[OpinionCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId1];
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId1];
         }
     
-        self.opinionCell = cell;
+        self.tf_opinion = [[GCPlaceholderTextView alloc]initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH - 20, 130)];
+        self.tf_opinion.delegate = self;
+        [self.tf_opinion setPlaceholder:@"请输入您的意见或者建议"];
+        self.tf_opinion.font = [UIFont systemFontOfSize:14];
+        [self.tf_opinion setNormalInputAccessory];
+        [self.tf_opinion  setValue:@200 forKey:@"limit"];
+        [cell addSubview:self.tf_opinion];
+
         
         return cell;
     }else if (indexPath.section == 1) {
@@ -106,12 +115,12 @@
 
 - (void)commitButtonClick {
 
-    AFNManager *manager = [AFNManager shareManager];
+    AFNManager *manager = [[AFNManager alloc] init];
     
     NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/saveSuggest",Development];
     
     NSString *contactString = self.contactCell.contactTextField.text;
-    NSString *string = self.opinionCell.opinionTextViewText;
+    NSString *string = self.tf_opinion.text;
     NSLog(@"%@",string);
     NSLog(@"%@",contactString);
 
@@ -212,5 +221,36 @@
         return 44;
     }
 }
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ((textView = self.tf_opinion)) {
+        if (text.length == 0)
+            return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 120) {
+            return NO;
+        }
+        if (text.length < 120) {
+            
+        }
+        if (existedLength - selectedLength + replaceLength == 120) {
+            
+        }
+    }
+    return YES;
+}
+
+-(BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    if (self.tf_opinion.text.length > 120) {
+        self.tf_opinion.text = [self.tf_opinion.text substringToIndex:120];
+    }
+    return YES;
+}
+
+
 
 @end

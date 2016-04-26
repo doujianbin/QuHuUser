@@ -51,4 +51,6 @@
 + (void)saveFirstMakeOrder:(BOOL)isFirstMakeOrder;
 + (BOOL)isFirstMakeOrder;
 
++ (void)savePackageArr:(NSArray *)arr;
++ (NSArray *)GetPackageArr;
 @end

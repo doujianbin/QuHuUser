@@ -130,10 +130,10 @@
 
 -(void)loadVersionMsg{
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,VersionInfo];
-    NSString *deviceVersion = [UIDevice currentDevice].systemVersion;
-    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
-    NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
-    NSDictionary *dic = @{@"os":@"ios",@"osversion":deviceVersion,@"role":@"user",@"roleversion":appVersion};
+//    NSString *deviceVersion = [UIDevice currentDevice].systemVersion;
+//    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+//    NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+    NSDictionary *dic = @{@"os":@"ios",@"osversion":@"1",@"role":@"user",@"roleversion":@"3"};
     AFNManager *manager = [[AFNManager alloc]init];
     [manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
         if ([Status isEqualToString:SUCCESS]) {

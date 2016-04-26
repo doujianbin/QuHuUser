@@ -91,7 +91,6 @@
 +(BOOL) isWXAppInstalled;
 
 
-
 /*! @brief 判断当前微信的版本是否支持OpenApi
  *
  * @return 支持返回YES，不支持返回NO。

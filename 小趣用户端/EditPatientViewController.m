@@ -165,6 +165,9 @@
     [self.pictureView.v_line setHidden:YES];
     [self.sc_back setContentSize:CGSizeMake(SCREEN_WIDTH, CGRectGetMaxY(self.pictureView.frame) + 20)];
     
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tgrAction)];
+    [self.view addGestureRecognizer:tgr];
+    
 }
 - (void)deletePictureWithIndex:(int)index{
     [self.arr_pics removeObjectAtIndex:index];
@@ -309,6 +312,13 @@
         [self.view hideToastActivity];
         NetError;
     }];
+}
+
+-(void)tgrAction{
+    [self.tf_department resignFirstResponder];
+    [self.tf_diagnosis resignFirstResponder];
+    [self.tf_diseaseDescription resignFirstResponder];
+    [self.tf_doctor resignFirstResponder];
 }
 
 

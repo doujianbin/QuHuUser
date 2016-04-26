@@ -16,7 +16,7 @@
 #define Status [responseDic objectForKey:@"status"]
 #define Message [responseDic objectForKey:@"message"]
 // 开发环境
-#define Development @"https://app.haohushi.me:8443"
+#define Development @"https://ci.haohushi.me:7009"
 //正式环境 http://app.haohushi.me:8080    https://app.haohushi.me:8443
 //开发环境 http://101.201.223.151:7001
 //测试环境 https://ci.haohushi.me:7009

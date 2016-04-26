@@ -114,7 +114,7 @@
     lab.font = [UIFont boldSystemFontOfSize:16];
     lab.textColor = [UIColor colorWithHexString:@"#9B9B9B"];
     lab.textAlignment = NSTextAlignmentCenter;
-    [lab setText:@"您暂时还没有添加成员哦~"];
+    [lab setText:@"您暂时还没有添加就诊人哦~"];
 }
 
 -(NSInteger )tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

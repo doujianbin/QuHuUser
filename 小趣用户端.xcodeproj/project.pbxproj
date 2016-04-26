@@ -158,6 +158,7 @@
 		05D593031CC08088006F5D6F /* linkPage_one.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D592FF1CC08088006F5D6F /* linkPage_one.png */; };
 		05D593041CC08088006F5D6F /* linkPage_three.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593001CC08088006F5D6F /* linkPage_three.png */; };
 		05D593051CC08088006F5D6F /* linkPage_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593011CC08088006F5D6F /* linkPage_two.png */; };
+		05D593161CCDBEF8006F5D6F /* LimitInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D593151CCDBEF8006F5D6F /* LimitInput.m */; };
 		05DC59DF1CB63409008F8538 /* v1.1 750x1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DC59DB1CB63409008F8538 /* v1.1 750x1334.png */; };
 		05DC59E01CB63409008F8538 /* v1.1--640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DC59DC1CB63409008F8538 /* v1.1--640x1136.png */; };
 		05DC59E11CB63409008F8538 /* v1.1-640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DC59DD1CB63409008F8538 /* v1.1-640x960.png */; };
@@ -208,11 +209,9 @@
 		05E8C0C51C76C9BD00DA27C0 /* CouponsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0B01C76C9BD00DA27C0 /* CouponsTableViewController.m */; };
 		05E8C0C61C76C9BD00DA27C0 /* HistoryBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0B21C76C9BD00DA27C0 /* HistoryBillModel.m */; };
 		05E8C0C71C76C9BD00DA27C0 /* MakeBillTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0B41C76C9BD00DA27C0 /* MakeBillTableViewController.m */; };
-		05E8C0C81C76C9BD00DA27C0 /* MyMemberTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0B61C76C9BD00DA27C0 /* MyMemberTableViewController.m */; };
 		05E8C0C91C76C9BD00DA27C0 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0B81C76C9BD00DA27C0 /* MyTableViewController.m */; };
 		05E8C0CA1C76C9BD00DA27C0 /* OpinionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0BA1C76C9BD00DA27C0 /* OpinionTableViewController.m */; };
 		05E8C0CB1C76C9BD00DA27C0 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0BC1C76C9BD00DA27C0 /* SettingTableViewController.m */; };
-		05E8C0CC1C76C9BD00DA27C0 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0BE1C76C9BD00DA27C0 /* ShareViewController.m */; };
 		05E8C0CD1C76C9BD00DA27C0 /* UIBarButtonItem+Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0C01C76C9BD00DA27C0 /* UIBarButtonItem+Extention.m */; };
 		05E8C0EC1C76C9CB00DA27C0 /* BillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0CF1C76C9CB00DA27C0 /* BillCell.m */; };
 		05E8C0ED1C76C9CB00DA27C0 /* BillHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E8C0D11C76C9CB00DA27C0 /* BillHistoryCell.m */; };
@@ -473,6 +472,8 @@
 		05D592FF1CC08088006F5D6F /* linkPage_one.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linkPage_one.png; sourceTree = "<group>"; };
 		05D593001CC08088006F5D6F /* linkPage_three.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linkPage_three.png; sourceTree = "<group>"; };
 		05D593011CC08088006F5D6F /* linkPage_two.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linkPage_two.png; sourceTree = "<group>"; };
+		05D593141CCDBEF8006F5D6F /* LimitInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LimitInput.h; sourceTree = "<group>"; };
+		05D593151CCDBEF8006F5D6F /* LimitInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LimitInput.m; sourceTree = "<group>"; };
 		05DC59DB1CB63409008F8538 /* v1.1 750x1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v1.1 750x1334.png"; sourceTree = "<group>"; };
 		05DC59DC1CB63409008F8538 /* v1.1--640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v1.1--640x1136.png"; sourceTree = "<group>"; };
 		05DC59DD1CB63409008F8538 /* v1.1-640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v1.1-640x960.png"; sourceTree = "<group>"; };
@@ -534,16 +535,12 @@
 		05E8C0B21C76C9BD00DA27C0 /* HistoryBillModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryBillModel.m; sourceTree = "<group>"; };
 		05E8C0B31C76C9BD00DA27C0 /* MakeBillTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeBillTableViewController.h; sourceTree = "<group>"; };
 		05E8C0B41C76C9BD00DA27C0 /* MakeBillTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeBillTableViewController.m; sourceTree = "<group>"; };
-		05E8C0B51C76C9BD00DA27C0 /* MyMemberTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMemberTableViewController.h; sourceTree = "<group>"; };
-		05E8C0B61C76C9BD00DA27C0 /* MyMemberTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMemberTableViewController.m; sourceTree = "<group>"; };
 		05E8C0B71C76C9BD00DA27C0 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
 		05E8C0B81C76C9BD00DA27C0 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
 		05E8C0B91C76C9BD00DA27C0 /* OpinionTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpinionTableViewController.h; sourceTree = "<group>"; };
 		05E8C0BA1C76C9BD00DA27C0 /* OpinionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpinionTableViewController.m; sourceTree = "<group>"; };
 		05E8C0BB1C76C9BD00DA27C0 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		05E8C0BC1C76C9BD00DA27C0 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
-		05E8C0BD1C76C9BD00DA27C0 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
-		05E8C0BE1C76C9BD00DA27C0 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		05E8C0BF1C76C9BD00DA27C0 /* UIBarButtonItem+Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extention.h"; sourceTree = "<group>"; };
 		05E8C0C01C76C9BD00DA27C0 /* UIBarButtonItem+Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extention.m"; sourceTree = "<group>"; };
 		05E8C0CE1C76C9CB00DA27C0 /* BillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BillCell.h; sourceTree = "<group>"; };
@@ -800,19 +797,14 @@
 				05BA34991C41F1FE00DC07CD /* AppDelegate.m */,
 				05BA349B1C41F1FE00DC07CD /* ViewController.h */,
 				05BA349C1C41F1FE00DC07CD /* ViewController.m */,
-				05075B5D1C463CCB0076EF31 /* SignInViewController.h */,
-				05075B5E1C463CCB0076EF31 /* SignInViewController.m */,
-				05E8C1721C7DAC6000DA27C0 /* WebViewViewController.h */,
-				05E8C1731C7DAC6100DA27C0 /* WebViewViewController.m */,
 				053AB0FA1C48F2CE00982B01 /* APIConfig.h */,
-				05E8BEC61C566C4100DA27C0 /* Common */,
-				05E8BED71C57275300DA27C0 /* WeiXinApi */,
-				05FF02531C840553004A2F16 /* td */,
-				05E8C1091C78195C00DA27C0 /* AliPay */,
-				05075B8A1C4769840076EF31 /* 百度推送 */,
+				05D593111CC492E0006F5D6F /* 登陆 */,
 				05BA34E11C41FF0000DC07CD /* 陪诊 */,
 				05BA34E21C41FF0C00DC07CD /* 预约单 */,
 				05BA34E31C41FF1D00DC07CD /* 我 */,
+				05E8BEC61C566C4100DA27C0 /* Common */,
+				05D593121CC49303006F5D6F /* WebView */,
+				05D593131CC4931C006F5D6F /* SDK */,
 				05075BB31C47A0F70076EF31 /* MyView */,
 				05BA349E1C41F1FE00DC07CD /* Main.storyboard */,
 				05BA34A11C41F1FE00DC07CD /* Brand Assets */,
@@ -871,22 +863,16 @@
 			children = (
 				05BA34C81C41F70A00DC07CD /* PeiZhenViewController.h */,
 				05BA34C91C41F70A00DC07CD /* PeiZhenViewController.m */,
-				05E8BE1E1C50C91B00DA27C0 /* BannerWebViewController.h */,
-				05E8BE1F1C50C91B00DA27C0 /* BannerWebViewController.m */,
-				05BA350C1C437E8100DC07CD /* PuTongPZViewController.h */,
-				05BA350D1C437E8100DC07CD /* PuTongPZViewController.m */,
-				05075B3D1C44A3560076EF31 /* PTSureOrderViewController.h */,
-				05075B3E1C44A3560076EF31 /* PTSureOrderViewController.m */,
+				05D5930E1CC4926E006F5D6F /* BannerWeb */,
+				05D5930D1CC49261006F5D6F /* 下单(普通) */,
+				05D5930F1CC49295006F5D6F /* 订单详情 */,
+				05D593101CC492B3006F5D6F /* 支付订单 */,
 				05E8BE301C52065000DA27C0 /* CommonOrderEntity.h */,
 				05E8BE311C52065000DA27C0 /* CommonOrderEntity.m */,
 				05BA34FD1C43738400DC07CD /* HospitalTableViewCell.h */,
 				05BA34FE1C43738400DC07CD /* HospitalTableViewCell.m */,
 				05BA35151C4382C400DC07CD /* BaseTableViewCell.h */,
 				05BA35161C4382C400DC07CD /* BaseTableViewCell.m */,
-				053AB0F51C48AA5B00982B01 /* KDCycleBannerView.h */,
-				053AB0F61C48AA5B00982B01 /* KDCycleBannerView.m */,
-				05E8C0FB1C77FE2F00DA27C0 /* PayViewController.h */,
-				05E8C0FC1C77FE2F00DA27C0 /* PayViewController.m */,
 				050BB1051C9FDD3900D5E890 /* OrderStateTableViewCell.h */,
 				050BB1061C9FDD3900D5E890 /* OrderStateTableViewCell.m */,
 				05BA351E1C43978800DC07CD /* 选择医院 */,
@@ -912,14 +898,9 @@
 				050BB1141CA01B9700D5E890 /* NotCompleteTableViewCell.m */,
 				050BB1161CA01BA300D5E890 /* CompleteTableViewCell.h */,
 				050BB1171CA01BA300D5E890 /* CompleteTableViewCell.m */,
-				050BB1191CA1289400D5E890 /* EvaluateViewController.h */,
-				050BB11A1CA1289400D5E890 /* EvaluateViewController.m */,
-				050BB1271CA26E9100D5E890 /* CancelViewController.h */,
-				050BB1281CA26E9100D5E890 /* CancelViewController.m */,
-				05B08D881CA38AD7002F7729 /* CancelOrderDetailViewController.h */,
-				05B08D891CA38AD7002F7729 /* CancelOrderDetailViewController.m */,
-				05B08D8B1CA38AE5002F7729 /* CompleteOrderDetailViewController.h */,
-				05B08D8C1CA38AE5002F7729 /* CompleteOrderDetailViewController.m */,
+				05D5930C1CC49203006F5D6F /* 评价订单 */,
+				05D5930A1CC491CA006F5D6F /* 取消订单 */,
+				05D5930B1CC491D7006F5D6F /* 订单详情 */,
 			);
 			name = "预约单";
 			sourceTree = "<group>";
@@ -927,60 +908,14 @@
 		05BA34E31C41FF1D00DC07CD /* 我 */ = {
 			isa = PBXGroup;
 			children = (
-				05E8C0A71C76C9BD00DA27C0 /* BillHistoryTableViewController.h */,
-				05E8C0A81C76C9BD00DA27C0 /* BillHistoryTableViewController.m */,
-				05E8C0A91C76C9BD00DA27C0 /* BillRecordTableViewController.h */,
-				05E8C0AA1C76C9BD00DA27C0 /* BillRecordTableViewController.m */,
-				05E8C0AB1C76C9BD00DA27C0 /* BillTableViewController.h */,
-				05E8C0AC1C76C9BD00DA27C0 /* BillTableViewController.m */,
-				05E8C0AD1C76C9BD00DA27C0 /* ChangeMyDataViewController.h */,
-				05E8C0AE1C76C9BD00DA27C0 /* ChangeMyDataViewController.m */,
-				05E8C0AF1C76C9BD00DA27C0 /* CouponsTableViewController.h */,
-				05E8C0B01C76C9BD00DA27C0 /* CouponsTableViewController.m */,
-				05E8C0B11C76C9BD00DA27C0 /* HistoryBillModel.h */,
-				05E8C0B21C76C9BD00DA27C0 /* HistoryBillModel.m */,
-				05E8C0B31C76C9BD00DA27C0 /* MakeBillTableViewController.h */,
-				05E8C0B41C76C9BD00DA27C0 /* MakeBillTableViewController.m */,
-				05E8C0B51C76C9BD00DA27C0 /* MyMemberTableViewController.h */,
-				05E8C0B61C76C9BD00DA27C0 /* MyMemberTableViewController.m */,
-				05E8C17B1C7EAC9400DA27C0 /* UserInfoDetailViewController.h */,
-				05E8C17C1C7EAC9400DA27C0 /* UserInfoDetailViewController.m */,
 				05E8C0B71C76C9BD00DA27C0 /* MyTableViewController.h */,
 				05E8C0B81C76C9BD00DA27C0 /* MyTableViewController.m */,
-				05E8C0B91C76C9BD00DA27C0 /* OpinionTableViewController.h */,
-				05E8C0BA1C76C9BD00DA27C0 /* OpinionTableViewController.m */,
-				05E8C0BB1C76C9BD00DA27C0 /* SettingTableViewController.h */,
-				05E8C0BC1C76C9BD00DA27C0 /* SettingTableViewController.m */,
-				05E8C0BD1C76C9BD00DA27C0 /* ShareViewController.h */,
-				05E8C0BE1C76C9BD00DA27C0 /* ShareViewController.m */,
-				05E8C0BF1C76C9BD00DA27C0 /* UIBarButtonItem+Extention.h */,
-				05E8C0C01C76C9BD00DA27C0 /* UIBarButtonItem+Extention.m */,
-				057585CE1C97BAD60040510B /* PatientViewController.h */,
-				057585CF1C97BAD60040510B /* PatientViewController.m */,
-				057585D11C97DA5B0040510B /* PatientEntity.h */,
-				057585D21C97DA5B0040510B /* PatientEntity.m */,
-				050BB0BE1C97F40B00D5E890 /* PatientTableViewCell.h */,
-				050BB0BF1C97F40B00D5E890 /* PatientTableViewCell.m */,
-				050BB0DB1C99469700D5E890 /* PatientDetailEntity.h */,
-				050BB0DC1C99469700D5E890 /* PatientDetailEntity.m */,
-				050BB0C71C98324700D5E890 /* PatientDetailTableViewCell.h */,
-				050BB0C81C98324700D5E890 /* PatientDetailTableViewCell.m */,
-				050BB0E41C9996BE00D5E890 /* PatientDetailViewController.h */,
-				050BB0E51C9996BE00D5E890 /* PatientDetailViewController.m */,
-				050BB0F91C9AED8600D5E890 /* MRZoomScrollView.h */,
-				050BB0FA1C9AED8600D5E890 /* MRZoomScrollView.m */,
-				050BB0FB1C9AED8600D5E890 /* ShowBigPhotosViewController.h */,
-				050BB0FC1C9AED8600D5E890 /* ShowBigPhotosViewController.m */,
-				050BB0E71C9996FD00D5E890 /* PatientListTotalView.h */,
-				050BB0E81C9996FD00D5E890 /* PatientListTotalView.m */,
-				050BB0E91C9996FD00D5E890 /* PatientPictureView.h */,
-				050BB0EA1C9996FD00D5E890 /* PatientPictureView.m */,
-				050BB0EB1C9996FD00D5E890 /* PictureCollectionViewCell.h */,
-				050BB0EC1C9996FD00D5E890 /* PictureCollectionViewCell.m */,
-				050BB0D51C990A0B00D5E890 /* EditPatientViewController.h */,
-				050BB0D61C990A0B00D5E890 /* EditPatientViewController.m */,
-				050BB0F21C99AB7700D5E890 /* ImageUtil.h */,
-				050BB0F01C99AB6D00D5E890 /* ImageUtil.m */,
+				05E8C17B1C7EAC9400DA27C0 /* UserInfoDetailViewController.h */,
+				05E8C17C1C7EAC9400DA27C0 /* UserInfoDetailViewController.m */,
+				05D593061CC490C8006F5D6F /* 就诊人档案 */,
+				05D593081CC490E6006F5D6F /* 优惠券 */,
+				05D593071CC490D0006F5D6F /* 发票 */,
+				05D593091CC490EE006F5D6F /* 设置 */,
 			);
 			name = "我";
 			sourceTree = "<group>";
@@ -1056,6 +991,176 @@
 			name = "选择成员";
 			sourceTree = "<group>";
 		};
+		05D593061CC490C8006F5D6F /* 就诊人档案 */ = {
+			isa = PBXGroup;
+			children = (
+				057585CE1C97BAD60040510B /* PatientViewController.h */,
+				057585CF1C97BAD60040510B /* PatientViewController.m */,
+				057585D11C97DA5B0040510B /* PatientEntity.h */,
+				057585D21C97DA5B0040510B /* PatientEntity.m */,
+				050BB0BE1C97F40B00D5E890 /* PatientTableViewCell.h */,
+				050BB0BF1C97F40B00D5E890 /* PatientTableViewCell.m */,
+				050BB0DB1C99469700D5E890 /* PatientDetailEntity.h */,
+				050BB0DC1C99469700D5E890 /* PatientDetailEntity.m */,
+				050BB0C71C98324700D5E890 /* PatientDetailTableViewCell.h */,
+				050BB0C81C98324700D5E890 /* PatientDetailTableViewCell.m */,
+				050BB0E41C9996BE00D5E890 /* PatientDetailViewController.h */,
+				050BB0E51C9996BE00D5E890 /* PatientDetailViewController.m */,
+				050BB0F91C9AED8600D5E890 /* MRZoomScrollView.h */,
+				050BB0FA1C9AED8600D5E890 /* MRZoomScrollView.m */,
+				050BB0FB1C9AED8600D5E890 /* ShowBigPhotosViewController.h */,
+				050BB0FC1C9AED8600D5E890 /* ShowBigPhotosViewController.m */,
+				050BB0E71C9996FD00D5E890 /* PatientListTotalView.h */,
+				050BB0E81C9996FD00D5E890 /* PatientListTotalView.m */,
+				050BB0E91C9996FD00D5E890 /* PatientPictureView.h */,
+				050BB0EA1C9996FD00D5E890 /* PatientPictureView.m */,
+				050BB0EB1C9996FD00D5E890 /* PictureCollectionViewCell.h */,
+				050BB0EC1C9996FD00D5E890 /* PictureCollectionViewCell.m */,
+				050BB0D51C990A0B00D5E890 /* EditPatientViewController.h */,
+				050BB0D61C990A0B00D5E890 /* EditPatientViewController.m */,
+				050BB0F21C99AB7700D5E890 /* ImageUtil.h */,
+				050BB0F01C99AB6D00D5E890 /* ImageUtil.m */,
+			);
+			name = "就诊人档案";
+			sourceTree = "<group>";
+		};
+		05D593071CC490D0006F5D6F /* 发票 */ = {
+			isa = PBXGroup;
+			children = (
+				05E8C0A71C76C9BD00DA27C0 /* BillHistoryTableViewController.h */,
+				05E8C0A81C76C9BD00DA27C0 /* BillHistoryTableViewController.m */,
+				05E8C0A91C76C9BD00DA27C0 /* BillRecordTableViewController.h */,
+				05E8C0AA1C76C9BD00DA27C0 /* BillRecordTableViewController.m */,
+				05E8C0AB1C76C9BD00DA27C0 /* BillTableViewController.h */,
+				05E8C0AC1C76C9BD00DA27C0 /* BillTableViewController.m */,
+				05E8C0AD1C76C9BD00DA27C0 /* ChangeMyDataViewController.h */,
+				05E8C0AE1C76C9BD00DA27C0 /* ChangeMyDataViewController.m */,
+				05E8C0B11C76C9BD00DA27C0 /* HistoryBillModel.h */,
+				05E8C0B21C76C9BD00DA27C0 /* HistoryBillModel.m */,
+				05E8C0B31C76C9BD00DA27C0 /* MakeBillTableViewController.h */,
+				05E8C0B41C76C9BD00DA27C0 /* MakeBillTableViewController.m */,
+			);
+			name = "发票";
+			sourceTree = "<group>";
+		};
+		05D593081CC490E6006F5D6F /* 优惠券 */ = {
+			isa = PBXGroup;
+			children = (
+				05E8C0AF1C76C9BD00DA27C0 /* CouponsTableViewController.h */,
+				05E8C0B01C76C9BD00DA27C0 /* CouponsTableViewController.m */,
+			);
+			name = "优惠券";
+			sourceTree = "<group>";
+		};
+		05D593091CC490EE006F5D6F /* 设置 */ = {
+			isa = PBXGroup;
+			children = (
+				05E8C0B91C76C9BD00DA27C0 /* OpinionTableViewController.h */,
+				05E8C0BA1C76C9BD00DA27C0 /* OpinionTableViewController.m */,
+				05E8C0BB1C76C9BD00DA27C0 /* SettingTableViewController.h */,
+				05E8C0BC1C76C9BD00DA27C0 /* SettingTableViewController.m */,
+				05E8C0BF1C76C9BD00DA27C0 /* UIBarButtonItem+Extention.h */,
+				05E8C0C01C76C9BD00DA27C0 /* UIBarButtonItem+Extention.m */,
+			);
+			name = "设置";
+			sourceTree = "<group>";
+		};
+		05D5930A1CC491CA006F5D6F /* 取消订单 */ = {
+			isa = PBXGroup;
+			children = (
+				050BB1271CA26E9100D5E890 /* CancelViewController.h */,
+				050BB1281CA26E9100D5E890 /* CancelViewController.m */,
+			);
+			name = "取消订单";
+			sourceTree = "<group>";
+		};
+		05D5930B1CC491D7006F5D6F /* 订单详情 */ = {
+			isa = PBXGroup;
+			children = (
+				05B08D881CA38AD7002F7729 /* CancelOrderDetailViewController.h */,
+				05B08D891CA38AD7002F7729 /* CancelOrderDetailViewController.m */,
+				05B08D8B1CA38AE5002F7729 /* CompleteOrderDetailViewController.h */,
+				05B08D8C1CA38AE5002F7729 /* CompleteOrderDetailViewController.m */,
+			);
+			name = "订单详情";
+			sourceTree = "<group>";
+		};
+		05D5930C1CC49203006F5D6F /* 评价订单 */ = {
+			isa = PBXGroup;
+			children = (
+				050BB1191CA1289400D5E890 /* EvaluateViewController.h */,
+				050BB11A1CA1289400D5E890 /* EvaluateViewController.m */,
+			);
+			name = "评价订单";
+			sourceTree = "<group>";
+		};
+		05D5930D1CC49261006F5D6F /* 下单(普通) */ = {
+			isa = PBXGroup;
+			children = (
+				05BA350C1C437E8100DC07CD /* PuTongPZViewController.h */,
+				05BA350D1C437E8100DC07CD /* PuTongPZViewController.m */,
+			);
+			name = "下单(普通)";
+			sourceTree = "<group>";
+		};
+		05D5930E1CC4926E006F5D6F /* BannerWeb */ = {
+			isa = PBXGroup;
+			children = (
+				053AB0F51C48AA5B00982B01 /* KDCycleBannerView.h */,
+				053AB0F61C48AA5B00982B01 /* KDCycleBannerView.m */,
+				05E8BE1E1C50C91B00DA27C0 /* BannerWebViewController.h */,
+				05E8BE1F1C50C91B00DA27C0 /* BannerWebViewController.m */,
+			);
+			name = BannerWeb;
+			sourceTree = "<group>";
+		};
+		05D5930F1CC49295006F5D6F /* 订单详情 */ = {
+			isa = PBXGroup;
+			children = (
+				05075B3D1C44A3560076EF31 /* PTSureOrderViewController.h */,
+				05075B3E1C44A3560076EF31 /* PTSureOrderViewController.m */,
+			);
+			name = "订单详情";
+			sourceTree = "<group>";
+		};
+		05D593101CC492B3006F5D6F /* 支付订单 */ = {
+			isa = PBXGroup;
+			children = (
+				05E8C0FB1C77FE2F00DA27C0 /* PayViewController.h */,
+				05E8C0FC1C77FE2F00DA27C0 /* PayViewController.m */,
+			);
+			name = "支付订单";
+			sourceTree = "<group>";
+		};
+		05D593111CC492E0006F5D6F /* 登陆 */ = {
+			isa = PBXGroup;
+			children = (
+				05075B5D1C463CCB0076EF31 /* SignInViewController.h */,
+				05075B5E1C463CCB0076EF31 /* SignInViewController.m */,
+			);
+			name = "登陆";
+			sourceTree = "<group>";
+		};
+		05D593121CC49303006F5D6F /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				05E8C1721C7DAC6000DA27C0 /* WebViewViewController.h */,
+				05E8C1731C7DAC6100DA27C0 /* WebViewViewController.m */,
+			);
+			name = WebView;
+			sourceTree = "<group>";
+		};
+		05D593131CC4931C006F5D6F /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				05FF02531C840553004A2F16 /* td */,
+				05E8C1091C78195C00DA27C0 /* AliPay */,
+				05E8BED71C57275300DA27C0 /* WeiXinApi */,
+				05075B8A1C4769840076EF31 /* 百度推送 */,
+			);
+			name = SDK;
+			sourceTree = "<group>";
+		};
 		05E8BE731C52595700DA27C0 /* launchImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,6 +1205,8 @@
 		05E8BEC61C566C4100DA27C0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				05D593141CCDBEF8006F5D6F /* LimitInput.h */,
+				05D593151CCDBEF8006F5D6F /* LimitInput.m */,
 				050BB1221CA23B4100D5E890 /* UITextView+ResignKeyboard.h */,
 				050BB1231CA23B4100D5E890 /* UITextView+ResignKeyboard.m */,
 				05E8BEC71C566C6100DA27C0 /* LinkPageViewController.h */,
@@ -1496,7 +1603,6 @@
 				050BB0D71C990A0B00D5E890 /* EditPatientViewController.m in Sources */,
 				057585D31C97DA5B0040510B /* PatientEntity.m in Sources */,
 				05E8BEC91C566C6100DA27C0 /* LinkPageViewController.m in Sources */,
-				05E8C0C81C76C9BD00DA27C0 /* MyMemberTableViewController.m in Sources */,
 				05BA35371C43ACA100DC07CD /* AddFamilyViewController.m in Sources */,
 				050BB11B1CA1289400D5E890 /* EvaluateViewController.m in Sources */,
 				05E8C0C11C76C9BD00DA27C0 /* BillHistoryTableViewController.m in Sources */,
@@ -1521,6 +1627,7 @@
 				05E8C0C71C76C9BD00DA27C0 /* MakeBillTableViewController.m in Sources */,
 				05BA35341C43A8B500DC07CD /* FamileTableViewCell.m in Sources */,
 				05E8C0C21C76C9BD00DA27C0 /* BillRecordTableViewController.m in Sources */,
+				05D593161CCDBEF8006F5D6F /* LimitInput.m in Sources */,
 				05BA35541C43DD1C00DC07CD /* InsetsLabel.m in Sources */,
 				05BA35531C43DD1C00DC07CD /* HeaderTableView.m in Sources */,
 				05E8C0EC1C76C9CB00DA27C0 /* BillCell.m in Sources */,
@@ -1573,7 +1680,6 @@
 				05BA34CD1C41F71400DC07CD /* YuYueViewController.m in Sources */,
 				05E8C0F41C76C9CB00DA27C0 /* MyCell.m in Sources */,
 				05BA35491C43D15600DC07CD /* UITextField+ResignKeyboard.m in Sources */,
-				05E8C0CC1C76C9BD00DA27C0 /* ShareViewController.m in Sources */,
 				05075B5C1C4622150076EF31 /* HospitalViewController.m in Sources */,
 				053AB1051C4A44FC00982B01 /* CommonFunc.m in Sources */,
 				050BB1151CA01B9700D5E890 /* NotCompleteTableViewCell.m in Sources */,
@@ -1744,8 +1850,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: SHANGHAI QUHU NETWORK TECHNOLOGY CO.,LTD. (VC4L739A9B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SHANGHAI QUHU NETWORK TECHNOLOGY CO.,LTD. (VC4L739A9B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianbin Dou (3EJDL54CCU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianbin Dou (3EJDL54CCU)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1773,8 +1879,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: SHANGHAI QUHU NETWORK TECHNOLOGY CO.,LTD. (VC4L739A9B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SHANGHAI QUHU NETWORK TECHNOLOGY CO.,LTD. (VC4L739A9B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jianbin Dou (3EJDL54CCU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianbin Dou (3EJDL54CCU)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

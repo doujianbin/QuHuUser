@@ -27,6 +27,9 @@
         contactTextField.placeholder = @"电话／邮箱／QQ";
         [contactTextField setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
         [contactView addSubview:contactTextField];
+        [contactTextField  setValue:@50 forKey:@"limit"];
+        contactTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        contactTextField.keyboardType = UIKeyboardTypeTwitter;
         self.contactTextField = contactTextField;
 
         [self.contentView addSubview:contactView];
@@ -41,7 +44,7 @@
     
     self.contactView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 57);
     
-    self.contactTextField.frame = CGRectMake(15, 0, [UIScreen mainScreen].bounds.size.width, 57);
+    self.contactTextField.frame = CGRectMake(15, 0, [UIScreen mainScreen].bounds.size .width - 30, 57);
 }
 
 @end

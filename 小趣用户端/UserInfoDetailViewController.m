@@ -134,6 +134,7 @@
         self.lab_nickName.font = [UIFont systemFontOfSize:16];
         self.lab_nickName.textColor = [UIColor colorWithHexString:@"#000000"];
         self.lab_nickName.textAlignment = NSTextAlignmentRight;
+        [self.lab_nickName  setValue:@10 forKey:@"limit"];
         self.lab_nickName.delegate = self;
         NSString *nickName = [LoginStorage GetnickName];
         if (nickName.length == 0) {

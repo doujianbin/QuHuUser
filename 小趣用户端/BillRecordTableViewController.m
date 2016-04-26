@@ -49,7 +49,7 @@
 - (void)makeNSURLRequest {
 
     BeginActivity;
-    AFNManager *manager = [AFNManager shareManager];
+    AFNManager *manager = [[AFNManager alloc] init];
     
     NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/invoice/queryUserInvoiceHistory",Development];
     

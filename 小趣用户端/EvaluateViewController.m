@@ -245,6 +245,9 @@
     
     [self.scl_back setContentSize:CGSizeMake(SCREEN_WIDTH, CGRectGetMaxY(self.v_pingjia.frame) + 10 + 64)];
     
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tgrAction)];
+    [self.view addGestureRecognizer:tgr];
+    
 }
 
 -(void)btn_pingjiaAction:(UIButton *)sender{
@@ -407,6 +410,10 @@
         }
     }
     return YES;
+}
+
+-(void)tgrAction{
+    [self.evaluteView resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

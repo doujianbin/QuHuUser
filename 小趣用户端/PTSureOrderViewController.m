@@ -127,7 +127,7 @@
         //        [SVProgressHUD showSuccessWithStatus:@"您的订单已结束,可在历史订单列表查看"];
     }else{
         
-        if (self.commonOrderEntity.orderType == 0) {
+        if (self.commonOrderEntity.orderType == 0 || self.commonOrderEntity.orderType == 2) {
             
             [self addCommonOrderDownView];
         }else{

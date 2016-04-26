@@ -66,6 +66,7 @@
         if ([Status isEqualToString:SUCCESS]) {
             
             [self.couponsTableView.mj_header endRefreshing];
+            self.couponIdTextField.text = @"";
             [self.dataArray removeAllObjects];
             [self.dataArray addObjectsFromArray:[responseDic objectForKey:@"data"]];
             [self.couponsTableView reloadData];

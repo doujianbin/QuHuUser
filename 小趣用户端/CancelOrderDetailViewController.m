@@ -72,6 +72,8 @@
         [self.v_total setBackgroundColor:[UIColor whiteColor]];
         
         UIImageView *img_head = [[UIImageView alloc]initWithFrame:CGRectMake(15, 15, 60, 60)];
+        img_head.layer.cornerRadius = 30;
+        img_head.layer.masksToBounds = YES;
         [self.v_total addSubview:img_head];
         if ([[self.commonOrderEntity.nurse objectForKey:@"nursePortrait"] isKindOfClass:[NSNull class]]) {
             [img_head setImage:[UIImage imageNamed:@"ic_个人中心"]];

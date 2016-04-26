@@ -52,10 +52,9 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
     // Do any additional setup after loading the view.
-    
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-    
+//    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
     scl_back = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -5, SCREEN_WIDTH, SCREEN_HEIGHT - 44)];
     [self.view addSubview:scl_back];
     
@@ -72,6 +71,7 @@
         NSLog(@"首页信息＝%@",responseDic);
         if ([Status isEqualToString:SUCCESS]) {
             EndActivity;
+//            [LoginStorage savePackageArr:[[responseDic objectForKey:@"data"] objectForKey:@"sets"]];
             [LoginStorage saveCommonOrderDic:[[responseDic objectForKey:@"data"] objectForKey:@"commonSet"]];
             [LoginStorage saveSpecialOrderDic:[[responseDic objectForKey:@"data"] objectForKey:@"specialSet"]];
             arr_hospital = [[responseDic objectForKey:@"data"] objectForKey:@"hospitalList"];
@@ -130,9 +130,13 @@
     self.cycleBannerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame) / 375 * 225);
     self.cycleBannerView.delegate = self;
     self.cycleBannerView.datasource = self;
-    self.cycleBannerView.continuous = YES;
     self.cycleBannerView.autoPlayTimeInterval = 5;
     [scl_back addSubview:self.cycleBannerView];
+    if (arr_bannerImg.count > 1) {
+        self.cycleBannerView.continuous = YES;
+    }else{
+        self.cycleBannerView.continuous = NO;
+    }
     
 //    UILabel *lb_place = [[UILabel alloc]initWithFrame:CGRectMake(15, 33, 34, 18)];
 //    [lb_place setFont:[UIFont systemFontOfSize:17]];

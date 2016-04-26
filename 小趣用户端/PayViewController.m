@@ -144,12 +144,19 @@
 -(void)btnPayAction{
     if (self.btnSelect == 1) {
         //微信支付
-        [self weixinPay];
+        if ([WXApi isWXAppInstalled] == YES) {
+            
+            [self weixinPay];
+            [self.view makeToastActivity];
+        }else{
+            [self.view makeToast:@"抱歉，您尚未安装微信。" duration:1.0 position:@"center"];
+        }
     }else{
         //支付宝支付
         [self zhifubaoPay];
+        [self.view makeToastActivity];
     }
-    [self.view makeToastActivity];
+    
 }
 
 -(void)SelectweixinPay{

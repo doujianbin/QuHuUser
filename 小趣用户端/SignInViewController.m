@@ -143,7 +143,7 @@
 -(void)xieyiAction{
     WebViewViewController *webVc = [[WebViewViewController alloc]init];
     webVc.strTitle = @"趣护用户服务协议";
-    webVc.strUrl = @"http://wx.haohushi.me/web/#/commonpage/agreement/ios/2";
+    webVc.strUrl = @"http://wx.haohushi.me/web/#/commonpage/agrxeement/ios/0";
     [self.navigationController pushViewController:webVc animated:YES];
     
 }
