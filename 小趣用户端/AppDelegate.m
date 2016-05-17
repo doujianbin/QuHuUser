@@ -177,25 +177,26 @@
 //    NSString *deviceVersion = [UIDevice currentDevice].systemVersion;
 //    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
 //    NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
-    NSDictionary *dic = @{@"os":@"ios",@"osversion":@"1",@"role":@"user",@"roleversion":@"3"};
+    NSDictionary *dic = @{@"os":@"ios",@"osversion":@"1",@"role":@"user",@"roleversion":@"4"};
     AFNManager *manager = [[AFNManager alloc]init];
     [manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
         if ([Status isEqualToString:SUCCESS]) {
             
             [LoginStorage saveKefuPhoneNum:[[[responseDic objectForKey:@"data"] objectForKey:@"service"] objectForKey:@"telnum"]];
+            if ([[[responseDic objectForKey:@"data"] objectForKey:@"isuse"] isEqualToString:@"1"]) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[[responseDic objectForKey:@"data"] objectForKey:@"title"]  message:[[responseDic objectForKey:@"data"] objectForKey:@"descripe"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"下载", nil];
+                alert.delegate = self;
+                alert.tag = 1;
+                [alert show];
+            }
+            if ([[[responseDic objectForKey:@"data"] objectForKey:@"isuse"] isEqualToString:@"2"]) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[[responseDic objectForKey:@"data"] objectForKey:@"title"]  message:[[responseDic objectForKey:@"data"] objectForKey:@"descripe"] delegate:self cancelButtonTitle:@"下载" otherButtonTitles:nil, nil];
+                alert.delegate = self;
+                alert.tag = 2;
+                [alert show];
+            }
         }
-        if ([[[responseDic objectForKey:@"data"] objectForKey:@"isuse"] isEqualToString:@"1"]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[[responseDic objectForKey:@"data"] objectForKey:@"title"]  message:[[responseDic objectForKey:@"data"] objectForKey:@"descripe"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"下载", nil];
-            alert.delegate = self;
-            alert.tag = 1;
-            [alert show];
-        }
-        if ([[[responseDic objectForKey:@"data"] objectForKey:@"isuse"] isEqualToString:@"2"]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[[responseDic objectForKey:@"data"] objectForKey:@"title"]  message:[[responseDic objectForKey:@"data"] objectForKey:@"descripe"] delegate:self cancelButtonTitle:@"下载" otherButtonTitles:nil, nil];
-            alert.delegate = self;
-            alert.tag = 2;
-            [alert show];
-        }
+        
     } fail:^(NSError *error) {
         
     }];

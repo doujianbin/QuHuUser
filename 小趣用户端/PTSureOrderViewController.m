@@ -635,7 +635,10 @@
                     [cell.lab_right setText:[NSString stringWithFormat:@"%.f折",couponValue]];
                 }else if (self.commonOrderEntity.couponType == 2){
                     [cell.lab_right setText:[NSString stringWithFormat:@"-%d元",(int)self.commonOrderEntity.couponValue]];
-                }else{
+                }else if (self.commonOrderEntity.couponType == 2){
+                    [cell.lab_right setText:@"免套餐券"];
+                }
+                else{
                     [cell.lab_right setText:@"暂未使用优惠券"];
                 }
                 [cell.lab_left setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
