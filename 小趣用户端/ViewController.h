@@ -10,6 +10,8 @@
 
 @interface ViewController : UIViewController
 
+@property (nonatomic ,strong)NSString *imgUrl;
+@property (nonatomic ,strong)NSString *linkPath;
 
 @end
 

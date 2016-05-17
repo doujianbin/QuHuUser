@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
     self.title = [self.dic_hospital objectForKey:@"hospitalName"];
-    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
     UIButton *btnl = [[UIButton alloc]initWithFrame:CGRectMake(15, 21.5, 20, 20)];

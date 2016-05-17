@@ -30,8 +30,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     self.title = [NSString stringWithFormat:@"%@的档案",self.patientEntity.userName];
-    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#f7f7f7"]];

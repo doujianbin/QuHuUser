@@ -80,4 +80,21 @@
 #define DeleteOrder @"/quhu/accompany/user/order/deleteOrder"
 // 是否在孕期
 #define UpdatePregnancyStatus @"/quhu/accompany/user/updatePregnancyStatus"
+// 已登陆的时候 根据经纬度  拿数据
+#define GetNearByHospitalList @"/quhu/accompany/user/getNearByHospitalList"
+// 未登录 根据经纬度 拿数据
+#define GetNearPublicByHospitalList @"/quhu/accompany/public/getNearByHospitalList"
+// 根据医院名称或别名查询医院列表
+#define QueryHospital @"/quhu/accompany/public/queryHospital"
+//获取用户全部优惠券
+#define QueryUserCouponsAll @"/quhu/accompany/user/coupon/queryUserCouponsAll"
+//用户端 1.2 新增接口 获取用户优惠券 限制 地区和套餐类型(获取部分优惠券(未过期的))
+#define QueryUserCouponsByAreaIdAndOrderType @"/quhu/accompany/user/coupon/queryUserCouponsByAreaIdAndOrderType"
+//根据百度地图返回经纬度获取首页信息
+#define GetHomePageInfoWithCity @"/quhu/accompany/user/getHomePageInfoWithCity"
+//获取开屏广告
+#define GetOneOpenAd @"/quhu/accompany/public/getOneOpenAd"
+
+
+
 #endif /* APIConfig_h */

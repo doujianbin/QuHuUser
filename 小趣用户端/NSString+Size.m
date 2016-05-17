@@ -14,6 +14,7 @@
 {
     if (self && ![self isEqualToString:@""]) {
         return [self boundingRectWithSize:CGSizeMake(270, 90) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:15]} context:nil].size;
+        
     }else{
         return CGSizeZero;
     }

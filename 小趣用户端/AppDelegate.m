@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "AdImgViewController.h"
 #import "PeiZhenViewController.h"
 #import "YuYueViewController.h"
 #import "SignInViewController.h"
@@ -19,11 +20,18 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "TalkingData.h"
 #import "TalkingDataSMS.h"
+#import <BaiduMapAPI_Map/BMKMapView.h>//只引入所需的单个头文件
+#import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
+#import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
 
 // rgb颜色转换（16进制->10进制）
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@interface AppDelegate ()<UITabBarControllerDelegate,LinkPageViewControllerDelegate,WXApiDelegate,UITabBarControllerDelegate,UIAlertViewDelegate>
+@interface AppDelegate ()<UITabBarControllerDelegate,LinkPageViewControllerDelegate,WXApiDelegate,UITabBarControllerDelegate,UIAlertViewDelegate,BMKGeneralDelegate>{
+    BMKMapManager* _mapManager;
+    BMKLocationService* _locService;
+}
 @property (nonatomic,strong)LinkPageViewController *vc_linePage;
 
 @end
@@ -34,10 +42,22 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [NSThread sleepForTimeInterval:1.2];
-    
+//    [NSThread sleepForTimeInterval:0.5];
+    [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    AdImgViewController *vc = [[AdImgViewController alloc]init];
+    [self.window setRootViewController:vc];
+    
+    [self.window makeKeyAndVisible];
+    
+    _mapManager = [[BMKMapManager alloc]init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:@"AX53AeiqFnqU5bsWbCZ7BcYYcYc4S6XR"  generalDelegate:self];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
     
     //设置navigationbar标题的字体和颜色
     
@@ -48,17 +68,20 @@
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor blackColor], NSForegroundColorAttributeName,
                                                           [UIFont systemFontOfSize:18.0], NSFontAttributeName, nil]];
-    if (![LoginStorage isFirstEnter]) {
-        self.vc_linePage = [[LinkPageViewController alloc]initWithImageArray:@[@"linkPage_one",@"linkPage_two",@"linkPage_three",@"linkPage_four"]];
-        self.vc_linePage.delegate = self;
-        
-        [self.window setRootViewController:_vc_linePage];
-        
-    }else{
-        
+    
+    
+//    if (![LoginStorage isFirstEnter]) {
+////        self.vc_linePage = [[LinkPageViewController alloc]initWithImageArray:@[@"linkPage_one",@"linkPage_two",@"linkPage_three",@"linkPage_four"]];
+////        self.vc_linePage.delegate = self;
+////        
+////        [self.window setRootViewController:_vc_linePage];
+//        [self setTabBarRootView];
+//    }else{
+//        
+//
+//        [self setTabBarRootView];
+//    }
 
-        [self setTabBarRootView];
-    }
     
     
     /// 推送
@@ -128,6 +151,27 @@
     return YES;
 }
 
+- (void)onGetNetworkState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"联网成功");
+    }
+    else{
+        NSLog(@"onGetNetworkState %d",iError);
+    }
+    
+}
+
+- (void)onGetPermissionState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"授权成功");
+    }
+    else {
+        NSLog(@"onGetPermissionState %d",iError);
+    }
+}
+
 -(void)loadVersionMsg{
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,VersionInfo];
 //    NSString *deviceVersion = [UIDevice currentDevice].systemVersion;
@@ -195,7 +239,7 @@
     UINavigationController *myNavi = [[UINavigationController alloc] initWithRootViewController:myVC];
     
     tabBarVC.viewControllers = @[navpei, yuyueNavi, myNavi];
-    tabBarVC.delegate = self;
+//    tabBarVC.delegate = self;
 }
 
 - (void)enterMainViewController{

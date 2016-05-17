@@ -192,24 +192,29 @@
 
 -(void)tijiaoReason{
     NSLog(@"%@",self.str_reason);
-    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,UpdateCancelreason];
-    NSDictionary *dic = @{@"orderId":self.str_OrderId,@"cancelReason":self.str_reason};
-    
-    AFNManager *manager = [[AFNManager alloc]init];
-    [manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
-        if ([Status isEqualToString:SUCCESS]) {
-            [self.view makeToast:@"提交成功" duration:1.0 position:@"center"];
-            [NSTimer scheduledTimerWithTimeInterval:1.1
-                                             target:self
-                                           selector:@selector(NavLeftAction)
-                                           userInfo:nil
-                                            repeats:NO];
-        }else{
-            FailMessage;
-        }
-    } fail:^(NSError *error) {
-        NetError;
-    }];
+    if (self.str_reason.length > 0) {
+        
+        NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,UpdateCancelreason];
+        NSDictionary *dic = @{@"orderId":self.str_OrderId,@"cancelReason":self.str_reason};
+        
+        AFNManager *manager = [[AFNManager alloc]init];
+        [manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
+            if ([Status isEqualToString:SUCCESS]) {
+                [self.view makeToast:@"提交成功" duration:1.0 position:@"center"];
+                [NSTimer scheduledTimerWithTimeInterval:1.1
+                                                 target:self
+                                               selector:@selector(NavLeftAction)
+                                               userInfo:nil
+                                                repeats:NO];
+            }else{
+                FailMessage;
+            }
+        } fail:^(NSError *error) {
+            NetError;
+        }];
+    }else{
+        [self.view makeToast:@"请选择取消原因" duration:1.0 position:@"center"];
+    }
     
 }
 

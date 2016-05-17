@@ -27,6 +27,16 @@
         self.lab_hospital.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
 //        [self.lab_hospital setText:@"上海市曙光医院"];
         
+        self.lab_level = [[UILabel alloc]init];
+        [self.contentView addSubview:self.lab_level];
+        self.lab_level.layer.borderWidth = 1.0f;
+        self.lab_level.layer.borderColor = [[UIColor colorWithHexString:@"#FA6262"] CGColor];
+        [self.lab_level setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+        [self.lab_level setFont:[UIFont systemFontOfSize:11]];
+        [self.lab_level setTextAlignment:NSTextAlignmentCenter];
+        self.lab_level.layer.cornerRadius = 3.0f;
+        self.lab_level.layer.masksToBounds = YES;
+        
         self.lab_hospitalAddress = [[UILabel alloc]initWithFrame:CGRectMake(103.5, 41, SCREEN_WIDTH - 123.5, 14)];
         [self.contentView addSubview:self.lab_hospitalAddress];
         self.lab_hospitalAddress.font = [UIFont systemFontOfSize:12];

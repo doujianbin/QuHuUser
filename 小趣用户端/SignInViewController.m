@@ -33,9 +33,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#f7f7f7"]];
     self.title = @"验证手机";
-    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
     // Do any additional setup after loading the view.
@@ -143,7 +146,7 @@
 -(void)xieyiAction{
     WebViewViewController *webVc = [[WebViewViewController alloc]init];
     webVc.strTitle = @"趣护用户服务协议";
-    webVc.strUrl = @"http://wx.haohushi.me/web/#/commonpage/agrxeement/ios/0";
+    webVc.strUrl = @"http://wx.haohushi.me/web/#/commonpage/agreement/ios/0";
     [self.navigationController pushViewController:webVc animated:YES];
     
 }

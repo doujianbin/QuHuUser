@@ -49,8 +49,10 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setTranslucent:NO];
-    self.tabBarController.tabBar.translucent = NO;
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+//    [self.navigationController.navigationBar setTranslucent:NO];
+//    self.tabBarController.tabBar.translucent = NO;
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
     //    [self.view setBackgroundColor:[UIColor yellowColor]];
     self.title = @"订单";
@@ -148,7 +150,7 @@
 
 -(void)onCreate{
     
-    self.tb_orderList = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44- 64) style:UITableViewStyleGrouped];
+    self.tb_orderList = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStyleGrouped];
     [self.view addSubview:self.tb_orderList];
     [self.tb_orderList setDataSource:self];
     [self.tb_orderList setDelegate:self];

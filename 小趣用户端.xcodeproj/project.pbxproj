@@ -159,6 +159,30 @@
 		05D593041CC08088006F5D6F /* linkPage_three.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593001CC08088006F5D6F /* linkPage_three.png */; };
 		05D593051CC08088006F5D6F /* linkPage_two.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593011CC08088006F5D6F /* linkPage_two.png */; };
 		05D593161CCDBEF8006F5D6F /* LimitInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D593151CCDBEF8006F5D6F /* LimitInput.m */; };
+		05D593191CDC39EB006F5D6F /* MapAndHospitalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D593181CDC39EB006F5D6F /* MapAndHospitalViewController.m */; };
+		05D5931C1CDC819E006F5D6F /* 当前位置@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D5931A1CDC819E006F5D6F /* 当前位置@2x.png */; };
+		05D5931D1CDC819E006F5D6F /* 重置@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D5931B1CDC819E006F5D6F /* 重置@2x.png */; };
+		05D593201CDCA599006F5D6F /* HospitalInMapEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D5931F1CDCA599006F5D6F /* HospitalInMapEntity.m */; };
+		05D593231CE069D3006F5D6F /* MapHospitalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D593221CE069D3006F5D6F /* MapHospitalTableViewCell.m */; };
+		05D593251CE0821D006F5D6F /* hospitalImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593241CE0821D006F5D6F /* hospitalImg.png */; };
+		05D5932B1CE0D38A006F5D6F /* MycustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D5932A1CE0D38A006F5D6F /* MycustomAnnotationView.m */; };
+		05D5932E1CE0D8C6006F5D6F /* MycustomActionPaopao.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D5932D1CE0D8C6006F5D6F /* MycustomActionPaopao.m */; };
+		05D593321CE183A3006F5D6F /* 弹出白框@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593311CE183A3006F5D6F /* 弹出白框@2x.png */; };
+		05D593341CE1863E006F5D6F /* 白框上的小三角@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593331CE1863E006F5D6F /* 白框上的小三角@2x.png */; };
+		05D593361CE1C343006F5D6F /* 搜索框@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593351CE1C343006F5D6F /* 搜索框@2x.png */; };
+		05D593381CE1C4EE006F5D6F /* 搜索图标@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593371CE1C4EE006F5D6F /* 搜索图标@2x.png */; };
+		05D5933B1CE1D279006F5D6F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D5933A1CE1D279006F5D6F /* SearchViewController.m */; };
+		05D5933D1CE2D313006F5D6F /* imgHospitalLevel@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D5933C1CE2D313006F5D6F /* imgHospitalLevel@x2.png */; };
+		05D593411CE46734006F5D6F /* 附近医院@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D5933E1CE46734006F5D6F /* 附近医院@2x.png */; };
+		05D593421CE46734006F5D6F /* 挂号icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D5933F1CE46734006F5D6F /* 挂号icon@2x.png */; };
+		05D593431CE46734006F5D6F /* 陪诊icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593401CE46734006F5D6F /* 陪诊icon@2x.png */; };
+		05D593461CE478A4006F5D6F /* CouponsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D593451CE478A4006F5D6F /* CouponsEntity.m */; };
+		05D593491CE48220006F5D6F /* CouponsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D593481CE48220006F5D6F /* CouponsTableViewCell.m */; };
+		05D5934B1CE4868B006F5D6F /* 折扣券@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D5934A1CE4868B006F5D6F /* 折扣券@2x.png */; };
+		05D5934D1CE9A080006F5D6F /* 不可用优惠券@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D5934C1CE9A080006F5D6F /* 不可用优惠券@2x.png */; };
+		05D5934F1CE9B60C006F5D6F /* 下拉箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D5934E1CE9B60C006F5D6F /* 下拉箭头@2x.png */; };
+		05D593511CEABF1B006F5D6F /* 750x1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D593501CEABF1B006F5D6F /* 750x1334.png */; };
+		05D593541CEAC6C2006F5D6F /* AdImgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D593531CEAC6C2006F5D6F /* AdImgViewController.m */; };
 		05DC59DF1CB63409008F8538 /* v1.1 750x1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DC59DB1CB63409008F8538 /* v1.1 750x1334.png */; };
 		05DC59E01CB63409008F8538 /* v1.1--640x1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DC59DC1CB63409008F8538 /* v1.1--640x1136.png */; };
 		05DC59E11CB63409008F8538 /* v1.1-640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 05DC59DD1CB63409008F8538 /* v1.1-640x960.png */; };
@@ -474,6 +498,39 @@
 		05D593011CC08088006F5D6F /* linkPage_two.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = linkPage_two.png; sourceTree = "<group>"; };
 		05D593141CCDBEF8006F5D6F /* LimitInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LimitInput.h; sourceTree = "<group>"; };
 		05D593151CCDBEF8006F5D6F /* LimitInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LimitInput.m; sourceTree = "<group>"; };
+		05D593171CDC39EB006F5D6F /* MapAndHospitalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAndHospitalViewController.h; sourceTree = "<group>"; };
+		05D593181CDC39EB006F5D6F /* MapAndHospitalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAndHospitalViewController.m; sourceTree = "<group>"; };
+		05D5931A1CDC819E006F5D6F /* 当前位置@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "当前位置@2x.png"; sourceTree = "<group>"; };
+		05D5931B1CDC819E006F5D6F /* 重置@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "重置@2x.png"; sourceTree = "<group>"; };
+		05D5931E1CDCA599006F5D6F /* HospitalInMapEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HospitalInMapEntity.h; sourceTree = "<group>"; };
+		05D5931F1CDCA599006F5D6F /* HospitalInMapEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HospitalInMapEntity.m; sourceTree = "<group>"; };
+		05D593211CE069D3006F5D6F /* MapHospitalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapHospitalTableViewCell.h; sourceTree = "<group>"; };
+		05D593221CE069D3006F5D6F /* MapHospitalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapHospitalTableViewCell.m; sourceTree = "<group>"; };
+		05D593241CE0821D006F5D6F /* hospitalImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hospitalImg.png; sourceTree = "<group>"; };
+		05D593291CE0D38A006F5D6F /* MycustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycustomAnnotationView.h; sourceTree = "<group>"; };
+		05D5932A1CE0D38A006F5D6F /* MycustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycustomAnnotationView.m; sourceTree = "<group>"; };
+		05D5932C1CE0D8C6006F5D6F /* MycustomActionPaopao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MycustomActionPaopao.h; sourceTree = "<group>"; };
+		05D5932D1CE0D8C6006F5D6F /* MycustomActionPaopao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MycustomActionPaopao.m; sourceTree = "<group>"; };
+		05D593311CE183A3006F5D6F /* 弹出白框@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "弹出白框@2x.png"; sourceTree = "<group>"; };
+		05D593331CE1863E006F5D6F /* 白框上的小三角@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "白框上的小三角@2x.png"; sourceTree = "<group>"; };
+		05D593351CE1C343006F5D6F /* 搜索框@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索框@2x.png"; sourceTree = "<group>"; };
+		05D593371CE1C4EE006F5D6F /* 搜索图标@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索图标@2x.png"; sourceTree = "<group>"; };
+		05D593391CE1D279006F5D6F /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		05D5933A1CE1D279006F5D6F /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		05D5933C1CE2D313006F5D6F /* imgHospitalLevel@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgHospitalLevel@x2.png"; sourceTree = "<group>"; };
+		05D5933E1CE46734006F5D6F /* 附近医院@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "附近医院@2x.png"; sourceTree = "<group>"; };
+		05D5933F1CE46734006F5D6F /* 挂号icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "挂号icon@2x.png"; sourceTree = "<group>"; };
+		05D593401CE46734006F5D6F /* 陪诊icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "陪诊icon@2x.png"; sourceTree = "<group>"; };
+		05D593441CE478A4006F5D6F /* CouponsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsEntity.h; sourceTree = "<group>"; };
+		05D593451CE478A4006F5D6F /* CouponsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsEntity.m; sourceTree = "<group>"; };
+		05D593471CE48220006F5D6F /* CouponsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsTableViewCell.h; sourceTree = "<group>"; };
+		05D593481CE48220006F5D6F /* CouponsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsTableViewCell.m; sourceTree = "<group>"; };
+		05D5934A1CE4868B006F5D6F /* 折扣券@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "折扣券@2x.png"; sourceTree = "<group>"; };
+		05D5934C1CE9A080006F5D6F /* 不可用优惠券@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "不可用优惠券@2x.png"; sourceTree = "<group>"; };
+		05D5934E1CE9B60C006F5D6F /* 下拉箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下拉箭头@2x.png"; sourceTree = "<group>"; };
+		05D593501CEABF1B006F5D6F /* 750x1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 750x1334.png; path = "Images.xcassets/Brand Assets.launchimage/750x1334.png"; sourceTree = "<group>"; };
+		05D593521CEAC6C2006F5D6F /* AdImgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdImgViewController.h; sourceTree = "<group>"; };
+		05D593531CEAC6C2006F5D6F /* AdImgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdImgViewController.m; sourceTree = "<group>"; };
 		05DC59DB1CB63409008F8538 /* v1.1 750x1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v1.1 750x1334.png"; sourceTree = "<group>"; };
 		05DC59DC1CB63409008F8538 /* v1.1--640x1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v1.1--640x1136.png"; sourceTree = "<group>"; };
 		05DC59DD1CB63409008F8538 /* v1.1-640x960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v1.1-640x960.png"; sourceTree = "<group>"; };
@@ -750,6 +807,8 @@
 		05075BE01C47A1610076EF31 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				05D5934A1CE4868B006F5D6F /* 折扣券@2x.png */,
+				05D5934C1CE9A080006F5D6F /* 不可用优惠券@2x.png */,
 				05DC59E31CB65BC0008F8538 /* 设置icon.png */,
 				05DC59E41CB65BC0008F8538 /* 设置icon@2x.png */,
 				05DC59E51CB65BC0008F8538 /* 设置icon@3x.png */,
@@ -797,6 +856,8 @@
 				05BA34991C41F1FE00DC07CD /* AppDelegate.m */,
 				05BA349B1C41F1FE00DC07CD /* ViewController.h */,
 				05BA349C1C41F1FE00DC07CD /* ViewController.m */,
+				05D593521CEAC6C2006F5D6F /* AdImgViewController.h */,
+				05D593531CEAC6C2006F5D6F /* AdImgViewController.m */,
 				053AB0FA1C48F2CE00982B01 /* APIConfig.h */,
 				05D593111CC492E0006F5D6F /* 登陆 */,
 				05BA34E11C41FF0000DC07CD /* 陪诊 */,
@@ -863,6 +924,18 @@
 			children = (
 				05BA34C81C41F70A00DC07CD /* PeiZhenViewController.h */,
 				05BA34C91C41F70A00DC07CD /* PeiZhenViewController.m */,
+				05D593171CDC39EB006F5D6F /* MapAndHospitalViewController.h */,
+				05D593181CDC39EB006F5D6F /* MapAndHospitalViewController.m */,
+				05D593391CE1D279006F5D6F /* SearchViewController.h */,
+				05D5933A1CE1D279006F5D6F /* SearchViewController.m */,
+				05D593291CE0D38A006F5D6F /* MycustomAnnotationView.h */,
+				05D5932A1CE0D38A006F5D6F /* MycustomAnnotationView.m */,
+				05D5932C1CE0D8C6006F5D6F /* MycustomActionPaopao.h */,
+				05D5932D1CE0D8C6006F5D6F /* MycustomActionPaopao.m */,
+				05D5931E1CDCA599006F5D6F /* HospitalInMapEntity.h */,
+				05D5931F1CDCA599006F5D6F /* HospitalInMapEntity.m */,
+				05D593211CE069D3006F5D6F /* MapHospitalTableViewCell.h */,
+				05D593221CE069D3006F5D6F /* MapHospitalTableViewCell.m */,
 				05D5930E1CC4926E006F5D6F /* BannerWeb */,
 				05D5930D1CC49261006F5D6F /* 下单(普通) */,
 				05D5930F1CC49295006F5D6F /* 订单详情 */,
@@ -923,6 +996,18 @@
 		05BA34F01C434C5200DC07CD /* 陪诊img */ = {
 			isa = PBXGroup;
 			children = (
+				05D5934E1CE9B60C006F5D6F /* 下拉箭头@2x.png */,
+				05D5933E1CE46734006F5D6F /* 附近医院@2x.png */,
+				05D5933F1CE46734006F5D6F /* 挂号icon@2x.png */,
+				05D593401CE46734006F5D6F /* 陪诊icon@2x.png */,
+				05D5933C1CE2D313006F5D6F /* imgHospitalLevel@x2.png */,
+				05D593371CE1C4EE006F5D6F /* 搜索图标@2x.png */,
+				05D593351CE1C343006F5D6F /* 搜索框@2x.png */,
+				05D593331CE1863E006F5D6F /* 白框上的小三角@2x.png */,
+				05D593311CE183A3006F5D6F /* 弹出白框@2x.png */,
+				05D593241CE0821D006F5D6F /* hospitalImg.png */,
+				05D5931A1CDC819E006F5D6F /* 当前位置@2x.png */,
+				05D5931B1CDC819E006F5D6F /* 重置@2x.png */,
 				05B08D941CA3E105002F7729 /* 是否在孕期弹层－非@2x_06.png */,
 				05B08D951CA3E105002F7729 /* 是否在孕期弹层@2x_03.png */,
 				050BB1081C9FDEBC00D5E890 /* 02-00等待护士接单－进度条@2x_03.png */,
@@ -1048,6 +1133,10 @@
 			children = (
 				05E8C0AF1C76C9BD00DA27C0 /* CouponsTableViewController.h */,
 				05E8C0B01C76C9BD00DA27C0 /* CouponsTableViewController.m */,
+				05D593441CE478A4006F5D6F /* CouponsEntity.h */,
+				05D593451CE478A4006F5D6F /* CouponsEntity.m */,
+				05D593471CE48220006F5D6F /* CouponsTableViewCell.h */,
+				05D593481CE48220006F5D6F /* CouponsTableViewCell.m */,
 			);
 			name = "优惠券";
 			sourceTree = "<group>";
@@ -1164,6 +1253,7 @@
 		05E8BE731C52595700DA27C0 /* launchImage */ = {
 			isa = PBXGroup;
 			children = (
+				05D593501CEABF1B006F5D6F /* 750x1334.png */,
 				05DC59DB1CB63409008F8538 /* v1.1 750x1334.png */,
 				05DC59DC1CB63409008F8538 /* v1.1--640x1136.png */,
 				05DC59DD1CB63409008F8538 /* v1.1-640x960.png */,
@@ -1413,6 +1503,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05D593421CE46734006F5D6F /* 挂号icon@2x.png in Resources */,
 				05DC59E11CB63409008F8538 /* v1.1-640x960.png in Resources */,
 				05B08D961CA3E105002F7729 /* 是否在孕期弹层－非@2x_06.png in Resources */,
 				05075B891C4762670076EF31 /* test.caf in Resources */,
@@ -1426,12 +1517,14 @@
 				05E8BE6D1C524A2C00DA27C0 /* orderDislect@2x.png in Resources */,
 				05D593041CC08088006F5D6F /* linkPage_three.png in Resources */,
 				05D593031CC08088006F5D6F /* linkPage_one.png in Resources */,
+				05D5933D1CE2D313006F5D6F /* imgHospitalLevel@x2.png in Resources */,
 				050BB1211CA14CB400D5E890 /* star_select.png in Resources */,
 				05BA34A51C41F1FE00DC07CD /* LaunchScreen.storyboard in Resources */,
 				05BA351C1C43893800DC07CD /* jiantou@2x.png in Resources */,
 				05075BF91C47BCEF0076EF31 /* Triangle 1@2x.png in Resources */,
 				05BA35421C43C6E700DC07CD /* normarl@2x.png in Resources */,
 				057585CD1C97B9D40040510B /* 1.1个人中心@2x_03.png in Resources */,
+				05D5934F1CE9B60C006F5D6F /* 下拉箭头@2x.png in Resources */,
 				05BA35131C4381BD00DC07CD /* Rectangle 91 + Line + Line Copy@2x.png in Resources */,
 				05E8C1001C78014700DA27C0 /* wechat@2x.png in Resources */,
 				05075C021C47BD350076EF31 /* Triangle s1@2x.png in Resources */,
@@ -1445,14 +1538,18 @@
 				05075B441C44AD710076EF31 /* Oval 91 + Path 52@2x.png in Resources */,
 				058B6B1B1CB4B59800EBBB37 /* 组-7@2x.png in Resources */,
 				05E8BEF51C5CFB3C00DA27C0 /* ic_hushi@2x.png in Resources */,
+				05D5934B1CE4868B006F5D6F /* 折扣券@2x.png in Resources */,
 				05E8BF801C61E53800DA27C0 /* ic_lishi@2x.png in Resources */,
+				05D5931C1CDC819E006F5D6F /* 当前位置@2x.png in Resources */,
 				05BA34A01C41F1FE00DC07CD /* Main.storyboard in Resources */,
 				059FFD801CB3AD0000639508 /* 1.5编辑档案－填写信息_03.png in Resources */,
 				050069901C86CD4200192418 /* douhttps.cer in Resources */,
 				05E8BE6A1C524A2C00DA27C0 /* Myselect@2x.png in Resources */,
 				05E8BEF81C5CFB3C00DA27C0 /* ic_texu@2x.png in Resources */,
+				05D593411CE46734006F5D6F /* 附近医院@2x.png in Resources */,
 				05BA35451C43C6E700DC07CD /* Oval 70 + Oval 70@2x.png in Resources */,
 				05DC59E21CB63409008F8538 /* v1.1-1242x2208.png in Resources */,
+				05D5931D1CDC819E006F5D6F /* 重置@2x.png in Resources */,
 				05075BF01C47BB0C0076EF31 /* 120 - iPhone.png in Resources */,
 				05BA34F81C43524100DC07CD /* Path 3@2x.png in Resources */,
 				05DC59DF1CB63409008F8538 /* v1.1 750x1334.png in Resources */,
@@ -1460,6 +1557,7 @@
 				050BB12C1CA2741000D5E890 /* cancelDiselect.png in Resources */,
 				050BB12D1CA2741000D5E890 /* cancelSelect.png in Resources */,
 				058B6B1C1CB4B59800EBBB37 /* 组-7@3x.png in Resources */,
+				05D5934D1CE9A080006F5D6F /* 不可用优惠券@2x.png in Resources */,
 				05085FE81CA928780015519C /* 积分规则@2x_03.png in Resources */,
 				050BB0CE1C98348E00D5E890 /* 1.3档案页@2x_03.png in Resources */,
 				050BB0DF1C99959900D5E890 /* upphoto@2x.png in Resources */,
@@ -1470,8 +1568,11 @@
 				050BB1261CA2660F00D5E890 /* evlatueSuccess.png in Resources */,
 				05D593051CC08088006F5D6F /* linkPage_two.png in Resources */,
 				050BB11D1CA1482C00D5E890 /* 02-04取消原因@2x_02.png in Resources */,
+				05D593511CEABF1B006F5D6F /* 750x1334.png in Resources */,
 				05BA34FB1C43524100DC07CD /* Rectangle 39@2x.png in Resources */,
+				05D593251CE0821D006F5D6F /* hospitalImg.png in Resources */,
 				05075BEC1C47BB0C0076EF31 /* 80 - Spotlight.png in Resources */,
+				05D593431CE46734006F5D6F /* 陪诊icon@2x.png in Resources */,
 				05E8BF711C5F4DE800DA27C0 /* big.png in Resources */,
 				050BB10D1C9FDEBC00D5E890 /* 02-01待陪诊@2x_03.png in Resources */,
 				05E8C1051C78015100DA27C0 /* icon_select@2x.png in Resources */,
@@ -1484,6 +1585,8 @@
 				05CCAE421C5078D6001D9B0D /* Group@2x.png in Resources */,
 				05D593021CC08088006F5D6F /* linkPage_four.png in Resources */,
 				05DC59E81CB65BC1008F8538 /* 设置icon@3x.png in Resources */,
+				05D593341CE1863E006F5D6F /* 白框上的小三角@2x.png in Resources */,
+				05D593321CE183A3006F5D6F /* 弹出白框@2x.png in Resources */,
 				05E8BF6F1C5F4D9900DA27C0 /* mid.png in Resources */,
 				05BA35041C4377EA00DC07CD /* Oval 56@2x.png in Resources */,
 				05E8C1891C80279300DA27C0 /* peizhen_arrow.png in Resources */,
@@ -1501,6 +1604,8 @@
 				058B6B1A1CB4B59800EBBB37 /* 组-7.png in Resources */,
 				05DC59F01CB65D08008F8538 /* HeadPlaceImg.png in Resources */,
 				05CCADD51C4E799F001D9B0D /* Oval 129@2x.png in Resources */,
+				05D593381CE1C4EE006F5D6F /* 搜索图标@2x.png in Resources */,
+				05D593361CE1C343006F5D6F /* 搜索框@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1603,10 +1708,13 @@
 				050BB0D71C990A0B00D5E890 /* EditPatientViewController.m in Sources */,
 				057585D31C97DA5B0040510B /* PatientEntity.m in Sources */,
 				05E8BEC91C566C6100DA27C0 /* LinkPageViewController.m in Sources */,
+				05D593461CE478A4006F5D6F /* CouponsEntity.m in Sources */,
 				05BA35371C43ACA100DC07CD /* AddFamilyViewController.m in Sources */,
 				050BB11B1CA1289400D5E890 /* EvaluateViewController.m in Sources */,
 				05E8C0C11C76C9BD00DA27C0 /* BillHistoryTableViewController.m in Sources */,
 				05E8C0F91C76C9CB00DA27C0 /* PersonDataCell.m in Sources */,
+				05D593201CDCA599006F5D6F /* HospitalInMapEntity.m in Sources */,
+				05D593491CE48220006F5D6F /* CouponsTableViewCell.m in Sources */,
 				05E8C0F11C76C9CB00DA27C0 /* ContactCell.m in Sources */,
 				05BA34FF1C43738400DC07CD /* HospitalTableViewCell.m in Sources */,
 				05E8C17A1C7DAC7F00DA27C0 /* NJKWebViewProgressView.m in Sources */,
@@ -1635,6 +1743,7 @@
 				05B08D8D1CA38AE5002F7729 /* CompleteOrderDetailViewController.m in Sources */,
 				05BA349D1C41F1FE00DC07CD /* ViewController.m in Sources */,
 				05E8C0C41C76C9BD00DA27C0 /* ChangeMyDataViewController.m in Sources */,
+				05D593541CEAC6C2006F5D6F /* AdImgViewController.m in Sources */,
 				05CCADBD1C4E6967001D9B0D /* HospitalGroupEntity.m in Sources */,
 				05075B4C1C45E53C0076EF31 /* SelectDoctorViewController.m in Sources */,
 				05075B3C1C4497D70076EF31 /* RightTableViewCell.m in Sources */,
@@ -1642,6 +1751,7 @@
 				053AB0F71C48AA5B00982B01 /* KDCycleBannerView.m in Sources */,
 				05E8C0ED1C76C9CB00DA27C0 /* BillHistoryCell.m in Sources */,
 				05BA34E01C41FECC00DC07CD /* UIColor+Util.m in Sources */,
+				05D5932B1CE0D38A006F5D6F /* MycustomAnnotationView.m in Sources */,
 				05075B3F1C44A3560076EF31 /* PTSureOrderViewController.m in Sources */,
 				050BB1071C9FDD3900D5E890 /* OrderStateTableViewCell.m in Sources */,
 				050BB0C91C98324700D5E890 /* PatientDetailTableViewCell.m in Sources */,
@@ -1669,9 +1779,13 @@
 				05075B661C4688540076EF31 /* HospitalAddressTableViewCell.m in Sources */,
 				05075B581C461EDD0076EF31 /* TXOrderTableViewCell.m in Sources */,
 				05E8C0CD1C76C9BD00DA27C0 /* UIBarButtonItem+Extention.m in Sources */,
+				05D5932E1CE0D8C6006F5D6F /* MycustomActionPaopao.m in Sources */,
 				05E8BF7E1C61D00300DA27C0 /* HistoryOrderViewController.m in Sources */,
+				05D593231CE069D3006F5D6F /* MapHospitalTableViewCell.m in Sources */,
 				05E8BE351C52138D00DA27C0 /* FromHospitalSelectDoctorViewController.m in Sources */,
 				053AB1011C4A1EFD00982B01 /* UserDefaultsUtils.m in Sources */,
+				05D593191CDC39EB006F5D6F /* MapAndHospitalViewController.m in Sources */,
+				05D5933B1CE1D279006F5D6F /* SearchViewController.m in Sources */,
 				05075B521C45FCA30076EF31 /* SelectTimeViewController.m in Sources */,
 				050BB0EE1C9996FD00D5E890 /* PatientPictureView.m in Sources */,
 				05BA349A1C41F1FE00DC07CD /* AppDelegate.m in Sources */,
@@ -1850,8 +1964,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianbin Dou (3EJDL54CCU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianbin Dou (3EJDL54CCU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SHANGHAI QUHU NETWORK TECHNOLOGY CO.,LTD. (VC4L739A9B)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1879,8 +1993,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jianbin Dou (3EJDL54CCU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jianbin Dou (3EJDL54CCU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SHANGHAI QUHU NETWORK TECHNOLOGY CO.,LTD. (VC4L739A9B)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

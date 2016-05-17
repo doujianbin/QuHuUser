@@ -22,8 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     // Do any additional setup after loading the view.
-    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.translucent = NO;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.title = self.strTitle;
     UIButton *btnl = [[UIButton alloc]initWithFrame:CGRectMake(15, 21.5, 20, 20)];

@@ -60,6 +60,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     self.arr_dataDay = [NSMutableArray array];
     self.arr_day = [NSMutableArray array];
     self.arr_hour = [NSMutableArray array];
@@ -67,7 +71,7 @@
     
     self.title = @"预约陪诊";
     
-    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.translucent = NO;
     
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
@@ -326,6 +330,11 @@
                 }
                 if ([[self.dic_coupon objectForKey:@"type"] intValue] == 2) {
                     [cell.lab_right setText:[NSString stringWithFormat:@"-%@元",[self.dic_coupon objectForKey:@"value"]]];
+                    [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+                    cell.lab_right.alpha = 1.0;
+                }
+                if ([[self.dic_coupon objectForKey:@"type"] intValue] == 3) {
+                    [cell.lab_right setText:@"免套餐券"];
                     [cell.lab_right setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
                     cell.lab_right.alpha = 1.0;
                 }
@@ -643,6 +652,14 @@
             [self.lab_yugujine setAttributedText:myStr];
             self.lab_yugujine.textAlignment = NSTextAlignmentCenter;
         }
+    }if ([[self.dic_coupon objectForKey:@"type"] intValue] == 3){
+        NSMutableAttributedString *myStr = [[NSMutableAttributedString alloc] initWithString:@"预估金额：0 元"];
+        [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a4a4a"] range:NSMakeRange(0, 5)];
+        [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0f] range:NSMakeRange(0, 5)];
+        [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#fa6262"] range:NSMakeRange(5, 3)];
+        [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0f] range:NSMakeRange(5, 3)];
+        [self.lab_yugujine setAttributedText:myStr];
+        self.lab_yugujine.textAlignment = NSTextAlignmentCenter;
     }
 }
 
@@ -711,8 +728,8 @@
             [self.navigationController pushViewController:orderView animated:YES];
         }else{
             self.zhifu_orderID = [responseDic objectForKey:@"data"];
-            if ([[responseDic objectForKey:@"errorCode"] isEqualToString:@"A301"]) {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"您有一笔订单未支付，请先进行支付" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"支付", nil];
+            if (![[responseDic objectForKey:@"errorCode"] isKindOfClass:[NSNull class]] && [[responseDic objectForKey:@"errorCode"] isEqualToString:@"A301"]) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:Message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"支付", nil];
                 alert.tag = 101;
                 alert.delegate = self;
                 [alert show];

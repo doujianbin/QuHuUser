@@ -15,5 +15,6 @@
 @property (nonatomic ,retain)UILabel *lab_hospitalAddress;
 @property (nonatomic ,retain)UIImageView *img_dingwei;
 @property (nonatomic ,retain)UILabel *lab_juli;
+@property (nonatomic ,strong)UILabel *lab_level;
 
 @end

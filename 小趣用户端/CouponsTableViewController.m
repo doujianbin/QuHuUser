@@ -11,16 +11,20 @@
 #import "UIBarButtonItem+Extention.h"
 #import "Toast+UIView.h"
 #import <MJRefresh/MJRefresh.h>
+#import "CouponsEntity.h"
+#import "CouponsTableViewCell.h"
 
 @interface CouponsTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic,weak)UITableView *couponsTableView;
-@property (nonatomic, weak)UITextField *couponIdTextField;
+@property (nonatomic,strong)UITableView *couponsTableView;
+@property (nonatomic, strong)UITextField *couponIdTextField;
 
 @property (nonatomic, strong)NSMutableArray *dataArray;
 
 @property (nonatomic, strong)AFNManager *manager;
 @property (nonatomic, strong)UIView *tab_backGroundView;
+@property (nonatomic ,strong)NSMutableArray *arr_weiguoqi;
+@property (nonatomic ,strong)NSMutableArray *arr_guoqi;
 
 
 @end
@@ -32,6 +36,8 @@
     self = [super init];
     if (self) {
         self.dataArray = [[NSMutableArray alloc]init];
+        self.arr_weiguoqi = [[NSMutableArray alloc]init];
+        self.arr_guoqi = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -56,34 +62,104 @@
 }
 
 - (void)makeURLRequest {
-//    BeginActivity;
-    NSString *url = [NSString stringWithFormat:@"%@/quhu/accompany/user/coupon/getCouponList",Development];
-    
-    AFNManager *manager = [[AFNManager alloc] init];
-    
-    [manager RequestJsonWithUrl:url method:@"POST" parameter:nil result:^(id responseDic) {
-//        EndActivity;
-        if ([Status isEqualToString:SUCCESS]) {
-            
-            [self.couponsTableView.mj_header endRefreshing];
-            self.couponIdTextField.text = @"";
-            [self.dataArray removeAllObjects];
-            [self.dataArray addObjectsFromArray:[responseDic objectForKey:@"data"]];
-            [self.couponsTableView reloadData];
-        }
-        NSArray * arr = [responseDic objectForKey:@"data"];
-        if (arr.count > 0) {
-            [self.couponsTableView setBackgroundView:nil];
-        }else{
-            [self.couponsTableView setBackgroundView:self.tab_backGroundView];
-        }
+    if (self.isFromOrder) {
+        // 从下单界面进入
+        NSString *url = [NSString stringWithFormat:@"%@%@",Development,QueryUserCouponsByAreaIdAndOrderType];
+                NSDictionary *dic = @{@"orderType":@"2",@"areaId":@"110100"};
+        AFNManager *manager = [[AFNManager alloc] init];
         
-    } fail:^(NSError *error) {
-        NSLog(@"%@",error);
-//        EndActivity;
-        NetError;
-        [self.couponsTableView.mj_header endRefreshing];
-    }];
+        [manager RequestJsonWithUrl:url method:@"POST" parameter:dic result:^(id responseDic) {
+            //        EndActivity;
+            [self.couponsTableView.mj_header endRefreshing];
+            if ([Status isEqualToString:SUCCESS]) {
+                self.couponIdTextField.text = @"";
+                [self.arr_weiguoqi removeAllObjects];
+                [self.arr_guoqi removeAllObjects];
+                [self.dataArray removeAllObjects];
+                
+                for (NSDictionary *dic in [responseDic objectForKey:@"data"]) {
+                    if ([[dic objectForKey:@"useable"] intValue] == 1) {
+                        [self.arr_weiguoqi addObject:dic];
+                    }if ([[dic objectForKey:@"useable"] intValue] == 0){
+                        [self.arr_guoqi addObject:dic];
+                    }
+                }
+                
+                if (self.arr_weiguoqi.count > 0) {
+                    [self.dataArray addObject:self.arr_weiguoqi];
+                }
+                if (self.arr_guoqi.count > 0) {
+                    [self.dataArray addObject:self.arr_guoqi];
+                }
+                
+                NSArray * arr = [responseDic objectForKey:@"data"];
+                if (arr.count > 0) {
+                    [self.couponsTableView setBackgroundView:nil];
+                    [self.couponsTableView reloadData];
+                }else{
+                    [self.couponsTableView setBackgroundView:self.tab_backGroundView];
+                }
+            }else{
+                [self.view makeToast:Message duration:1.0 position:@"center"];
+            }
+            
+        } fail:^(NSError *error) {
+            NSLog(@"%@",error);
+            //        EndActivity;
+            NetError;
+            [self.couponsTableView.mj_header endRefreshing];
+        }];
+
+        }else{
+                
+                NSString *url = [NSString stringWithFormat:@"%@%@",Development,QueryUserCouponsAll];
+//                NSDictionary *dic = @{@"orderType":@"2",@"areaId":@"110100"};
+                AFNManager *manager = [[AFNManager alloc] init];
+                
+                [manager RequestJsonWithUrl:url method:@"POST" parameter:nil result:^(id responseDic) {
+                    //        EndActivity;
+                    [self.couponsTableView.mj_header endRefreshing];
+                    if ([Status isEqualToString:SUCCESS]) {
+                        self.couponIdTextField.text = @"";
+                        [self.arr_weiguoqi removeAllObjects];
+                        [self.arr_guoqi removeAllObjects];
+                        [self.dataArray removeAllObjects];
+                        
+                        for (NSDictionary *dic in [responseDic objectForKey:@"data"]) {
+                            if ([[dic objectForKey:@"useable"] intValue] == 1) {
+                                [self.arr_weiguoqi addObject:dic];
+                            }if ([[dic objectForKey:@"useable"] intValue] == 0){
+                                [self.arr_guoqi addObject:dic];
+                            }
+                        }
+                        
+                        if (self.arr_weiguoqi.count > 0) {
+                            [self.dataArray addObject:self.arr_weiguoqi];
+                        }
+                        if (self.arr_guoqi.count > 0) {
+                            [self.dataArray addObject:self.arr_guoqi];
+                        }
+                        
+                        NSArray * arr = [responseDic objectForKey:@"data"];
+                        if (arr.count > 0) {
+                            [self.couponsTableView setBackgroundView:nil];
+                            [self.couponsTableView reloadData];
+                        }else{
+                            [self.couponsTableView setBackgroundView:self.tab_backGroundView];
+                        }
+                    }else{
+                        [self.view makeToast:Message duration:1.0 position:@"center"];
+                    }
+                    
+                } fail:^(NSError *error) {
+                    NSLog(@"%@",error);
+                    //        EndActivity;
+                    NetError;
+                    [self.couponsTableView.mj_header endRefreshing];
+                }];
+
+        }
+    
 }
 
 - (void)backItemClick {
@@ -123,16 +199,16 @@
 
     [self.view addSubview:chargeView];
     
-    UITableView *couponsTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,140 - 64 , [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 139 - 44)];
-    couponsTableView.backgroundColor = COLOR(245, 246, 247, 1);
-    couponsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    couponsTableView.delegate = self;
-    couponsTableView.dataSource = self;
-    self.couponsTableView = couponsTableView;
+    self.couponsTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,140 - 64 , [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 76 - 64)];
+    self.couponsTableView.backgroundColor = [UIColor colorWithHexString:@"#F5F5F9"];
+    self.couponsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.couponsTableView.delegate = self;
+    self.couponsTableView.dataSource = self;
+
     self.couponsTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self makeURLRequest];
     }];
-    [self.view addSubview:couponsTableView];
+    [self.view addSubview:self.couponsTableView];
     
     self.tab_backGroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,self.couponsTableView.frame.size.width, self.couponsTableView.frame.size.height)];
     UIImageView *img_nothing = [[UIImageView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - 115) / 2 ,(self.tab_backGroundView.frame.size.height - 127)/2 - 80, 115, 127)];
@@ -169,105 +245,86 @@
     }];
 }
 
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    return @"11";
+//}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 1;
+    return self.dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (self.dataArray.count == 0) {
-        return 0;
-    }else {
-        
-        return self.dataArray.count;
+    return [[self.dataArray objectAtIndex:section] count];
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+
+    UIView *viewS = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - 120) / 2, 28, 120, 14)];
+    [viewS addSubview:lab];
+    [lab setTextColor:[UIColor colorWithHexString:@"#A4A4A4"]];
+    [lab setFont:[UIFont systemFontOfSize:14]];
+    [lab setText:@"不可用优惠券"];
+    [lab setTextAlignment:NSTextAlignmentCenter];
+    
+    UIImageView *img1 = [[UIImageView alloc]initWithFrame:CGRectMake(20, 34, (SCREEN_WIDTH - 130) / 2 - 15, 0.7)];
+    [viewS addSubview:img1];
+    [img1 setBackgroundColor:[UIColor colorWithHexString:@"#cccccc"]];
+    
+    UIImageView *img2 = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 20 - (SCREEN_WIDTH - 130) / 2 + 15, 34, (SCREEN_WIDTH - 130) / 2 - 15, 0.7)];
+    [viewS addSubview:img2];
+    [img2 setBackgroundColor:[UIColor colorWithHexString:@"#cccccc"]];
+    
+    if (self.dataArray.count == 2) {
+        if (section == 0) {
+            return nil;
+        }
+        if (section == 1) {
+            return viewS;
+        }
     }
+    if (self.dataArray.count == 1) {
+        if (self.arr_guoqi == 0) {
+            return nil;
+        }
+        if (self.arr_weiguoqi == 0) {
+            return viewS;
+        }
+    }
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellId = @"cell";
     
-    CouponsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    CouponsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
-        cell = [[CouponsCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
-        
+        cell = [[CouponsTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
     }
-    NSDictionary *dic = self.dataArray[indexPath.row];
-    
-    NSLog(@"%@",dic);
-    
-    NSString *valueString = [[dic objectForKey:@"value"]stringValue];
-    
-        if ([[dic objectForKey:@"isPast"]isEqualToString:@"1"]) {
-            if ([[dic objectForKey:@"type"]isEqualToNumber:[NSNumber numberWithInt:1]]) {
-                
-                CGFloat cValue = [valueString floatValue] * 10;
-                NSString *str = [NSString stringWithFormat:@"%.1f",cValue];
-                cell.couponImageView.image = [UIImage imageNamed:@"overtimebg"];
-                
-                cell.chargeLabel.text = [NSString stringWithFormat:@"%@折",str];
-                cell.chargeLabel.textColor = COLOR(74, 74, 74, 1);
-                
-                cell.couponTypeLabel.text = @"折扣券";
-                cell.couponTypeLabel.textColor = COLOR(208, 208, 208, 1);
-                NSString *scheduleT = [[dic objectForKey:@"expireTime"] substringToIndex:10];
-                cell.endTimeLabel.text = [NSString stringWithFormat:@"有效期至 %@",scheduleT];
-                cell.endTimeLabel.textColor = COLOR(208, 208, 208, 1);
-                
-            }else {
-                
-                
-                cell.couponImageView.image = [UIImage imageNamed:@"countbg1"];
-                
-                cell.chargeLabel.text = [NSString stringWithFormat:@"%@元",valueString];
-                cell.chargeLabel.textColor = COLOR(208, 208, 208, 1);
-                
-                cell.couponTypeLabel.text = @"抵用券";
-                cell.couponTypeLabel.textColor = COLOR(208, 208, 208, 1);
-                
-                NSString *scheduleT = [[dic objectForKey:@"expireTime"] substringToIndex:10];
-                cell.endTimeLabel.text = [NSString stringWithFormat:@"有效期至 %@",scheduleT];
-                cell.endTimeLabel.textColor = COLOR(208, 208, 208, 1);
-                
-            }
-            
-        }else{
-            
-            if ([[dic objectForKey:@"type"]isEqualToNumber:[NSNumber numberWithInt:1]]) {
-                
-                CGFloat cValue = [valueString floatValue] * 10;
-                NSString *str = [NSString stringWithFormat:@"%.1f",cValue];
-                cell.couponImageView.image = [UIImage imageNamed:@"countbg2"];
-                
-                cell.chargeLabel.text = [NSString stringWithFormat:@"%@折",str];
-        
-                cell.chargeLabel.textColor = COLOR(74, 74, 74, 1);
-                
-                cell.couponTypeLabel.text = @"折扣券";
-                cell.couponTypeLabel.textColor = COLOR(74, 74, 74, 1);
-                
-                NSString *scheduleT = [[dic objectForKey:@"expireTime"] substringToIndex:10];
-                cell.endTimeLabel.text = [NSString stringWithFormat:@"有效期至 %@",scheduleT];
-                cell.endTimeLabel.textColor = COLOR(155, 155, 155, 1);
-                
-            }else {
-                
-                cell.couponImageView.image = [UIImage imageNamed:@"countbg1"];
-                
-                cell.chargeLabel.text = [NSString stringWithFormat:@"%@元",valueString];
-                cell.chargeLabel.textColor = COLOR(74, 74, 74, 1);
-                
-                cell.couponTypeLabel.text = @"抵用券";
-                cell.couponTypeLabel.textColor = COLOR(74, 74, 74, 1);
-                
-                NSString *scheduleT = [[dic objectForKey:@"expireTime"] substringToIndex:10];
-                cell.endTimeLabel.text = [NSString stringWithFormat:@"有效期至 %@",scheduleT];
-                cell.endTimeLabel.textColor = COLOR(155, 155, 155, 1);                
-            
-        }
-
+    NSDictionary *dic = [[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if ([[dic objectForKey:@"useable"] intValue] == 1) {
+        [cell.img_backGround setImage:[UIImage imageNamed:@"折扣券"]];
+        [cell.lab_couponsName setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+        [cell.lab_expireTimeDesc setTextColor:[UIColor colorWithHexString:@"#666666"]];
+        [cell.lab_value setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+        [cell.lab_type setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
     }
+    if ([[dic objectForKey:@"useable"] intValue] == 0) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.img_backGround setImage:[UIImage imageNamed:@"不可用优惠券"]];
+        [cell.lab_couponsName setTextColor:[UIColor colorWithHexString:@"#CCCCCC"]];
+        [cell.lab_expireTimeDesc setTextColor:[UIColor colorWithHexString:@"#CCCCCC"]];
+        [cell.lab_value setTextColor:[UIColor colorWithHexString:@"#CCCCCC"]];
+        [cell.lab_type setTextColor:[UIColor colorWithHexString:@"#CCCCCC"]];
+    }
+    [cell.lab_couponsName setText:[dic objectForKey:@"name"]];
+    [cell.lab_expireTimeDesc setText:[dic objectForKey:@"expireTimeDesc"]];
+    [cell.lab_usageDesc setText:[dic objectForKey:@"usageDesc"]];
+    [cell.lab_value setText:[dic objectForKey:@"typeDesc"]];
+    [cell.lab_type setText:[dic objectForKey:@"discountDesc"]];
     return cell;
 }
 
@@ -275,12 +332,11 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.isFromOrder) {
-        if ([[[self.dataArray objectAtIndex:indexPath.row] objectForKey:@"isPast"] intValue] == 1) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"过期的优惠券暂时无法使用哦" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-            [alert show];
+        if ([[[[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"useable"] intValue] == 0) {
+            // 过期的不可点
         }else{
             
-            NSDictionary *dic = [self.dataArray objectAtIndex:indexPath.row];
+            NSDictionary *dic = [[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
             [self.delegate didSelectedCouponsWithDic:dic];
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -288,21 +344,36 @@
     
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (self.dataArray.count == 2) {
+        if (section == 0) {
+            return 0;
+        }
+        if (section == 1) {
+            return 40;
+        }
+    }
+    if (self.dataArray.count == 1) {
+        if (self.arr_guoqi == 0) {
+            return 0;
+        }
+        if (self.arr_weiguoqi == 0) {
+            return 40;
+        }
+    }
+    return 0;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 114.5;
+    return 131;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
      [self.view endEditing:YES];
 }
 
-//-(void)viewWillAppear:(BOOL)animated{
-//    [self.tabBarController.tabBar setHidden:YES];
-//}
-//
-//-(void)viewWillDisappear:(BOOL)animated{
-//    [self.tabBarController.tabBar setHidden:NO];
-//}
+
 
 @end

@@ -16,8 +16,15 @@
 #import "BannerWebViewController.h"
 #import "Toast+UIView.h"
 #import "TalkingData.h"
+#import <BaiduMapAPI_Location/BMKLocationService.h>
+#import <BaiduMapAPI_Search/BMKGeocodeSearch.h>
+#import <BaiduMapAPI_Search/BMKGeocodeSearchOption.h>
+#import "MapAndHospitalViewController.h"
+#import "NSString+Size.h"
 
-@interface PeiZhenViewController ()<UITableViewDataSource,UITableViewDelegate,KDCycleBannerViewDataource,KDCycleBannerViewDelegate>{
+#define MaxWidth SCREEN_WIDTH * 0.6
+
+@interface PeiZhenViewController ()<UITableViewDataSource,UITableViewDelegate,KDCycleBannerViewDataource,KDCycleBannerViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UIGestureRecognizerDelegate>{
     UIButton *btn_putong;
     UIButton *btn_texu;
     UITableView *tableView_hospital;
@@ -29,9 +36,21 @@
     NSMutableArray *arr_title;
     UIView         *sec;
     UIView         *view_keshi;
+    BMKLocationService *_locService;
+    BMKGeoCodeSearch *_searcher;
+    
+    
 }
 @property (nonatomic ,retain)AFNManager *manager;
 @property (nonatomic ,strong)KDCycleBannerView *cycleBannerView;
+@property (nonatomic ,strong)NSString *localCityName;
+@property (nonatomic ,strong)UIButton *btn_navLeft;
+@property (nonatomic ,strong)NSString *longitude;
+@property (nonatomic ,strong)NSString *latitude;
+@property (nonatomic ,strong)UILabel *lab_city;
+@property (nonatomic ,strong)UIImageView *img_up;
+@property (nonatomic ,strong)NSString *cityName;
+@property (nonatomic )int currentCityServe;
 @end
 
 @implementation PeiZhenViewController
@@ -48,30 +67,118 @@
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.extendedLayoutIncludesOpaqueBars = NO;
+//    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
+    UILabel *titleLabel = [[UILabel
+                            alloc] initWithFrame:CGRectMake(0,
+                                                            0, 150, 44)];
+    [titleLabel setText:@"小趣好护士"];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
+    self.navigationItem.titleView = titleLabel;
+    
+    self.btn_navLeft = [[UIButton alloc]initWithFrame:CGRectMake(0, 21.5, 60, 20)];
+    self.lab_city = [[UILabel alloc]init];
+    [self.btn_navLeft addSubview:self.lab_city];
+    [self.lab_city setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
+    self.img_up = [[UIImageView alloc] init];
+    [self.btn_navLeft addSubview:self.img_up];
+    [self.img_up setImage:[UIImage imageNamed:@"下拉箭头"]];
+    UIBarButtonItem *btnleft = [[UIBarButtonItem alloc]initWithCustomView:_btn_navLeft];
+    self.navigationItem.leftBarButtonItem = btnleft;
+    [_btn_navLeft addTarget:self action:@selector(selectLocationLeftAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     // Do any additional setup after loading the view.
-    self.extendedLayoutIncludesOpaqueBars = NO;
-    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-//    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+
     scl_back = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -5, SCREEN_WIDTH, SCREEN_HEIGHT - 44)];
     [self.view addSubview:scl_back];
     
-    [self getMsg];
+//    [self getMsg];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loginAgainAction) name:@"login" object:nil];
+    
+    if ([CLLocationManager locationServicesEnabled] &&
+        ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized
+         || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
+            //定位功能可用，开始定位
+            //初始化BMKLocationService
+            _locService = [[BMKLocationService alloc]init];
+            _locService.delegate = self;
+            _locService.distanceFilter = 1000.0f;
+            //启动LocationService
+            [_locService startUserLocationService];
+        }
+    else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
+        // 定位功能不可用，提示用户或忽略引导用户开启
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"定位服务已关闭" message:@"请到设置－>隐私->定位服务中开启［小趣好护士］定位服务，以便为您提供更准确的服务信息" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+        alert.delegate = self;
+        [alert show];
+        self.longitude = @"0.0000";
+        self.latitude = @"0.0000";
+        [self getMsg];
+    }
+    
+    
+    //发起反向地理编码检索
+    _searcher =[[BMKGeoCodeSearch alloc]init];
+    _searcher.delegate = self;
+    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){39.961292, 116.466714};
+    BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[
+    BMKReverseGeoCodeOption alloc]init];
+    reverseGeoCodeSearchOption.reverseGeoPoint = pt;
+    BOOL flag = [_searcher reverseGeoCode:reverseGeoCodeSearchOption];
+    if(flag)
+    {
+      NSLog(@"反geo检索发送成功");
+    }
+    else
+    {
+      NSLog(@"反geo检索发送失败");
+    }
+}
+// 反地理编码检索 根据经纬度检索当前地理位置 城市
+- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
+    
+//    NSLog(@"这里是＝＝%@",result.addressDetail.city);
+//    self.localCityName = result.addressDetail.city;
+    
+}
+//实现相关delegate 处理位置信息更新
+//处理方向变更信息
+- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
+{
+//    NSLog(@"heading is %@",userLocation.heading);
+    
+}
+//处理位置坐标更新
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+//    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    self.latitude = [NSString stringWithFormat:@"%f",userLocation.location.coordinate.latitude];
+    self.longitude = [NSString stringWithFormat:@"%f",userLocation.location.coordinate.longitude];
+    [self getMsg];
 }
 
+
 - (void)getMsg{
+    
     BeginActivity;
-    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetShouYeMsg];
+    NSString *strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/public/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,self.longitude,self.latitude];
+    //    NSDictionary *dic = @{@"longitude":self.longitude,@"latitude":self.latitude,@"actId":@"1"};
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"GET" parameter:nil result:^(id responseDic) {
         NSLog(@"首页信息＝%@",responseDic);
         if ([Status isEqualToString:SUCCESS]) {
             EndActivity;
-//            [LoginStorage savePackageArr:[[responseDic objectForKey:@"data"] objectForKey:@"sets"]];
+            //            [LoginStorage savePackageArr:[[responseDic objectForKey:@"data"] objectForKey:@"sets"]];
             [LoginStorage saveCommonOrderDic:[[responseDic objectForKey:@"data"] objectForKey:@"commonSet"]];
             [LoginStorage saveSpecialOrderDic:[[responseDic objectForKey:@"data"] objectForKey:@"specialSet"]];
             arr_hospital = [[responseDic objectForKey:@"data"] objectForKey:@"hospitalList"];
@@ -97,9 +204,19 @@
                     [arr_title addObject:[dic objectForKey:@"title"]];
                 }
             }
+            self.currentCityServe = [[[responseDic objectForKey:@"data"] objectForKey:@"currentCityServe"] intValue];
+            if (self.currentCityServe == 0) {
+                [self.view makeToast:Message duration:1.0 position:@"center"];
+            }
+            self.cityName = [[responseDic objectForKey:@"data"] objectForKey:@"cityName"];
+            CGFloat width = [self.cityName fittingLabelWidthWithHeight:17 andFontSize:[UIFont systemFontOfSize:17]];
+            [self.lab_city setFrame:CGRectMake(0, 1.5, width, 17)];
+            NSString *strCN = [self.cityName substringToIndex:self.cityName.length - 1];
+            [self.lab_city setText:strCN];
+            [self.img_up setFrame:CGRectMake(CGRectGetMaxX(self.lab_city.frame) - 13, -2, 8, 20)];
+
         }
         [self addMidView];
-//        [self addKeshiView];
         [self addYiYuanView];
         
     } fail:^(NSError *error) {
@@ -108,26 +225,25 @@
         NetError;
         
     }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
     if(arr_bannerImg.count == 0){
-        [self getMsg];
+//        [self getMsg];
     }
     [self.cycleBannerView startAutoSwitchBannerView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO;
     [self.cycleBannerView cancelAutoSwitchBannerView];
 }
 
 // 中间普通陪诊和特需陪诊两个按钮
 -(void)addMidView{
     self.cycleBannerView = [KDCycleBannerView new];
-    self.cycleBannerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame) / 375 * 225);
+    self.cycleBannerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), SCREEN_HEIGHT * 0.23);
     self.cycleBannerView.delegate = self;
     self.cycleBannerView.datasource = self;
     self.cycleBannerView.autoPlayTimeInterval = 5;
@@ -137,92 +253,69 @@
     }else{
         self.cycleBannerView.continuous = NO;
     }
+
     
-//    UILabel *lb_place = [[UILabel alloc]initWithFrame:CGRectMake(15, 33, 34, 18)];
-//    [lb_place setFont:[UIFont systemFontOfSize:17]];
-//    [lb_place setText:@"北京"];
-//    [lb_place setTextColor:[UIColor colorWithHexString:@"#FFFFFF"]];
-//    [scl_back addSubview:lb_place];
-//    
-//    UIImage *im_down = [UIImage imageNamed:@"Oval 21"];
-//    UIImageView *iv_down = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(lb_place.frame) + 5, 39.5, im_down.size.width, im_down.size.height)];
-//    [iv_down setImage:im_down];
-//    [scl_back addSubview:iv_down];
-    
-    sec = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.cycleBannerView.frame), SCREEN_WIDTH, SCREEN_HEIGHT * 0.127)];
+    sec = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.cycleBannerView.frame), SCREEN_WIDTH, SCREEN_HEIGHT * 0.21)];
     [scl_back addSubview:sec];
     [sec setBackgroundColor:[UIColor whiteColor]];
-    UIImageView *img_heng = [[UIImageView alloc]initWithFrame:CGRectMake(0,128.5, SCREEN_WIDTH, 0.5)];
+    
+
+    UIImageView *img_shu = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 2, 0, 0.5, SCREEN_HEIGHT * 0.21)];
+    [sec addSubview:img_shu];
+    [img_shu setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
+    
+    UIImageView *img_heng = [[UIImageView alloc]initWithFrame:CGRectMake(0, sec.frame.size.height / 2, SCREEN_WIDTH / 2, 0.5)];
     [sec addSubview:img_heng];
     [img_heng setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
     
-    btn_putong = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.127)];
-    [sec addSubview:btn_putong];
+    UIButton *btn_yuyueguahao = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, sec.frame.size.width / 2, sec.frame.size.height / 2)];
+    [sec addSubview:btn_yuyueguahao];
+    [btn_yuyueguahao addTarget:self action:@selector(btn_yuyueguahao) forControlEvents:UIControlEventTouchUpInside];
     
-    [btn_putong addTarget:self action:@selector(btn_putongAction) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView *img1 = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH * 0.096, (sec.frame.size.height / 2 - 46) / 2, 46, 46)];
+    [btn_yuyueguahao addSubview:img1];
+    [img1 setImage:[UIImage imageNamed:@"挂号icon"]];
     
-    UIImage *im_putong = [UIImage imageNamed:@"ic_hushi"];
-    UIImageView *img_putong = [[UIImageView alloc]initWithFrame:CGRectMake(15, (btn_putong.frame.size.height - 55) / 2,55,55)];
-    [btn_putong addSubview:img_putong];
-    [img_putong setImage:im_putong];
+    UILabel *lab1 = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(img1.frame) + 10, 0, 60, btn_yuyueguahao.frame.size.height)];
+    [btn_yuyueguahao addSubview:lab1];
+    [lab1 setText:@"预约挂号"];
+    [lab1 setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+    lab1.font = [UIFont systemFontOfSize:15];
+    
+    
+    
+    
+    UIButton *btn_nearHospital = [[UIButton alloc]initWithFrame:CGRectMake(0, sec.frame.size.height / 2, sec.frame.size.width / 2, sec.frame.size.height / 2)];
+    [sec addSubview:btn_nearHospital];
+    [btn_nearHospital addTarget:self action:@selector(btn_nearHospital) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageView *img2 = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH * 0.096, (sec.frame.size.height / 2 - 46) / 2, 46, 46)];
+    [btn_nearHospital addSubview:img2];
+    [img2 setImage:[UIImage imageNamed:@"附近医院"]];
+    
+    UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(img1.frame) + 10, 0, 60, btn_nearHospital.frame.size.height)];
+    [btn_nearHospital addSubview:lab2];
+    [lab2 setText:@"附近医院"];
+    [lab2 setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+    lab2.font = [UIFont systemFontOfSize:15];
+    
+    
+    
 
-    UILabel *lab_putong = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(img_putong.frame) - 15,(btn_putong.frame.size.height - 18) / 2, 200, 18)];
-    [btn_putong addSubview:lab_putong];
-    [lab_putong setTextAlignment:NSTextAlignmentCenter];
-    lab_putong.font = [UIFont systemFontOfSize:22];
-    [lab_putong setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+    UIButton *btn_yuYuePeiZhen = [[UIButton alloc]initWithFrame:CGRectMake(sec.frame.size.width / 2, 0, sec.frame.size.width / 2, sec.frame.size.height)];
+    [sec addSubview:btn_yuYuePeiZhen];
+    [btn_yuYuePeiZhen addTarget:self action:@selector(btn_yuYuePeiZhen) forControlEvents:UIControlEventTouchUpInside];
+
+    UIImageView *img3 = [[UIImageView alloc]initWithFrame:CGRectMake((sec.frame.size.width / 2 - 73) / 2 , 20, 73, 73)];
+    [btn_yuYuePeiZhen addSubview:img3];
+    [img3 setImage:[UIImage imageNamed:@"陪诊icon"]];
     
-    NSMutableAttributedString *myStr = [[NSMutableAttributedString alloc] initWithString:@"预约陪诊服务"];
-    
-    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4A4A4A"] range:NSMakeRange(0, 2)];
-    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22.0f] range:NSMakeRange(0, 2)];
-    
-    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#FA6262"] range:NSMakeRange(2,2)];
-    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22.0f] range:NSMakeRange(2, 2)];
-    
-    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4A4A4A"] range:NSMakeRange(4,2)];
-    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:22.0f] range:NSMakeRange(4, 2)];
-    [lab_putong setAttributedText:myStr];
-    
-    UIImageView *imgjiantou = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - SCREEN_HEIGHT * 0.127 * 0.69, 0, SCREEN_HEIGHT * 0.127 * 0.69, SCREEN_HEIGHT * 0.127)];
-    [btn_putong addSubview:imgjiantou];
-    [imgjiantou setImage:[UIImage imageNamed:@"peizhen_arrow"]];
-//
-//    UILabel *lab_putong2 = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(lab_putong.frame) + 5, SCREEN_WIDTH/2, 12.5)];
-//    [btn_putong addSubview:lab_putong2];
-//    [lab_putong2 setText:@"挂号排队一条龙"];
-//    [lab_putong2 setTextAlignment:NSTextAlignmentCenter];
-//    lab_putong2.font = [UIFont systemFontOfSize:12];
-//    [lab_putong2 setTextColor:[UIColor colorWithHexString:@"4A4A4A" alpha:0.5]];
-//    
-//    UIImageView *img_shu = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 2, 0, 0.5, 129)];
-//    [sec addSubview:img_shu];
-//    [img_shu setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
-//    
-//    
-//    btn_texu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2, 129)];
-//    [sec addSubview:btn_texu];
-//    [btn_texu addTarget:self action:@selector(btn_texuAction) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    UIImage *im_texu = [UIImage imageNamed:@"ic_texu"];
-//    UIImageView *img_texu = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/4 - im_putong.size.width/2, 17,im_putong.size.width,im_putong.size.height)];
-//    [btn_texu addSubview:img_texu];
-//    [img_texu setImage:im_texu];
-//    
-//    UILabel *lab_texu = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(img_texu.frame) + 7.5, SCREEN_WIDTH/2, 18)];
-//    [btn_texu addSubview:lab_texu];
-//    [lab_texu setText:@"特需陪诊"];
-//    [lab_texu setTextAlignment:NSTextAlignmentCenter];
-//    lab_texu.font = [UIFont boldSystemFontOfSize:17];
-//    [lab_texu setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
-//    
-//    UILabel *lab_texu2 = [[UILabel alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(lab_texu.frame) + 5, SCREEN_WIDTH/2, 12.5)];
-//    [btn_texu addSubview:lab_texu2];
-//    [lab_texu2 setText:@"妥妥专家号预约"];
-//    [lab_texu2 setTextAlignment:NSTextAlignmentCenter];
-//    lab_texu2.font = [UIFont systemFontOfSize:12];
-//    [lab_texu2 setTextColor:[UIColor colorWithHexString:@"4A4A4A" alpha:0.5]];
-    
+    UILabel *lab3 = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(img3.frame) + 10, sec.frame.size.width / 2, 17)];
+    [btn_yuYuePeiZhen addSubview:lab3];
+    [lab3 setText:@"预约陪诊"];
+    [lab3 setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+    lab3.font = [UIFont systemFontOfSize:17];
+    lab3.textAlignment = NSTextAlignmentCenter;
 }
 
 -(void)addKeshiView{
@@ -240,14 +333,6 @@
     [lab_allkeshi setText:@"热门科室"];
     lab_allkeshi.font = [UIFont systemFontOfSize:13];
     [lab_allkeshi setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
-    
-    //    UIImageView *img_jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 21, 15, 6, 10)];
-    //    [btn_allkeshi addSubview:img_jiantou];
-    //    [img_jiantou setImage:[UIImage imageNamed:@"Path 3"]];
-    
-    UIImageView *img_heng = [[UIImageView alloc]initWithFrame:CGRectMake(0, 39.5, SCREEN_WIDTH, 0.5)];
-    [btn_allkeshi addSubview:img_heng];
-    [img_heng setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
     
     view_keshi = [[UIView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(btn_allkeshi.frame), SCREEN_WIDTH, 80)];
     [scl_back addSubview:view_keshi];
@@ -294,16 +379,13 @@
     [btn_allyiyuan addSubview:lab_allyiyuan];
     [lab_allyiyuan setText:@"热门医院"];
     lab_allyiyuan.font = [UIFont systemFontOfSize:13];
-    [lab_allyiyuan setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
+    [lab_allyiyuan setTextColor:[UIColor colorWithHexString:@"#A4A4A4"]];
     
     UIImageView *img_heng = [[UIImageView alloc]initWithFrame:CGRectMake(0, 39.5, SCREEN_WIDTH, 0.5)];
     [btn_allyiyuan addSubview:img_heng];
     [img_heng setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E8"]];
     
-    //    UIImageView *img_jiantou = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 21, 15, 6, 10)];
-    //    [btn_allyiyuan addSubview:img_jiantou];
-    //    [img_jiantou setImage:[UIImage imageNamed:@"Path 3"]];
-    //
+
     tableView_hospital = [[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(btn_allyiyuan.frame), SCREEN_WIDTH, 72 * arr_hospital.count) style:UITableViewStylePlain];
     [scl_back addSubview:tableView_hospital];
     [tableView_hospital setBackgroundColor:[UIColor whiteColor]];
@@ -339,7 +421,17 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HospitalTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableViewHospital"];
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-    [cell.lab_hospital setText:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"hospitalName"]];
+    NSString *hn = [[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"hospitalName"];
+    CGFloat width = [hn fittingLabelWidthWithHeight:18 andFontSize:[UIFont systemFontOfSize:17]];
+    if (width < MaxWidth) {
+        [cell.lab_hospital setFrame:CGRectMake(103.5, 15.5, width, 17)];
+        [cell.lab_level setFrame:CGRectMake(CGRectGetMaxX(cell.lab_hospital.frame) + 10, 16, 27, 16)];
+    }else{
+        [cell.lab_hospital setFrame:CGRectMake(103.5, 15.5, MaxWidth, 17)];
+        [cell.lab_level setFrame:CGRectMake(CGRectGetMaxX(cell.lab_hospital.frame) + 10, 16, 27, 16)];
+    }
+    [cell.lab_level setText:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"level"]];
+    [cell.lab_hospital setText:hn];
     [cell.lab_hospitalAddress setText:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"address"]];
     [cell.img_hospitalPic sd_setImageWithURL:[[arr_hospital objectAtIndex:indexPath.row] objectForKey:@"picUrl"] placeholderImage:[UIImage imageNamed:@"mid"]];
     
@@ -356,22 +448,14 @@
     [self.navigationController pushViewController:hospitalView animated:YES];
 }
 
--(void)btn_putongAction{
-    NSLog(@"普通陪诊");
-    [TalkingData trackEvent:@"用户点击陪诊按钮"];
-    PuTongPZViewController *pt = [[PuTongPZViewController alloc]init];
-//    UINavigationController *nav_pt = [[UINavigationController alloc]initWithRootViewController:pt];
-    pt.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:pt animated:YES];
-}
 
--(void)btn_texuAction{
-    NSLog(@"特需陪诊");
-    SelectDoctorViewController *selectDoctor = [[SelectDoctorViewController alloc]init];
-//    UINavigationController *nnav_Sd = [[UINavigationController alloc]initWithRootViewController:selectDoctor];
-    selectDoctor.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:selectDoctor animated:YES];
-}
+//-(void)btn_texuAction{
+//    NSLog(@"特需陪诊");
+//    SelectDoctorViewController *selectDoctor = [[SelectDoctorViewController alloc]init];
+////    UINavigationController *nnav_Sd = [[UINavigationController alloc]initWithRootViewController:selectDoctor];
+//    selectDoctor.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:selectDoctor animated:YES];
+//}
 
 -(void)btn_keshiAction:(UIButton *)sender{
     NSLog(@"%ld",(long)sender.tag);
@@ -423,6 +507,37 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+//-(void)NavRightAction{
+//    MapAndHospitalViewController *vc = [[MapAndHospitalViewController alloc]init];
+//    vc.enterFirstCityName = self.localCityName;
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
+
+-(void)btn_yuyueguahao{
+    
+}
+
+-(void)btn_nearHospital{
+    MapAndHospitalViewController *vc = [[MapAndHospitalViewController alloc]init];
+    vc.enterFirstCityName = self.cityName;
+    vc.currentCityServe = self.currentCityServe;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)btn_yuYuePeiZhen{
+    [TalkingData trackEvent:@"用户点击陪诊按钮"];
+    PuTongPZViewController *pt = [[PuTongPZViewController alloc]init];
+    //    UINavigationController *nav_pt = [[UINavigationController alloc]initWithRootViewController:pt];
+    pt.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:pt animated:YES];
+}
+
+-(void)selectLocationLeftAction{
+    
 }
 
 @end
