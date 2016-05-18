@@ -16,7 +16,7 @@
 #define Status [responseDic objectForKey:@"status"]
 #define Message [responseDic objectForKey:@"message"]
 // 开发环境
-#define Development @"http://101.201.223.151:7001"
+#define Development @"https://ci.haohushi.me:7009"
 //正式环境 http://app.haohushi.me:8080    https://app.haohushi.me:8443
 //开发环境 http://101.201.223.151:7001
 //测试环境 https://ci.haohushi.me:7009
@@ -90,8 +90,10 @@
 #define QueryUserCouponsAll @"/quhu/accompany/user/coupon/queryUserCouponsAll"
 //用户端 1.2 新增接口 获取用户优惠券 限制 地区和套餐类型(获取部分优惠券(未过期的))
 #define QueryUserCouponsByAreaIdAndOrderType @"/quhu/accompany/user/coupon/queryUserCouponsByAreaIdAndOrderType"
-//根据百度地图返回经纬度获取首页信息
+//根据百度地图返回经纬度获取首页信息(已登陆)
 #define GetHomePageInfoWithCity @"/quhu/accompany/user/getHomePageInfoWithCity"
+//根据百度地图返回经纬度获取首页信息(未登陆)
+#define GetHomePageInfoWithCityWithNoLogin @"/quhu/accompany/public/getHomePageInfoWithCity"
 //获取开屏广告
 #define GetOneOpenAd @"/quhu/accompany/public/getOneOpenAd"
 

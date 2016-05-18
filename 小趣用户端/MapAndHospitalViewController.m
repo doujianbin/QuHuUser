@@ -371,7 +371,13 @@
     
     [_mapView removeAnnotations:self.annonation];
 
-    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetNearByHospitalList];
+    NSString *strUrl;
+    if ([LoginStorage GetHTTPHeader] == nil) {
+        strUrl = [NSString stringWithFormat:@"%@%@",Development,GetNearPublicByHospitalList];
+    }else{
+        strUrl = [NSString stringWithFormat:@"%@%@",Development,GetNearByHospitalList];
+    }
+//    NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetNearByHospitalList];
     NSString *longitude = [NSString stringWithFormat:@"%f",self.longitude];
     NSString *latitude = [NSString stringWithFormat:@"%f",self.latitude];
     NSDictionary *dic = @{@"cityId":@"110100",@"longitude":longitude,@"latitude":latitude};

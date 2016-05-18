@@ -21,7 +21,7 @@
 #import "CancelOrderDetailViewController.h"
 #import "CompleteOrderDetailViewController.h"
 
-@interface YuYueViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface YuYueViewController ()<UITableViewDataSource,UITableViewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic ,strong)AFNManager *manager;
 @property (nonatomic ,strong)NSMutableArray *arr_orderList;
 @property (nonatomic ,strong)UITableView *tb_orderList;
@@ -49,6 +49,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
 //    [self.navigationController.navigationBar setTranslucent:NO];

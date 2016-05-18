@@ -9,8 +9,9 @@
 #import "UserInfoDetailViewController.h"
 #import <SDWebImage/UIButton+WebCache.h>
 #import "Toast+UIView.h"
+#import "ChangeNickNameViewController.h"
 
-@interface UserInfoDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UITextFieldDelegate>
+@interface UserInfoDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UITextFieldDelegate,ChangeNickNameControllerDegelate>
 @property (nonatomic ,strong)UITableView *tb_userInfo;
 @property (nonatomic ,strong)UIButton *btn_headPic;
 @property (nonatomic ,strong)UITextField *lab_nickName;
@@ -34,13 +35,13 @@
     self.navigationItem.leftBarButtonItem = btnleft;
     [btnl addTarget:self action:@selector(NavLeftAction) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *btnR = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 35, 21.5, 17, 17)];
-    [btnR setTitle:@"提交" forState:UIControlStateNormal];
-    [btnR setTitleColor:[UIColor colorWithHexString:@"#FA6262"] forState:UIControlStateNormal];
-    [btnR sizeToFit];
-    UIBarButtonItem *btnRight = [[UIBarButtonItem alloc]initWithCustomView:btnR];
-    self.navigationItem.rightBarButtonItem = btnRight;
-    [btnR addTarget:self action:@selector(NavRightAction) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *btnR = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 35, 21.5, 17, 17)];
+//    [btnR setTitle:@"提交" forState:UIControlStateNormal];
+//    [btnR setTitleColor:[UIColor colorWithHexString:@"#FA6262"] forState:UIControlStateNormal];
+//    [btnR sizeToFit];
+//    UIBarButtonItem *btnRight = [[UIBarButtonItem alloc]initWithCustomView:btnR];
+//    self.navigationItem.rightBarButtonItem = btnRight;
+//    [btnR addTarget:self action:@selector(NavRightAction) forControlEvents:UIControlEventTouchUpInside];
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
 
@@ -105,11 +106,11 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableView"];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     if (indexPath.row == 0) {
         [cell.textLabel setText:@"头像"];
         cell.textLabel.font = [UIFont systemFontOfSize:18];
         cell.textLabel.textColor = [UIColor colorWithHexString:@"#969696"];
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         
         UIImageView *img1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 74.5, SCREEN_WIDTH, 0.5)];
         [cell addSubview:img1];
@@ -125,22 +126,24 @@
         
     }
     if (indexPath.row == 1) {
+
         [cell.textLabel setText:@"昵称"];
         cell.textLabel.font = [UIFont systemFontOfSize:18];
         cell.textLabel.textColor = [UIColor colorWithHexString:@"#969696"];
         
-        self.lab_nickName = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 215, 17.5, 200, 22.5)];
+        self.lab_nickName = [[UITextField alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 215, 17.5, 182, 22.5)];
         [cell addSubview:self.lab_nickName];
-        self.lab_nickName.font = [UIFont systemFontOfSize:16];
-        self.lab_nickName.textColor = [UIColor colorWithHexString:@"#000000"];
+        self.lab_nickName.font = [UIFont systemFontOfSize:17];
+        self.lab_nickName.textColor = [UIColor colorWithHexString:@"#4a4a4a"];
         self.lab_nickName.textAlignment = NSTextAlignmentRight;
+        self.lab_nickName.enabled = NO;
         [self.lab_nickName  setValue:@10 forKey:@"limit"];
         self.lab_nickName.delegate = self;
-        NSString *nickName = [LoginStorage GetnickName];
-        if (nickName.length == 0) {
+//        NSString *nickName = [LoginStorage GetnickName];
+        if (self.nickName.length == 0) {
             self.lab_nickName.placeholder = @"请输入昵称";
         }else{
-            self.lab_nickName.text = nickName;
+            self.lab_nickName.text = self.nickName;
         }
     }
     return cell;
@@ -155,9 +158,13 @@
         [sheet showInView:self.view];
     }
     if (indexPath.row == 1) {
-        self.lab_nickName.text = @"";
-        [self.lab_nickName becomeFirstResponder];
         
+//        self.lab_nickName.text = @"";
+//        [self.lab_nickName becomeFirstResponder];
+        ChangeNickNameViewController *vc = [[ChangeNickNameViewController alloc]init];
+        vc.nickName = self.lab_nickName.text;
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -195,37 +202,40 @@
     [self.btn_headPic setBackgroundImage:self.iconImage forState:UIControlStateNormal];
     self.imageString = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     [picker dismissViewControllerAnimated:YES completion:nil];
+    self.dataDic = @{@"photo":self.imageString,@"photoExt":@"JPEG"};
+    [self uploadData];
+    
 }
 
--(void)NavRightAction{
-    
-    if (self.lab_nickName.text.length > 10) {
-        self.lab_nickName.text = [self.lab_nickName.text substringToIndex:10];
-        [self.lab_nickName resignFirstResponder];
-    }
-    
-    if (self.imageString.length == 0 && self.lab_nickName.text.length == 0) {
-        
-        [self.view makeToast:@"请选择图片或填写昵称" duration:1.0 position:@"center"];
-        return;
-    }if (self.imageString.length == 0 && [[LoginStorage GetnickName] isEqualToString:self.lab_nickName.text]) {
-        [self.view makeToast:@"请选择图片或修改昵称" duration:1.0 position:@"center"];
-        return;
-    }
-    if (self.lab_nickName.text.length > 0 && self.imageString.length > 0) {
-        self.dataDic = @{@"photo":self.imageString,@"photoExt":@"JPEG",@"nickName":self.lab_nickName.text};
-        [self uploadData];
-        return;
-    }if (self.lab_nickName.text.length > 0 && self.imageString.length == 0) {
-        self.dataDic = @{@"nickName":self.lab_nickName.text};
-        [self uploadData];
-        return;
-    }if (self.imageString.length > 0 && self.lab_nickName.text.length == 0) {
-        self.dataDic = @{@"photo":self.imageString,@"photoExt":@"JPEG"};
-        [self uploadData];
-        return;
-    }
-}
+//-(void)NavRightAction{
+//    
+//    if (self.lab_nickName.text.length > 10) {
+//        self.lab_nickName.text = [self.lab_nickName.text substringToIndex:10];
+//        [self.lab_nickName resignFirstResponder];
+//    }
+//    
+//    if (self.imageString.length == 0 && self.lab_nickName.text.length == 0) {
+//        
+//        [self.view makeToast:@"请选择图片或填写昵称" duration:1.0 position:@"center"];
+//        return;
+//    }if (self.imageString.length == 0 && [[LoginStorage GetnickName] isEqualToString:self.lab_nickName.text]) {
+//        [self.view makeToast:@"请选择图片或修改昵称" duration:1.0 position:@"center"];
+//        return;
+//    }
+//    if (self.lab_nickName.text.length > 0 && self.imageString.length > 0) {
+//        self.dataDic = @{@"photo":self.imageString,@"photoExt":@"JPEG",@"nickName":self.lab_nickName.text};
+//        [self uploadData];
+//        return;
+//    }if (self.lab_nickName.text.length > 0 && self.imageString.length == 0) {
+//        self.dataDic = @{@"nickName":self.lab_nickName.text};
+//        [self uploadData];
+//        return;
+//    }if (self.imageString.length > 0 && self.lab_nickName.text.length == 0) {
+//        self.dataDic = @{@"photo":self.imageString,@"photoExt":@"JPEG"};
+//        [self uploadData];
+//        return;
+//    }
+//}
 
 -(void)uploadData{
     [self.lab_nickName resignFirstResponder];
@@ -240,11 +250,11 @@
             [LoginStorage savenickName:[[responseDic objectForKey:@"data"] objectForKey:@"nickName"]];
             [self.btn_headPic sd_setBackgroundImageWithURL:[NSURL URLWithString:[[responseDic objectForKey:@"data"] objectForKey:@"photo"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"HeadPlaceImg"]];
             [self.view makeToast:@"提交成功" duration:1.0 position:@"center"];
-            [NSTimer scheduledTimerWithTimeInterval:1.2
-                                             target:self
-                                           selector:@selector(NavLeftAction)
-                                           userInfo:nil
-                                            repeats:NO];
+//            [NSTimer scheduledTimerWithTimeInterval:1.2
+//                                             target:self
+//                                           selector:@selector(NavLeftAction)
+//                                           userInfo:nil
+//                                            repeats:NO];
         }else{
             NSString *photoPath = [LoginStorage Getphoto];
             [self.btn_headPic sd_setBackgroundImageWithURL:[NSURL URLWithString:photoPath] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"HeadPlaceImg"]];
@@ -317,6 +327,10 @@
     [self.backV removeFromSuperview];
 }
 
+-(void)didSelectedNickNameWithStr:(NSString *)strNickName{
+//    self.nickName = strNickName;
+    self.lab_nickName.text = strNickName;
+}
 
 -(void)NavLeftAction{
     [self.navigationController popViewControllerAnimated:YES];

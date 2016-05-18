@@ -11,5 +11,6 @@
 @interface UserInfoDetailViewController : UIViewController
 
 @property (nonatomic ,strong)NSString *points;
+@property (nonatomic ,strong)NSString *nickName;
 
 @end

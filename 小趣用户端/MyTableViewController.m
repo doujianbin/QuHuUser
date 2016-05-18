@@ -20,7 +20,7 @@
 #import "UserInfoDetailViewController.h"
 #import "PatientViewController.h"
 
-@interface MyTableViewController ()
+@interface MyTableViewController ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong)NSArray *personCenterImageArray;
 
@@ -40,7 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.title = @"个人中心";
     
     self.view.backgroundColor = COLOR(245, 246, 247, 1);
@@ -233,6 +233,7 @@
 //                changeMyDataViewController.personName = self.personDataCell.nameLabel.text;
                 UserInfoDetailViewController *vc = [[UserInfoDetailViewController alloc]init];
                 vc.points = self.str_points;
+                vc.nickName = [LoginStorage GetnickName];
                 vc.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:vc animated:YES];
             }else{

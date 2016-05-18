@@ -111,7 +111,7 @@
             //初始化BMKLocationService
             _locService = [[BMKLocationService alloc]init];
             _locService.delegate = self;
-            _locService.distanceFilter = 1000.0f;
+            _locService.distanceFilter = 10000.0f;
             //启动LocationService
             [_locService startUserLocationService];
         }
@@ -171,8 +171,14 @@
 - (void)getMsg{
     
     BeginActivity;
-    NSString *strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/public/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,self.longitude,self.latitude];
-    //    NSDictionary *dic = @{@"longitude":self.longitude,@"latitude":self.latitude,@"actId":@"1"};
+    NSString *strUrl;
+    if ([LoginStorage GetHTTPHeader] == nil) {
+        strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/public/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,self.longitude,self.latitude];
+    }else{
+        strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/user/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,self.longitude,self.latitude];
+    }
+//    NSString *strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/public/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,self.longitude,self.latitude];
+
     self.manager = [[AFNManager alloc]init];
     [self.manager RequestJsonWithUrl:strUrl method:@"GET" parameter:nil result:^(id responseDic) {
         NSLog(@"首页信息＝%@",responseDic);

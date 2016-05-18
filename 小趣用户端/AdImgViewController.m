@@ -19,6 +19,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -32,28 +34,31 @@
     
     self.img_adVC = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.view addSubview:_img_adVC];
+    [_img_adVC setImage:[UIImage imageNamed:@"750x1334"]];
     
-    UIButton *btn_tiaoguo = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 78, 19, 58, 27)];
-    [self.view addSubview:btn_tiaoguo];
-    btn_tiaoguo.layer.cornerRadius = 2.0f;
-    btn_tiaoguo.layer.masksToBounds = YES;
-    [btn_tiaoguo setBackgroundColor:[UIColor colorWithHexString:@"#000000" alpha:0.6]];
-    [btn_tiaoguo setTitle:@"跳过" forState:UIControlStateNormal];
-    btn_tiaoguo.titleLabel.font = [UIFont systemFontOfSize:17];
-    [btn_tiaoguo setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
-    [btn_tiaoguo addTarget:self action:@selector(tiaoguoAction) forControlEvents:UIControlEventTouchUpInside];
-    //Do any additional setup after loading the view.
     [self loadData];
+    
+    //Do any additional setup after loading the view.
 }
 
 -(void)loadData{
     NSString *strUrl = [NSString stringWithFormat:@"%@%@",Development,GetOneOpenAd];
+    NSDictionary *dic = @{@"os":@"ios"};
     AFNManager *manager = [[AFNManager alloc]init];
-    [manager RequestJsonWithUrl:strUrl method:@"POST" parameter:nil result:^(id responseDic) {
+    [manager RequestJsonWithUrl:strUrl method:@"POST" parameter:dic result:^(id responseDic) {
         if ([Status isEqualToString:SUCCESS]) {
             if ([[responseDic objectForKey:@"data"] isKindOfClass:[NSNull class]]) {
                 [(AppDelegate*)[UIApplication sharedApplication].delegate setTabBarRootView];
             }else{
+                UIButton *btn_tiaoguo = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 78, 19, 58, 27)];
+                [self.view addSubview:btn_tiaoguo];
+                btn_tiaoguo.layer.cornerRadius = 2.0f;
+                btn_tiaoguo.layer.masksToBounds = YES;
+                [btn_tiaoguo setBackgroundColor:[UIColor colorWithHexString:@"#000000" alpha:0.6]];
+                [btn_tiaoguo setTitle:@"跳过" forState:UIControlStateNormal];
+                btn_tiaoguo.titleLabel.font = [UIFont systemFontOfSize:17];
+                [btn_tiaoguo setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
+                [btn_tiaoguo addTarget:self action:@selector(tiaoguoAction) forControlEvents:UIControlEventTouchUpInside];
                 [self startTimeCount];
                 [_img_adVC sd_setImageWithURL:[NSURL URLWithString:[[responseDic objectForKey:@"data"] objectForKey:@"imgUrl"]] placeholderImage:[UIImage imageNamed:@"750x1334"]];
             }

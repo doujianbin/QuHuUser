@@ -34,8 +34,13 @@
         
         [_manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",  @"text/json", @"text/html", @"text/javascript",nil]];
         if ([LoginStorage GetHTTPHeader].length != 0 || [LoginStorage GetHTTPHeader] != nil) {
-            
+            NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+            NSString *deviceVersion = [UIDevice currentDevice].systemVersion;
+            NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+            [_manager.requestSerializer setValue:deviceVersion forHTTPHeaderField:@"sysversion"];
             [_manager.requestSerializer setValue:[LoginStorage GetHTTPHeader] forHTTPHeaderField:@"Authorization"];
+            [_manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"sysos"];
+            [_manager.requestSerializer setValue:appVersion forHTTPHeaderField:@"appversion"];
         }
         
         NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"douhttps" ofType:@"cer"];
@@ -87,7 +92,6 @@
                 [request setValue:strHttpHeader
                forHTTPHeaderField:@"Authorization"];
                 [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-                
                 NSString *strUserName = [NSString stringWithFormat:@"U_%@",[LoginStorage GetPhoneNum]];
                 NSString *token = [NSString stringWithFormat:@"grant_type=password&username=%@&password=%@",strUserName,[LoginStorage GetYanZhengMa]];
                 NSData *data = [token dataUsingEncoding:NSUTF8StringEncoding];
