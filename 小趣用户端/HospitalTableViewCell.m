@@ -30,8 +30,8 @@
         self.lab_level = [[UILabel alloc]init];
         [self.contentView addSubview:self.lab_level];
         self.lab_level.layer.borderWidth = 1.0f;
-        self.lab_level.layer.borderColor = [[UIColor colorWithHexString:@"#FA6262"] CGColor];
-        [self.lab_level setTextColor:[UIColor colorWithHexString:@"#FA6262"]];
+        self.lab_level.layer.borderColor = [[UIColor colorWithHexString:@"#41C9B8"] CGColor];
+        [self.lab_level setTextColor:[UIColor colorWithHexString:@"#41C9B8"]];
         [self.lab_level setFont:[UIFont systemFontOfSize:11]];
         [self.lab_level setTextAlignment:NSTextAlignmentCenter];
         self.lab_level.layer.cornerRadius = 3.0f;

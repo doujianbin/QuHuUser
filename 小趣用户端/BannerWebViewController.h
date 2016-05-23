@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <JavaScriptCore/JavaScriptCore.h>
+
+
 
 @interface BannerWebViewController : UIViewController
 

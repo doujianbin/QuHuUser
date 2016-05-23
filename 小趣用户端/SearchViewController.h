@@ -10,4 +10,9 @@
 
 @interface SearchViewController : UIViewController
 
+@property (nonatomic ,strong)NSString *sourceFrom;
+
+
+
+
 @end

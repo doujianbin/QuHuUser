@@ -11,7 +11,7 @@
 @interface BannerWebViewController ()<UIWebViewDelegate>
 
 @property(nonatomic,strong)UIWebView* webView;
-
+@property (nonatomic, strong) JSContext *context;
 
 @end
 
@@ -36,9 +36,10 @@
     [btnl addTarget:self action:@selector(NavLeftAction) forControlEvents:UIControlEventTouchUpInside];
 
     
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
     self.webView.delegate = self;
     [self.view addSubview:_webView];
+    
     
 }
 
@@ -52,22 +53,33 @@
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.str_url]]];
 }
 
+
+
 -(void)dealloc
 {
     [_webView stopLoading];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     // starting the load, show the activity indicator in the status bar
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    // finished loading, hide the activity indicator in the status bar
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    // finished loading,hide the activity indicator in the status bar
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//    
+//    _context = [_webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+//    _context[@"JSCaller"] = self;
 }
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    return YES;
+}
+
 
 
 

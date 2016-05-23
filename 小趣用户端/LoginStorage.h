@@ -53,4 +53,12 @@
 
 + (void)savePackageArr:(NSArray *)arr;
 + (NSArray *)GetPackageArr;
+
++ (void)saveLongitude:(NSString *)longitude;
++ (NSString *)longitude;
+
++ (void)saveLatitude:(NSString *)latitude;
++ (NSString *)latitude;
+
+
 @end

@@ -66,6 +66,8 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
 //    self.title = @"确认订单";
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
     UIButton *btnl = [[UIButton alloc]initWithFrame:CGRectMake(15, 21.5, 20, 20)];
@@ -635,7 +637,7 @@
                     [cell.lab_right setText:[NSString stringWithFormat:@"%.f折",couponValue]];
                 }else if (self.commonOrderEntity.couponType == 2){
                     [cell.lab_right setText:[NSString stringWithFormat:@"-%d元",(int)self.commonOrderEntity.couponValue]];
-                }else if (self.commonOrderEntity.couponType == 2){
+                }else if (self.commonOrderEntity.couponType == 3){
                     [cell.lab_right setText:@"免套餐券"];
                 }
                 else{

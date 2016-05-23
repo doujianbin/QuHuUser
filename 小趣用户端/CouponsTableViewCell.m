@@ -32,16 +32,16 @@
         [self.img_backGround addSubview:self.lab_expireTimeDesc];
         [self.lab_expireTimeDesc setFont:[UIFont systemFontOfSize:13]];
         
-        self.lab_value = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 158, 24, 120, 27)];
-        [self.img_backGround addSubview:self.lab_value];
-        self.lab_value.textAlignment = NSTextAlignmentRight;
-        [self.lab_value setFont:[UIFont systemFontOfSize:27]];
-        
-        
-        self.lab_type = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 105, 63, 63, 14)];
+        self.lab_type = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 158, 24, 120, 27)];
         [self.img_backGround addSubview:self.lab_type];
-        [self.lab_type setTextAlignment:NSTextAlignmentRight];
-        [self.lab_type setFont:[UIFont systemFontOfSize:14]];
+        self.lab_type.textAlignment = NSTextAlignmentRight;
+        [self.lab_type setFont:[UIFont systemFontOfSize:27]];
+        
+        
+        self.lab_value = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 105, 63, 63, 14)];
+        [self.img_backGround addSubview:self.lab_value];
+        [self.lab_value setTextAlignment:NSTextAlignmentRight];
+        [self.lab_value setFont:[UIFont systemFontOfSize:14]];
         
         self.lab_usageDesc = [[UILabel alloc]initWithFrame:CGRectMake(20, 98, SCREEN_WIDTH - 22, 12)];
         [self.img_backGround addSubview:self.lab_usageDesc];

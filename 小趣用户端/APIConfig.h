@@ -8,6 +8,9 @@
 
 #ifndef APIConfig_h
 #define APIConfig_h
+////经纬度
+//#define Longitude @"longitude"
+//#define Latitude @"latitude"
 //成功的状态吗
 #define SUCCESS @"SUCCESS"
 #define ERROR @"ERROR"

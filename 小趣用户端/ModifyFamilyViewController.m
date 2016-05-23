@@ -42,6 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     self.title = @"修改就诊人";
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
     
@@ -80,12 +83,23 @@
         self.genderIndex = @"1";
     }
     
-    UILabel *lab_tixing = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(tableAddFamily.frame) + 10 - 64 - 10, SCREEN_WIDTH - 30, 50)];
-    [self.view addSubview:lab_tixing];
-    [lab_tixing setText:@"陪诊服务中我们会为就诊人免费提供平安意外险一份，请输入真实身份证号"];
-    [lab_tixing setTextColor:[UIColor colorWithHexString:@"#a4a4a4"]];
-    [lab_tixing setFont:[UIFont systemFontOfSize:12]];
+    UILabel *lab_tixing = [[UILabel alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(tableAddFamily.frame) + 10 - 64 - 7, SCREEN_WIDTH - 30, 70)];
     lab_tixing.numberOfLines = 0;
+    [self.view addSubview:lab_tixing];
+    NSMutableAttributedString *myStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"陪诊服务中我们会为就诊人免费提供一份平安意外险，请输入您的真实身份信息(姓名、性别、身份证号码)，信息有误会影响您的保险生效。"]];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:5];//调整行间距
+    
+    [myStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [myStr length])];
+    
+    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#a4a4a4"] range:NSMakeRange(0, 12)];
+    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0f] range:NSMakeRange(0, 12)];
+    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#fa6262"] range:NSMakeRange(12, 36)];
+    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0f] range:NSMakeRange(12, 36)];
+    [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#a4a4a4"] range:NSMakeRange(48, 15)];
+    [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.0f] range:NSMakeRange(48, 15)];
+    [lab_tixing setAttributedText:myStr];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

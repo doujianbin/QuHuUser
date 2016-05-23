@@ -20,5 +20,6 @@
 
 @property (nonatomic )BOOL isFromOrder;
 
+@property (nonatomic, strong)NSString *orderType;
 @end
 

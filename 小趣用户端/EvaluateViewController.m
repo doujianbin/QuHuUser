@@ -33,6 +33,10 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F5F9"]];
     self.title = @"订单";
+    
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};
     UIButton *btnl = [[UIButton alloc]initWithFrame:CGRectMake(15, 21.5, 20, 20)];
@@ -164,20 +168,22 @@
     
     UILabel *lab_xiangqing33 = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 115, CGRectGetMaxY(lab_xiangqing2.frame) + 10, 100, 13)];
     [self.v_detail addSubview:lab_xiangqing33];
-    if (self.commonOrderEntity.couponValue > 0) {
-        if (self.commonOrderEntity.couponType == 1)
-        {
-            CGFloat couponValue = self.commonOrderEntity.couponValue * 10;
-            [lab_xiangqing33 setText:[NSString stringWithFormat:@"%.f折",couponValue]];
-        }
-        if(self.commonOrderEntity.couponType == 2)
-        {
-            [lab_xiangqing33 setText:[NSString stringWithFormat:@"-%d元",(int)self.commonOrderEntity.couponValue]];
-        }
-    }else{
-        
-        [lab_xiangqing33 setText:@"-0 元"];
-    }
+
+//        if (self.commonOrderEntity.couponType == 1)
+//        {
+//            CGFloat couponValue = self.commonOrderEntity.couponValue * 10;
+//            [lab_xiangqing33 setText:[NSString stringWithFormat:@"%.f折",couponValue]];
+//        }
+//        if(self.commonOrderEntity.couponType == 2)
+//        {
+//            [lab_xiangqing33 setText:[NSString stringWithFormat:@"-%d元",(int)self.commonOrderEntity.couponValue]];
+//        }
+//        if (self.commonOrderEntity.couponType == 3) {
+//            [lab_xiangqing33 setText:[NSString stringWithFormat:@"-%@元",self.commonOrderEntity.discountAmount]];
+//        }
+    
+    [lab_xiangqing33 setText:[NSString stringWithFormat:@"-%@元",self.commonOrderEntity.discountAmount]];
+    
     [lab_xiangqing33 setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
     [lab_xiangqing33 setFont:[UIFont systemFontOfSize:13]];
     [lab_xiangqing33 setTextAlignment:NSTextAlignmentRight];
@@ -191,7 +197,7 @@
     lab_zongPrice.font = [UIFont systemFontOfSize:17];
     [lab_zongPrice setTextColor:[UIColor colorWithHexString:@"#fa6262"]];
     [lab_zongPrice setTextAlignment:NSTextAlignmentRight];
-    [lab_zongPrice setText:[NSString stringWithFormat:@"总计： %@ 元",self.commonOrderEntity.totalAmount]];
+    [lab_zongPrice setText:[NSString stringWithFormat:@"总计： %@ 元",self.commonOrderEntity.payAmount]];
     
     UILabel *lab_dafen = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.v_detail.frame) + 20, SCREEN_WIDTH, 13)];
     [self.scl_back addSubview:lab_dafen];

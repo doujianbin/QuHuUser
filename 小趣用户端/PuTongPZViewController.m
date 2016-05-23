@@ -15,8 +15,9 @@
 #import "SignInViewController.h"
 #import "Toast+UIView.h"
 #import "TalkingData.h"
+#import "MapAndHospitalViewController.h"
 
-@interface PuTongPZViewController ()<UITableViewDataSource,UITableViewDelegate,SelectFamilyViewControllerDelegate,TwoLevelViewControllerDegelate,CouponsTableViewControllerDegelate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>{
+@interface PuTongPZViewController ()<UITableViewDataSource,UITableViewDelegate,SelectFamilyViewControllerDelegate,TwoLevelViewControllerDegelate,CouponsTableViewControllerDegelate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate,MapAndHospitalControllerDegelate>{
     UITableView *tableView1;
     UITableView *tableView2;
 }
@@ -54,6 +55,7 @@
 @property (nonatomic ,strong)UIButton *btn_NoYunfu;
 @property (nonatomic,assign)int   int_isyunfu;   // 0 为是孕妇  1 为不是孕妇
 @property (nonatomic ,strong)NSString *zhifu_orderID; // 引导跳转支付传的订单Id(风控)
+@property (nonatomic ,strong)NSString *orderType; // 0为 普通   2为孕检
 @end
 
 @implementation PuTongPZViewController
@@ -83,13 +85,15 @@
     [btnl addTarget:self action:@selector(NavLeftAction) forControlEvents:UIControlEventTouchUpInside];
     UIView *bv = [[UIView alloc]init];
     [self.view addSubview:bv];
-    
+    self.orderType = @"0";
+    self.int_isyunfu = 1;
     [self addTableView];
     [self addTimeData];
     // Do any additional setup after loading the view.
     [self addTimeSelect];
 
-    self.int_isyunfu = 1;
+    
+    
 }
 
 -(void)addTimeData{
@@ -133,8 +137,7 @@
 
 
 -(void)addTableView{
-
-    
+    self.orderType = @"0";
     tableView1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 11, SCREEN_WIDTH, 57 * 4 ) style:UITableViewStylePlain];
     [self.view addSubview:tableView1];
     [tableView1 setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
@@ -293,7 +296,7 @@
             [cell.lab_left setText:@"是否孕妇"];
             self.btn_yunfu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 120, 17, 23, 23)];
             [cell addSubview:self.btn_yunfu];
-            [self.btn_yunfu setBackgroundImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
+//            [self.btn_yunfu setBackgroundImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
             [self.btn_yunfu addTarget:self action:@selector(btn_yunfuAction) forControlEvents:UIControlEventTouchUpInside];
             
             UILabel *lab_yes = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_yunfu.frame) + 10, 20, 16, 16)];
@@ -304,7 +307,7 @@
             
             self.btn_NoYunfu = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 63, 17, 23, 23)];
             [cell addSubview:self.btn_NoYunfu];
-            [self.btn_NoYunfu setBackgroundImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
+//            [self.btn_NoYunfu setBackgroundImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
             [self.btn_NoYunfu addTarget:self action:@selector(btn_NoYunfuAction) forControlEvents:UIControlEventTouchUpInside];
             
             UILabel *lab_no = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.btn_NoYunfu.frame) + 9, 20, 16, 16)];
@@ -312,6 +315,15 @@
             [lab_no setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
             [lab_no setFont:[UIFont systemFontOfSize:16]];
             [cell addSubview:lab_no];
+            
+            if ([self.orderType isEqualToString:@"0"]) {
+                [self.btn_NoYunfu setBackgroundImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
+                [self.btn_yunfu setBackgroundImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
+            }else{
+                
+                [self.btn_NoYunfu setBackgroundImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
+                [self.btn_yunfu setBackgroundImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
+            }
             
         }
         return cell;
@@ -387,8 +399,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (tableView == tableView1) {
         if (indexPath.row == 0) {
-            TwoLevelViewController *vc = [[TwoLevelViewController alloc]init];
+            MapAndHospitalViewController *vc = [[MapAndHospitalViewController alloc]init];
+//            TwoLevelViewController *vc = [[TwoLevelViewController alloc]init];
+//            vc.delegate = self;
+            vc.sourceFrom = @"2";
+            vc.currentCityServe = self.currentCityServe;
             vc.delegate = self;
+            vc.enterFirstCityName = @"北京市";
+            
             [self.navigationController pushViewController:vc animated:YES];
         }
         if (indexPath.row == 1) {
@@ -412,6 +430,7 @@
                 CouponsTableViewController *vc_cou = [[CouponsTableViewController alloc]init];
                 vc_cou.isFromOrder = YES;
                 vc_cou.delegate =self;
+                vc_cou.orderType = self.orderType;
                 vc_cou.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:vc_cou animated:YES];
             }else{
@@ -595,11 +614,25 @@
     [tableView1 reloadData];
 }
 
-- (void)didSelectedHospitalWithEntity:(NSDictionary *)hospitalDic{
-    self.hospitalDic = hospitalDic;
-    self.str_hospitalName = [hospitalDic objectForKey:@"hospitalName"];
-    self.str_hospitalAddress = [hospitalDic objectForKey:@"address"];
-    self.str_hospitalId = [hospitalDic objectForKey:@"hospitalId"];
+//- (void)didSelectedHospitalWithEntity:(NSDictionary *)hospitalDic{
+//    self.hospitalDic = hospitalDic;
+//    self.str_hospitalName = [hospitalDic objectForKey:@"hospitalName"];
+//    self.str_hospitalAddress = [hospitalDic objectForKey:@"address"];
+//    self.str_hospitalId = [hospitalDic objectForKey:@"hospitalId"];
+//    [tableView1 reloadData];
+//}
+
+-(void)reloadTableViewFromSearchControllerWithEntity:(HospitalInMapEntity *)entity{
+    self.str_hospitalName = entity.name;
+    self.str_hospitalAddress = entity.address;
+    self.str_hospitalId = [NSString stringWithFormat:@"%d",entity.hospitalId];
+    [tableView1 reloadData];
+}
+
+- (void)didSelectedHospitalWithEntity:(HospitalInMapEntity *)hospitalEntity{
+    self.str_hospitalName = hospitalEntity.name;
+    self.str_hospitalAddress = hospitalEntity.address;
+    self.str_hospitalId = [NSString stringWithFormat:@"%d",hospitalEntity.hospitalId];
     [tableView1 reloadData];
 }
 
@@ -621,6 +654,7 @@
             self.lab_yugujine.textAlignment = NSTextAlignmentCenter;
 //            [self.lab_yugujine setText:@"¥0.00"];
         }else{
+            
             NSMutableAttributedString *myStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"预估金额：%.f 元",price]];
             [myStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#4a4a4a"] range:NSMakeRange(0, 5)];
             [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0f] range:NSMakeRange(0, 5)];
@@ -628,7 +662,7 @@
             [myStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17.0f] range:NSMakeRange(5, myStr.length - 5)];
             [self.lab_yugujine setAttributedText:myStr];
             self.lab_yugujine.textAlignment = NSTextAlignmentCenter;
-//            [self.lab_yugujine setText:[NSString stringWithFormat:@"¥%.2f",price]];
+
         }
     }if ([[self.dic_coupon objectForKey:@"type"] intValue] == 2){
         CGFloat totalPrice = [[[LoginStorage GetCommonOrderDic] objectForKey:@"info"] floatValue];
@@ -665,12 +699,14 @@
 
 -(void)btn_yunfuAction{
     self.int_isyunfu = 0;
+    self.orderType = @"2";
     [self.btn_yunfu setBackgroundImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
     [self.btn_NoYunfu setBackgroundImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
 }
 
 -(void)btn_NoYunfuAction{
     self.int_isyunfu = 1;
+    self.orderType = @"0";
     [self.btn_NoYunfu setBackgroundImage:[UIImage imageNamed:@"Oval 70 + Oval 70"] forState:UIControlStateNormal];
     [self.btn_yunfu setBackgroundImage:[UIImage imageNamed:@"normarl"] forState:UIControlStateNormal];
 }

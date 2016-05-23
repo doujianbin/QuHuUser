@@ -21,10 +21,11 @@
 #import <BaiduMapAPI_Search/BMKGeocodeSearchOption.h>
 #import "MapAndHospitalViewController.h"
 #import "NSString+Size.h"
+#import "WebViewController.h"
 
 #define MaxWidth SCREEN_WIDTH * 0.6
 
-@interface PeiZhenViewController ()<UITableViewDataSource,UITableViewDelegate,KDCycleBannerViewDataource,KDCycleBannerViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UIGestureRecognizerDelegate>{
+@interface PeiZhenViewController ()<UITableViewDataSource,UITableViewDelegate,KDCycleBannerViewDataource,KDCycleBannerViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate>{
     UIButton *btn_putong;
     UIButton *btn_texu;
     UITableView *tableView_hospital;
@@ -68,6 +69,7 @@
 }
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.extendedLayoutIncludesOpaqueBars = NO;
@@ -83,13 +85,21 @@
     titleLabel.textColor = [UIColor colorWithHexString:@"#4A4A4A"];
     self.navigationItem.titleView = titleLabel;
     
+    
+    //初始化BMKLocationService
+    _locService = [[BMKLocationService alloc]init];
+    _locService.delegate = self;
+    _locService.distanceFilter = 10000.0f;
+    //启动LocationService
+    [_locService startUserLocationService];
+    
     self.btn_navLeft = [[UIButton alloc]initWithFrame:CGRectMake(0, 21.5, 60, 20)];
     self.lab_city = [[UILabel alloc]init];
     [self.btn_navLeft addSubview:self.lab_city];
     [self.lab_city setTextColor:[UIColor colorWithHexString:@"#4a4a4a"]];
-    self.img_up = [[UIImageView alloc] init];
-    [self.btn_navLeft addSubview:self.img_up];
-    [self.img_up setImage:[UIImage imageNamed:@"下拉箭头"]];
+//    self.img_up = [[UIImageView alloc] init];
+//    [self.btn_navLeft addSubview:self.img_up];
+//    [self.img_up setImage:[UIImage imageNamed:@"下拉箭头"]];
     UIBarButtonItem *btnleft = [[UIBarButtonItem alloc]initWithCustomView:_btn_navLeft];
     self.navigationItem.leftBarButtonItem = btnleft;
     [_btn_navLeft addTarget:self action:@selector(selectLocationLeftAction) forControlEvents:UIControlEventTouchUpInside];
@@ -108,49 +118,54 @@
         ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized
          || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
             //定位功能可用，开始定位
-            //初始化BMKLocationService
-            _locService = [[BMKLocationService alloc]init];
-            _locService.delegate = self;
-            _locService.distanceFilter = 10000.0f;
-            //启动LocationService
-            [_locService startUserLocationService];
+//            //初始化BMKLocationService
+//            _locService = [[BMKLocationService alloc]init];
+//            _locService.delegate = self;
+//            _locService.distanceFilter = 10000.0f;
+//            //启动LocationService
+//            [_locService startUserLocationService];
         }
     else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
         // 定位功能不可用，提示用户或忽略引导用户开启
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"定位服务已关闭" message:@"请到设置－>隐私->定位服务中开启［小趣好护士］定位服务，以便为您提供更准确的服务信息" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+        alert.tag = 23;
         alert.delegate = self;
         [alert show];
         self.longitude = @"0.0000";
         self.latitude = @"0.0000";
         [self getMsg];
+    }else{
+        self.longitude = @"0.0000";
+        self.latitude = @"0.0000";
+        [self getMsg];
     }
+
     
-    
-    //发起反向地理编码检索
-    _searcher =[[BMKGeoCodeSearch alloc]init];
-    _searcher.delegate = self;
-    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){39.961292, 116.466714};
-    BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[
-    BMKReverseGeoCodeOption alloc]init];
-    reverseGeoCodeSearchOption.reverseGeoPoint = pt;
-    BOOL flag = [_searcher reverseGeoCode:reverseGeoCodeSearchOption];
-    if(flag)
-    {
-      NSLog(@"反geo检索发送成功");
-    }
-    else
-    {
-      NSLog(@"反geo检索发送失败");
-    }
+//    //发起反向地理编码检索
+//    _searcher =[[BMKGeoCodeSearch alloc]init];
+//    _searcher.delegate = self;
+//    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){39.961292, 116.466714};
+//    BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[
+//    BMKReverseGeoCodeOption alloc]init];
+//    reverseGeoCodeSearchOption.reverseGeoPoint = pt;
+//    BOOL flag = [_searcher reverseGeoCode:reverseGeoCodeSearchOption];
+//    if(flag)
+//    {
+//      NSLog(@"反geo检索发送成功");
+//    }
+//    else
+//    {
+//      NSLog(@"反geo检索发送失败");
+//    }
 }
-// 反地理编码检索 根据经纬度检索当前地理位置 城市
-- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
-    
+//// 反地理编码检索 根据经纬度检索当前地理位置 城市
+//- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
+//    
 //    NSLog(@"这里是＝＝%@",result.addressDetail.city);
-//    self.localCityName = result.addressDetail.city;
-    
-}
+////    self.localCityName = result.addressDetail.city;
+//    
+//}
 //实现相关delegate 处理位置信息更新
 //处理方向变更信息
 - (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
@@ -164,18 +179,30 @@
 //    NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     self.latitude = [NSString stringWithFormat:@"%f",userLocation.location.coordinate.latitude];
     self.longitude = [NSString stringWithFormat:@"%f",userLocation.location.coordinate.longitude];
+    [LoginStorage saveLongitude:self.longitude];
+    [LoginStorage saveLatitude:self.latitude];
+    
     [self getMsg];
 }
 
+- (void)didFailToLocateUserWithError:(NSError *)error{
+    
+    self.longitude = @"0.0000";
+    self.latitude = @"0.0000";
+    [self getMsg];
+}
 
 - (void)getMsg{
     
-    BeginActivity;
     NSString *strUrl;
+    
+    BeginActivity;
     if ([LoginStorage GetHTTPHeader] == nil) {
-        strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/public/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,self.longitude,self.latitude];
+        
+        strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/public/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,[LoginStorage longitude],[LoginStorage latitude]];
     }else{
-        strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/user/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,self.longitude,self.latitude];
+ 
+        strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/user/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,[LoginStorage longitude],[LoginStorage latitude]];
     }
 //    NSString *strUrl = [NSString stringWithFormat:@"%@/quhu/accompany/public/getHomePageInfoWithCity?longitude=%@&latitude=%@",Development,self.longitude,self.latitude];
 
@@ -212,7 +239,12 @@
             }
             self.currentCityServe = [[[responseDic objectForKey:@"data"] objectForKey:@"currentCityServe"] intValue];
             if (self.currentCityServe == 0) {
-                [self.view makeToast:Message duration:1.0 position:@"center"];
+                if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
+                    [self.view makeToast:@"您未开启定位，系统默认当前服务城市为北京市" duration:1.0 position:@"center"];
+                }else{
+                    
+                    [self.view makeToast:Message duration:1.0 position:@"center"];
+                }
             }
             self.cityName = [[responseDic objectForKey:@"data"] objectForKey:@"cityName"];
             CGFloat width = [self.cityName fittingLabelWidthWithHeight:17 andFontSize:[UIFont systemFontOfSize:17]];
@@ -234,6 +266,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    
+    
 //    self.navigationController.navigationBarHidden = YES;
     if(arr_bannerImg.count == 0){
 //        [self getMsg];
@@ -523,13 +557,19 @@
 //}
 
 -(void)btn_yuyueguahao{
-    
+    BannerWebViewController *vc = [[BannerWebViewController alloc]init];
+    vc.str_url = @"http://web.quyiyuan.com/h5/";
+    vc.strTitle = @"预约挂号";
+//    WebViewController *vc = [[WebViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)btn_nearHospital{
     MapAndHospitalViewController *vc = [[MapAndHospitalViewController alloc]init];
     vc.enterFirstCityName = self.cityName;
     vc.currentCityServe = self.currentCityServe;
+    vc.sourceFrom = @"1";
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -538,8 +578,21 @@
     [TalkingData trackEvent:@"用户点击陪诊按钮"];
     PuTongPZViewController *pt = [[PuTongPZViewController alloc]init];
     //    UINavigationController *nav_pt = [[UINavigationController alloc]initWithRootViewController:pt];
+    pt.currentCityServe = self.currentCityServe;
     pt.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pt animated:YES];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 23) {
+        if (buttonIndex == 1) {
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                //如果点击打开的话，需要记录当前的状态，从设置回到应用的时候会用到
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }
+    }
 }
 
 -(void)selectLocationLeftAction{

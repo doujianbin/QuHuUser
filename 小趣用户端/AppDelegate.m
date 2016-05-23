@@ -28,7 +28,7 @@
 // rgb颜色转换（16进制->10进制）
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@interface AppDelegate ()<UITabBarControllerDelegate,LinkPageViewControllerDelegate,WXApiDelegate,UITabBarControllerDelegate,UIAlertViewDelegate,BMKGeneralDelegate>{
+@interface AppDelegate ()<UITabBarControllerDelegate,LinkPageViewControllerDelegate,WXApiDelegate,UITabBarControllerDelegate,UIAlertViewDelegate,BMKGeneralDelegate,BMKLocationServiceDelegate>{
     BMKMapManager* _mapManager;
     BMKLocationService* _locService;
 }
@@ -42,6 +42,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    _mapManager = [[BMKMapManager alloc]init];
+    
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:@"AX53AeiqFnqU5bsWbCZ7BcYYcYc4S6XR"  generalDelegate:self];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
+    
+
+    
 //    [NSThread sleepForTimeInterval:0.5];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -52,12 +62,8 @@
     
     [self.window makeKeyAndVisible];
     
-    _mapManager = [[BMKMapManager alloc]init];
-    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
-    BOOL ret = [_mapManager start:@"AX53AeiqFnqU5bsWbCZ7BcYYcYc4S6XR"  generalDelegate:self];
-    if (!ret) {
-        NSLog(@"manager start failed!");
-    }
+    
+
     
     //设置navigationbar标题的字体和颜色
     

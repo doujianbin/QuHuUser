@@ -28,6 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"支付订单";
+    
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F5F6F7"]];
     self.navigationController.navigationBar.titleTextAttributes = @{UITextAttributeTextColor: [UIColor colorWithHexString:@"#4A4A4A"],
                                                                     UITextAttributeFont : [UIFont systemFontOfSize:17]};

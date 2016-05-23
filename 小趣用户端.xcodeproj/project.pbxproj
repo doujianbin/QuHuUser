@@ -99,6 +99,8 @@
 		058B6B1C1CB4B59800EBBB37 /* 组-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 058B6B191CB4B59800EBBB37 /* 组-7@3x.png */; };
 		059FFD801CB3AD0000639508 /* 1.5编辑档案－填写信息_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 059FFD7F1CB3AD0000639508 /* 1.5编辑档案－填写信息_03.png */; };
 		05A292CD1CEC51F6009DC328 /* ChangeNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A292CC1CEC51F6009DC328 /* ChangeNickNameViewController.m */; };
+		05A292CF1CED97D0009DC328 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A292CE1CED97D0009DC328 /* JavaScriptCore.framework */; };
+		05A292D21CEDBB03009DC328 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A292D11CEDBB03009DC328 /* WebViewController.m */; };
 		05B08D8A1CA38AD7002F7729 /* CancelOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B08D891CA38AD7002F7729 /* CancelOrderDetailViewController.m */; };
 		05B08D8D1CA38AE5002F7729 /* CompleteOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B08D8C1CA38AE5002F7729 /* CompleteOrderDetailViewController.m */; };
 		05B08D931CA3BA40002F7729 /* ModifyFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B08D921CA3BA40002F7729 /* ModifyFamilyViewController.m */; };
@@ -417,6 +419,9 @@
 		059FFD7F1CB3AD0000639508 /* 1.5编辑档案－填写信息_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1.5编辑档案－填写信息_03.png"; sourceTree = "<group>"; };
 		05A292CB1CEC51F6009DC328 /* ChangeNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickNameViewController.h; sourceTree = "<group>"; };
 		05A292CC1CEC51F6009DC328 /* ChangeNickNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNickNameViewController.m; sourceTree = "<group>"; };
+		05A292CE1CED97D0009DC328 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/PrivateFrameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		05A292D01CEDBB03009DC328 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		05A292D11CEDBB03009DC328 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		05B08D881CA38AD7002F7729 /* CancelOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelOrderDetailViewController.h; sourceTree = "<group>"; };
 		05B08D891CA38AD7002F7729 /* CancelOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelOrderDetailViewController.m; sourceTree = "<group>"; };
 		05B08D8B1CA38AE5002F7729 /* CompleteOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteOrderDetailViewController.h; sourceTree = "<group>"; };
@@ -675,6 +680,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05A292CF1CED97D0009DC328 /* JavaScriptCore.framework in Frameworks */,
 				05FF025B1C8405A8004A2F16 /* AdSupport.framework in Frameworks */,
 				05FF02591C84059E004A2F16 /* Security.framework in Frameworks */,
 				05E8C11B1C781A9800DA27C0 /* AlipaySDK.framework in Frameworks */,
@@ -862,6 +868,8 @@
 				05D593521CEAC6C2006F5D6F /* AdImgViewController.h */,
 				05D593531CEAC6C2006F5D6F /* AdImgViewController.m */,
 				053AB0FA1C48F2CE00982B01 /* APIConfig.h */,
+				05A292D01CEDBB03009DC328 /* WebViewController.h */,
+				05A292D11CEDBB03009DC328 /* WebViewController.m */,
 				05D593111CC492E0006F5D6F /* 登陆 */,
 				05BA34E11C41FF0000DC07CD /* 陪诊 */,
 				05BA34E21C41FF0C00DC07CD /* 预约单 */,
@@ -1367,6 +1375,7 @@
 		7FD9EEAD0426C59FCBA5E15C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05A292CE1CED97D0009DC328 /* JavaScriptCore.framework */,
 				05FF025A1C8405A8004A2F16 /* AdSupport.framework */,
 				05FF02581C84059E004A2F16 /* Security.framework */,
 				05E8C11A1C781A9800DA27C0 /* AlipaySDK.framework */,
@@ -1702,6 +1711,7 @@
 				053AB0F41C47E8C500982B01 /* AFNManager.m in Sources */,
 				05075B481C4528E50076EF31 /* MemberEntity.m in Sources */,
 				05BA35171C4382C400DC07CD /* BaseTableViewCell.m in Sources */,
+				05A292D21CEDBB03009DC328 /* WebViewController.m in Sources */,
 				05E8C0C91C76C9BD00DA27C0 /* MyTableViewController.m in Sources */,
 				05E8C0CB1C76C9BD00DA27C0 /* SettingTableViewController.m in Sources */,
 				05075B551C45FDBC0076EF31 /* TXOrderViewController.m in Sources */,
@@ -1976,6 +1986,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/小趣用户端",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/小趣用户端/PrefixHeader.pch";
 				INFOPLIST_FILE = "小趣用户端/Info.plist";
@@ -2005,6 +2016,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/小趣用户端",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/小趣用户端/PrefixHeader.pch";
 				INFOPLIST_FILE = "小趣用户端/Info.plist";

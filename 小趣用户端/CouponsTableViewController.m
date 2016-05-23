@@ -13,6 +13,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import "CouponsEntity.h"
 #import "CouponsTableViewCell.h"
+#import "WebViewViewController.h"
 
 @interface CouponsTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -53,6 +54,17 @@
     self.navigationItem.leftBarButtonItem = item;
     [self.view addSubview:[UIView new]];
     
+    
+    UIButton * btnR = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 45, 10, 70, 24)];
+//    [btnR setBackgroundColor:[UIColor redColor]];
+    [btnR setTitle:@"使用说明" forState:UIControlStateNormal];
+    [btnR setTitleColor:[UIColor colorWithHexString:@"#4a4a4a"] forState:UIControlStateNormal];
+    btnR.titleLabel.font = [UIFont systemFontOfSize:15];
+    UIBarButtonItem *btnright = [[UIBarButtonItem alloc]initWithCustomView:btnR];
+    self.navigationItem.rightBarButtonItem = btnright;
+
+    [btnR addTarget:self action:@selector(btnRSave) forControlEvents:UIControlEventTouchUpInside];
+    
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
     
@@ -65,7 +77,7 @@
     if (self.isFromOrder) {
         // 从下单界面进入
         NSString *url = [NSString stringWithFormat:@"%@%@",Development,QueryUserCouponsByAreaIdAndOrderType];
-                NSDictionary *dic = @{@"orderType":@"2",@"areaId":@"110100"};
+                NSDictionary *dic = @{@"orderType":self.orderType,@"areaId":@"110100"};
         AFNManager *manager = [[AFNManager alloc] init];
         
         [manager RequestJsonWithUrl:url method:@"POST" parameter:dic result:^(id responseDic) {
@@ -305,6 +317,11 @@
         cell = [[CouponsTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
     }
     NSDictionary *dic = [[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if ([[dic objectForKey:@"type"] intValue] == 3) {
+        [cell.lab_value setHidden:YES];
+    }else{
+        [cell.lab_value setHidden:NO];
+    }
     if ([[dic objectForKey:@"useable"] intValue] == 1) {
         [cell.img_backGround setImage:[UIImage imageNamed:@"折扣券"]];
         [cell.lab_couponsName setTextColor:[UIColor colorWithHexString:@"#4A4A4A"]];
@@ -320,6 +337,7 @@
         [cell.lab_value setTextColor:[UIColor colorWithHexString:@"#CCCCCC"]];
         [cell.lab_type setTextColor:[UIColor colorWithHexString:@"#CCCCCC"]];
     }
+    
     [cell.lab_couponsName setText:[dic objectForKey:@"name"]];
     [cell.lab_expireTimeDesc setText:[dic objectForKey:@"expireTimeDesc"]];
     [cell.lab_usageDesc setText:[dic objectForKey:@"usageDesc"]];
@@ -374,6 +392,11 @@
      [self.view endEditing:YES];
 }
 
-
+- (void)btnRSave{
+    WebViewViewController *vc = [[WebViewViewController alloc]init];
+    vc.strTitle = @"使用说明";
+    vc.strUrl = @"http://wx.haohushi.me/web/#/userCenter/couponRule/2";
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

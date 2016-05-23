@@ -22,6 +22,8 @@ static NSString * const KeFuNum = @"KeFuNum";
 static NSString * const PregnancyStatus = @"PregnancyStatus";
 static NSString * const IsFirstMakeOrder = @"IsFirstMakeOrder";
 static NSString * const Package = @"Package";     // 套餐  dic
+static NSString * const Longitude = @"longitude";
+static NSString * const Latitude = @"latitude";
 
 @implementation LoginStorage
 
@@ -142,5 +144,17 @@ static NSString * const Package = @"Package";     // 套餐  dic
     return [UserDefaultsUtils boolValueWithKey:IsFirstMakeOrder];
 }
 
++ (void)saveLongitude:(NSString *)longitude{
+    [UserDefaultsUtils saveValue:longitude forKey:Longitude];
+}
++ (NSString *)longitude{
+    return [UserDefaultsUtils valueWithKey:Longitude];
+}
 
++ (void)saveLatitude:(NSString *)latitude{
+    [UserDefaultsUtils saveValue:latitude forKey:Latitude];
+}
++ (NSString *)latitude{
+    return [UserDefaultsUtils valueWithKey:Latitude];
+}
 @end

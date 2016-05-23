@@ -21,7 +21,7 @@
 #import "MycustomActionPaopao.h"
 #import "MapHospitalTableViewCell.h"
 #import "SearchViewController.h"
-#import "HospitalInMapEntity.h"
+//#import "HospitalInMapEntity.h"
 #import "PuTongPZViewController.h"
 
 @interface MapAndHospitalViewController ()<BMKLocationServiceDelegate,BMKMapViewDelegate,UITableViewDataSource,UITableViewDelegate,BMKGeoCodeSearchDelegate,UIAlertViewDelegate>{
@@ -72,7 +72,11 @@
     
     reverseGeoCodeSearchOption = [[
                                    BMKReverseGeoCodeOption alloc]init];
-    //定位功能可用，开始定位
+    
+    //初始化search 服务
+    _searcher =[[BMKGeoCodeSearch alloc]init];
+    _searcher.delegate = self;
+//    //定位功能可用，开始定位
     [self IslocService];
     
 }
@@ -97,9 +101,9 @@
     if ([CLLocationManager locationServicesEnabled] &&
         ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized
          || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
-            //初始化search 服务
-            _searcher =[[BMKGeoCodeSearch alloc]init];
-            _searcher.delegate = self;
+//            [self IslocService];
+            
+            
         
         }
     else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied){
@@ -319,6 +323,7 @@
     // 通过经纬度 反查当前位置
     CLLocationCoordinate2D pt = (CLLocationCoordinate2D){_mapView.centerCoordinate.latitude, _mapView.centerCoordinate.longitude};
     [self selectAddressFromCLLocation:pt];
+    
 }
 
 -(void)selectAddressFromCLLocation:(CLLocationCoordinate2D )coor{
@@ -344,19 +349,11 @@
             if (![result.addressDetail.city isEqualToString:self.enterFirstCityName]) {
                 [self.view makeToast:@"您的位置已经移出北京啦" duration:1.0 position:@"center"];
             }
-//                else{
-//
+
                 BMKPoiInfo *ingo = [result.poiList objectAtIndex:0];
-//                //            NSLog(@"这里是＝＝%@",ingo.name);
-//                CGFloat width = [result.addressDetail.city fittingLabelWidthWithHeight:16 andFontSize:[UIFont systemFontOfSize:16]];
-//                [_lab_searchCity setFrame:CGRectMake(16, 13, width, 16)];
-//                [_lab_searchCity setText:result.addressDetail.city];
-//                [_img_searchShu setFrame:CGRectMake(CGRectGetMaxX(_lab_searchCity.frame) + 10, 11, 1, 20)];
-//                _img_searchIcon.frame = CGRectMake(_img_search.frame.size.width / 2 - 35, 16, 13, 12);
-//                _lab_search.frame = CGRectMake(CGRectGetMaxX(_img_searchIcon.frame)+6, 14, 60, 14);
-//                
+            
                 [_lab_localName setText:ingo.name];
-//            }
+
         }
     }
 }
@@ -559,12 +556,20 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HospitalInMapEntity *entity = [[self.arr_tableView objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    PuTongPZViewController *vc = [[PuTongPZViewController alloc]init];
-    vc.str_hospitalName = entity.name;
-    vc.str_hospitalAddress = entity.address;
-    vc.str_hospitalId = [NSString stringWithFormat:@"%d",entity.hospitalId];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([self.sourceFrom isEqualToString:@"1"]) {
+        
+        HospitalInMapEntity *entity = [[self.arr_tableView objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        PuTongPZViewController *vc = [[PuTongPZViewController alloc]init];
+        vc.str_hospitalName = entity.name;
+        vc.str_hospitalAddress = entity.address;
+        vc.str_hospitalId = [NSString stringWithFormat:@"%d",entity.hospitalId];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if ([self.sourceFrom isEqualToString:@"2"]) {
+        HospitalInMapEntity *entity = [[self.arr_tableView objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        [self.delegate didSelectedHospitalWithEntity:entity];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma -
@@ -592,7 +597,14 @@
 
 -(void)puchSearchAction{
     SearchViewController *vc = [[SearchViewController alloc]init];
+    vc.sourceFrom = self.sourceFrom;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [_mapView viewWillDisappear];
+    _mapView.delegate = nil; // 不用时，置nil
 }
 
 -(void)NavLeftAction{

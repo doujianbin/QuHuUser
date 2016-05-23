@@ -28,7 +28,6 @@
 
 @property (nonatomic, weak)PersonDataCell *personDataCell;
 
-@property (nonatomic, strong)NSMutableArray *dataArray;
 @property (nonatomic ,strong)NSString *points;
 @property (nonatomic ,strong)NSString *str_points;
 
@@ -49,6 +48,11 @@
     
     self.tableView.scrollEnabled = NO;
     
+    if ([LoginStorage isLogin] == YES) {
+        
+        [self makeNSURLRequest];
+    }
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loginAgainAction) name:@"loginIn" object:nil];
 }
 
@@ -59,10 +63,10 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    if ([LoginStorage isLogin] == YES) {
-        
-        [self makeNSURLRequest];
-    }
+//    if ([LoginStorage isLogin] == YES) {
+//        
+//        [self makeNSURLRequest];
+//    }
     [self.tableView reloadData];
 }
 
@@ -78,28 +82,7 @@
         
         self.points = [NSString stringWithFormat:@"%@  积分",[[responseDic objectForKey:@"data"]objectForKey:@"points"]];
         self.str_points = [NSString stringWithFormat:@"%@",[[responseDic objectForKey:@"data"]objectForKey:@"points"]];
-//        NSString *nickName = [[responseDic objectForKey:@"data"]objectForKey:@"nickName"];
-//        if ([nickName isKindOfClass:[NSNull class]]) {
-//           self.personDataCell.nameLabel.text = @"小趣好护士";
-//        }else{
-//            self.personDataCell.nameLabel.text = nickName;
-//        }
-//        self.personDataCell.creditLabel.text = [[responseDic objectForKey:@"data"]objectForKey:@"points"];
-//        
-//        NSString *url = [[responseDic objectForKey:@"data"]objectForKey:@"photo"];
-//
-//        if ([url isKindOfClass:[NSNull class]]) {
-//            
-//            self.personDataCell.iconImageView.image = [UIImage imageNamed:@"morenicon"];
-//
-//        }else {
-//        
-//            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-//            self.personDataCell.iconImageView.image = [UIImage imageWithData:imageData];
-//
-//        }
-//        
-//
+
         [self.tableView reloadData];
     } fail:^(NSError *error) {
         
@@ -323,13 +306,7 @@
     self.personDataCell.nameLabel.text = name;
 }
 
-- (NSMutableArray *)dataArray {
-    if (_dataArray == nil) {
-        
-        
-    }
-    return _dataArray;
-}
+
 
 
 @end

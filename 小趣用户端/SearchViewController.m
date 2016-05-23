@@ -10,6 +10,7 @@
 #import "MapHospitalTableViewCell.h"
 #import "HospitalInMapEntity.h"
 #import "PuTongPZViewController.h"
+#import "PuTongPZViewController.h"
 
 @interface SearchViewController ()<UISearchBarDelegate,UISearchDisplayDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -95,7 +96,7 @@
 }
 
 -(void)addTableView{
-    self.tab_search = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 216 - 64) style:UITableViewStylePlain];
+    self.tab_search = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 216 - 64 - 44) style:UITableViewStylePlain];
     [self.view addSubview:self.tab_search];
     [self.tab_search setDelegate:self];
     [self.tab_search setDataSource:self];
@@ -130,12 +131,32 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HospitalInMapEntity *entity = [self.arr_search objectAtIndex:indexPath.row];
-    PuTongPZViewController *vc = [[PuTongPZViewController alloc]init];
-    vc.str_hospitalId = [NSString stringWithFormat:@"%d",entity.hospitalId];
-    vc.str_hospitalName = entity.name;
-    vc.str_hospitalAddress = entity.address;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([self.sourceFrom isEqualToString:@"1"]) {
+        
+        HospitalInMapEntity *entity = [self.arr_search objectAtIndex:indexPath.row];
+        PuTongPZViewController *vc = [[PuTongPZViewController alloc]init];
+        vc.str_hospitalId = [NSString stringWithFormat:@"%d",entity.hospitalId];
+        vc.str_hospitalName = entity.name;
+        vc.str_hospitalAddress = entity.address;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if ([self.sourceFrom isEqualToString:@"2"]) {
+        
+        HospitalInMapEntity *entity = [self.arr_search objectAtIndex:indexPath.row];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"newOrder" object:self userInfo:dic];
+//        
+//        
+//        [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        
+        for (UIViewController *vc in self.navigationController.viewControllers) {
+            if ([vc isKindOfClass:[PuTongPZViewController class]]) {
+                //更新list数据
+                [(PuTongPZViewController *)vc reloadTableViewFromSearchControllerWithEntity:entity];
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
+    }
+    
 }
 
 #pragma mark -

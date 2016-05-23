@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 
 @interface AdImgViewController (){
-
+    NSTimer *timer;
 }
 @property (nonatomic ,strong)UIImageView *img_adVC;
 @end
@@ -71,7 +71,7 @@
 }
 
 -(void)startTimeCount{
-    [NSTimer scheduledTimerWithTimeInterval:3.0
+     timer = [NSTimer scheduledTimerWithTimeInterval:3.0
                                      target:self
                                    selector:@selector(tiaoguoAction)
                                    userInfo:nil
@@ -79,6 +79,7 @@
 }
 
 -(void)tiaoguoAction{
+    [timer invalidate];
     [(AppDelegate*)[UIApplication sharedApplication].delegate setTabBarRootView];
 }
 

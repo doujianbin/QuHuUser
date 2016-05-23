@@ -85,8 +85,15 @@
     if (row == 0) {
         WebViewViewController *webVc = [[WebViewViewController alloc]init];
         webVc.strTitle = @"关于我们";
-//        webVc.strUrl = @"http://wx.haohushi.me/web/#/commonpage/about/ios/0";
-        webVc.strUrl = @"http://wx.haohushi.me/web/#/commonpage/about/ios/0";
+        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+        NSString *version = [NSString stringWithFormat:@"v%@",appVersion];
+        // 生产环境
+        NSString *SCurl = [NSString stringWithFormat:@"http://wx.haohushi.me/web/#/commonpage/about/ios/0/%@",version];
+        // 测试
+//        NSString *CSurl = [NSString stringWithFormat:@"http://ci.haohushi.me/web/#/commonpage/about/ios/0/%@",version];
+        webVc.strUrl = SCurl;
+        
         [self.navigationController pushViewController:webVc animated:YES];
     }
     if (row == 1) {

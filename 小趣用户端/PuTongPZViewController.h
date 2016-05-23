@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MemberEntity.h"
+#import "HospitalInMapEntity.h"
 
 @interface PuTongPZViewController : UIViewController
 
@@ -15,4 +16,8 @@
 @property (nonatomic ,retain)NSString *str_hospitalAddress;
 @property (nonatomic ,retain)NSString *str_hospitalId;
 @property (nonatomic,strong)MemberEntity *entity;
+@property (nonatomic ,assign)int currentCityServe;
+
+- (void)reloadTableViewFromSearchControllerWithEntity:(HospitalInMapEntity *)entity;
+
 @end
